@@ -12,7 +12,7 @@
             
         </Grid.ColumnDefinitions>
 
-        <Button Text="Who Is Who" Grid.Row="0" Grid.Column="0"/>
+        <Button Text="Who Is Who" Grid.Row="0" Grid.Column="0" Command="{Binding WhoIsWhoCommand}"/>
         <Button Text="Floor Plan" Grid.Row="0" Grid.Column="1"/>
 
         <Button Text="Training" Grid.Row="1" Grid.Column="0"/>

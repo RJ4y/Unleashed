@@ -11,7 +11,7 @@ namespace UnleashedApp
         {
             InitializeComponent();
 
-            MainPage = new MenuView();
+            MainPage = new NavigationPage(new MenuView());
         }
 
         protected override void OnStart()
