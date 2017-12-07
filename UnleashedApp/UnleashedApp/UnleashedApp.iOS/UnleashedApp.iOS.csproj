@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{3365D970-703C-428B-9956-EF311D34FF47}</ProjectGuid>
+    <ProjectGuid>{78C6FA8A-9606-4C6C-B89C-A7832FDCC62C}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
     <RootNamespace>UnleashedApp.iOS</RootNamespace>
@@ -135,7 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UnleashedApp\UnleashedApp.csproj">
-      <Project>{89b658d1-e20e-4e78-9e15-600f5e06bba1}</Project>
+      <Project>{48e8797d-836b-4705-9113-2f524f7ab7de}</Project>
       <Name>UnleashedApp</Name>
     </ProjectReference>
   </ItemGroup>

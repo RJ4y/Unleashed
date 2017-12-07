@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:UnleashedApp"
+             x:Class="UnleashedApp.Views.MenuView">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            
+        </Grid.ColumnDefinitions>
+
+        <Button Text="Who Is Who" Grid.Row="0" Grid.Column="0"/>
+        <Button Text="Floor Plan" Grid.Row="0" Grid.Column="1"/>
+
+        <Button Text="Training" Grid.Row="1" Grid.Column="0"/>
+        <Button Text="Library" Grid.Row="1" Grid.Column="1"/>
+
+        <Button Text="Reserve" Grid.Row="2" Grid.Column="0"/>
+        <Button Text="Log Out" Grid.Row="2" Grid.Column="1"/>
+    </Grid>
+</ContentPage>

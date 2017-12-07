@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
-namespace UnleashedApp
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace UnleashedApp.Views
 {
-    public partial class MainPage : ContentPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class MenuView : ContentPage
     {
-        public MainPage()
+        public MenuView()
         {
             InitializeComponent();
         }

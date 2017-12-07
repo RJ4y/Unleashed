@@ -7,11 +7,11 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="6c7f805d-69ff-4f93-b88a-580b2517dee4"
+    Name="3d944227-b324-4c0c-872a-2ae289db9834"
     Publisher="CN=René"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="6c7f805d-69ff-4f93-b88a-580b2517dee4" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="3d944227-b324-4c0c-872a-2ae289db9834" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>UnleashedApp.UWP</DisplayName>

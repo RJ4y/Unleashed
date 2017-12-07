@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+using UnleashedApp.Views;
 using Xamarin.Forms;
 
 namespace UnleashedApp
@@ -13,7 +11,7 @@ namespace UnleashedApp
         {
             InitializeComponent();
 
-            MainPage = new UnleashedApp.MainPage();
+            MainPage = new MenuView();
         }
 
         protected override void OnStart()
