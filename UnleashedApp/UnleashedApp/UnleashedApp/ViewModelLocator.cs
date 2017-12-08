@@ -13,6 +13,7 @@ namespace UnleashedApp
         {
             //services:
             INavigationService navigationService = new NavigationService();
+
             //repositories:
 
             //viewmodels:

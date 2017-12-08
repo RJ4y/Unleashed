@@ -7,12 +7,14 @@ namespace UnleashedApp.ViewModels
 {
     public class MenuViewModel : ViewModelBase, IMenuViewModel
     {
-        //properties
+        private readonly INavigationService _navigationService;
+
         public ICommand WhoIsWhoCommand { get; set; }
 
         public MenuViewModel(INavigationService navigationService)
         {
-            InitialiseComponents(navigationService);
+            //InitialiseComponents(navigationService);
+            _navigationService = navigationService;
             InitialiseCommands();
         }
 

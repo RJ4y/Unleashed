@@ -2,4 +2,27 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UnleashedApp.Views.WhoIsWhoView">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+
+        </Grid.ColumnDefinitions>
+
+        <Image Source="header.png" Aspect="AspectFill" Grid.Row="0" Grid.Column="0"/>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="1" Grid.Column="0">
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                <Button Text="Habitat" BackgroundColor="White" TextColor="CornflowerBlue" FontAttributes="Bold"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                <Button Text="Squad" BackgroundColor="White" TextColor="CornflowerBlue" FontAttributes="Bold"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                <SearchBar Placeholder="search"/>
+            </StackLayout>
+        </StackLayout>
+    </Grid>
 </ContentPage>

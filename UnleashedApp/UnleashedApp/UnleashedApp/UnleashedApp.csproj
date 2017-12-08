@@ -86,9 +86,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\header.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Views\WhoIsWhoView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
