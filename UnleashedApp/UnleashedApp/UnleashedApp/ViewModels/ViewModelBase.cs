@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using Xamarin.Forms;
 
 namespace UnleashedApp.ViewModels
 {
@@ -128,14 +129,22 @@ namespace UnleashedApp.ViewModels
         public static INavigationService NavigationService { get; set; }
 
         /// <summary>
+        /// Messaging system
+        /// </summary>
+        public static IMessagingCenter MessagingCenter { get; set; }
+
+        /// <summary>
         /// Initialise MessagingCenter and NavigationService.
         /// </summary>
         /// <param name="navigationService">Navigation service instance to use.</param>
         /// <param name="messagingCenter">Messagingcenter instance to use.</param>
-        public void InitialiseComponents(INavigationService navigationService)
+        public void InitialiseComponents(IMessagingCenter messagingCenter, INavigationService navigationService)
         {
             if (NavigationService == null)
                 NavigationService = navigationService;
+
+            if (MessagingCenter == null)
+                MessagingCenter = messagingCenter;
         }
     }
 }

@@ -11,10 +11,9 @@ namespace UnleashedApp.ViewModels
 
         public ICommand WhoIsWhoCommand { get; set; }
 
-        public MenuViewModel(INavigationService navigationService)
+        public MenuViewModel(IMessagingCenter messagingCenter, INavigationService navigationService)
         {
-            //InitialiseComponents(navigationService);
-            _navigationService = navigationService;
+            InitialiseComponents(messagingCenter, navigationService);
             InitialiseCommands();
         }
 
