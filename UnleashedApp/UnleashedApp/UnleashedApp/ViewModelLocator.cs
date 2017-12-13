@@ -1,4 +1,5 @@
-﻿using UnleashedApp.Services;
+﻿using UnleashedApp.Repositories.EmployeeRepositories;
+using UnleashedApp.Services;
 using UnleashedApp.ViewModels;
 using Xamarin.Forms;
 
@@ -19,9 +20,10 @@ namespace UnleashedApp
             INavigationService navigationService = new NavigationService();
 
             //repositories:
+            IEmployeeRepository employeeRepository = new EmployeeRepository();
 
             //viewmodels:
-            MenuViewModel = new MenuViewModel(navigationService);
+            MenuViewModel = new MenuViewModel(messengerService, navigationService);
             WhoIsViewViewModel = new WhoIsWhoViewModel(navigationService);
         }
     }
