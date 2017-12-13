@@ -5,13 +5,13 @@ using System.Diagnostics;
 using System.Net.Http;
 using UnleashedApp.Models;
 
-namespace UnleashedApp.Repositories.EmployeeRepositories
+namespace UnleashedApp.Repositories.HabitatRepositories
 {
-    public class EmployeeRepository : Repository, IEmployeeRepository
+    public class HabitatRepository : Repository, IHabitatRepository
     {
-        private List<Employee> _employees;
+        private List<Habitat> _habitats;
 
-        public List<Employee> GetAllEmployees()
+        public List<Habitat> GetAllHabitats()
         {
             var address = "employees";
 
@@ -22,7 +22,7 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
                 if (response.IsSuccessStatusCode)
                 {
                     string resultString = response.Content.ReadAsStringAsync().Result;
-                    _employees = JsonConvert.DeserializeObject<List<Employee>>(resultString);
+                    _habitats = JsonConvert.DeserializeObject<List<Habitat>>(resultString);
                 }
             }
             catch (AggregateException e)
@@ -30,7 +30,7 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
                 Debug.WriteLine(e.ToString());
             }
 
-            return _employees;
+            return _habitats;
         }
     }
 }

@@ -2,16 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using UnleashedApp.Models;
 
-namespace UnleashedApp.Repositories.EmployeeRepositories
+namespace UnleashedApp.Repositories.SquadRepositories
 {
-    public class EmployeeRepository : Repository, IEmployeeRepository
+    public class SquadRepository : Repository, ISquadRepository
     {
-        private List<Employee> _employees;
+        private List<Squad> _squads;
 
-        public List<Employee> GetAllEmployees()
+        public List<Squad> GetAllSquads()
         {
             var address = "employees";
 
@@ -22,7 +25,7 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
                 if (response.IsSuccessStatusCode)
                 {
                     string resultString = response.Content.ReadAsStringAsync().Result;
-                    _employees = JsonConvert.DeserializeObject<List<Employee>>(resultString);
+                    _squads = JsonConvert.DeserializeObject<List<Squad>>(resultString);
                 }
             }
             catch (AggregateException e)
@@ -30,7 +33,7 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
                 Debug.WriteLine(e.ToString());
             }
 
-            return _employees;
+            return _squads;
         }
     }
 }
