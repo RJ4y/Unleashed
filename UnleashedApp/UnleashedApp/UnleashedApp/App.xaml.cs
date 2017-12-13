@@ -12,10 +12,10 @@ namespace UnleashedApp
         {
             InitializeComponent();
 
-            AppContainer.Container = new Bootstrap().CreateContainer();
+            //AppContainer.Container = new Bootstrap().CreateContainer();
 
             //var menuView = new MenuView();
-            var whoisWhoView = new WhoIsWhoView();
+            //var whoisWhoView = new WhoIsWhoView();
 
             //var nagigationService = AppContainer.Container.Resolve<INavigationService>();
             //nagigationService.NavigationContext = menuView.Navigation;
