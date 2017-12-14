@@ -1,6 +1,4 @@
-﻿using Autofac;
-using UnleashedApp.Contracts.ViewModels;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace UnleashedApp.Views

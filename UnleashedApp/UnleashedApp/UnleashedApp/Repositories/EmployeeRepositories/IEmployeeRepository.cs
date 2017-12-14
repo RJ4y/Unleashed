@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnleashedApp.Models;
 
 namespace UnleashedApp.Repositories.EmployeeRepositories

@@ -1,6 +1,4 @@
-﻿using Autofac;
-using UnleashedApp.Contracts.ViewModels;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace UnleashedApp.Views
@@ -8,7 +6,7 @@ namespace UnleashedApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class WhoIsWhoView : ContentPage
     {
-        private IWhoIsWhoViewModel _viewModel;
+        //private IWhoIsWhoViewModel _viewModel;
 
         public WhoIsWhoView()
         {
