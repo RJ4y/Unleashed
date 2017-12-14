@@ -11,7 +11,7 @@ namespace UnleashedApp.Views
         public MenuView()
         {
             InitializeComponent();
-
+            //NavigationPage.SetHasNavigationBar(this, false);
             //_viewModel = AppContainer.Container.Resolve<IMenuViewModel>();
             //BindingContext = _viewModel;
         }

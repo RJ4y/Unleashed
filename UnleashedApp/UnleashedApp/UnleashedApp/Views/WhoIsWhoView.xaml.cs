@@ -11,7 +11,7 @@ namespace UnleashedApp.Views
         public WhoIsWhoView()
         {
             InitializeComponent();
-
+            NavigationPage.SetHasNavigationBar(this, false);
             //_viewModel = AppContainer.Container.Resolve<IWhoIsWhoViewModel>();
             //BindingContext = _viewModel;
         }

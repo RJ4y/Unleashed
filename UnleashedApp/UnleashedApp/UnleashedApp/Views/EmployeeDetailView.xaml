@@ -6,8 +6,6 @@
              BindingContext="{Binding Source={x:Static locator:ViewModelLocator.Instance}, Path=EmployeeViewModel}">
     
     <StackLayout Orientation="Vertical">
-        <Image Source="placeholder.png" Aspect="AspectFit"/>
-        <Label Text="{Binding FullName Mode=OneWay}"/>
-        <Label Text="{Binding Function, Mode=OneWay}"/>
+        
     </StackLayout>
 </ContentPage>
