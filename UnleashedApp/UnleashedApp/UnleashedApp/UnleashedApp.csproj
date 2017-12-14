@@ -50,7 +50,11 @@
     <Compile Include="Models\Squad.cs" />
     <Compile Include="Repositories\EmployeeRepositories\EmployeeRepository.cs" />
     <Compile Include="Repositories\EmployeeRepositories\IEmployeeRepository.cs" />
+    <Compile Include="Repositories\HabitatRepositories\HabitatRepository.cs" />
+    <Compile Include="Repositories\HabitatRepositories\IHabitatRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\SquadRepositories\ISquadRepository.cs" />
+    <Compile Include="Repositories\SquadRepositories\SquadRepository.cs" />
     <Compile Include="Services\MessengerService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
