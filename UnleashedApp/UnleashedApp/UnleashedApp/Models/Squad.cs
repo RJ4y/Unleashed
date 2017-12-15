@@ -7,6 +7,5 @@ namespace UnleashedApp.Models
     {
         public int Id { get; set; }
         public String Name { get; set; }
-        public List<Employee> Employees { get; set; }
     }
 }

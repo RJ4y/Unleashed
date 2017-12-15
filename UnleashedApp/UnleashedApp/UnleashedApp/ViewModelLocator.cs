@@ -29,7 +29,7 @@ namespace UnleashedApp
 
             //viewmodels:
             MenuViewModel = new MenuViewModel(messengerService, navigationService);
-            WhoIsViewViewModel = new WhoIsWhoViewModel(navigationService);
+            WhoIsViewViewModel = new WhoIsWhoViewModel(messengerService, navigationService, habitatRepository, squadRepository);
             EmployeeDetailViewModel = new EmployeeDetailViewModel();
         }
     }
