@@ -15,5 +15,12 @@ namespace UnleashedApp.Views
             //_viewModel = AppContainer.Container.Resolve<IWhoIsWhoViewModel>();
             //BindingContext = _viewModel;
         }
+
+        public void InitializeList()
+        {
+            var model = ViewModelLocator.Instance.WhoIsViewViewModel;
+
+            
+        }
     }
 }

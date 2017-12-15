@@ -26,5 +26,9 @@
                 <SearchBar Placeholder="search"/>
             </StackLayout>
         </StackLayout>
+
+        <StackLayout x:Name="groups" Orientation="Vertical" VerticalOptions="Fill">
+            
+        </StackLayout>
     </Grid>
 </ContentPage>

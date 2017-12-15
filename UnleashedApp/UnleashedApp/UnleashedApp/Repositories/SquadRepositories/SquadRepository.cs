@@ -10,6 +10,8 @@ namespace UnleashedApp.Repositories.SquadRepositories
     public class SquadRepository : Repository, ISquadRepository
     {
         private List<Squad> _squads;
+        private Squad _squad;
+        private List<Employee> _employees;
 
         public List<Squad> GetAllSquads()
         {
@@ -31,6 +33,50 @@ namespace UnleashedApp.Repositories.SquadRepositories
             }
 
             return _squads;
+        }
+
+        public Squad GetSquadById(int id)
+        {
+            var address = "squads/" + id;
+
+            try
+            {
+                HttpResponseMessage response = _client.GetAsync(address).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string resultString = response.Content.ReadAsStringAsync().Result;
+                    _squad = JsonConvert.DeserializeObject<Squad>(resultString);
+                }
+            }
+            catch (AggregateException e)
+            {
+                Debug.WriteLine(e.ToString());
+            }
+
+            return _squad;
+        }
+
+        public List<Employee> GetEmployees(int id)
+        {
+            var address = "squads/" + id + "/employees";
+
+            try
+            {
+                HttpResponseMessage response = _client.GetAsync(address).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string resultString = response.Content.ReadAsStringAsync().Result;
+                    _employees = JsonConvert.DeserializeObject<List<Employee>>(resultString);
+                }
+            }
+            catch (AggregateException e)
+            {
+                Debug.WriteLine(e.ToString());
+            }
+
+            return _employees;
         }
     }
 }

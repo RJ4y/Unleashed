@@ -10,6 +10,7 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
     public class EmployeeRepository : Repository, IEmployeeRepository
     {
         private List<Employee> _employees;
+        private Employee _employee;
 
         public List<Employee> GetAllEmployees()
         {
@@ -31,6 +32,28 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
             }
 
             return _employees;
+        }
+
+        public Employee GetEmployeeById(int id)
+        {
+            var address = "employees/" + id;
+
+            try
+            {
+                HttpResponseMessage response = _client.GetAsync(address).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string resultString = response.Content.ReadAsStringAsync().Result;
+                    _employee = JsonConvert.DeserializeObject<Employee>(resultString);
+                }
+            }
+            catch (AggregateException e)
+            {
+                Debug.WriteLine(e.ToString());
+            }
+
+            return _employee;
         }
     }
 }

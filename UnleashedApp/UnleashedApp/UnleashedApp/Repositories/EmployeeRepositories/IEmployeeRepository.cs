@@ -6,5 +6,6 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
     public interface IEmployeeRepository
     {
         List<Employee> GetAllEmployees();
+        Employee GetEmployeeById(int id);
     }
 }
