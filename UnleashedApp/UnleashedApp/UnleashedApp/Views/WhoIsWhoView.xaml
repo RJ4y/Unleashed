@@ -27,7 +27,7 @@
             </StackLayout>
         </StackLayout>
 
-        <StackLayout x:Name="Groups" Orientation="Vertical" VerticalOptions="Fill">
+        <StackLayout x:Name="GroupStack" Orientation="Vertical" VerticalOptions="Fill">
             
         </StackLayout>
     </Grid>
