@@ -17,6 +17,7 @@ namespace UnleashedApp.ViewModels
         public List<Squad> Squads { get; set; }
         public List<Group> Groups { get; set; }
         public List<Employee> HabitatEmployeeList { get; set; }
+        public List<Employee> Employees { get; set; }
         //public ICommand HabitatCommand { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public WhoIsWhoViewModel(INavigationService navigationService, IHabitatRepository habitatRepository, ISquadRepository squadRepository)
@@ -26,19 +27,20 @@ namespace UnleashedApp.ViewModels
             //InitialiseCommands();
             _habitatRepository = habitatRepository;
             _squadRepository = squadRepository;
-            //LoadData();
+            LoadData();
         }
 
-        /* public void LoadData()
+        public void LoadData()
         {
-            Habitats = _habitatRepository.GetAllHabitats();
+            /*Habitats = _habitatRepository.GetAllHabitats();
             Squads = _squadRepository.GetAllSquads();
 
             foreach (Habitat habitat in Habitats)
             {
                 Groups.Add(habitat);
-            }
-        } */
+            } */
+            Employees = _habitatRepository.GetEmployees(1);
+        }
 
         public void ProvideEmployeesPerHabitat(int id)
         {

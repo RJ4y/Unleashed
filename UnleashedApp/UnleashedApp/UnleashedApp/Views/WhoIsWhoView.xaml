@@ -27,8 +27,20 @@
             </StackLayout>
         </StackLayout>
 
-        <StackLayout x:Name="GroupStack" Orientation="Vertical" VerticalOptions="Fill">
-            
+        <StackLayout VerticalOptions="FillAndExpand">
+            <ListView ItemsSource="{Binding Employees}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout HorizontalOptions="Start" Orientation="Horizontal">
+                                    <Label Text="{Binding Last_Name}"/>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </Grid>
 </ContentPage>
