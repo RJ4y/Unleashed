@@ -21,7 +21,7 @@ namespace UnleashedApp
 
             //MainPage = new NavigationPage(new MenuView());
 
-            MainPage = new NavigationPage(new MenuView());
+            MainPage = new NavigationPage(new LoginView());
         }
 
         protected override void OnStart()

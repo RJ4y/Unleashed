@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UnleashedApp.Views.LoginView" BackgroundColor="#e6332a"
+             xmlns:locator="clr-namespace:UnleashedApp"             
+             BindingContext="{Binding Source={x:Static locator:ViewModelLocator.Instance}, Path=LoginViewModel}">
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry Placeholder="Email"/>
+            <Entry Placeholder="Password"/>
+            <Button Text="Log In" Command="{Binding LoginCommand}}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

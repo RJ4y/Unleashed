@@ -15,6 +15,7 @@ namespace UnleashedApp
         private readonly IHabitatRepository _habitatRepository;
         private readonly ISquadRepository _squadRepository;
 
+        public LoginViewModel LoginViewModel { get; }
         public MenuViewModel MenuViewModel { get; }
         public WhoIsWhoViewModel WhoIsViewViewModel { get; }
         public EmployeeDetailViewModel EmployeeDetailViewModel { get; }
@@ -32,6 +33,7 @@ namespace UnleashedApp
             _squadRepository = new SquadRepository();
 
             //viewmodels:
+            LoginViewModel = new LoginViewModel(_navigationService);
             MenuViewModel = new MenuViewModel(_navigationService);
             WhoIsViewViewModel = new WhoIsWhoViewModel(_navigationService, _habitatRepository, _squadRepository);
             //EmployeeDetailViewModel = new EmployeeDetailViewModel();

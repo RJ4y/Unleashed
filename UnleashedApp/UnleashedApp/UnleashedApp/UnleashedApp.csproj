@@ -40,6 +40,7 @@
     </Compile>
     <Compile Include="Contracts\INavigationService.cs" />
     <Compile Include="Contracts\ViewModels\IEmployeeDetailViewModel.cs" />
+    <Compile Include="Contracts\ViewModels\ILoginViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IMenuViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IWhoIsWhoViewModel.cs" />
     <Compile Include="Models\Employee.cs" />
@@ -61,11 +62,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\EmployeeDetailViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\WhoIsWhoViewModel.cs" />
     <Compile Include="Views\EmployeeDetailView.xaml.cs">
       <DependentUpon>EmployeeDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
@@ -123,6 +128,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\EmployeeDetailView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\LoginView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
