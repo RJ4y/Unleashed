@@ -26,5 +26,21 @@
                 <SearchBar Placeholder="search"/>
             </StackLayout>
         </StackLayout>
+
+        <StackLayout VerticalOptions="FillAndExpand" Grid.Row="2" Grid.Column="0">
+            <ListView ItemsSource="{Binding Employees}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout HorizontalOptions="Start" Orientation="Horizontal">
+                                    <Label Text="{Binding Last_Name}"/>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
     </Grid>
 </ContentPage>

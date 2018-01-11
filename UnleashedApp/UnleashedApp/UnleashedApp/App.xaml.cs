@@ -1,5 +1,4 @@
-﻿using Autofac;
-using UnleashedApp.Views;
+﻿using UnleashedApp.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,7 +21,7 @@ namespace UnleashedApp
 
             //MainPage = new NavigationPage(new MenuView());
 
-            MainPage = new NavigationPage(new WhoIsWhoView());
+            MainPage = new NavigationPage(new MenuView());
         }
 
         protected override void OnStart()
