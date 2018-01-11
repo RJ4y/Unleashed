@@ -9,7 +9,7 @@ namespace UnleashedApp.Views
         public MenuView()
         {
             InitializeComponent();
-            //NavigationPage.SetHasNavigationBar(this, false);
+            NavigationPage.SetHasNavigationBar(this, false);
         }
     }
 }

@@ -11,9 +11,10 @@ namespace UnleashedApp.ViewModels
 
         public ICommand WhoIsWhoCommand { get; set; }
 
-        public MenuViewModel(IMessagingCenter messagingCenter, INavigationService navigationService)
+        public MenuViewModel(INavigationService navigationService)
         {
-            InitialiseComponents(messagingCenter, navigationService);
+            _navigationService = navigationService;
+            //InitialiseComponents(messagingCenter, navigationService);
             InitialiseCommands();
         }
 
@@ -21,7 +22,7 @@ namespace UnleashedApp.ViewModels
         {
             WhoIsWhoCommand = new Command(async() =>
             {
-                await NavigationService.PushAsync(nameof(WhoIsWhoView));
+                await _navigationService.PushAsync(nameof(WhoIsWhoView));
             });
         }
     }

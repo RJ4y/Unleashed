@@ -72,6 +72,7 @@ namespace UnleashedApp
             switch (pageName)
             {
                 case nameof(MenuView): return new MenuView();
+                case nameof(WhoIsWhoView): return new WhoIsWhoView();
             }
 
             return null;

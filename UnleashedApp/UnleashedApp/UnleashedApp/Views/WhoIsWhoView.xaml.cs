@@ -14,11 +14,10 @@ namespace UnleashedApp.Views
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-            //uncommment after tests
             //InitializeList();
         }
 
-        public void InitializeList()
+        /* public void InitializeList()
         {
             var viewModel = ViewModelLocator.Instance.WhoIsViewViewModel;
             FlowListView flowListView;
@@ -49,6 +48,6 @@ namespace UnleashedApp.Views
                 GroupStack.Children.Add(stack);
                 //Groups.Children.Add(new ___ { BindingContext = ___});
             }
-        }
+        } */
     }
 }
