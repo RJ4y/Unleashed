@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnleashedApp.Contracts.ViewModels;
 using UnleashedApp.Models;
 using UnleashedApp.Repositories.HabitatRepositories;
@@ -17,7 +18,8 @@ namespace UnleashedApp.ViewModels
         public List<Squad> Squads { get; set; }
         public List<Group> Groups { get; set; }
         public List<Employee> HabitatEmployeeList { get; set; }
-        public List<Employee> Employees { get; set; }
+        //public List<Employee> Employees { get; set; }
+        public ObservableCollection<Employee> Employees { get; set; }
         //public ICommand HabitatCommand { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public WhoIsWhoViewModel(INavigationService navigationService, IHabitatRepository habitatRepository, ISquadRepository squadRepository)
@@ -39,7 +41,8 @@ namespace UnleashedApp.ViewModels
             {
                 Groups.Add(habitat);
             } */
-            Employees = _habitatRepository.GetEmployees(1);
+            Employees = new ObservableCollection<Employee>(_habitatRepository.GetEmployees(1));
+            //Employees = _squadRepository.GetEmployees(1);
         }
 
         public void ProvideEmployeesPerHabitat(int id)

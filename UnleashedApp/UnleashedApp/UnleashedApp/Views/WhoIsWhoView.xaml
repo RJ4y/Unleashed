@@ -27,7 +27,7 @@
             </StackLayout>
         </StackLayout>
 
-        <StackLayout VerticalOptions="FillAndExpand">
+        <StackLayout VerticalOptions="FillAndExpand" Grid.Row="2" Grid.Column="0">
             <ListView ItemsSource="{Binding Employees}">
                 <ListView.ItemTemplate>
                     <DataTemplate>

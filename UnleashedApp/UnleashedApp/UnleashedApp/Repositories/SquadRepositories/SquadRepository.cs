@@ -68,7 +68,15 @@ namespace UnleashedApp.Repositories.SquadRepositories
                 if (response.IsSuccessStatusCode)
                 {
                     string resultString = response.Content.ReadAsStringAsync().Result;
-                    _employees = JsonConvert.DeserializeObject<List<Employee>>(resultString);
+                    List<Temp> rootObjects = JsonConvert.DeserializeObject<List<Temp>>(resultString);
+                    _employees = new List<Employee>();
+
+                    foreach(Temp root in rootObjects)
+                    {
+                        _employees.Add(root.Employee);
+                    }
+
+                    //_employees = JsonConvert.DeserializeObject<List<Employee>>(resultString);
                 }
             }
             catch (AggregateException e)

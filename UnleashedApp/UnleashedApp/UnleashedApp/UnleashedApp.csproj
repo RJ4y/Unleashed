@@ -48,6 +48,7 @@
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\Space.cs" />
     <Compile Include="Models\Squad.cs" />
+    <Compile Include="Models\Temp.cs" />
     <Compile Include="Repositories\EmployeeRepositories\EmployeeRepository.cs" />
     <Compile Include="Repositories\EmployeeRepositories\IEmployeeRepository.cs" />
     <Compile Include="Repositories\HabitatRepositories\HabitatRepository.cs" />
