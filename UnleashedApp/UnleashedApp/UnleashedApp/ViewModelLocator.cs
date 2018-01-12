@@ -21,7 +21,7 @@ namespace UnleashedApp
 
         public static ViewModelLocator Instance => _instance ?? (_instance = new ViewModelLocator());
 
-        public ViewModelLocator()
+        private ViewModelLocator()
         {
             //services:
             _navigationService = new NavigationService();

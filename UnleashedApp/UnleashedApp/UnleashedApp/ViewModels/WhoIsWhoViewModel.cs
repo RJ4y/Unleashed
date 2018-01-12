@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using UnleashedApp.Contracts.ViewModels;
 using UnleashedApp.Models;
 using UnleashedApp.Repositories.HabitatRepositories;
@@ -9,7 +10,7 @@ using Xamarin.Forms;
 
 namespace UnleashedApp.ViewModels
 {
-    public class WhoIsWhoViewModel : ViewModelBase, IWhoIsWhoViewModel
+    public class WhoIsWhoViewModel : INotifyPropertyChanged, IWhoIsWhoViewModel
     {
         private IHabitatRepository _habitatRepository;
         private ISquadRepository _squadRepository;
@@ -18,8 +19,12 @@ namespace UnleashedApp.ViewModels
         public List<Squad> Squads { get; set; }
         public List<Group> Groups { get; set; }
         public List<Employee> HabitatEmployeeList { get; set; }
+        private ObservableCollection<Employee> _employees;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         //public List<Employee> Employees { get; set; }
-        public ObservableCollection<Employee> Employees { get; set; }
+        //public ObservableCollection<Employee> Employees { get; set; }
         //public ICommand HabitatCommand { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public WhoIsWhoViewModel(INavigationService navigationService, IHabitatRepository habitatRepository, ISquadRepository squadRepository)
@@ -43,6 +48,21 @@ namespace UnleashedApp.ViewModels
             } */
             Employees = new ObservableCollection<Employee>(_habitatRepository.GetEmployees(1));
             //Employees = _squadRepository.GetEmployees(1);
+        }
+
+        public ObservableCollection<Employee> Employees
+        {
+            get => _employees;
+            set
+            {
+                _employees = value;
+                RaisePropertyChanged(nameof(Employees));
+            }
+        }
+
+        private void RaisePropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public void ProvideEmployeesPerHabitat(int id)
