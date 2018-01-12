@@ -21,6 +21,8 @@ namespace UnleashedApp.ViewModels
             LoginCommand = new Command(async () =>
             {
                 await _navigationService.PushAsync(nameof(MenuView));
+                //Disables the pressing back (to login) after logging in
+                _navigationService.ClearPageStack();
             });
         }
     }

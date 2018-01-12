@@ -15,6 +15,7 @@ namespace UnleashedApp.Views
         public LoginView()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
     }
 }
