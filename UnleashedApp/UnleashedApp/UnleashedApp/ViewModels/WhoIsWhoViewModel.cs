@@ -27,15 +27,8 @@ namespace UnleashedApp.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        //public List<Employee> Employees { get; set; }
-        //public ObservableCollection<Employee> Employees { get; set; }
-        //public ICommand HabitatCommand { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
         public WhoIsWhoViewModel(INavigationService navigationService, IHabitatRepository habitatRepository, ISquadRepository squadRepository)
         {
-            //InitialiseComponents(messagingCenter, navigationService);
-            //InitialiseNavigation();
-            //InitialiseCommands();
             _navigationService = navigationService;
             _habitatRepository = habitatRepository;
             _squadRepository = squadRepository;
@@ -76,6 +69,8 @@ namespace UnleashedApp.ViewModels
             set
             {
                 _selectedEmployee = value;
+                //MessagingCenter.Send<WhoIsWhoViewModel, Employee>(this, "", SelectedEmployee);
+                _navigationService.PushAsync(nameof(EmployeeDetailView));
                 RaisePropertyChanged(nameof(SelectedEmployee));
             }
         }
@@ -98,22 +93,5 @@ namespace UnleashedApp.ViewModels
                 await _navigationService.PushAsync(nameof(EmployeeDetailView));
             });
         }
-
-        /* private void InitialiseNavigation()
-        {
-            MessagingCenter.Subscribe<MenuViewModel, CurrentUser>(this, Constants.Values.SHOW_QR_NAVIGATION_LINK, (sender, data) =>
-            {
-                User = data;
-                Contents = CreateImageSourceFromId();
-            });
-        } */
-
-        /* private void InitialiseCommands()
-        {
-            HabitatCommand = new Command(async () =>
-            {
-                await NavigationService.PushAsync(nameof(MenuView));
-            });
-        } */
     }
 }
