@@ -13,7 +13,7 @@ namespace UnleashedApp.Models
         [JsonProperty(PropertyName = "last_name")]
         public String Last_Name { get; set; }
 
-        //public String FullName { get; set; }
+        public String FullName { get; set; }
 
         public String Function { get; set; }
 

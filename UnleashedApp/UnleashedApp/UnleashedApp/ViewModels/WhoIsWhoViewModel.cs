@@ -47,6 +47,10 @@ namespace UnleashedApp.ViewModels
                 Groups.Add(habitat);
             } */
             Employees = new ObservableCollection<Employee>(_habitatRepository.GetEmployees(1));
+            foreach(Employee emp in Employees)
+            {
+                emp.FullName = emp.First_Name + " " + emp.Last_Name;
+            }
             //Employees = _squadRepository.GetEmployees(1);
         }
 

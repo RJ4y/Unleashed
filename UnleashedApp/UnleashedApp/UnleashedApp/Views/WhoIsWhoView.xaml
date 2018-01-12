@@ -29,7 +29,7 @@
         <ListView ItemsSource="{Binding Employees}" Grid.Row="2" Grid.Column="0">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Last_Name}"/>
+                    <TextCell Text="{Binding FullName}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
