@@ -26,14 +26,12 @@
             </StackLayout>
         </StackLayout>
 
-        <ListView ItemsSource="{Binding Employees}" Grid.Row="2" Grid.Column="0">
+        <ListView ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}" Grid.Row="2" Grid.Column="0">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding FullName}"/>
+                    <TextCell Text="{Binding FullName}" Command="{ Binding EmployeeDetailCommand }"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
-        
     </Grid>
 </ContentPage>
