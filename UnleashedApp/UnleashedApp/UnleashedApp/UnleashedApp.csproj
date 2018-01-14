@@ -43,6 +43,7 @@
     <Compile Include="Contracts\ViewModels\IMenuViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IRoomViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IWhoIsWhoViewModel.cs" />
+    <Compile Include="Models\DrawableRoom.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Habitat.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\SquadRepositories\ISquadRepository.cs" />
     <Compile Include="Repositories\SquadRepositories\SquadRepository.cs" />
+    <Compile Include="Services\GridService.cs" />
     <Compile Include="Services\MessengerService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

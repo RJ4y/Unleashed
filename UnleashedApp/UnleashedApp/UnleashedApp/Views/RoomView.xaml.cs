@@ -1,49 +1,77 @@
 ﻿using System;
+using UnleashedApp.Models;
+using UnleashedApp.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace UnleashedApp.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class RoomView : ContentPage
-	{
-		public RoomView ()
-		{
-			InitializeComponent ();
-            FillGrid();
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class RoomView : ContentPage
+    {
+        public RoomView()
+        {
+            InitializeComponent();
+            CreateLegendGrid();
+            CreateRoomGrid();
         }
 
-        private void FillGrid()
+        #region LegendGrid
+        private void CreateLegendGrid()
         {
-            AddBox(0, 0, Color.LightGray);
-            AddBox(0, 1, Color.LightGray);
-
-            AddBox(1, 0, Color.LightGray);
-            AddBox(1, 1, Color.LightGray);
-
-            AddBox(2, 0, Color.LightGray);
-            AddBox(2, 1, Color.LightGray);
-
-            AddBox(3, 0, Color.LightGray);
-            AddBox(3, 1, Color.LightGray);
+            GridService.CreateLegendGridColumnDefinitions(LegendGrid);
+            GridService.CreateLegendGridRowDefinitions(LegendGrid, 1);
+            FillLegendGrid();
         }
 
-        private void AddBox(int row, int column, Color color)
+        private void FillLegendGrid()
         {
-            BoxView box = new BoxView();
-            box.BackgroundColor = color;
+            GridService.AddColorLabel(LegendGrid, 1, 1, Color.Black);
+            GridService.AddTextLabel(LegendGrid, 1, 2, "Workspot");
+        }
+        #endregion
 
-            if (box.BackgroundColor == Color.Black)
+        #region RoomGrid
+        private void CreateRoomGrid()
+        {
+            Size dimensions = GridService.GetRoomGridDimensions();
+            GridService.CreateGridColumnDefinitions(RoomGrid, dimensions);
+            GridService.CreateGridRowDefinitions(RoomGrid, dimensions);
+            FillRoomGrid();
+        }
+
+        private void FillRoomGrid()
+        {
+            Size translation = GridService.GetRoomGridTranslation();
+            int xChange = Convert.ToInt32(translation.Width);
+            int yChange = Convert.ToInt32(translation.Height);
+            foreach (Space space in GridService.SelectedSpaces)
             {
-                AddTapEventToBox(box);
+                if (space.EmployeeId == 0)
+                {
+                    AddEmptyCell(space.XCoord - xChange, space.YCoord - yChange);
+                }
+                else
+                {
+                    AddEmployeeWorkspotCell(space.XCoord - xChange, space.YCoord - yChange, GridService.Rooms.Find(r => r.Id == space.RoomId));
+                }
             }
-
-            Grid.SetRow(box, row);
-            Grid.SetColumn(box, column);
-            RoomGrid.Children.Add(box);
         }
 
-        private void AddTapEventToBox(BoxView box)
+        private void AddEmptyCell(int column, int row)
+        {
+            BoxView box = new BoxView { BackgroundColor = Color.Gray };
+            GridService.AddItemToGridAtLocation(box, RoomGrid, row, column);
+        }
+
+        private void AddEmployeeWorkspotCell(int column, int row, DrawableRoom room)
+        {
+            BoxView box = new BoxView { BackgroundColor = room.Color };
+            AddWorkspaceTapEventToBox(box);
+            GridService.AddItemToGridAtLocation(box, RoomGrid, row, column);
+        }
+
+        private void AddWorkspaceTapEventToBox(BoxView box)
         {
             TapGestureRecognizer box_tap = new TapGestureRecognizer();
             box_tap.Tapped += WorkspaceClicked;
@@ -53,7 +81,19 @@ namespace UnleashedApp.Views
         private void WorkspaceClicked(object sender, EventArgs e)
         {
             BoxView box = ((BoxView)sender);
-            DisplayAlert("Alert", "You have pressed workspace " + Grid.GetColumn(box) + "," + Grid.GetRow(box), "OK");
+
+            Size translation = GridService.GetRoomGridTranslation();
+            int x = Grid.GetColumn(box) + Convert.ToInt32(translation.Width);
+            int y = Grid.GetRow(box) + Convert.ToInt32(translation.Height);
+
+            foreach (Space space in GridService.SelectedSpaces)
+            {
+                if (space.XCoord == x && space.YCoord == y)
+                {
+                    DisplayAlert("Employee " + space.EmployeeId, "Employee information", "OK");
+                }
+            }
         }
+        #endregion
     }
 }
