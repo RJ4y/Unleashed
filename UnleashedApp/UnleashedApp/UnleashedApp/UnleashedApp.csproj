@@ -39,8 +39,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Contracts\INavigationService.cs" />
-    <Compile Include="Contracts\ViewModels\IEmployeeDetailViewModel.cs" />
+    <Compile Include="Contracts\ViewModels\IFloorplanViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IMenuViewModel.cs" />
+    <Compile Include="Contracts\ViewModels\IRoomViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IWhoIsWhoViewModel.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Group.cs" />
@@ -49,8 +50,6 @@
     <Compile Include="Models\Space.cs" />
     <Compile Include="Models\Squad.cs" />
     <Compile Include="Models\Temp.cs" />
-    <Compile Include="Repositories\EmployeeRepositories\EmployeeRepository.cs" />
-    <Compile Include="Repositories\EmployeeRepositories\IEmployeeRepository.cs" />
     <Compile Include="Repositories\HabitatRepositories\HabitatRepository.cs" />
     <Compile Include="Repositories\HabitatRepositories\IHabitatRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
@@ -60,15 +59,19 @@
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModelLocator.cs" />
-    <Compile Include="ViewModels\EmployeeDetailViewModel.cs" />
+    <Compile Include="ViewModels\FloorplanViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
+    <Compile Include="ViewModels\RoomViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\WhoIsWhoViewModel.cs" />
-    <Compile Include="Views\EmployeeDetailView.xaml.cs">
-      <DependentUpon>EmployeeDetailView.xaml</DependentUpon>
+    <Compile Include="Views\FloorplanView.xaml.cs">
+      <DependentUpon>FloorplanView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RoomView.xaml.cs">
+      <DependentUpon>RoomView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WhoIsWhoView.xaml.cs">
       <DependentUpon>WhoIsWhoView.xaml</DependentUpon>
@@ -122,7 +125,16 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\EmployeeDetailView.xaml">
+    <EmbeddedResource Include="Views\FloorplanView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\desk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\RoomView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -5,13 +5,14 @@ using Xamarin.Forms;
 
 namespace UnleashedApp.ViewModels
 {
-    public class MenuViewModel : ViewModelBase, IMenuViewModel
+    public class FloorplanViewModel : ViewModelBase, IFloorplanViewModel
     {
         private readonly INavigationService _navigationService;
-        public ICommand WhoIsWhoCommand { get; set; }
         public ICommand FloorplanCommand { get; set; }
+        public ICommand RoomCommand { get; set; }
 
-        public MenuViewModel(INavigationService navigationService)
+
+        public FloorplanViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
             InitialiseCommands();
@@ -19,13 +20,13 @@ namespace UnleashedApp.ViewModels
 
         private void InitialiseCommands()
         {
-            WhoIsWhoCommand = new Command(async () =>
-            {
-                await _navigationService.PushAsync(nameof(WhoIsWhoView));
-            });
             FloorplanCommand = new Command(async () =>
             {
                 await _navigationService.PushAsync(nameof(FloorplanView));
+            });
+            RoomCommand = new Command(async () =>
+            {
+                await _navigationService.PushAsync(nameof(RoomView));
             });
         }
     }

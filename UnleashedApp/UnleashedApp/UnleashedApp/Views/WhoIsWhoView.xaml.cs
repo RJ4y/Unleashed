@@ -1,7 +1,4 @@
-﻿using DLToolkit.Forms.Controls;
-using System;
-using UnleashedApp.Models;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace UnleashedApp.Views
@@ -13,6 +10,7 @@ namespace UnleashedApp.Views
         public WhoIsWhoView()
         {
             InitializeComponent();
+            BindingContext = ViewModelLocator.Instance.WhoIsViewViewModel;
             NavigationPage.SetHasNavigationBar(this, false);
             //InitializeList();
         }

@@ -2,12 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UnleashedApp.Views.WhoIsWhoView"
-             xmlns:locator="clr-namespace:UnleashedApp"             
-             BindingContext="{Binding Source={x:Static locator:ViewModelLocator.Instance}, Path=WhoIsWhoViewModel}">
+             xmlns:locator="clr-namespace:UnleashedApp">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
 
@@ -15,11 +14,11 @@
 
         <Image Source="header.png" Aspect="AspectFill" Grid.Row="0" Grid.Column="0"/>
 
-        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="1" Grid.Column="0">
-            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" Grid.Row="1" Grid.Column="0">
+            <StackLayout Orientation="Vertical" HorizontalOptions="Start">
                 <Button Text="Habitat" BackgroundColor="White" TextColor="CornflowerBlue" FontAttributes="Bold"/>
             </StackLayout>
-            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+            <StackLayout Orientation="Vertical" HorizontalOptions="Fill">
                 <Button Text="Squad" BackgroundColor="White" TextColor="CornflowerBlue" FontAttributes="Bold"/>
             </StackLayout>
             <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
@@ -27,20 +26,14 @@
             </StackLayout>
         </StackLayout>
 
-        <StackLayout VerticalOptions="FillAndExpand" Grid.Row="2" Grid.Column="0">
-            <ListView ItemsSource="{Binding Employees}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <ViewCell.View>
-                                <StackLayout HorizontalOptions="Start" Orientation="Horizontal">
-                                    <Label Text="{Binding Last_Name}"/>
-                                </StackLayout>
-                            </ViewCell.View>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+        <ListView ItemsSource="{Binding Employees}" Grid.Row="2" Grid.Column="0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding FullName}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        
     </Grid>
 </ContentPage>

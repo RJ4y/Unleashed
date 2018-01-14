@@ -4,17 +4,9 @@
              x:Class="UnleashedApp.Views.MenuView"
              xmlns:locator="clr-namespace:UnleashedApp"             
              BindingContext="{Binding Source={x:Static locator:ViewModelLocator.Instance}, Path=MenuViewModel}">
-
     <Grid>
-        <Grid.RowDefinitions>
-            
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            
-        </Grid.ColumnDefinitions>
-
         <Button Text="Who Is Who" Grid.Row="0" Grid.Column="0" Command="{Binding WhoIsWhoCommand}"/>
-        <Button Text="Floor Plan" Grid.Row="0" Grid.Column="1"/>
+        <Button Text="Floor Plan" Grid.Row="0" Grid.Column="1" Command="{Binding FloorplanCommand}"/>
 
         <Button Text="Training" Grid.Row="1" Grid.Column="0"/>
         <Button Text="Library" Grid.Row="1" Grid.Column="1"/>

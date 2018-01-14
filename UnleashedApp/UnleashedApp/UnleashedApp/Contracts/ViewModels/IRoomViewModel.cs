@@ -2,8 +2,8 @@
 
 namespace UnleashedApp.Contracts.ViewModels
 {
-    public interface IWhoIsWhoViewModel
+    public interface IRoomViewModel
     {
-        ICommand HabitatCommand { get; set; }
+        ICommand RoomCommand { get; set; }
     }
 }
