@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnleashedApp.Models;
 using Xamarin.Forms;
 using static UnleashedApp.Models.DrawableRoom;
@@ -9,14 +10,27 @@ namespace UnleashedApp.Services
     {
         public static List<Space> SelectedSpaces { get; private set; }
         public static List<DrawableRoom> Rooms { get; private set; }
+        private static Random random = new Random();
 
         public static void CreateRooms()
         {
+            List<Color> randomColors = GetListOfRandomColors(3);
+
             Rooms = new List<DrawableRoom> {
-                new DrawableRoom(1,"Hallway",Color.Blue,RoomType.Empty),
-                new DrawableRoom(2,"Kitchen",Color.Green,RoomType.Kitchen),
-                new DrawableRoom(3,"Workspace",Color.Black,RoomType.Workspace)
+                new DrawableRoom(1,"Hallway-1",randomColors[0],RoomType.Empty),
+                new DrawableRoom(2,"Kitchen-1",randomColors[1],RoomType.Kitchen),
+                new DrawableRoom(3,"Workspace-1",randomColors[2],RoomType.Workspace)
             };
+        }
+
+        private static List<Color> GetListOfRandomColors(int amount)
+        {
+            List<Color> colors = new List<Color>();
+            for (int i = 0; i < amount; i++)
+            {
+                colors.Add(Color.FromRgb(random.Next(256), random.Next(256), random.Next(256)));
+            }
+            return colors;
         }
 
         public static void AddColorLabel(Grid grid, int row, int column, Color color)
@@ -73,6 +87,20 @@ namespace UnleashedApp.Services
             }
         }
 
+        public static DrawableRoom GetRoom()
+        {
+            DrawableRoom room = null;
+            foreach (Space s in SelectedSpaces)
+            {
+                if (s.EmployeeId == 0)
+                {
+                    room =Rooms.Find(r => r.Id == s.RoomId);
+                    break;
+                }
+            }
+            return room;
+        }
+
         public static Size GetRoomGridTranslation()
         {
             int xMin = int.MaxValue;
@@ -119,7 +147,7 @@ namespace UnleashedApp.Services
 
         public static void CreateLegendGridRowDefinitions(Grid grid, int amountOfRooms)
         {
-            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(6, GridUnitType.Star) });
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(4, GridUnitType.Star) });
 
             for (int i = 0; i < amountOfRooms; i++)
             {

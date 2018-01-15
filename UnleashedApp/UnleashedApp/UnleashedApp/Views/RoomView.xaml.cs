@@ -20,7 +20,7 @@ namespace UnleashedApp.Views
         private void CreateLegendGrid()
         {
             GridService.CreateLegendGridColumnDefinitions(LegendGrid);
-            GridService.CreateLegendGridRowDefinitions(LegendGrid, 1);
+            GridService.CreateLegendGridRowDefinitions(LegendGrid, 2);
             FillLegendGrid();
         }
 
@@ -28,6 +28,8 @@ namespace UnleashedApp.Views
         {
             GridService.AddColorLabel(LegendGrid, 1, 1, Color.Black);
             GridService.AddTextLabel(LegendGrid, 1, 2, "Workspot");
+            GridService.AddColorLabel(LegendGrid, 2, 1, GridService.GetRoom().Color);
+            GridService.AddTextLabel(LegendGrid, 2, 2, "Empty");
         }
         #endregion
 
@@ -49,24 +51,24 @@ namespace UnleashedApp.Views
             {
                 if (space.EmployeeId == 0)
                 {
-                    AddEmptyCell(space.XCoord - xChange, space.YCoord - yChange);
+                    AddEmptyCell(space.XCoord - xChange, space.YCoord - yChange, GridService.GetRoom().Color);
                 }
                 else
                 {
-                    AddEmployeeWorkspotCell(space.XCoord - xChange, space.YCoord - yChange, GridService.Rooms.Find(r => r.Id == space.RoomId));
+                    AddEmployeeWorkspotCell(space.XCoord - xChange, space.YCoord - yChange, GridService.GetRoom());
                 }
             }
         }
 
-        private void AddEmptyCell(int column, int row)
+        private void AddEmptyCell(int column, int row, Color color)
         {
-            BoxView box = new BoxView { BackgroundColor = Color.Gray };
+            BoxView box = new BoxView { BackgroundColor = color };
             GridService.AddItemToGridAtLocation(box, RoomGrid, row, column);
         }
 
         private void AddEmployeeWorkspotCell(int column, int row, DrawableRoom room)
         {
-            BoxView box = new BoxView { BackgroundColor = room.Color };
+            BoxView box = new BoxView { BackgroundColor = Color.Black };
             AddWorkspaceTapEventToBox(box);
             GridService.AddItemToGridAtLocation(box, RoomGrid, row, column);
         }
