@@ -16,6 +16,23 @@ namespace UnleashedApp.Views
             CreateRoomGrid();
         }
 
+        /// <summary>
+        /// Makes the RoomGrid a square
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+
+            double amountOfColumns = RoomGrid.ColumnDefinitions.Count;
+            double amountOfRows = RoomGrid.RowDefinitions.Count;
+            if (amountOfColumns > 0 && amountOfRows > 0)
+            {
+                RoomGrid.HeightRequest = width / amountOfColumns * amountOfRows;
+            }
+        }
+
         #region LegendGrid
         private void CreateLegendGrid()
         {
