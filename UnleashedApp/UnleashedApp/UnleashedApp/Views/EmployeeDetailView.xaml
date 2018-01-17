@@ -10,8 +10,8 @@
 
         <Label Text="Habitat" FontSize="Large" TextColor="#e6332a"/>
         <StackLayout Orientation="Horizontal">
-            <Label Text="Image"/>
-            <Label Text="FirstName LastName" TextColor="Black"/>
+            <Image Source="placeholder.jpg" HeightRequest="80"/>
+            <Label Text="FirstName LastName" TextColor="Black" VerticalTextAlignment="Center"/>
         </StackLayout>
 
     <Label Text="Function" TextColor="Black"/>

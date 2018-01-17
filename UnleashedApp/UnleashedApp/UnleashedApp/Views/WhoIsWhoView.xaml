@@ -15,9 +15,9 @@
             <StackLayout Orientation="Vertical" HorizontalOptions="Fill">
                 <Button Text="Squad" BackgroundColor="White" TextColor="CornflowerBlue" FontAttributes="Bold"/>
             </StackLayout>
-            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+            <!-- <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
                 <SearchBar Placeholder="search"/>
-            </StackLayout>
+            </StackLayout> -->
         </StackLayout>
 
         <ListView ItemsSource="{ Binding Employees }" SelectedItem="{ Binding SelectedEmployee, Mode=TwoWay }">
