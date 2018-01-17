@@ -5,17 +5,10 @@
              x:Name="WhoIsWho"
              xmlns:locator="clr-namespace:UnleashedApp">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
+    <StackLayout Orientation="Vertical">
+        <Image Source="header.png" Aspect="AspectFill" HeightRequest="60"/>
 
-        </Grid.ColumnDefinitions>
-
-        <Image Source="header.png" Aspect="AspectFill" Grid.Row="0" Grid.Column="0"/>
-
-        <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" Grid.Row="1" Grid.Column="0">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
             <StackLayout Orientation="Vertical" HorizontalOptions="Start">
                 <Button Text="Habitat" BackgroundColor="White" TextColor="CornflowerBlue" FontAttributes="Bold"/>
             </StackLayout>
@@ -27,12 +20,12 @@
             </StackLayout>
         </StackLayout>
 
-        <ListView ItemsSource="{ Binding Employees }" SelectedItem="{ Binding SelectedEmployee, Mode=TwoWay }" Grid.Row="2" Grid.Column="0">
+        <ListView ItemsSource="{ Binding Employees }" SelectedItem="{ Binding SelectedEmployee, Mode=TwoWay }">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell Text="{ Binding FullName }" Command="{ Binding Source={x:Reference WhoIsWho}, Path=BindingContext.EmployeeDetailCommand }"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </Grid>
+    </StackLayout>
 </ContentPage>
