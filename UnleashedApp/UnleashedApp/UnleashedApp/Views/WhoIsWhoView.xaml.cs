@@ -14,7 +14,7 @@ namespace UnleashedApp.Views
         {
             InitializeComponent();
             BindingContext = ViewModelLocator.Instance.WhoIsViewViewModel;
-            NavigationPage.SetHasNavigationBar(this, false);
+            //NavigationPage.SetHasNavigationBar(this, false);
             //InitializeList();
         }
 

@@ -6,7 +6,7 @@
              xmlns:locator="clr-namespace:UnleashedApp">
 
     <StackLayout Orientation="Vertical">
-        <Image Source="header.png" Aspect="AspectFill" HeightRequest="60"/>
+        <!-- <Image Source="header.png" Aspect="AspectFill" HeightRequest="60"/> -->
 
         <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
             <StackLayout Orientation="Vertical" HorizontalOptions="Start">

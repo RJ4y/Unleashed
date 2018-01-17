@@ -9,7 +9,7 @@ namespace UnleashedApp.Views
         public EmployeeDetailView()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
+            //NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = ViewModelLocator.Instance.EmployeeDetailViewModel;
         }
     }

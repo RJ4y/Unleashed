@@ -4,9 +4,9 @@
              x:Class="UnleashedApp.Views.EmployeeDetailView"
              xmlns:locator="clr-namespace:UnleashedApp">
     <StackLayout Orientation="Vertical">
-        <StackLayout>
+        <!--<StackLayout>
             <Image Source="header.png" Aspect="AspectFill" HeightRequest="60"/>
-        </StackLayout>
+        </StackLayout> -->
 
         <Label Text="Habitat" FontSize="Large" TextColor="#e6332a"/>
         <StackLayout Orientation="Horizontal">
