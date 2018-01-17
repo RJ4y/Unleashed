@@ -43,6 +43,7 @@
     <Compile Include="Contracts\ViewModels\IMenuViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IRoomViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IWhoIsWhoViewModel.cs" />
+    <Compile Include="Models\Dimension.cs" />
     <Compile Include="Models\DrawableRoom.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Group.cs" />

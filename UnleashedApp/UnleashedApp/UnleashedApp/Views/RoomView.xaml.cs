@@ -1,6 +1,7 @@
 ﻿using System;
 using UnleashedApp.Models;
 using UnleashedApp.Services;
+using UnleashedApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -45,7 +46,7 @@ namespace UnleashedApp.Views
         {
             GridService.AddColorLabel(LegendGrid, 1, 1, Color.Black);
             GridService.AddTextLabel(LegendGrid, 1, 2, "Workspot");
-            GridService.AddColorLabel(LegendGrid, 2, 1, GridService.GetRoom().Color);
+            GridService.AddColorLabel(LegendGrid, 2, 1, GridService.GetSelectedRoom().Color);
             GridService.AddTextLabel(LegendGrid, 2, 2, "Empty");
         }
         #endregion
@@ -53,7 +54,7 @@ namespace UnleashedApp.Views
         #region RoomGrid
         private void CreateRoomGrid()
         {
-            Size dimensions = GridService.GetRoomGridDimensions();
+            Dimension dimensions = GridService.GetRoomGridDimensions();
             GridService.CreateGridColumnDefinitions(RoomGrid, dimensions);
             GridService.CreateGridRowDefinitions(RoomGrid, dimensions);
             FillRoomGrid();
@@ -61,18 +62,17 @@ namespace UnleashedApp.Views
 
         private void FillRoomGrid()
         {
-            Size translation = GridService.GetRoomGridTranslation();
-            int xChange = Convert.ToInt32(translation.Width);
-            int yChange = Convert.ToInt32(translation.Height);
+            Dimension translation = GridService.GetRoomGridTranslation();
+
             foreach (Space space in GridService.SelectedSpaces)
             {
                 if (space.EmployeeId == 0)
                 {
-                    AddEmptyCell(space.XCoord - xChange, space.YCoord - yChange, GridService.GetRoom().Color);
+                    AddEmptyCell(space.XCoord - translation.X, space.YCoord - translation.Y, GridService.GetSelectedRoom().Color);
                 }
                 else
                 {
-                    AddEmployeeWorkspotCell(space.XCoord - xChange, space.YCoord - yChange, GridService.GetRoom());
+                    AddEmployeeWorkspotCell(space.XCoord - translation.X, space.YCoord - translation.Y, GridService.GetSelectedRoom());
                 }
             }
         }
@@ -101,16 +101,26 @@ namespace UnleashedApp.Views
         {
             BoxView box = ((BoxView)sender);
 
-            Size translation = GridService.GetRoomGridTranslation();
-            int x = Grid.GetColumn(box) + Convert.ToInt32(translation.Width);
-            int y = Grid.GetRow(box) + Convert.ToInt32(translation.Height);
+            Dimension translation = GridService.GetRoomGridTranslation();
+            int x = Grid.GetColumn(box) + translation.X;
+            int y = Grid.GetRow(box) + translation.Y;
 
             foreach (Space space in GridService.SelectedSpaces)
             {
                 if (space.XCoord == x && space.YCoord == y)
                 {
-                    DisplayAlert("Employee " + space.EmployeeId, "Employee information", "OK");
+                    ShowEmployeeInformation(space);
                 }
+            }
+        }
+
+        private async void ShowEmployeeInformation(Space space)
+        {
+            bool action = await DisplayAlert("Employee " + space.EmployeeId, "Employee information", "View details", "Close");
+            if (action == true)
+            {
+                RoomViewModel vm = ViewModelLocator.Instance.RoomViewModel;
+                vm.WhoIsWhoCommand.Execute(space.EmployeeId);
             }
         }
         #endregion

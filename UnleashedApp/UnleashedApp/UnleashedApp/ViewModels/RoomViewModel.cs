@@ -9,6 +9,7 @@ namespace UnleashedApp.ViewModels
     {
         private readonly INavigationService _navigationService;
         public ICommand RoomCommand { get; set; }
+        public ICommand WhoIsWhoCommand { get; set; }
 
         public RoomViewModel(INavigationService navigationService)
         {
@@ -21,6 +22,10 @@ namespace UnleashedApp.ViewModels
             RoomCommand = new Command(async () =>
             {
                 await _navigationService.PushAsync(nameof(RoomView));
+            });
+            WhoIsWhoCommand = new Command(async () =>
+            {
+                await _navigationService.PushAsync(nameof(WhoIsWhoView));
             });
         }
     }

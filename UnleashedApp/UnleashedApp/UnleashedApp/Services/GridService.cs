@@ -14,12 +14,34 @@ namespace UnleashedApp.Services
 
         public static void CreateRooms()
         {
-            List<Color> randomColors = GetListOfRandomColors(3);
+            List<Color> randomColors = GetListOfRandomColors(18);
 
             Rooms = new List<DrawableRoom> {
-                new DrawableRoom(1,"Hallway-1",randomColors[0],RoomType.Empty),
-                new DrawableRoom(2,"Kitchen-1",randomColors[1],RoomType.Kitchen),
-                new DrawableRoom(3,"Workspace-1",randomColors[2],RoomType.Workspace)
+                new DrawableRoom(1,"EMPTY",Color.LightGray,RoomType.Empty),
+                new DrawableRoom(2,"2FREEDOM",randomColors[1]),
+                new DrawableRoom(3,"THE_WORKSHOP",Color.HotPink),
+                new DrawableRoom(4,"FINANCE",randomColors[2]),
+                new DrawableRoom(5,"CEO",randomColors[3]),
+                new DrawableRoom(6,"PEOPLE",randomColors[4]),
+                new DrawableRoom(7,"KITCHEN",randomColors[5],RoomType.Kitchen),
+
+                new DrawableRoom(8,"VIKING_DEALS",randomColors[6]),
+                new DrawableRoom(9,"JIM_MOBILE",randomColors[7]),
+                new DrawableRoom(10,"THE_ARENA",Color.Red),
+                new DrawableRoom(11,"STIEVIE",randomColors[8]),
+                new DrawableRoom(12,"TECHNOLOGY",randomColors[9]),
+                new DrawableRoom(13,"THE_BIG_ROOM",randomColors[10]),
+                new DrawableRoom(14,"THE_CHAT_ROOM",Color.Red),
+
+                new DrawableRoom(15,"MOBILE_VIKINGS_PRODUCT",randomColors[11]),
+                new DrawableRoom(16,"THE_SPOTLIGHT",Color.Yellow),
+                new DrawableRoom(17,"DESIGN",randomColors[12]),
+                new DrawableRoom(18,"MOVILE_VIKINGS_GET_&_RETAIN",randomColors[13]),
+                new DrawableRoom(19,"THE_CLOUD",Color.Blue),
+                new DrawableRoom(20,"THE_MILKYWAY",randomColors[14]),
+                new DrawableRoom(21,"THE_WINDOW_ROOM",randomColors[15]),
+                new DrawableRoom(22,"COPYROOM",randomColors[16]),
+                new DrawableRoom(23,"CUSTOMER_CARE",randomColors[17]),
             };
         }
 
@@ -41,12 +63,12 @@ namespace UnleashedApp.Services
 
         public static void AddItemToGridAtLocation(View item, Grid grid, int row, int column)
         {
-            Grid.SetRow(item, row);
-            Grid.SetColumn(item, column);
+            Grid.SetRow(item, column);
+            Grid.SetColumn(item, row);
             grid.Children.Add(item);
         }
 
-        public static Size GetRoomGridDimensions()
+        public static Dimension GetRoomGridDimensions()
         {
             int xMin = int.MaxValue;
             int yMin = int.MaxValue;
@@ -79,29 +101,29 @@ namespace UnleashedApp.Services
 
             if (xDifference <= yDifference)
             {
-                return new Size(yDifference + 1, yDifference + 1);
+                return new Dimension(yDifference + 1, yDifference + 1);
             }
             else
             {
-                return new Size(xDifference + 1, xDifference + 1);
+                return new Dimension(xDifference + 1, xDifference + 1);
             }
         }
 
-        public static DrawableRoom GetRoom()
+        public static DrawableRoom GetSelectedRoom()
         {
             DrawableRoom room = null;
             foreach (Space s in SelectedSpaces)
             {
                 if (s.EmployeeId == 0)
                 {
-                    room =Rooms.Find(r => r.Id == s.RoomId);
+                    room = Rooms.Find(r => r.Id == s.RoomId);
                     break;
                 }
             }
             return room;
         }
 
-        public static Size GetRoomGridTranslation()
+        public static Dimension GetRoomGridTranslation()
         {
             int xMin = int.MaxValue;
             int yMin = int.MaxValue;
@@ -119,7 +141,7 @@ namespace UnleashedApp.Services
                     yMin = y;
                 }
             }
-            return new Size(xMin, yMin);
+            return new Dimension(xMin, yMin);
         }
 
         public static void AddTextLabel(Grid grid, int row, int column, string text)
@@ -129,19 +151,19 @@ namespace UnleashedApp.Services
         }
 
 
-        public static void CreateGridColumnDefinitions(Grid grid, Size size)
+        public static void CreateGridColumnDefinitions(Grid grid, Dimension dimension)
         {
-            for (int i = 0; i < size.Width; i++)
+            for (int i = 0; i < dimension.X; i++)
             {
-                grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(100 / size.Width, GridUnitType.Star) });
+                grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(100 / dimension.X, GridUnitType.Star) });
             }
         }
 
-        public static void CreateGridRowDefinitions(Grid grid, Size size)
+        public static void CreateGridRowDefinitions(Grid grid, Dimension dimension)
         {
-            for (int i = 0; i < size.Height; i++)
+            for (int i = 0; i < dimension.Y; i++)
             {
-                grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(100 / size.Height, GridUnitType.Star) });
+                grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(100 / dimension.Y, GridUnitType.Star) });
             }
         }
 
