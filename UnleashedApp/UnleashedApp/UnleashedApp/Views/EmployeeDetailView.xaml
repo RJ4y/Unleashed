@@ -3,8 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UnleashedApp.Views.EmployeeDetailView"
              xmlns:locator="clr-namespace:UnleashedApp">
-    
     <StackLayout Orientation="Vertical">
-        <Label Text="Success!"/>
+        <StackLayout>
+            <Image Source="header.png" Aspect="AspectFill" HeightRequest="60"/>
+        </StackLayout>
+
+        <Label Text="Habitat" FontSize="Large" TextColor="#e6332a"/>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Image"/>
+            <Label Text="FirstName LastName" TextColor="Black"/>
+        </StackLayout>
+
+    <Label Text="Function" TextColor="Black"/>
     </StackLayout>
 </ContentPage>
