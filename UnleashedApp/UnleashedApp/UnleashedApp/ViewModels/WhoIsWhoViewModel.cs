@@ -66,9 +66,8 @@ namespace UnleashedApp.ViewModels
             set
             {
                 _selectedEmployee = value;
-                //MessagingCenter.Send<WhoIsWhoViewModel, Employee>(this, "", SelectedEmployee);
-                _navigationService.PushAsync(nameof(EmployeeDetailView));
                 RaisePropertyChanged(nameof(SelectedEmployee));
+                //MessagingCenter.Send<WhoIsWhoViewModel, Employee>(this, "", SelectedEmployee);           
             }
         }
 
