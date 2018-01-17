@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UnleashedApp.Views.WhoIsWhoView"
+             x:Name="WhoIsWho"
              xmlns:locator="clr-namespace:UnleashedApp">
 
     <Grid>
@@ -26,10 +27,10 @@
             </StackLayout>
         </StackLayout>
 
-        <ListView ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}" Grid.Row="2" Grid.Column="0">
+        <ListView ItemsSource="{ Binding Employees }" SelectedItem="{ Binding SelectedEmployee, Mode=TwoWay }" Grid.Row="2" Grid.Column="0">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding FullName}"/>
+                    <TextCell Text="{ Binding FullName }" Command="{ Binding Source={x:Reference WhoIsWho}, Path=BindingContext.EmployeeDetailCommand }"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

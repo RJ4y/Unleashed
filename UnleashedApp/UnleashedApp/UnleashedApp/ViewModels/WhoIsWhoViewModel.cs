@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using UnleashedApp.Contracts.ViewModels;
 using UnleashedApp.Models;
+using UnleashedApp.Repositories.EmployeeRepositories;
 using UnleashedApp.Repositories.HabitatRepositories;
 using UnleashedApp.Repositories.SquadRepositories;
 using UnleashedApp.Views;
@@ -16,6 +17,7 @@ namespace UnleashedApp.ViewModels
     {
         private IHabitatRepository _habitatRepository;
         private ISquadRepository _squadRepository;
+        private IEmployeeRepository _employeeRepository;
         private readonly INavigationService _navigationService;
         public Habitat Habitat { get; set; }
         public List<Habitat> Habitats { get; set; }
@@ -27,29 +29,24 @@ namespace UnleashedApp.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public WhoIsWhoViewModel(INavigationService navigationService, IHabitatRepository habitatRepository, ISquadRepository squadRepository)
+        public WhoIsWhoViewModel(INavigationService navigationService, IHabitatRepository habitatRepository, ISquadRepository squadRepository, IEmployeeRepository employeeRepository)
         {
             _navigationService = navigationService;
             _habitatRepository = habitatRepository;
             _squadRepository = squadRepository;
+            _employeeRepository = employeeRepository;
+            InitialiseCommands();
             LoadData();
+            
         }
 
         public void LoadData()
         {
-            /*Habitats = _habitatRepository.GetAllHabitats();
-            Squads = _squadRepository.GetAllSquads();
-
-            foreach (Habitat habitat in Habitats)
-            {
-                Groups.Add(habitat);
-            } */
-            Employees = new ObservableCollection<Employee>(_habitatRepository.GetEmployees(1));
+            Employees = new ObservableCollection<Employee>(_employeeRepository.GetAllEmployees());
             foreach(Employee emp in Employees)
             {
                 emp.FullName = emp.First_Name + " " + emp.Last_Name;
             }
-            //Employees = _squadRepository.GetEmployees(1);
         }
 
         public ObservableCollection<Employee> Employees
@@ -89,7 +86,7 @@ namespace UnleashedApp.ViewModels
         {
             EmployeeDetailCommand = new Command(async () =>
             {
-                MessagingCenter.Send<WhoIsWhoViewModel, Employee>(this, "", SelectedEmployee);
+                //MessagingCenter.Send<WhoIsWhoViewModel, Employee>(this, "", SelectedEmployee);
                 await _navigationService.PushAsync(nameof(EmployeeDetailView));
             });
         }
