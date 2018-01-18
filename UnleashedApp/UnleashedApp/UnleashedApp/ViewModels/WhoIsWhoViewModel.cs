@@ -19,11 +19,6 @@ namespace UnleashedApp.ViewModels
         private ISquadRepository _squadRepository;
         private IEmployeeRepository _employeeRepository;
         private readonly INavigationService _navigationService;
-        public Habitat Habitat { get; set; }
-        public List<Habitat> Habitats { get; set; }
-        public List<Squad> Squads { get; set; }
-        public List<Group> Groups { get; set; }
-        public List<Employee> HabitatEmployeeList { get; set; }
         private ObservableCollection<Employee> _employees;
         public ICommand EmployeeDetailCommand { get; set; }
 
@@ -66,8 +61,7 @@ namespace UnleashedApp.ViewModels
             set
             {
                 _selectedEmployee = value;
-                RaisePropertyChanged(nameof(SelectedEmployee));
-                //MessagingCenter.Send<WhoIsWhoViewModel, Employee>(this, "", SelectedEmployee);           
+                RaisePropertyChanged(nameof(SelectedEmployee));        
             }
         }
 
@@ -76,20 +70,15 @@ namespace UnleashedApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void ProvideEmployeesPerHabitat(int id)
-        {
-            HabitatEmployeeList = _habitatRepository.GetEmployees(id);
-        }
-
         private void InitialiseCommands()
         {
             EmployeeDetailCommand = new Command(async () =>
             {
-                //MessagingCenter.Send<WhoIsWhoViewModel, Employee>(this, "", SelectedEmployee);
                 var empDetailPage = new EmployeeDetailView();
                 empDetailPage.BindingContext = SelectedEmployee;
 
                 await _navigationService.PushAsync(empDetailPage);
+                SelectedEmployee = null;
             });
         }
     }
