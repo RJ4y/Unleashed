@@ -43,6 +43,10 @@ namespace UnleashedApp
             return _navigation.PushAsync(GetPage(pageName));
         }
 
+        public Task PushAsync(Page page) {
+            return _navigation.PushAsync(page);
+        }
+
         public Task PushModalAsync(string pageName, object objectToPass)
         {
             PreventNullReferenceMethod();
@@ -73,6 +77,7 @@ namespace UnleashedApp
             {
                 case nameof(MenuView): return new MenuView();
                 case nameof(WhoIsWhoView): return new WhoIsWhoView();
+                case nameof(EmployeeDetailView): return new EmployeeDetailView();
             }
 
             return null;

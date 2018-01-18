@@ -33,8 +33,8 @@ namespace UnleashedApp
 
             //viewmodels:
             MenuViewModel = new MenuViewModel(_navigationService);
-            WhoIsViewViewModel = new WhoIsWhoViewModel(_navigationService, _habitatRepository, _squadRepository);
-            //EmployeeDetailViewModel = new EmployeeDetailViewModel();
+            WhoIsViewViewModel = new WhoIsWhoViewModel(_navigationService, _habitatRepository, _squadRepository, _employeeRepository);
+            EmployeeDetailViewModel = new EmployeeDetailViewModel();
         }
     }
 }
