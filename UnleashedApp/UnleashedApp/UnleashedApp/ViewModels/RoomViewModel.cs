@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using UnleashedApp.Contracts.ViewModels;
-using UnleashedApp.Models;
-using UnleashedApp.Services;
 using UnleashedApp.Views;
 using Xamarin.Forms;
 

@@ -15,10 +15,9 @@ namespace UnleashedApp.Views
         public static Room Room { get; private set; }
         public static List<Space> Spaces { get; private set; }
 
-        public RoomView(object passedObject)
+        public RoomView()
         {
             InitializeComponent();
-            var obj = passedObject;
             viewModel = ViewModelLocator.Instance.RoomViewModel;
             Room = TransferService.GetSelectedRoom();
             Spaces = TransferService.GetSelectedSpaces();

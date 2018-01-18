@@ -66,7 +66,7 @@ namespace UnleashedApp
                 case nameof(MenuView): return new MenuView();
                 case nameof(WhoIsWhoView): return new WhoIsWhoView();
                 case nameof(FloorplanView): return new FloorplanView();
-                case nameof(RoomView): return new RoomView(objectToPass);
+                case nameof(RoomView): return new RoomView();
             }
             return null;
         }
