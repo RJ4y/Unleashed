@@ -14,16 +14,21 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
     {
         public const string CONVERT_URL = "auth/convert-token";
 
-        public async Task<CustomTokenResponse> GetCustomToken(TokenConvertRequest tokenRequest)
+        public CustomTokenResponse GetCustomToken(TokenConvertRequest tokenRequest)
         {
             string data = JsonConvert.SerializeObject(tokenRequest);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await _client.PostAsync(CONVERT_URL, content);
+            System.Diagnostics.Debug.WriteLine("CONTENT******************************************" + content.ReadAsStringAsync().Result);
+            HttpResponseMessage response = _client.PostAsync(CONVERT_URL, content).Result;
             if (response.IsSuccessStatusCode)
             {
-                String tokenJson = await response.Content.ReadAsStringAsync();
+                String tokenJson = response.Content.ReadAsStringAsync().Result;
                 CustomTokenResponse customToken = JsonConvert.DeserializeObject<CustomTokenResponse>(tokenJson);
                 return customToken;
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("**********************************************************************************************");
             }
             return null;
         }

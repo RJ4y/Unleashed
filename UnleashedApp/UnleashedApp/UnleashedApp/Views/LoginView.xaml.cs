@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -40,15 +41,17 @@ namespace UnleashedApp.Views
 
         private void OnAuthCompleted(object sender, AuthenticatorCompletedEventArgs e)
         {
-            DisplayAlert("auth completed", "auth completed", "xx");
+            Debug.WriteLine("*********************************************** in oauthcompleted");
             if (e.IsAuthenticated)
             {
                 var googleToken = e.Account.Properties["access_token"];
-                DisplayAlert("is authenticated", "is authenticated", "xx");
 
                 //Get custom access token API
-                CustomTokenResponse accessToken = repository.GetCustomToken(new TokenConvertRequest(googleToken)).Result;
+                CustomTokenResponse accessToken = repository.GetCustomToken(new TokenConvertRequest(googleToken));
                 repository.SaveCredentials(e.Account, accessToken.access_token, googleToken);
+                Debug.WriteLine("***********************************************", "before gettoken");
+                var test = repository.GetAPIAccessToken();
+                Debug.WriteLine("***********************************************" + test);
             }
             else
             {
