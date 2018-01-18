@@ -49,10 +49,12 @@ namespace UnleashedApp.Views
             if (legendGrid.IsVisible)
             {
                 legendGrid.IsVisible = false;
+                legendButton.Text = "Open legend";
             }
             else
             {
                 legendGrid.IsVisible = true;
+                legendButton.Text = "Close legend";
             }
         }
 
@@ -139,7 +141,7 @@ namespace UnleashedApp.Views
                     break;
                 }
             }
-            viewModel.RoomCommand.Execute(null);
+            viewModel.RoomCommand.Execute(SelectedRoom);
         }
 
         private void KitchenClicked(object sender, EventArgs e)

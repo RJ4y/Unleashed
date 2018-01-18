@@ -15,18 +15,20 @@ namespace UnleashedApp.Views
         public static Room Room { get; private set; }
         public static List<Space> Spaces { get; private set; }
 
-        public RoomView()
+        public RoomView(object passedObject)
         {
             InitializeComponent();
+            var obj = passedObject;
             viewModel = ViewModelLocator.Instance.RoomViewModel;
             Room = TransferService.GetSelectedRoom();
             Spaces = TransferService.GetSelectedSpaces();
+            roomNameLabel.Text = Room.Name;
             CreateLegendGrid();
             CreateRoomGrid();
         }
 
         /// <summary>
-        ///Makes the RoomGrid cells a square by making the width and height the correct ratio.
+        /// Makes the RoomGrid cells a square by making the width and height the correct ratio.
         /// </summary>
         /// <param name="width"></param>
         /// <param name="height"></param>
