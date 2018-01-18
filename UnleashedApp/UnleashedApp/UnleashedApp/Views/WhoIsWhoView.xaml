@@ -15,7 +15,11 @@
             </StackLayout>
         </StackLayout>
 
-        <ListView ItemsSource="{ Binding Employees }" SelectedItem="{ Binding SelectedEmployee, Mode=TwoWay }">
+        <ListView ItemsSource="{ Binding GroupedList }"
+                  IsGroupingEnabled="True"
+                  GroupDisplayBinding="{ Binding Name }"
+                  GroupShortNameBinding="{Binding Name }"
+                  SelectedItem="{ Binding SelectedEmployee, Mode=TwoWay }">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell Text="{ Binding FullName }" Command="{ Binding Source={x:Reference WhoIsWho}, Path=BindingContext.EmployeeDetailCommand }"/>
