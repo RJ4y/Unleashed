@@ -8,10 +8,10 @@
     <StackLayout Orientation="Vertical">
         <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
             <StackLayout Orientation="Vertical" HorizontalOptions="Start">
-                <Button Text="Habitat" BackgroundColor="White" TextColor="CornflowerBlue" FontAttributes="Bold"/>
+                <Button Text="Habitat" Command="{ Binding HabitatCommand }" BackgroundColor="White" TextColor="CornflowerBlue" FontAttributes="Bold"/>
             </StackLayout>
             <StackLayout Orientation="Vertical" HorizontalOptions="Fill">
-                <Button Text="Squad" BackgroundColor="White" TextColor="CornflowerBlue" FontAttributes="Bold"/>
+                <Button Text="Squad" Command="{ Binding SquadCommand }" BackgroundColor="White" TextColor="CornflowerBlue" FontAttributes="Bold"/>
             </StackLayout>
         </StackLayout>
 
