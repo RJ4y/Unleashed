@@ -6,7 +6,8 @@
              BindingContext="{Binding Source={x:Static locator:ViewModelLocator.Instance}, Path=LoginViewModel}">
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="Log In" Command="{Binding LoginCommand}}" x:Name="loginButton"/>
+            <Button Text="Log In With Unleashed Account" Command="{Binding PresentLoginScreenCommand}" x:Name="loginButton"/>
         </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>

@@ -10,7 +10,7 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
 {
     public interface IAuthenticationRepository
     {
-        CustomTokenResponse GetCustomToken(TokenConvertRequest tokenRequest);
+        Task<CustomTokenResponse> GetCustomTokenAsync(TokenConvertRequest tokenRequest);
         void SaveCredentials(Account account, string API_Token, string Google_token);
         string GetAPIAccessToken();
     }

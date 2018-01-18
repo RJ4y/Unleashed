@@ -4,6 +4,6 @@ namespace UnleashedApp.Contracts.ViewModels
 {
     public interface ILoginViewModel
     {
-        ICommand LoginCommand { get; set; }
+        ICommand PresentLoginScreenCommand { get; set; }
     }
 }
