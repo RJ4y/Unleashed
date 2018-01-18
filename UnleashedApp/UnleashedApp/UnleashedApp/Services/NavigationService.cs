@@ -43,6 +43,10 @@ namespace UnleashedApp
             return _navigation.PushAsync(GetPage(pageName));
         }
 
+        public Task PushAsync(Page page) {
+            return _navigation.PushAsync(page);
+        }
+
         public Task PushModalAsync(string pageName, object objectToPass)
         {
             PreventNullReferenceMethod();

@@ -8,12 +8,12 @@
             <Image Source="header.png" Aspect="AspectFill" HeightRequest="60"/>
         </StackLayout> -->
 
-        <Label Text="Habitat" FontSize="Large" TextColor="#e6332a"/>
+        <Label Text="{ Binding Habitat.Name }" FontSize="Large" TextColor="#e6332a"/>
         <StackLayout Orientation="Horizontal">
             <Image Source="placeholder.jpg" HeightRequest="80"/>
-            <Label Text="FirstName LastName" TextColor="Black" VerticalTextAlignment="Center"/>
+            <Label Text="{ Binding FullName }" TextColor="Black" VerticalTextAlignment="Center"/>
         </StackLayout>
 
-    <Label Text="Function" TextColor="Black"/>
+    <Label Text="{ Binding Function }" TextColor="Black"/>
     </StackLayout>
 </ContentPage>

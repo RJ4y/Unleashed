@@ -86,7 +86,10 @@ namespace UnleashedApp.ViewModels
             EmployeeDetailCommand = new Command(async () =>
             {
                 //MessagingCenter.Send<WhoIsWhoViewModel, Employee>(this, "", SelectedEmployee);
-                await _navigationService.PushAsync(nameof(EmployeeDetailView));
+                var empDetailPage = new EmployeeDetailView();
+                empDetailPage.BindingContext = SelectedEmployee;
+
+                await _navigationService.PushAsync(empDetailPage);
             });
         }
     }
