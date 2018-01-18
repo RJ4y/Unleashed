@@ -3,37 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UnleashedApp.Views.WhoIsWhoView"
              xmlns:locator="clr-namespace:UnleashedApp">
-
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-
-        <Image Source="header.png" Aspect="AspectFill" Grid.Row="0" Grid.Column="0"/>
-
-        <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" Grid.Row="1" Grid.Column="0">
-            <StackLayout Orientation="Vertical" HorizontalOptions="Start">
-                <Button Text="Habitat" BackgroundColor="White" TextColor="CornflowerBlue" FontAttributes="Bold"/>
-            </StackLayout>
-            <StackLayout Orientation="Vertical" HorizontalOptions="Fill">
-                <Button Text="Squad" BackgroundColor="White" TextColor="CornflowerBlue" FontAttributes="Bold"/>
-            </StackLayout>
-            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                <SearchBar Placeholder="search"/>
-            </StackLayout>
-        </StackLayout>
-
-        <ListView ItemsSource="{Binding Employees}" Grid.Row="2" Grid.Column="0">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding FullName}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
-        
+        <Label Grid.Row="0" Grid.Column="0" Text="Who is who page"></Label>
     </Grid>
 </ContentPage>

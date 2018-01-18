@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnleashedApp.Models;
 using UnleashedApp.Services;
 using UnleashedApp.ViewModels;
@@ -10,15 +11,22 @@ namespace UnleashedApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RoomView : ContentPage
     {
+        private static RoomViewModel viewModel;
+        public static Room Room { get; private set; }
+        public static List<Space> Spaces { get; private set; }
+
         public RoomView()
         {
             InitializeComponent();
+            viewModel = ViewModelLocator.Instance.RoomViewModel;
+            Room = TransferService.GetSelectedRoom();
+            Spaces = TransferService.GetSelectedSpaces();
             CreateLegendGrid();
             CreateRoomGrid();
         }
 
         /// <summary>
-        /// Makes the RoomGrid a square
+        ///Makes the RoomGrid cells a square by making the width and height the correct ratio.
         /// </summary>
         /// <param name="width"></param>
         /// <param name="height"></param>
@@ -26,53 +34,53 @@ namespace UnleashedApp.Views
         {
             base.OnSizeAllocated(width, height);
 
-            double amountOfColumns = RoomGrid.ColumnDefinitions.Count;
-            double amountOfRows = RoomGrid.RowDefinitions.Count;
+            double amountOfColumns = roomGrid.ColumnDefinitions.Count;
+            double amountOfRows = roomGrid.RowDefinitions.Count;
             if (amountOfColumns > 0 && amountOfRows > 0)
             {
-                RoomGrid.HeightRequest = width / amountOfColumns * amountOfRows;
+                roomGrid.HeightRequest = width / amountOfColumns * amountOfRows;
             }
         }
 
         #region LegendGrid
         private void CreateLegendGrid()
         {
-            GridService.CreateLegendGridColumnDefinitions(LegendGrid);
-            GridService.CreateLegendGridRowDefinitions(LegendGrid, 2);
+            LegendGridService.CreateLegendGridColumnDefinitions(legendGrid);
+            LegendGridService.CreateLegendGridRowDefinitions(legendGrid, 2);
             FillLegendGrid();
         }
 
         private void FillLegendGrid()
         {
-            GridService.AddColorLabel(LegendGrid, 1, 1, Color.Black);
-            GridService.AddTextLabel(LegendGrid, 1, 2, "Workspot");
-            GridService.AddColorLabel(LegendGrid, 2, 1, GridService.GetSelectedRoom().Color);
-            GridService.AddTextLabel(LegendGrid, 2, 2, "Empty");
+            GridService.AddColorLabel(legendGrid, 1, 1, Color.Black, false);
+            GridService.AddTextLabel(legendGrid, 1, 2, "Workspot", false);
+            GridService.AddColorLabel(legendGrid, 2, 1, Room.Color, false);
+            GridService.AddTextLabel(legendGrid, 2, 2, "Empty", false);
         }
         #endregion
 
         #region RoomGrid
         private void CreateRoomGrid()
         {
-            Dimension dimensions = GridService.GetRoomGridDimensions();
-            GridService.CreateGridColumnDefinitions(RoomGrid, dimensions);
-            GridService.CreateGridRowDefinitions(RoomGrid, dimensions);
+            Dimensions dimensions = GridService.GetMinifiedGridDimensions(Spaces);
+            GridService.CreateGridColumnDefinitions(roomGrid, dimensions);
+            GridService.CreateGridRowDefinitions(roomGrid, dimensions);
             FillRoomGrid();
         }
 
         private void FillRoomGrid()
         {
-            Dimension translation = GridService.GetRoomGridTranslation();
+            Dimensions translation = GridService.GetGridTranslation(Spaces);
 
-            foreach (Space space in GridService.SelectedSpaces)
+            foreach (Space space in Spaces)
             {
                 if (space.EmployeeId == 0)
                 {
-                    AddEmptyCell(space.XCoord - translation.X, space.YCoord - translation.Y, GridService.GetSelectedRoom().Color);
+                    AddEmptyCell(space.XCoord - translation.X, space.YCoord - translation.Y, Room.Color);
                 }
                 else
                 {
-                    AddEmployeeWorkspotCell(space.XCoord - translation.X, space.YCoord - translation.Y, GridService.GetSelectedRoom());
+                    AddEmployeeWorkspotCell(space.XCoord - translation.X, space.YCoord - translation.Y, Room);
                 }
             }
         }
@@ -80,14 +88,14 @@ namespace UnleashedApp.Views
         private void AddEmptyCell(int column, int row, Color color)
         {
             BoxView box = new BoxView { BackgroundColor = color };
-            GridService.AddItemToGridAtLocation(box, RoomGrid, row, column);
+            GridService.AddItemToGridAtLocation(box, roomGrid, row, column);
         }
 
-        private void AddEmployeeWorkspotCell(int column, int row, DrawableRoom room)
+        private void AddEmployeeWorkspotCell(int column, int row, Room room)
         {
             BoxView box = new BoxView { BackgroundColor = Color.Black };
             AddWorkspaceTapEventToBox(box);
-            GridService.AddItemToGridAtLocation(box, RoomGrid, row, column);
+            GridService.AddItemToGridAtLocation(box, roomGrid, row, column);
         }
 
         private void AddWorkspaceTapEventToBox(BoxView box)
@@ -101,11 +109,11 @@ namespace UnleashedApp.Views
         {
             BoxView box = ((BoxView)sender);
 
-            Dimension translation = GridService.GetRoomGridTranslation();
+            Dimensions translation = GridService.GetGridTranslation(Spaces);
             int x = Grid.GetColumn(box) + translation.X;
             int y = Grid.GetRow(box) + translation.Y;
 
-            foreach (Space space in GridService.SelectedSpaces)
+            foreach (Space space in Spaces)
             {
                 if (space.XCoord == x && space.YCoord == y)
                 {

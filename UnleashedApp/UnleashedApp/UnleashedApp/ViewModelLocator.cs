@@ -1,5 +1,5 @@
-﻿using UnleashedApp.Repositories.HabitatRepositories;
-using UnleashedApp.Repositories.SquadRepositories;
+﻿using UnleashedApp.Repositories.RoomRepositories;
+using UnleashedApp.Repositories.SpaceRepositories;
 using UnleashedApp.ViewModels;
 
 namespace UnleashedApp
@@ -9,8 +9,8 @@ namespace UnleashedApp
         private static ViewModelLocator _instance;
         private readonly INavigationService _navigationService;
 
-        private readonly IHabitatRepository _habitatRepository;
-        private readonly ISquadRepository _squadRepository;
+        private readonly ISpaceRepository _spaceRepository;
+        private readonly IRoomRepository _roomRepository;
 
         public MenuViewModel MenuViewModel { get; }
         public WhoIsWhoViewModel WhoIsViewViewModel { get; }
@@ -22,12 +22,13 @@ namespace UnleashedApp
         private ViewModelLocator()
         {
             _navigationService = new NavigationService();
-            _habitatRepository = new HabitatRepository();
-            _squadRepository = new SquadRepository();
+
+            _spaceRepository = new SpaceRepository();
+            _roomRepository = new RoomRepository();
 
             MenuViewModel = new MenuViewModel(_navigationService);
-            WhoIsViewViewModel = new WhoIsWhoViewModel(_navigationService, _habitatRepository, _squadRepository);
-            FloorplanViewModel = new FloorplanViewModel(_navigationService);
+            WhoIsViewViewModel = new WhoIsWhoViewModel(_navigationService);
+            FloorplanViewModel = new FloorplanViewModel(_navigationService, _spaceRepository, _roomRepository);
             RoomViewModel = new RoomViewModel(_navigationService);
         }
     }

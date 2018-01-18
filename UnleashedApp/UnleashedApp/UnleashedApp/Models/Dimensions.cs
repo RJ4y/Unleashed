@@ -1,11 +1,11 @@
 ﻿namespace UnleashedApp.Models
 {
-    public class Dimension
+    public class Dimensions
     {
         public int X { get; set; }
         public int Y { get; set; }
 
-        public Dimension(int x, int y)
+        public Dimensions(int x, int y)
         {
             X = x;
             Y = y;
