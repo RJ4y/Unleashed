@@ -41,7 +41,7 @@ namespace UnleashedApp.ViewModels
             {
                 Groups.Add(habitat);
             } */
-            Employees = new ObservableCollection<Employee>(_habitatRepository.GetEmployees(1));
+            //Employees = new ObservableCollection<Employee>(_habitatRepository.GetEmployees(1));
             //Employees = _squadRepository.GetEmployees(1);
         }
 
