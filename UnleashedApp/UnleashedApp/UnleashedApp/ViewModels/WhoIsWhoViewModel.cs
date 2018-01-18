@@ -20,7 +20,10 @@ namespace UnleashedApp.ViewModels
         private IEmployeeRepository _employeeRepository;
         private readonly INavigationService _navigationService;
         private ObservableCollection<Employee> _employees;
+        private ObservableCollection<Group> _groupedList;
         public ICommand EmployeeDetailCommand { get; set; }
+        public ICommand HabitatCommand { get; set; }
+        public ICommand SquadCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -31,8 +34,8 @@ namespace UnleashedApp.ViewModels
             _squadRepository = squadRepository;
             _employeeRepository = employeeRepository;
             InitialiseCommands();
-            LoadData();
-            
+            LoadHabitats();
+            //LoadSquads();
         }
 
         public void LoadData()
@@ -41,6 +44,72 @@ namespace UnleashedApp.ViewModels
             foreach(Employee emp in Employees)
             {
                 emp.FullName = emp.First_Name + " " + emp.Last_Name;
+            }
+        }
+
+        public void LoadHabitats()
+        {
+            var habitats = _habitatRepository.GetAllHabitats();
+            GroupedList = new ObservableCollection<Group>();
+
+            foreach(Habitat habitat in habitats)
+            {
+                var group = new Group
+                {
+                    Id = habitat.Id,
+                    Name = habitat.Name
+                };
+
+                GroupedList.Add(group);
+            }
+
+            foreach (Group group in GroupedList)
+            {
+                var employees = _habitatRepository.GetEmployees(group.Id);
+
+                foreach(Employee employee in employees)
+                {
+                    employee.FullName = employee.First_Name + " " + employee.Last_Name;
+                    group.Add(employee);
+                }
+            }
+        }
+
+        public void LoadSquads()
+        {
+            var squads = _squadRepository.GetAllSquads();
+            GroupedList = new ObservableCollection<Group>();
+
+            foreach (Squad squad in squads)
+            {
+                var group = new Group
+                {
+                    Id = squad.Id,
+                    Name = squad.Name
+                };
+
+                GroupedList.Add(group);
+            }
+
+            foreach (Group group in GroupedList)
+            {
+                var employees = _squadRepository.GetEmployees(group.Id);
+
+                foreach (Employee employee in employees)
+                {
+                    employee.FullName = employee.First_Name + " " + employee.Last_Name;
+                    group.Add(employee);
+                }
+            }
+        }
+
+        public ObservableCollection<Group> GroupedList
+        {
+            get => _groupedList;
+            set
+            {
+                _groupedList = value;
+                RaisePropertyChanged(nameof(GroupedList));
             }
         }
 
@@ -79,6 +148,14 @@ namespace UnleashedApp.ViewModels
 
                 await _navigationService.PushAsync(empDetailPage);
                 SelectedEmployee = null;
+            });
+            HabitatCommand = new Command(() =>
+            {
+                LoadHabitats();
+            });
+            SquadCommand = new Command(() =>
+            {
+                LoadSquads();
             });
         }
     }
