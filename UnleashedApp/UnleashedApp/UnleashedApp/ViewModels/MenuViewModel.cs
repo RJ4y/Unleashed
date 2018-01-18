@@ -14,7 +14,6 @@ namespace UnleashedApp.ViewModels
         public MenuViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
-            //InitialiseComponents(messagingCenter, navigationService);
             InitialiseCommands();
         }
 

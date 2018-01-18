@@ -6,8 +6,6 @@
              xmlns:locator="clr-namespace:UnleashedApp">
 
     <StackLayout Orientation="Vertical">
-        <!-- <Image Source="header.png" Aspect="AspectFill" HeightRequest="60"/> -->
-
         <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
             <StackLayout Orientation="Vertical" HorizontalOptions="Start">
                 <Button Text="Habitat" BackgroundColor="White" TextColor="CornflowerBlue" FontAttributes="Bold"/>
@@ -15,9 +13,6 @@
             <StackLayout Orientation="Vertical" HorizontalOptions="Fill">
                 <Button Text="Squad" BackgroundColor="White" TextColor="CornflowerBlue" FontAttributes="Bold"/>
             </StackLayout>
-            <!-- <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                <SearchBar Placeholder="search"/>
-            </StackLayout> -->
         </StackLayout>
 
         <ListView ItemsSource="{ Binding Employees }" SelectedItem="{ Binding SelectedEmployee, Mode=TwoWay }">
