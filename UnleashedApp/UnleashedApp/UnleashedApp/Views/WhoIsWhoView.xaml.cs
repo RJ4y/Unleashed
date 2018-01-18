@@ -9,6 +9,7 @@ namespace UnleashedApp.Views
         public WhoIsWhoView()
         {
             InitializeComponent();
+            BindingContext = ViewModelLocator.Instance.WhoIsViewViewModel;
         }
     }
 }

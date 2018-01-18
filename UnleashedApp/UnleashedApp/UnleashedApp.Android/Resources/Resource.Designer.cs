@@ -2444,8 +2444,12 @@ namespace UnleashedApp.Droid
 			// aapt resource value: 0x7f0200a1
 			public const int ic_mr_button_connected_13_light = 2130837665;
 			
+			// aapt resource value: 0x7f0200a3
+			public const int notification_template_icon_bg = 2130837667;
+			
 			// aapt resource value: 0x7f0200a2
 			public const int ic_mr_button_connected_14_dark = 2130837666;
+			public const int placeholder = 2130837666;
 			
 			// aapt resource value: 0x7f0200a3
 			public const int ic_mr_button_connected_14_light = 2130837667;

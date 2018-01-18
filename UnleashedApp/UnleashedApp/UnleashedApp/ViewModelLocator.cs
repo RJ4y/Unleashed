@@ -30,6 +30,8 @@ namespace UnleashedApp
             WhoIsViewViewModel = new WhoIsWhoViewModel(_navigationService);
             FloorplanViewModel = new FloorplanViewModel(_navigationService, _spaceRepository, _roomRepository);
             RoomViewModel = new RoomViewModel(_navigationService);
+            WhoIsViewViewModel = new WhoIsWhoViewModel(_navigationService, _habitatRepository, _squadRepository, _employeeRepository);
+            EmployeeDetailViewModel = new EmployeeDetailViewModel();
         }
     }
 }

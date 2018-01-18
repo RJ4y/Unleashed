@@ -38,6 +38,10 @@ namespace UnleashedApp
             return _navigation.PushAsync(GetPage(pageName));
         }
 
+        public Task PushAsync(Page page) {
+            return _navigation.PushAsync(page);
+        }
+
         public Task PushModalAsync(string pageName, object objectToPass)
         {
             PreventNullReferenceMethod();
@@ -67,6 +71,7 @@ namespace UnleashedApp
                 case nameof(WhoIsWhoView): return new WhoIsWhoView();
                 case nameof(FloorplanView): return new FloorplanView();
                 case nameof(RoomView): return new RoomView();
+                case nameof(EmployeeDetailView): return new EmployeeDetailView();
             }
             return null;
         }

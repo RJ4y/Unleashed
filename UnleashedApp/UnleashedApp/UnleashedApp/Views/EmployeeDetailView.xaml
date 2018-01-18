@@ -2,10 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UnleashedApp.Views.EmployeeDetailView"
-             xmlns:locator="clr-namespace:UnleashedApp"             
-             BindingContext="{Binding Source={x:Static locator:ViewModelLocator.Instance}, Path=EmployeeViewModel}">
-    
+             xmlns:locator="clr-namespace:UnleashedApp">
     <StackLayout Orientation="Vertical">
-        
+        <!--<StackLayout>
+            <Image Source="header.png" Aspect="AspectFill" HeightRequest="60"/>
+        </StackLayout> -->
+
+        <Label Text="{ Binding Habitat.Name }" FontSize="Large" TextColor="#e6332a"/>
+        <StackLayout Orientation="Horizontal">
+            <Image Source="placeholder.jpg" HeightRequest="80"/>
+            <Label Text="{ Binding FullName }" TextColor="Black" VerticalTextAlignment="Center"/>
+        </StackLayout>
+
+    <Label Text="{ Binding Function }" TextColor="Black"/>
     </StackLayout>
 </ContentPage>
