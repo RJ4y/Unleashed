@@ -39,29 +39,45 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Contracts\INavigationService.cs" />
+    <Compile Include="Contracts\ViewModels\IEmployeeDetailViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IFloorplanViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IMenuViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IRoomViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IWhoIsWhoViewModel.cs" />
     <Compile Include="Models\Dimensions.cs" />
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\Habitat.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\Space.cs" />
+    <Compile Include="Models\Squad.cs" />
+    <Compile Include="Models\TempEmployee.cs" />
+    <Compile Include="Repositories\EmployeeRepositories\EmployeeRepository.cs" />
+    <Compile Include="Repositories\EmployeeRepositories\IEmployeeRepository.cs" />
+    <Compile Include="Repositories\HabitatRepositories\HabitatRepository.cs" />
+    <Compile Include="Repositories\HabitatRepositories\IHabitatRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\RoomRepositories\IRoomRepository.cs" />
     <Compile Include="Repositories\RoomRepositories\RoomRepository.cs" />
     <Compile Include="Repositories\SpaceRepositories\ISpaceRepository.cs" />
     <Compile Include="Repositories\SpaceRepositories\SpaceRepository.cs" />
+    <Compile Include="Repositories\SquadRepositories\ISquadRepository.cs" />
+    <Compile Include="Repositories\SquadRepositories\SquadRepository.cs" />
     <Compile Include="Services\GridService.cs" />
     <Compile Include="Services\LegendGridService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\TransferService.cs" />
     <Compile Include="ViewModelLocator.cs" />
+    <Compile Include="ViewModels\EmployeeDetailViewModel.cs" />
     <Compile Include="ViewModels\FloorplanViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\RoomViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\WhoIsWhoViewModel.cs" />
+    <Compile Include="Views\EmployeeDetailView.xaml.cs">
+      <DependentUpon>EmployeeDetailView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FloorplanView.xaml.cs">
       <DependentUpon>FloorplanView.xaml</DependentUpon>
     </Compile>
@@ -131,6 +147,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Views\RoomView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\EmployeeDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

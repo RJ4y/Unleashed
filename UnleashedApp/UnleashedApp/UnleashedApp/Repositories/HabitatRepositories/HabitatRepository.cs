@@ -5,17 +5,17 @@ using System.Diagnostics;
 using System.Net.Http;
 using UnleashedApp.Models;
 
-namespace UnleashedApp.Repositories.SquadRepositories
+namespace UnleashedApp.Repositories.HabitatRepositories
 {
-    public class SquadRepository : Repository, ISquadRepository
+    public class HabitatRepository : Repository, IHabitatRepository
     {
-        private List<Squad> _squads;
-        private Squad _squad;
+        private List<Habitat> _habitats;
         private List<Employee> _employees;
+        private Habitat _habitat;
 
-        public List<Squad> GetAllSquads()
+        public List<Habitat> GetAllHabitats()
         {
-            var address = "squads";
+            var address = "habitats";
 
             try
             {
@@ -24,7 +24,7 @@ namespace UnleashedApp.Repositories.SquadRepositories
                 if (response.IsSuccessStatusCode)
                 {
                     string resultString = response.Content.ReadAsStringAsync().Result;
-                    _squads = JsonConvert.DeserializeObject<List<Squad>>(resultString);
+                    _habitats = JsonConvert.DeserializeObject<List<Habitat>>(resultString);
                 }
             }
             catch (AggregateException e)
@@ -32,12 +32,12 @@ namespace UnleashedApp.Repositories.SquadRepositories
                 Debug.WriteLine(e.ToString());
             }
 
-            return _squads;
+            return _habitats;
         }
 
-        public Squad GetSquadById(int id)
+        public Habitat GetHabitatById(int id)
         {
-            var address = "squads/" + id;
+            var address = "habitats/" + id;
 
             try
             {
@@ -46,7 +46,7 @@ namespace UnleashedApp.Repositories.SquadRepositories
                 if (response.IsSuccessStatusCode)
                 {
                     string resultString = response.Content.ReadAsStringAsync().Result;
-                    _squad = JsonConvert.DeserializeObject<Squad>(resultString);
+                    _habitat = JsonConvert.DeserializeObject<Habitat>(resultString);
                 }
             }
             catch (AggregateException e)
@@ -54,12 +54,12 @@ namespace UnleashedApp.Repositories.SquadRepositories
                 Debug.WriteLine(e.ToString());
             }
 
-            return _squad;
+            return _habitat;
         }
 
         public List<Employee> GetEmployees(int id)
         {
-            var address = "squads/" + id + "/employees";
+            var address = "habitats/" + id + "/employees";
 
             try
             {
@@ -68,15 +68,7 @@ namespace UnleashedApp.Repositories.SquadRepositories
                 if (response.IsSuccessStatusCode)
                 {
                     string resultString = response.Content.ReadAsStringAsync().Result;
-                    List<TempEmployee> rootObjects = JsonConvert.DeserializeObject<List<TempEmployee>>(resultString);
-                    _employees = new List<Employee>();
-
-                    foreach(TempEmployee root in rootObjects)
-                    {
-                        _employees.Add(root.Employee);
-                    }
-
-                    //_employees = JsonConvert.DeserializeObject<List<Employee>>(resultString);
+                    _employees = JsonConvert.DeserializeObject<List<Employee>>(resultString);
                 }
             }
             catch (AggregateException e)
