@@ -5,9 +5,12 @@
              xmlns:locator="clr-namespace:UnleashedApp"             
              BindingContext="{Binding Source={x:Static locator:ViewModelLocator.Instance}, Path=LoginViewModel}">
     <ContentPage.Content>
-        <StackLayout Padding="20">
-            <Button Text="Log In With Unleashed Account" Command="{Binding PresentLoginScreenCommand}" x:Name="loginButton"/>
+        <StackLayout Padding="20" Spacing="30" Orientation="Vertical">
+            <BoxView HeightRequest="40" />
+            <Image HorizontalOptions="Center" WidthRequest="400" Source="logoWit.png" />
+            <Button Text="Login with Unleashed account" Command="{Binding PresentLoginScreenCommand}" 
+                    TextColor="#e6332a" FontSize="10"
+                    HorizontalOptions="FillAndExpand" BackgroundColor="White"/>
         </StackLayout>
-        
     </ContentPage.Content>
 </ContentPage>
