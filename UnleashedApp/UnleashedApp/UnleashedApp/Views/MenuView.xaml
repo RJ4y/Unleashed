@@ -20,6 +20,6 @@
         <Button Text="Library" Grid.Row="1" Grid.Column="1"/>
 
         <Button Text="Reserve" Grid.Row="2" Grid.Column="0"/>
-        <Button Text="Log Out" Grid.Row="2" Grid.Column="1"/>
+        <Button Text="Log Out" Grid.Row="2" Grid.Column="1" Command="{Binding LogOutCommand}"/>
     </Grid>
 </ContentPage>

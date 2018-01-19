@@ -73,6 +73,7 @@ namespace UnleashedApp
             {
                 case nameof(MenuView): return new MenuView();
                 case nameof(WhoIsWhoView): return new WhoIsWhoView();
+                case nameof(LoginView): return new LoginView();
             }
 
             return null;

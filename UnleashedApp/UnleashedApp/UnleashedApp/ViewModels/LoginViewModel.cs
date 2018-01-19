@@ -36,7 +36,7 @@ namespace UnleashedApp.ViewModels
                 CustomTokenResponse accessToken = await repository.GetCustomTokenAsync(new TokenConvertRequest(googleToken));
                 if (accessToken != null)
                 {
-                    repository.SaveCredentials(e.Account, accessToken.access_token, googleToken);
+                    repository.SaveCredentials(e.Account, accessToken.access_token);
 
                     await _navigationService.PushAsync(nameof(MenuView));
                     //Disables the pressing back (to login) after logging in

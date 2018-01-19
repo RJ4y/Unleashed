@@ -5,7 +5,7 @@
              xmlns:locator="clr-namespace:UnleashedApp"             
              BindingContext="{Binding Source={x:Static locator:ViewModelLocator.Instance}, Path=LoginViewModel}">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="20">
             <Button Text="Log In With Unleashed Account" Command="{Binding PresentLoginScreenCommand}" x:Name="loginButton"/>
         </StackLayout>
         

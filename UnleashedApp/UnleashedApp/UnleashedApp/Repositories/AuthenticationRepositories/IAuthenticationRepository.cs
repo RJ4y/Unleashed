@@ -13,5 +13,6 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
         Task<CustomTokenResponse> GetCustomTokenAsync(TokenConvertRequest tokenRequest);
         void SaveCredentials(Account account, string API_Token, string Google_token);
         string GetAPIAccessToken();
+        void DeleteAccessToken();
     }
 }

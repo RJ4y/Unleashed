@@ -28,12 +28,11 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
             return null;
         }
 
-        public void SaveCredentials(Account account, string API_token, string Google_token)
+        public void SaveCredentials(Account account, string API_token)
         {
-            if (account != null && !string.IsNullOrWhiteSpace(API_token) && !string.IsNullOrWhiteSpace(Google_token))
+            if (account != null && !string.IsNullOrWhiteSpace(API_token))
             {
                 account.Properties.Add("API_token", API_token);
-                account.Properties.Add("Google_token", Google_token);
                 AccountStore.Create().Save(account, Configuration.APP_NAME);
             }
         }
@@ -41,7 +40,17 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
         public string GetAPIAccessToken()
         {
             var account = AccountStore.Create().FindAccountsForService(Configuration.APP_NAME).FirstOrDefault();
-            return account?.Properties["API_token"];
+            if(account != null && account.Properties.ContainsKey("API_token"))
+            {
+                return account.Properties["API_token"];
+            }
+            return null;
+        }
+
+        public void DeleteAccessToken()
+        {
+            var account = AccountStore.Create().FindAccountsForService(Configuration.APP_NAME).FirstOrDefault();
+            account?.Properties.Remove("API_token");
         }
     }
 }
