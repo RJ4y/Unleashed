@@ -5,5 +5,6 @@ namespace UnleashedApp.Contracts.ViewModels
     public interface IMenuViewModel
     {
         ICommand WhoIsWhoCommand { get; set; }
+        ICommand FloorplanCommand { get; set; }
     }
 }

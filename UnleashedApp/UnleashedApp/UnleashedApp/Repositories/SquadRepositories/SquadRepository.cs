@@ -15,7 +15,7 @@ namespace UnleashedApp.Repositories.SquadRepositories
 
         public List<Squad> GetAllSquads()
         {
-            var address = "squads";
+            string address = "squads";
 
             try
             {
@@ -37,7 +37,7 @@ namespace UnleashedApp.Repositories.SquadRepositories
 
         public Squad GetSquadById(int id)
         {
-            var address = "squads/" + id;
+            string address = "squads/" + id;
 
             try
             {
@@ -59,7 +59,7 @@ namespace UnleashedApp.Repositories.SquadRepositories
 
         public List<Employee> GetEmployees(int id)
         {
-            var address = "squads/" + id + "/employees";
+            string address = "squads/" + id + "/employees";
 
             try
             {
@@ -71,12 +71,10 @@ namespace UnleashedApp.Repositories.SquadRepositories
                     List<TempEmployee> rootObjects = JsonConvert.DeserializeObject<List<TempEmployee>>(resultString);
                     _employees = new List<Employee>();
 
-                    foreach(TempEmployee root in rootObjects)
+                    foreach (TempEmployee root in rootObjects)
                     {
                         _employees.Add(root.Employee);
                     }
-
-                    //_employees = JsonConvert.DeserializeObject<List<Employee>>(resultString);
                 }
             }
             catch (AggregateException e)

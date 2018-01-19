@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 using UnleashedApp.Contracts.ViewModels;
@@ -17,7 +15,6 @@ namespace UnleashedApp.ViewModels
     {
         private IHabitatRepository _habitatRepository;
         private ISquadRepository _squadRepository;
-        private IEmployeeRepository _employeeRepository;
         private readonly INavigationService _navigationService;
         private ObservableCollection<Employee> _employees;
         private ObservableCollection<Group> _groupedList;
@@ -32,19 +29,8 @@ namespace UnleashedApp.ViewModels
             _navigationService = navigationService;
             _habitatRepository = habitatRepository;
             _squadRepository = squadRepository;
-            _employeeRepository = employeeRepository;
             InitialiseCommands();
             LoadHabitats();
-            //LoadSquads();
-        }
-
-        public void LoadData()
-        {
-            Employees = new ObservableCollection<Employee>(_employeeRepository.GetAllEmployees());
-            foreach(Employee emp in Employees)
-            {
-                emp.FullName = emp.First_Name + " " + emp.Last_Name;
-            }
         }
 
         public void LoadHabitats()
