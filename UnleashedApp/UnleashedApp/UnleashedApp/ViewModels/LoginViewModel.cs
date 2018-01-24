@@ -12,18 +12,30 @@ namespace UnleashedApp.ViewModels
     public class LoginViewModel : ILoginViewModel
     {
         private readonly INavigationService _navigationService;
-        private AuthenticationRepository repository;
+        private readonly AuthenticationService _authenticationService;
+        private readonly IAuthenticationRepository _authenticationRepository;
 
         public ICommand PresentLoginScreenCommand { get; set; }
 
-        public LoginViewModel(INavigationService navigationService)
+        public LoginViewModel(INavigationService navigationService, AuthenticationService authenticationService, IAuthenticationRepository authenticationRepository)
         {
             _navigationService = navigationService;
-            repository = new AuthenticationRepository();
+            _authenticationService = authenticationService;
+            _authenticationRepository = authenticationRepository;
             GoogleAuthenticator.Authenticator.Completed += OnAuthCompletedAsync;
-            //GoogleAuthenticator.Authenticator.Error += OnAuthErrorAsync;
+            GoogleAuthenticator.Authenticator.Error += OnAuthError;
 
             InitialiseCommands();
+        }
+
+        private void InitialiseCommands()
+        {
+            PresentLoginScreenCommand = new Command(() =>
+            {
+                var presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
+                presenter.Login(GoogleAuthenticator.Authenticator);
+            }
+            );
         }
 
         private async void OnAuthCompletedAsync(object sender, AuthenticatorCompletedEventArgs e)
@@ -31,36 +43,40 @@ namespace UnleashedApp.ViewModels
             if (e.IsAuthenticated)
             {
                 var googleToken = e.Account.Properties["access_token"];
-
-                //Get custom access token API
-                CustomTokenResponse accessToken = await repository.GetCustomTokenAsync(new TokenConvertRequest(googleToken));
-                if (accessToken != null)
+                CustomTokenResponse accessTokenAPI = await _authenticationRepository.ExchangeGoogleTokenAsync(new TokenConvertRequest(googleToken));
+                if (accessTokenAPI != null)
                 {
-                    repository.SaveCredentials(e.Account, accessToken.access_token);
-
-                    await _navigationService.PushAsync(nameof(MenuView));
-                    //Disables the pressing back (to login) after logging in
-                    _navigationService.ClearPageStack();
+                    _authenticationService.SaveCredentials(e.Account, accessTokenAPI.access_token);
+                    showHomePageAsync();
                 }
                 else
                 {
-                    MessagingCenter.Send(this, "Authentication_fail", "Oops something went wrong");
+                    ShowErrorMessage("Oops something went wrong");
                 }
             }
             else
             {
-                MessagingCenter.Send(this, "Authentication_fail", "Oops something went wrong");
+                ShowErrorMessage("Oops you are not authorized to use this app");
             }
         }
 
-        private void InitialiseCommands()
+        private void OnAuthError(object sender, AuthenticatorErrorEventArgs e)
         {
-            PresentLoginScreenCommand = new Command(() =>
-                {
-                    var presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
-                    presenter.Login(GoogleAuthenticator.Authenticator);
-                }
-            );
+            ShowErrorMessage("Oops something went wrong");
         }
+
+        private void ShowErrorMessage(string message)
+        {
+            MessagingCenter.Send(this, "authentication_failed", message);
+        }
+
+        private async void showHomePageAsync()
+        {
+             await _navigationService.PushAsync(nameof(MenuView));
+            //Disables the pressing back (to login) after logging in
+            _navigationService.ClearPageStack();
+        }
+
+        
     }
 }

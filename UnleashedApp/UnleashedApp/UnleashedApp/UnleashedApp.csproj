@@ -38,10 +38,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Authentication\CustomTokenResponse.cs" />
+    <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Authentication\GoogleAuthenticator.cs" />
-    <Compile Include="Authentication\TokenConvertRequest.cs" />
-    <Compile Include="Configuration.cs" />
+    <Compile Include="Models\CustomTokenResponse.cs" />
+    <Compile Include="Models\TokenConvertRequest.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Contracts\INavigationService.cs" />
     <Compile Include="Contracts\ViewModels\IEmployeeDetailViewModel.cs" />
     <Compile Include="Contracts\ViewModels\ILoginViewModel.cs" />

@@ -27,8 +27,8 @@ namespace UnleashedApp.Authentication
         public TokenConvertRequest(string googleToken)
         {
             GrantType = "convert_token";
-            ClientId = Configuration.CLIENT_ID_API;
-            ClientSecret = Configuration.CLIENT_SECRET_API;
+            ClientId = Constants.CLIENT_ID_API;
+            ClientSecret = Constants.CLIENT_SECRET_API;
             Backend = "google-oauth2";
             Token = googleToken;
         }

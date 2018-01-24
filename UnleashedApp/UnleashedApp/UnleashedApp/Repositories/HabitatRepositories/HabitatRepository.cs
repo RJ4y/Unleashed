@@ -59,7 +59,7 @@ namespace UnleashedApp.Repositories.HabitatRepositories
 
         public List<Employee> GetEmployees(int id)
         {
-            var address = "habitats/" + id + "/employees";
+            var address = "habitats/" + id + "/employees/";
 
             try
             {

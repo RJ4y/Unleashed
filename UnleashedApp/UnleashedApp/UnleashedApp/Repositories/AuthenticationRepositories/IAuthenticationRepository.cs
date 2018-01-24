@@ -4,15 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnleashedApp.Authentication;
-using Xamarin.Auth;
 
 namespace UnleashedApp.Repositories.AuthenticationRepositories
 {
     public interface IAuthenticationRepository
     {
-        Task<CustomTokenResponse> GetCustomTokenAsync(TokenConvertRequest tokenRequest);
-        void SaveCredentials(Account account, string API_Token);
-        string GetAPIAccessToken();
-        void DeleteAccessToken();
+        Task<CustomTokenResponse> ExchangeGoogleTokenAsync(TokenConvertRequest tokenRequest);
     }
 }

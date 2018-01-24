@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using UnleashedApp.Contracts.ViewModels;
 using UnleashedApp.Models;
 using UnleashedApp.Repositories.HabitatRepositories;
@@ -41,7 +42,12 @@ namespace UnleashedApp.ViewModels
             {
                 Groups.Add(habitat);
             } */
-            //Employees = new ObservableCollection<Employee>(_habitatRepository.GetEmployees(1));
+            if(_habitatRepository.GetEmployees(1) != null)
+            {
+                Employees = new ObservableCollection<Employee>(_habitatRepository.GetEmployees(1));
+                Debug.WriteLine("****************************************************** " + Employees[0].First_Name);
+            }
+
             //Employees = _squadRepository.GetEmployees(1);
         }
 

@@ -1,9 +1,9 @@
-﻿using UnleashedApp.Repositories.EmployeeRepositories;
+﻿using UnleashedApp.Authentication;
+using UnleashedApp.Repositories.AuthenticationRepositories;
+using UnleashedApp.Repositories.EmployeeRepositories;
 using UnleashedApp.Repositories.HabitatRepositories;
 using UnleashedApp.Repositories.SquadRepositories;
-using UnleashedApp.Services;
 using UnleashedApp.ViewModels;
-using Xamarin.Forms;
 
 namespace UnleashedApp
 {
@@ -11,9 +11,11 @@ namespace UnleashedApp
     {
         private static ViewModelLocator _instance;
         private readonly INavigationService _navigationService;
+        private readonly AuthenticationService _authenticationService;
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IHabitatRepository _habitatRepository;
         private readonly ISquadRepository _squadRepository;
+        private readonly IAuthenticationRepository _authenticationRepository;
 
         public LoginViewModel LoginViewModel { get; }
         public MenuViewModel MenuViewModel { get; }
@@ -26,15 +28,17 @@ namespace UnleashedApp
         {
             //services:
             _navigationService = new NavigationService();
+            _authenticationService = new AuthenticationService();
 
             //repositories:
             _employeeRepository = new EmployeeRepository();
             _habitatRepository = new HabitatRepository();
             _squadRepository = new SquadRepository();
+            _authenticationRepository = new AuthenticationRepository();
 
             //viewmodels:
-            LoginViewModel = new LoginViewModel(_navigationService);
-            MenuViewModel = new MenuViewModel(_navigationService);
+            LoginViewModel = new LoginViewModel(_navigationService, _authenticationService, _authenticationRepository);
+            MenuViewModel = new MenuViewModel(_navigationService, _authenticationService);
             WhoIsViewViewModel = new WhoIsWhoViewModel(_navigationService, _habitatRepository, _squadRepository);
             //EmployeeDetailViewModel = new EmployeeDetailViewModel();
         }

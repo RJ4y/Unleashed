@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
+using UnleashedApp.Authentication;
 using UnleashedApp.Contracts.ViewModels;
-using UnleashedApp.Repositories.AuthenticationRepositories;
 using UnleashedApp.Views;
 using Xamarin.Forms;
 
@@ -9,14 +9,15 @@ namespace UnleashedApp.ViewModels
     public class MenuViewModel : ViewModelBase, IMenuViewModel
     {
         private readonly INavigationService _navigationService;
+        private readonly AuthenticationService _authenticationService;
 
         public ICommand WhoIsWhoCommand { get; set; }
         public ICommand LogOutCommand { get; set; }
 
-        public MenuViewModel(INavigationService navigationService)
+        public MenuViewModel(INavigationService navigationService, AuthenticationService authenticationService)
         {
             _navigationService = navigationService;
-            //InitialiseComponents(messagingCenter, navigationService);
+            _authenticationService = authenticationService;
             InitialiseCommands();
         }
 
@@ -29,8 +30,7 @@ namespace UnleashedApp.ViewModels
 
             LogOutCommand = new Command(async() =>
             {
-                AuthenticationRepository authRepo = new AuthenticationRepository();
-                authRepo.DeleteAccessToken();
+                _authenticationService.DeleteAccessToken();
                 await _navigationService.PushAsync(nameof(LoginView));
             });
         }

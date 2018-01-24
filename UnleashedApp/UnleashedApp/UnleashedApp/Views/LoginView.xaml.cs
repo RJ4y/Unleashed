@@ -22,11 +22,15 @@ namespace UnleashedApp.Views
         public LoginView()
         {
             InitializeComponent();
-          
+
             NavigationPage.SetHasNavigationBar(this, false);
-            MessagingCenter.Subscribe<LoginViewModel>(this, "Authentication_fail", (sender) =>
+
+            MessagingCenter.Subscribe<LoginViewModel, string>(this, "authentication_failed", (sender, arg) =>
             {
-                DisplayAlert("Authentication failed!", "Oops something went wrong", "Try again");
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await DisplayAlert("Authentication failed!", arg, "Try again");
+                });
             });
         }
 

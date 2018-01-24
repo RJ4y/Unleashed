@@ -1,4 +1,4 @@
-﻿using UnleashedApp.Repositories.AuthenticationRepositories;
+﻿using UnleashedApp.Authentication;
 using UnleashedApp.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,8 +12,8 @@ namespace UnleashedApp
         {
             InitializeComponent();
 
-            AuthenticationRepository authRepo = new AuthenticationRepository();
-            if(authRepo.GetAPIAccessToken() != null)
+            AuthenticationService authService = new AuthenticationService();
+            if(authService.UserIsLoggedIn())
             {
                 MainPage = new NavigationPage(new MenuView());
             }
