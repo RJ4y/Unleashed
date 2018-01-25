@@ -33,25 +33,45 @@
                 <Label Text="Total cost:"/>
                 <Label Text="{ Binding TrainingTotal }"/>
             </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Amount available:"/>
+                <Label Text="0000"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage>
-    
-    <ContentPage Title="Add Training">
-        <StackLayout Orientation="Vertical">
-            <Label Text="Add Training" TextColor="Red" FontSize="Large"/>
-            <Label Text="Date:"/>
-            <DatePicker/>
-            <Label Text="Days"/>
-            <Picker x:Name="DayPicker">
-                <Picker.Items>
-                    <x:String>1</x:String>
-                    <x:String>2</x:String>
-                    <x:String>3</x:String>
-                    <x:String>4</x:String>
-                    <x:String>5</x:String>
-                </Picker.Items>
-            </Picker>
 
-        </StackLayout>           
+    <ContentPage Title="Add Training">
+        <ScrollView>
+            <StackLayout Orientation="Vertical">
+                <Label Text="Add Training" TextColor="Red" FontSize="Large"/>
+                <Label Text="Date:"/>
+                <DatePicker/>
+                <Label Text="Days"/>
+                <Picker x:Name="DayPicker">
+                    <Picker.Items>
+                        <x:String>1</x:String>
+                        <x:String>2</x:String>
+                        <x:String>3</x:String>
+                        <x:String>4</x:String>
+                        <x:String>5</x:String>
+                    </Picker.Items>
+                </Picker>
+
+                <Label Text="Training / Event / Hotel:"/>
+                <Entry/>
+                <Label Text="Company:"/>
+                <Entry/>
+                <Label Text="City:"/>
+                <Entry/>
+                <Label Text="Cost (€):"/>
+                <Entry Keyboard="Numeric"/>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Invoice to finance?"/>
+                    <Switch/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage>
 </TabbedPage>
