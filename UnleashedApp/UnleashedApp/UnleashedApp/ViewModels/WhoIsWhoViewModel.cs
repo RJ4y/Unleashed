@@ -15,6 +15,7 @@ namespace UnleashedApp.ViewModels
 {
     public class WhoIsWhoViewModel : INotifyPropertyChanged, IWhoIsWhoViewModel
     {
+        #region Variables
         private IHabitatRepository _habitatRepository;
         private ISquadRepository _squadRepository;
         private readonly INavigationService _navigationService;
@@ -26,6 +27,7 @@ namespace UnleashedApp.ViewModels
         public ICommand SquadCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
 
         public WhoIsWhoViewModel(INavigationService navigationService, IHabitatRepository habitatRepository, ISquadRepository squadRepository, IEmployeeRepository employeeRepository)
         {
@@ -36,6 +38,7 @@ namespace UnleashedApp.ViewModels
             LoadHabitats();
         }
 
+        #region LoadData
         public void LoadHabitats()
         {
             var habitats = _habitatRepository.GetAllHabitats();
@@ -94,7 +97,9 @@ namespace UnleashedApp.ViewModels
 
             InitialiseFilteredList();
         }
+        #endregion
 
+        #region Properties
         public ObservableCollection<Group> GroupedList
         {
             get => _groupedList;
@@ -153,6 +158,7 @@ namespace UnleashedApp.ViewModels
                 }
             }
         }
+        #endregion
 
         private void RaisePropertyChanged(string propertyName)
         {
@@ -193,6 +199,7 @@ namespace UnleashedApp.ViewModels
             }
         }
 
+        #region Initialisation
         private void InitialiseCommands()
         {
             EmployeeDetailCommand = new Command(async () =>
@@ -241,5 +248,6 @@ namespace UnleashedApp.ViewModels
                 FilteredList.Add(gr);
             }
         }
+        #endregion
     }
 }
