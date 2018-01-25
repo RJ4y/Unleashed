@@ -7,7 +7,7 @@
         <ToolbarItem Name="="></ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <StackLayout Orientation="Vertical">
+    <StackLayout Orientation="Vertical" Padding="10">
         <Label Text="{ Binding Habitat.Name }" FontSize="Large" TextColor="#e6332a"/>
         <StackLayout Orientation="Horizontal">
             <Image Source="placeholder.jpg" HeightRequest="80"/>
