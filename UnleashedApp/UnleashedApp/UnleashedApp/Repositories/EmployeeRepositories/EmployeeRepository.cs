@@ -14,7 +14,7 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
 
         public List<Employee> GetAllEmployees()
         {
-            string address = "employees";
+            string address = "employees/";
 
             try
             {
@@ -36,7 +36,7 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
 
         public Employee GetEmployeeById(int id)
         {
-            string address = "employees/" + id;
+            string address = "employees/" + id + "/";
 
             try
             {
