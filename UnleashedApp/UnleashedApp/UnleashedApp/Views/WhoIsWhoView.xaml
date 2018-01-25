@@ -15,7 +15,7 @@
             </StackLayout>
         </StackLayout>
 
-        <SearchBar Text="{ Binding Filter, Mode=TwoWay }" Placeholder="search"/>
+        <SearchBar Text="{ Binding Filter, Mode=TwoWay }" Placeholder="Search"/>
 
         <ListView ItemsSource="{ Binding FilteredList }"
                   IsGroupingEnabled="True"
