@@ -8,6 +8,7 @@ namespace UnleashedApp.ViewModels
     public class MenuViewModel : ViewModelBase, IMenuViewModel
     {
         private readonly INavigationService _navigationService;
+
         public ICommand WhoIsWhoCommand { get; set; }
         public ICommand FloorplanCommand { get; set; }
 

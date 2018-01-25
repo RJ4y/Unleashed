@@ -15,7 +15,7 @@ namespace UnleashedApp.Repositories.HabitatRepositories
 
         public List<Habitat> GetAllHabitats()
         {
-            string address = "habitats";
+            string address = "habitats/";
 
             try
             {

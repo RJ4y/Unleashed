@@ -1,6 +1,4 @@
-﻿using System;
-using UnleashedApp.Contracts.ViewModels;
-using UnleashedApp.Models;
+﻿using UnleashedApp.Contracts.ViewModels;
 
 namespace UnleashedApp.ViewModels
 {

@@ -15,7 +15,7 @@ namespace UnleashedApp.Repositories.SquadRepositories
 
         public List<Squad> GetAllSquads()
         {
-            string address = "squads";
+            string address = "squads/";
 
             try
             {

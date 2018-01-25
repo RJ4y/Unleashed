@@ -25,7 +25,7 @@ namespace UnleashedApp.Views
             Rooms = viewModel.Rooms;
             Spaces = viewModel.Spaces;
             CreateLegendGrid();
-            CreateFloorplanGrid();            
+            CreateFloorplanGrid();
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace UnleashedApp.Views
         #region FloorplanGrid
         private void CreateFloorplanGrid()
         {
-            Dimensions dimensions = new Dimensions(13, 51);
+            Dimensions dimensions = GridService.GetFloorplanGridDimensions(Spaces);
             GridService.CreateGridColumnDefinitions(floorplanGrid, dimensions);
             GridService.CreateGridRowDefinitions(floorplanGrid, dimensions);
             FillFloorplanGrid();
