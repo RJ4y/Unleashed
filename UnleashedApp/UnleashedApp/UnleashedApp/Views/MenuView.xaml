@@ -4,20 +4,21 @@
              x:Class="UnleashedApp.Views.MenuView"
              xmlns:locator="clr-namespace:UnleashedApp"             
              BindingContext="{Binding Source={x:Static locator:ViewModelLocator.Instance}, Path=MenuViewModel}">
-    <Grid RowSpacing="10" ColumnSpacing="10">
+    <Grid Padding="10"  RowSpacing="5" ColumnSpacing="0">
         <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="60" />
             <RowDefinition Height="60" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50*" />
-            <ColumnDefinition Width="50*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Button Text="Who Is Who" Grid.Row="0" Grid.Column="0" Command="{Binding WhoIsWhoCommand}" BackgroundColor="#e6332a"/>
-        <Button Text="Floor Plan" Grid.Row="0" Grid.Column="1" Command="{Binding FloorplanCommand}" BackgroundColor="#e6332a"/>
+        <Button Text="Who Is Who" Grid.Row="0" Grid.Column="0" Command="{Binding WhoIsWhoCommand}" BackgroundColor="#e6332a" TextColor="#fff" />
+        <Button Text="Floor Plan" Grid.Row="1" Grid.Column="0" Command="{Binding FloorplanCommand}" BackgroundColor="#e6332a" TextColor="#fff"/>
 
-        <Button Text="Training" Grid.Row="1" Grid.Column="0" BackgroundColor="#e6332a"/>
-        <Button Text="Log Out" Grid.Row="1" Grid.Column="1" BackgroundColor="#e6332a"/>
+        <Button Text="Training" Grid.Row="2" Grid.Column="0" BackgroundColor="#e6332a" TextColor="#fff"/>
+        <Button Text="Log Out" Grid.Row="3" Grid.Column="0" BackgroundColor="#e6332a" TextColor="#fff"/>
     </Grid>
 </ContentPage>
