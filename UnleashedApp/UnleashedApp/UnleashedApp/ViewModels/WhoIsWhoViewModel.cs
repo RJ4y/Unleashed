@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using UnleashedApp.Contracts.ViewModels;
 using UnleashedApp.Models;
@@ -13,16 +15,19 @@ namespace UnleashedApp.ViewModels
 {
     public class WhoIsWhoViewModel : INotifyPropertyChanged, IWhoIsWhoViewModel
     {
+        #region Variables
         private IHabitatRepository _habitatRepository;
         private ISquadRepository _squadRepository;
         private readonly INavigationService _navigationService;
         private ObservableCollection<Employee> _employees;
         private ObservableCollection<Group> _groupedList;
+        private ObservableCollection<Group> _filteredList;
         public ICommand EmployeeDetailCommand { get; set; }
         public ICommand HabitatCommand { get; set; }
         public ICommand SquadCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
 
         public WhoIsWhoViewModel(INavigationService navigationService, IHabitatRepository habitatRepository, ISquadRepository squadRepository, IEmployeeRepository employeeRepository)
         {
@@ -33,12 +38,13 @@ namespace UnleashedApp.ViewModels
             LoadHabitats();
         }
 
+        #region LoadData
         public void LoadHabitats()
         {
             var habitats = _habitatRepository.GetAllHabitats();
             GroupedList = new ObservableCollection<Group>();
 
-            foreach(Habitat habitat in habitats)
+            foreach (Habitat habitat in habitats)
             {
                 var group = new Group
                 {
@@ -59,6 +65,7 @@ namespace UnleashedApp.ViewModels
                     group.Add(employee);
                 }
             }
+            InitialiseFilteredList();
         }
 
         public void LoadSquads()
@@ -87,8 +94,12 @@ namespace UnleashedApp.ViewModels
                     group.Add(employee);
                 }
             }
-        }
 
+            InitialiseFilteredList();
+        }
+        #endregion
+
+        #region Properties
         public ObservableCollection<Group> GroupedList
         {
             get => _groupedList;
@@ -96,6 +107,16 @@ namespace UnleashedApp.ViewModels
             {
                 _groupedList = value;
                 RaisePropertyChanged(nameof(GroupedList));
+            }
+        }
+
+        public ObservableCollection<Group> FilteredList
+        {
+            get => _filteredList;
+            set
+            {
+                _filteredList = value;
+                RaisePropertyChanged(nameof(FilteredList));
             }
         }
 
@@ -120,11 +141,65 @@ namespace UnleashedApp.ViewModels
             }
         }
 
+        private string _filter;
+        public string Filter
+        {
+            get
+            {
+                return _filter;
+            }
+            set
+            {
+                if (_filter != value)
+                {
+                    _filter = value;
+                    RaisePropertyChanged("Filter");
+                    FilterList();
+                }
+            }
+        }
+        #endregion
+
         private void RaisePropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private void FilterList()
+        {
+            if (_groupedList != null)
+            {
+                if (String.IsNullOrEmpty(_filter))
+                {
+                    InitialiseFilteredList();
+                }
+                else
+                {
+                    InitialiseFilteredList();
+
+                    foreach (Group group in FilteredList)
+                    {
+                        ObservableCollection<Employee> temp = new ObservableCollection<Employee>();
+                        
+                        foreach(Employee emp in group)
+                        {
+                            if(emp.FullName.ToLower().Contains(Filter.ToLower()))
+                            {
+                                temp.Add(emp);
+                            }
+                        }
+
+                        group.Clear();
+                        foreach(Employee emp in temp)
+                        {
+                            group.Add(emp);
+                        }
+                    }
+                }
+            }
+        }
+
+        #region Initialisation
         private void InitialiseCommands()
         {
             EmployeeDetailCommand = new Command(async () =>
@@ -144,5 +219,35 @@ namespace UnleashedApp.ViewModels
                 LoadSquads();
             });
         }
+
+        private void InitialiseFilteredList()
+        {
+            FilteredList = new ObservableCollection<Group>();
+
+            foreach(Group group in GroupedList)
+            {
+                var gr = new Group();
+                gr.Id = group.Id;
+                gr.Name = group.Name;
+
+                foreach(Employee employee in group)
+                {
+                    var emp = new Employee();
+                    emp.Id = employee.Id;
+                    emp.First_Name = employee.First_Name;
+                    emp.Last_Name = employee.Last_Name;
+                    emp.FullName = employee.FullName;
+                    emp.StartDate = employee.StartDate;
+                    emp.EndDate = employee.EndDate;
+                    emp.Function = employee.Function;
+                    emp.Habitat = employee.Habitat;
+
+                    gr.Add(emp);
+                }
+
+                FilteredList.Add(gr);
+            }
+        }
+        #endregion
     }
 }

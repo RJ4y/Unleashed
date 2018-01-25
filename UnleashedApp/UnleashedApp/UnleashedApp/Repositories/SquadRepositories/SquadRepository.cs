@@ -15,7 +15,7 @@ namespace UnleashedApp.Repositories.SquadRepositories
 
         public List<Squad> GetAllSquads()
         {
-            string address = "squads";
+            string address = "squads/";
 
             try
             {
@@ -37,7 +37,7 @@ namespace UnleashedApp.Repositories.SquadRepositories
 
         public Squad GetSquadById(int id)
         {
-            string address = "squads/" + id;
+            string address = "squads/" + id + "/";
 
             try
             {
@@ -59,7 +59,7 @@ namespace UnleashedApp.Repositories.SquadRepositories
 
         public List<Employee> GetEmployees(int id)
         {
-            string address = "squads/" + id + "/employees";
+            string address = "squads/" + id + "/employees/";
 
             try
             {

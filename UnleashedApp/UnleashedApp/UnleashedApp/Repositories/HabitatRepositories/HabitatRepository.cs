@@ -15,7 +15,7 @@ namespace UnleashedApp.Repositories.HabitatRepositories
 
         public List<Habitat> GetAllHabitats()
         {
-            string address = "habitats";
+            string address = "habitats/";
 
             try
             {
@@ -37,7 +37,7 @@ namespace UnleashedApp.Repositories.HabitatRepositories
 
         public Habitat GetHabitatById(int id)
         {
-            string address = "habitats/" + id;
+            string address = "habitats/" + id + "/";
 
             try
             {
@@ -59,7 +59,7 @@ namespace UnleashedApp.Repositories.HabitatRepositories
 
         public List<Employee> GetEmployees(int id)
         {
-            string address = "habitats/" + id + "/employees";
+            string address = "habitats/" + id + "/employees/";
 
             try
             {
