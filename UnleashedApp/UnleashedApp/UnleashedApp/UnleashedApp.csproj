@@ -43,6 +43,7 @@
     <Compile Include="Contracts\ViewModels\IFloorplanViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IMenuViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IRoomViewModel.cs" />
+    <Compile Include="Contracts\ViewModels\ITrainingViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IWhoIsWhoViewModel.cs" />
     <Compile Include="Models\Dimensions.cs" />
     <Compile Include="Models\Employee.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="ViewModels\FloorplanViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\RoomViewModel.cs" />
+    <Compile Include="ViewModels\TrainingViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\WhoIsWhoViewModel.cs" />
     <Compile Include="Views\EmployeeDetailView.xaml.cs">

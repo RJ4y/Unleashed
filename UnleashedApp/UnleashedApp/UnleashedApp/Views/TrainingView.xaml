@@ -1,12 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UnleashedApp.Views.TrainingView">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+  <!--Pages can be added as references or inline-->
+    <ContentPage Title="Overview">
+        <StackLayout Orientation="Vertical">
+            <Label Text="Training" TextColor="Red" FontSize="Large"/>
+
+            <ListView ItemsSource="{ Binding TrainingList }">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50*"/>
+                                    <ColumnDefinition Width="50*"/>
+                                    <ColumnDefinition Width="50*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{ Binding Date }" Grid.Row="0" Grid.Column="0"/>
+                                <Label Text="{ Binding Name }" Grid.Row="0" Grid.Column="1"/>
+                                <Label Text="{ Binding Cost }" Grid.Row="0" Grid.Column="2"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+    </ContentPage>
+    
+    <ContentPage Title="Add Training">
+        
+    </ContentPage>
+</TabbedPage>

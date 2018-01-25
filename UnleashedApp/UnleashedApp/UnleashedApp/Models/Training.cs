@@ -8,6 +8,8 @@ namespace UnleashedApp.Models
 {
     public class Training
     {
-        
+        public string Date { get; set; }
+        public string Name { get; set; }
+        public int Cost { get; set; }
     }
 }

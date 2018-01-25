@@ -35,7 +35,13 @@ namespace UnleashedApp
         public Task PushAsync(string pageName)
         {
             PreventNullReferenceMethod();
-            return _navigation.PushAsync(GetPage(pageName));
+            if(pageName == nameof(TrainingView))
+            {
+                return _navigation.PushAsync(GetTabbedPage(pageName));
+            } else
+            {
+                return _navigation.PushAsync(GetPage(pageName));
+            }
         }
 
         public Task PushAsync(Page page) {
@@ -70,10 +76,19 @@ namespace UnleashedApp
                 case nameof(MenuView): return new MenuView();
                 case nameof(WhoIsWhoView): return new WhoIsWhoView();
                 case nameof(FloorplanView): return new FloorplanView();
-                case nameof(TrainingView): return new TrainingView();
                 case nameof(RoomView): return new RoomView();
                 case nameof(EmployeeDetailView): return new EmployeeDetailView();
             }
+            return null;
+        }
+
+        public TabbedPage GetTabbedPage(string pageName, object objectToPass = null)
+        {
+            switch(pageName)
+            {
+                case nameof(TrainingView): return new TrainingView();
+            }
+
             return null;
         }
 

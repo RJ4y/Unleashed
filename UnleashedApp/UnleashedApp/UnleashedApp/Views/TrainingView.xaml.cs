@@ -9,12 +9,13 @@ using Xamarin.Forms.Xaml;
 
 namespace UnleashedApp.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class TrainingView : ContentPage
-	{
-		public TrainingView ()
-		{
-			InitializeComponent ();
-		}
-	}
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class TrainingView : TabbedPage
+    {
+        public TrainingView ()
+        {
+            InitializeComponent();
+            BindingContext = ViewModelLocator.Instance.TrainingViewModel;
+        }
+    }
 }
