@@ -52,6 +52,7 @@
     <Compile Include="Models\Space.cs" />
     <Compile Include="Models\Squad.cs" />
     <Compile Include="Models\TempEmployee.cs" />
+    <Compile Include="Models\Training.cs" />
     <Compile Include="Repositories\EmployeeRepositories\EmployeeRepository.cs" />
     <Compile Include="Repositories\EmployeeRepositories\IEmployeeRepository.cs" />
     <Compile Include="Repositories\HabitatRepositories\HabitatRepository.cs" />
@@ -63,6 +64,8 @@
     <Compile Include="Repositories\SpaceRepositories\SpaceRepository.cs" />
     <Compile Include="Repositories\SquadRepositories\ISquadRepository.cs" />
     <Compile Include="Repositories\SquadRepositories\SquadRepository.cs" />
+    <Compile Include="Repositories\TrainingRepository\ITrainingRepository.cs" />
+    <Compile Include="Repositories\TrainingRepository\TrainingRepository.cs" />
     <Compile Include="Services\GridService.cs" />
     <Compile Include="Services\LegendGridService.cs" />
     <Compile Include="Services\NavigationService.cs" />
@@ -86,6 +89,9 @@
     </Compile>
     <Compile Include="Views\RoomView.xaml.cs">
       <DependentUpon>RoomView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrainingView.xaml.cs">
+      <DependentUpon>TrainingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WhoIsWhoView.xaml.cs">
       <DependentUpon>WhoIsWhoView.xaml</DependentUpon>
@@ -153,6 +159,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Views\EmployeeDetailView.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\TrainingView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
