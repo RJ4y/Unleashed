@@ -3,9 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UnleashedApp.Views.EmployeeDetailView"
              xmlns:locator="clr-namespace:UnleashedApp">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Name="="></ToolbarItem>
-    </ContentPage.ToolbarItems>
 
     <StackLayout Orientation="Vertical">
         <Label Text="{ Binding Habitat.Name }" FontSize="Large" TextColor="#e6332a"/>

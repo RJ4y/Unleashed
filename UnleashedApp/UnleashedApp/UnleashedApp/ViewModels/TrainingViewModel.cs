@@ -11,6 +11,7 @@ namespace UnleashedApp.ViewModels
     {
         private ITrainingRepository _trainingRepository;
         private ObservableCollection<Training> _trainings;
+        private int _trainingTotal;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -18,6 +19,7 @@ namespace UnleashedApp.ViewModels
         {
             _trainingRepository = trainingRepository;
             Init();
+            CalculateTotal();
         }
 
         public void Init()
@@ -26,8 +28,20 @@ namespace UnleashedApp.ViewModels
             {
                 new Training() { Date = "2018-01-24", Name = "TabbedView", Cost = 9001 },
                 new Training() { Date = "2018-01-25", Name = "Code Review", Cost = 500 },
-                new Training() { Date = "2018-01-25", Name = "Wenen", Cost = 9999999 }
+                new Training() { Date = "2018-01-25", Name = "Testen", Cost = 2000 }
             };
+        }
+
+        public void CalculateTotal()
+        {
+            var total = 0;
+
+            foreach(Training training in _trainings)
+            {
+                total += training.Cost;
+            }
+
+            TrainingTotal = total;
         }
 
         public ObservableCollection<Training> TrainingList
@@ -37,6 +51,16 @@ namespace UnleashedApp.ViewModels
             {
                 _trainings = value;
                 RaisePropertyChanged(nameof(TrainingList));
+            }
+        }
+
+        public int TrainingTotal
+        {
+            get => _trainingTotal;
+            set
+            {
+                _trainingTotal = value;
+                RaisePropertyChanged(nameof(TrainingTotal));
             }
         }
 
