@@ -20,7 +20,6 @@ namespace UnleashedApp.Views
         public FloorplanView()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
             viewModel = ViewModelLocator.Instance.FloorplanViewModel;
             Rooms = viewModel.Rooms;
             Spaces = viewModel.Spaces;
