@@ -20,9 +20,7 @@
         </Grid.ColumnDefinitions>
 
         <Button Text="Who Is Who" Grid.Row="0" Grid.Column="0" Command="{Binding WhoIsWhoCommand}" BackgroundColor="#e6332a" TextColor="#fff" />
-        <Button Text="Floor Plan" Grid.Row="1" Grid.Column="0" Command="{Binding FloorplanCommand}" BackgroundColor="#e6332a" TextColor="#fff"/>
-
-        <Button Text="Training" Grid.Row="2" Grid.Column="0" BackgroundColor="#e6332a" TextColor="#fff"/>
-        <Button Text="Log Out" Grid.Row="3" Grid.Column="0" BackgroundColor="#e6332a" TextColor="#fff"/>
+        <Button Text="Floor Plan" Grid.Row="1" Grid.Column="0" Command="{Binding FloorplanCommand}" BackgroundColor="#e6332a" TextColor="#fff" />
+        <Button Text="Training" Grid.Row="2" Grid.Column="0" BackgroundColor="#e6332a" TextColor="#fff" />
     </Grid>
 </ContentPage>
