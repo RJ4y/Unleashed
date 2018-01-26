@@ -8,8 +8,8 @@
         <ToolbarItem Name="About" Order="Secondary" Text="About" Priority="1" />
         <ToolbarItem Name="LogOut" Order="Secondary" Text="Log out" Priority="0" />
     </ContentPage.ToolbarItems>
-    <ScrollView>
-        <Grid x:Name="mainGrid" RowSpacing="10" ColumnSpacing="0" Padding="10">
+    <ScrollView x:Name="scrollView" Padding="10">
+        <Grid x:Name="mainGrid" RowSpacing="10" ColumnSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
