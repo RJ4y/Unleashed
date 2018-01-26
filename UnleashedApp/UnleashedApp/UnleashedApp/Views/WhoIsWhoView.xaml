@@ -4,7 +4,10 @@
              x:Class="UnleashedApp.Views.WhoIsWhoView"
              x:Name="WhoIsWho"
              xmlns:locator="clr-namespace:UnleashedApp">
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="About" Order="Secondary" Text="About" Priority="1" />
+        <ToolbarItem Name="LogOut" Order="Secondary" Text="Log out" Priority="0" />
+    </ContentPage.ToolbarItems>
     <StackLayout Orientation="Vertical">
         <Grid Padding="10,10,10,0"  RowSpacing="0" ColumnSpacing="10">
             <Grid.RowDefinitions>

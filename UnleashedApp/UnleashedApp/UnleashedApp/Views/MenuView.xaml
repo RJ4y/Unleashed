@@ -4,6 +4,10 @@
              x:Class="UnleashedApp.Views.MenuView"
              xmlns:locator="clr-namespace:UnleashedApp"             
              BindingContext="{Binding Source={x:Static locator:ViewModelLocator.Instance}, Path=MenuViewModel}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="About" Order="Secondary" Icon="Xamarin.png" Text="About" Priority="1" />
+        <ToolbarItem Name="LogOut" Order="Secondary" Icon="Microsoft.png" Text="Log out" Priority="0" />
+    </ContentPage.ToolbarItems>
     <Grid Padding="10"  RowSpacing="5" ColumnSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

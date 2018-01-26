@@ -4,6 +4,10 @@
              x:Class="UnleashedApp.Views.FloorplanView"
              xmlns:locator="clr-namespace:UnleashedApp"
              Padding="0">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="About" Order="Secondary" Text="About" Priority="1" />
+        <ToolbarItem Name="LogOut" Order="Secondary" Text="Log out" Priority="0" />
+    </ContentPage.ToolbarItems>
     <ScrollView>
         <Grid x:Name="MainGrid" RowSpacing="10" ColumnSpacing="0" Padding="10">
             <Grid.RowDefinitions>

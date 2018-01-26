@@ -3,6 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UnleashedApp.Views.RoomView"
              xmlns:locator="clr-namespace:UnleashedApp">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="About" Order="Secondary" Text="About" Priority="1" />
+        <ToolbarItem Name="LogOut" Order="Secondary" Text="Log out" Priority="0" />
+    </ContentPage.ToolbarItems>
     <Grid Padding="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
