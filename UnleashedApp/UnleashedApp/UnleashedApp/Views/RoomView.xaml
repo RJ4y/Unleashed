@@ -4,8 +4,8 @@
              x:Class="UnleashedApp.Views.RoomView"
              xmlns:locator="clr-namespace:UnleashedApp">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Name="About" Order="Secondary" Text="About" Priority="1" />
-        <ToolbarItem Name="LogOut" Order="Secondary" Text="Log out" Priority="0" />
+        <ToolbarItem Name="About" Order="Secondary" Text="About" Priority="0" />
+        <ToolbarItem Name="LogOut" Order="Secondary" Text="Log out" Priority="1" />
     </ContentPage.ToolbarItems>
     <Grid Padding="10">
         <Grid.RowDefinitions>
