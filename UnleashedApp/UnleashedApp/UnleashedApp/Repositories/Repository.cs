@@ -15,7 +15,7 @@ namespace UnleashedApp.Repositories
             _client.BaseAddress = _baseAddress;
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            _client.Timeout = TimeSpan.FromSeconds(.875);
+            _client.Timeout = TimeSpan.FromSeconds(10);
         }
     }
 }
