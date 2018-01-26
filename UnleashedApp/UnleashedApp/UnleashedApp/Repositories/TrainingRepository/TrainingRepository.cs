@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -66,7 +67,7 @@ namespace UnleashedApp.Repositories.TrainingRepository
 
             try
             {
-                string postString = JsonConvert.SerializeObject(training);
+                string postString = JsonConvert.SerializeObject(training, new IsoDateTimeConverter(){ DateTimeFormat = "dd/MM/yyyy" });
                 HttpContent httpContent = new StringContent(postString, Encoding.UTF8, "application/json");
 
                 _client.PostAsync(address, httpContent);

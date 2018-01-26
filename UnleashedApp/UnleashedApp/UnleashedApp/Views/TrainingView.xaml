@@ -46,31 +46,32 @@
             <StackLayout Orientation="Vertical">
                 <Label Text="Add Training" TextColor="Red" FontSize="Large"/>
                 <Label Text="Date:"/>
-                <DatePicker/>
+                <DatePicker Date="{ Binding Date, Mode=TwoWay}"/>
+                
                 <Label Text="Days"/>
-                <Picker x:Name="DayPicker">
-                    <Picker.Items>
-                        <x:String>1</x:String>
-                        <x:String>2</x:String>
-                        <x:String>3</x:String>
-                        <x:String>4</x:String>
-                        <x:String>5</x:String>
-                    </Picker.Items>
-                </Picker>
-
+                <Entry Text="{ Binding Days, Mode=TwoWay}"/>
+                
                 <Label Text="Training / Event / Hotel:"/>
-                <Entry/>
+                <Entry Text="{ Binding Event, Mode=TwoWay}"/>
+                
                 <Label Text="Company:"/>
-                <Entry/>
+                <Entry Text="{ Binding Company, Mode=TwoWay}"/>
+                
                 <Label Text="City:"/>
-                <Entry/>
+                <Entry Text="{ Binding City, Mode=TwoWay}"/>
+                
                 <Label Text="Cost (€):"/>
-                <Entry Keyboard="Numeric"/>
+                <Entry Text="{ Binding Cost, Mode=TwoWay}" Keyboard="Numeric"/>
 
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Invoice to finance?"/>
-                    <Switch/>
+                    <Switch IsToggled="{ Binding IsOn, Mode=TwoWay}"/>
                 </StackLayout>
+
+                <Label Text="Extra info:"/>
+                <Entry Text="{ Binding Info, Mode=TwoWay}"/>
+
+                <Button Text="Add Training" Command="{ Binding AddTrainingCommand }"/>
             </StackLayout>
         </ScrollView>
     </ContentPage>

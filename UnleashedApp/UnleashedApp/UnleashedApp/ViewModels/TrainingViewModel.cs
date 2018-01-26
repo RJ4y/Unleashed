@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
 using UnleashedApp.Contracts.ViewModels;
 using UnleashedApp.Models;
 using UnleashedApp.Repositories.TrainingRepository;
+using Xamarin.Forms;
 
 namespace UnleashedApp.ViewModels
 {
@@ -12,12 +14,15 @@ namespace UnleashedApp.ViewModels
         private ITrainingRepository _trainingRepository;
         private ObservableCollection<Training> _trainings;
         private int _trainingTotal;
+        private Training _postTraining;
+        public ICommand AddTrainingCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public TrainingViewModel(ITrainingRepository trainingRepository)
         {
             _trainingRepository = trainingRepository;
+            InitialiseCommands();
             Init();
             CalculateTotal();
         }
@@ -81,9 +86,125 @@ namespace UnleashedApp.ViewModels
             }
         }
 
+        #region TrainingProperties
+        private DateTime _date;
+        public DateTime Date
+        {
+            get => _date;
+            set
+            {
+                _date = value;
+                RaisePropertyChanged(nameof(Date));
+            }
+        }
+
+        private string _days;
+        public string Days
+        {
+            get => _days;
+            set
+            {
+                _days = value;
+                RaisePropertyChanged(nameof(Days));
+            }
+        }
+
+        private string _event;
+        public string Event
+        {
+            get => _event;
+            set
+            {
+                _event = value;
+                RaisePropertyChanged(nameof(Event));
+            }
+        }
+
+        private string _company;
+        public string Company
+        {
+            get => _company;
+            set
+            {
+                _company = value;
+                RaisePropertyChanged(nameof(Company));
+            }
+        }
+
+        private string _city;
+        public string City
+        {
+            get => _city;
+            set
+            {
+                _city = value;
+                RaisePropertyChanged(nameof(City));
+            }
+        }
+
+        private string _cost;
+        public string Cost
+        {
+            get => _cost;
+            set
+            {
+                _cost = value;
+                RaisePropertyChanged(nameof(Cost));
+            }
+        }
+
+        private string _isOn;
+        public bool IsOn
+        {
+            get
+            {
+                if(_isOn == "Ja")
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            }
+            set
+            {
+                if(IsOn)
+                {
+                    _isOn = "Ja";
+                } else
+                {
+                    _isOn = "Nee";
+                }
+                RaisePropertyChanged(nameof(IsOn));
+            }
+        }
+        #endregion
+
         private void RaisePropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void InitialiseCommands()
+        {
+            AddTrainingCommand = new Command(() =>
+            {
+                _postTraining = new Training();
+
+                _postTraining.City = City;
+                _postTraining.Company = Company;
+                _postTraining.Cost = Convert.ToInt32(Cost);
+                _postTraining.Date = Date;
+                _postTraining.Days = Convert.ToInt32(Days);
+                _postTraining.First_Name = "René";
+                _postTraining.Last_Name = "Jacobs";
+                _postTraining.Info = "info";
+                _postTraining.Invoice = _isOn;
+                _postTraining.Team = "team";
+                _postTraining.TrainingName = Event;
+
+                _trainingRepository.PostTraining(_postTraining);
+            });
         }
     }
 }
