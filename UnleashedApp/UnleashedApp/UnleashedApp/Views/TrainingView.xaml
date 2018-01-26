@@ -1,12 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:converters="clr-namespace:UnleashedApp.Converters;assembly=UnleashedApp"
              x:Class="UnleashedApp.Views.TrainingView">
     <ContentPage Title="Overview">
+        <ContentPage.Resources>
+            <ResourceDictionary>
+                <converters:DateConverter x:Key="dateConverter"></converters:DateConverter>
+            </ResourceDictionary>
+        </ContentPage.Resources>
+        
         <StackLayout Orientation="Vertical">
             <Label Text="Training" TextColor="Red" FontSize="Large"/>
 
-            <ListView ItemsSource="{ Binding TrainingList }">
+            <ListView ItemsSource="{ Binding TrainingList }" Margin="10, 0, 10, 0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -15,12 +22,12 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60*"/>
                                     <ColumnDefinition Width="50*"/>
-                                    <ColumnDefinition Width="50*"/>
-                                    <ColumnDefinition Width="50*"/>
+                                    <ColumnDefinition Width="40*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Text="{ Binding Date }" Grid.Row="0" Grid.Column="0"/>
+                                <Label Text="{ Binding Date, Converter={StaticResource dateConverter} }" Grid.Row="0" Grid.Column="0"/>
                                 <Label Text="{ Binding TrainingName }" Grid.Row="0" Grid.Column="1"/>
                                 <Label Text="{ Binding Cost }" Grid.Row="0" Grid.Column="2"/>
                             </Grid>
@@ -29,12 +36,12 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <StackLayout Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal" Margin="30, 0, 30, 0">
                 <Label Text="Total cost:"/>
                 <Label Text="{ Binding TrainingTotal }"/>
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal" Margin="30, 0, 30, 0">
                 <Label Text="Amount available:"/>
                 <Label Text="0000"/>
             </StackLayout>
@@ -43,7 +50,7 @@
 
     <ContentPage Title="Add Training">
         <ScrollView>
-            <StackLayout Orientation="Vertical">
+            <StackLayout Orientation="Vertical" Margin="20, 0, 20, 0">
                 <Label Text="Add Training" TextColor="Red" FontSize="Large"/>
                 <Label Text="Date:"/>
                 <DatePicker Date="{ Binding Date, Mode=TwoWay}"/>

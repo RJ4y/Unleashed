@@ -28,7 +28,7 @@ namespace UnleashedApp.Repositories.TrainingRepository
                 if (response.IsSuccessStatusCode)
                 {
                     string resultString = response.Content.ReadAsStringAsync().Result;
-                    _trainings = JsonConvert.DeserializeObject<List<Training>>(resultString);
+                    _trainings = JsonConvert.DeserializeObject<List<Training>>(resultString, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
                 }
             }
             catch (AggregateException e)
