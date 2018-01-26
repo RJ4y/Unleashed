@@ -61,16 +61,16 @@ namespace UnleashedApp.Repositories.TrainingRepository
             return _training;
         }
 
-        public void PostTraining(Training training)
+        public async Task PostTrainingAsync(Training training)
         {
             string address = "trainings/";
 
             try
             {
                 string postString = JsonConvert.SerializeObject(training, new IsoDateTimeConverter(){ DateTimeFormat = "dd/MM/yyyy" });
-                HttpContent httpContent = new StringContent(postString, Encoding.UTF8, "application/json");
+                StringContent content = new StringContent(postString, Encoding.UTF8, "application/json");
 
-                _client.PostAsync(address, httpContent);
+                HttpResponseMessage respone =  await _client.PostAsync(address, content);
             }
             catch (AggregateException e)
             {

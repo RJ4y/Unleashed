@@ -168,10 +168,11 @@ namespace UnleashedApp.ViewModels
             }
             set
             {
-                if(IsOn)
+                if (value)
                 {
                     _isOn = "Ja";
-                } else
+                }
+                else
                 {
                     _isOn = "Nee";
                 }
@@ -203,7 +204,7 @@ namespace UnleashedApp.ViewModels
                 _postTraining.Team = "team";
                 _postTraining.TrainingName = Event;
 
-                _trainingRepository.PostTraining(_postTraining);
+                _trainingRepository.PostTrainingAsync(_postTraining);
             });
         }
     }

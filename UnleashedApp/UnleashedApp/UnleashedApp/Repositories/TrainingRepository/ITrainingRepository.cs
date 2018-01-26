@@ -11,7 +11,7 @@ namespace UnleashedApp.Repositories.TrainingRepository
     {
         List<Training> GetAll();
         Training GetTraining(int trainingId);
-        void PostTraining(Training training);
+        Task PostTrainingAsync(Training training);
         List<Training> GetAllMyTrainings(int employeeId);
         Training GetMyTraining(int employeeId, int trainingId);
     }
