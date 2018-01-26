@@ -6,16 +6,22 @@
              xmlns:locator="clr-namespace:UnleashedApp">
 
     <StackLayout Orientation="Vertical">
-        <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
-            <StackLayout Orientation="Vertical" HorizontalOptions="Start">
-                <Button Text="Habitat" Command="{ Binding HabitatCommand }" BackgroundColor="White" TextColor="CornflowerBlue" FontAttributes="Bold"/>
-            </StackLayout>
-            <StackLayout Orientation="Vertical" HorizontalOptions="Fill">
-                <Button Text="Squad" Command="{ Binding SquadCommand }" BackgroundColor="White" TextColor="CornflowerBlue" FontAttributes="Bold"/>
-            </StackLayout>
-        </StackLayout>
+        <Grid Padding="10,10,10,0"  RowSpacing="0" ColumnSpacing="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <SearchBar Text="{ Binding Filter, Mode=TwoWay }" Placeholder="Search"/>
+            <Button Text="Habitat" Grid.Row="0" Grid.Column="0"  Command="{ Binding HabitatCommand }" BackgroundColor="#fff" TextColor="#e6332a"/>
+            <Button Text="Squad" Grid.Row="0" Grid.Column="1"  Command="{ Binding SquadCommand }" BackgroundColor="#fff" TextColor="#e6332a"/>
+
+            <SearchBar Text="{ Binding Filter, Mode=TwoWay }" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Placeholder="Search"/>
+        </Grid>
+
 
         <ListView ItemsSource="{ Binding FilteredList }"
                   IsGroupingEnabled="True"
