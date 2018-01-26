@@ -21,7 +21,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Text="{ Binding Date }" Grid.Row="0" Grid.Column="0"/>
-                                <Label Text="{ Binding Name }" Grid.Row="0" Grid.Column="1"/>
+                                <Label Text="{ Binding TrainingName }" Grid.Row="0" Grid.Column="1"/>
                                 <Label Text="{ Binding Cost }" Grid.Row="0" Grid.Column="2"/>
                             </Grid>
                         </ViewCell>

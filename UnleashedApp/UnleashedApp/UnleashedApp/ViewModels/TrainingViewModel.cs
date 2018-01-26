@@ -24,12 +24,29 @@ namespace UnleashedApp.ViewModels
 
         public void Init()
         {
-            _trainings = new ObservableCollection<Training>
+            _trainings = new ObservableCollection<Training>();
+
+            var trainingList = _trainingRepository.GetAll();
+
+            foreach(Training training in trainingList)
             {
-                new Training() { Date = "2018-01-24", Name = "TabbedView", Cost = 9001 },
-                new Training() { Date = "2018-01-25", Name = "Code Review", Cost = 500 },
-                new Training() { Date = "2018-01-25", Name = "Testen", Cost = 2000 }
-            };
+                var tr = new Training
+                {
+                    City = training.City,
+                    Company = training.Company,
+                    Cost = training.Cost,
+                    Date = training.Date,
+                    Days = training.Days,
+                    First_Name = training.First_Name,
+                    Last_Name = training.Last_Name,
+                    Info = training.Info,
+                    Invoice = training.Invoice,
+                    Team = training.Team,
+                    TrainingName = training.TrainingName
+                };
+
+                _trainings.Add(tr);
+            }
         }
 
         public void CalculateTotal()
