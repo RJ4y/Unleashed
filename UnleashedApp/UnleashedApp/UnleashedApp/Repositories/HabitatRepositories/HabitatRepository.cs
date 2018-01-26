@@ -31,14 +31,13 @@ namespace UnleashedApp.Repositories.HabitatRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
-
             return _habitats;
         }
 
         public Habitat GetHabitatById(int id)
         {
             string address = "habitats/" + id + "/";
-
+            
             try
             {
                 HttpResponseMessage response = _client.GetAsync(address).Result;
@@ -53,14 +52,13 @@ namespace UnleashedApp.Repositories.HabitatRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
-
             return _habitat;
         }
 
         public List<Employee> GetEmployees(int id)
         {
             string address = "habitats/" + id + "/employees/";
-
+            
             try
             {
                 HttpResponseMessage response = _client.GetAsync(address).Result;

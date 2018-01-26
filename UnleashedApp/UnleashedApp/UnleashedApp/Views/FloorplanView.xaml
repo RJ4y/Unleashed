@@ -9,7 +9,7 @@
         <ToolbarItem Name="LogOut" Order="Secondary" Text="Log out" Priority="0" />
     </ContentPage.ToolbarItems>
     <ScrollView>
-        <Grid x:Name="MainGrid" RowSpacing="10" ColumnSpacing="0" Padding="10">
+        <Grid x:Name="mainGrid" RowSpacing="10" ColumnSpacing="0" Padding="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />

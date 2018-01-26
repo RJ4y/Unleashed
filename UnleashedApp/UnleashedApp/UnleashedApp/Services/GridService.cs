@@ -6,7 +6,7 @@ namespace UnleashedApp.Services
 {
     public static class GridService
     {
-        public static void AddItemToGridAtLocation(View item, Grid grid, int row, int column, bool isInverted = true)
+        internal static void AddItemToGridAtLocation(View item, Grid grid, int row, int column, bool isInverted = true)
         {
             if (isInverted)
             {
@@ -21,7 +21,7 @@ namespace UnleashedApp.Services
             grid.Children.Add(item);
         }
 
-        public static void AddColorLabel(Grid grid, int row, int column, Color color, bool isInverted = true)
+        internal static void AddColorLabel(Grid grid, int row, int column, Color color, bool isInverted = true)
         {
             Label label = new Label { BackgroundColor = color };
             if (isInverted)
@@ -35,7 +35,7 @@ namespace UnleashedApp.Services
         }
 
 
-        public static void AddTextLabel(Grid grid, int row, int column, string text, bool isInverted = true)
+        internal static void AddTextLabel(Grid grid, int row, int column, string text, bool isInverted = true)
         {
             Label label = new Label { Text = text };
             if (isInverted)
@@ -48,7 +48,7 @@ namespace UnleashedApp.Services
             }
         }
 
-        public static void CreateGridColumnDefinitions(Grid grid, Dimensions dimensions)
+        internal static void CreateGridColumnDefinitions(Grid grid, Dimensions dimensions)
         {
             for (int i = 0; i < dimensions.X; i++)
             {
@@ -56,7 +56,7 @@ namespace UnleashedApp.Services
             }
         }
 
-        public static void CreateGridRowDefinitions(Grid grid, Dimensions dimensions)
+        internal static void CreateGridRowDefinitions(Grid grid, Dimensions dimensions)
         {
             for (int i = 0; i < dimensions.Y; i++)
             {
@@ -64,7 +64,7 @@ namespace UnleashedApp.Services
             }
         }
 
-        public static Dimensions GetGridTranslation(List<Space> spaces)
+        internal static Dimensions GetGridTranslation(List<Space> spaces)
         {
             int xMin = int.MaxValue;
             int yMin = int.MaxValue;
@@ -85,7 +85,7 @@ namespace UnleashedApp.Services
             return new Dimensions(xMin, yMin);
         }
 
-        public static Dimensions GetMinifiedGridDimensions(List<Space> spaces)
+        internal static Dimensions GetMinifiedGridDimensions(List<Space> spaces)
         {
             int xMin = int.MaxValue;
             int yMin = int.MaxValue;
@@ -123,6 +123,32 @@ namespace UnleashedApp.Services
             else
             {
                 return new Dimensions(xDifference + 1, xDifference + 1);
+            }
+        }
+
+        internal static Dimensions GetFloorplanGridDimensions(List<Space> spaces, bool isInverted = true)
+        {
+            int x = 0;
+            int y = 0;
+            foreach (Space space in spaces)
+            {
+                if (space.XCoord > x)
+                {
+                    x = space.XCoord;
+                }
+                if (space.YCoord > y)
+                {
+                    y = space.YCoord;
+                }
+            }
+            //Because 0 to 10 gives 11 values the dimensions are increased by 1;
+            if (isInverted)
+            {
+                return new Dimensions(y + 1, x + 1);
+            }
+            else
+            {
+                return new Dimensions(x + 1, y + 1);
             }
         }
     }

@@ -125,11 +125,14 @@ namespace UnleashedApp.Views
 
         private async void ShowEmployeeInformation(Space space)
         {
-            bool action = await DisplayAlert("Employee " + space.EmployeeId, "Employee information", "View details", "Close");
+            RoomViewModel vm = ViewModelLocator.Instance.RoomViewModel;
+            Employee e = vm.EmployeeRepository.GetEmployeeById(space.EmployeeId);
+            ViewModelLocator.Instance.RoomViewModel.SelectedEmployee = e;
+
+            bool action = await DisplayAlert(e.First_Name + " " + e.Last_Name, e.Function, "View details", "Close");
             if (action == true)
             {
-                RoomViewModel vm = ViewModelLocator.Instance.RoomViewModel;
-                vm.WhoIsWhoCommand.Execute(space.EmployeeId);
+                vm.EmployeeDetailCommand.Execute(null);
             }
         }
         #endregion

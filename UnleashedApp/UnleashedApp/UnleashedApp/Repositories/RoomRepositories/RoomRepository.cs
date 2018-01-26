@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
 using UnleashedApp.Models;
 using Xamarin.Forms;
 using static UnleashedApp.Models.Room;
@@ -7,35 +11,50 @@ namespace UnleashedApp.Repositories.RoomRepositories
 {
     public class RoomRepository : Repository, IRoomRepository
     {
+        private List<Room> _rooms = new List<Room>();
+
         public List<Room> GetAllRooms()
         {
-            return new List<Room> {
-                new Room(1, "Empty", Color.DarkGray,RoomType.Empty),
-                new Room(2, "2Freedom", Color.BlueViolet),
-                new Room(3, "The Workshop", Color.HotPink),
-                new Room(4, "Finance", Color.DarkOrange),
-                new Room(5, "CEO", Color.DarkSeaGreen),
-                new Room(6, "People", Color.DarkSalmon),
-                new Room(7, "Kitchen", Color.Coral,RoomType.Kitchen),
+            string address = "rooms/";
+            try
+            {
+                HttpResponseMessage response = _client.GetAsync(address).Result;
 
-                new Room(8, "Viking Deals", Color.Brown),
-                new Room(9, "JIM Mobile", Color.DarkSlateBlue),
-                new Room(10, "The Arena", Color.Red),
-                new Room(11, "Stievie", Color.SteelBlue),
-                new Room(12, "Technology", Color.GreenYellow),
-                new Room(13, "The Big Room", Color.Indigo),
-                new Room(14, "The Chat Room", Color.LightSteelBlue),
+                if (response.IsSuccessStatusCode)
+                {
+                    string resultString = response.Content.ReadAsStringAsync().Result;
+                    List<SerializableRoom> rooms = JsonConvert.DeserializeObject<List<SerializableRoom>>(resultString);
+                    foreach (SerializableRoom r in rooms)
+                    {
+                        Color color = Color.FromHex("#" + r.ColorAsString);
 
-                new Room(15, "Mobile Vikings Product", Color.DarkCyan),
-                new Room(16, "The Spotlight", Color.Yellow),
-                new Room(17, "Design", Color.Maroon),
-                new Room(18, "Mobile Vikings Get & Retain", Color.MidnightBlue),
-                new Room(19, "The Cloud", Color.Blue),
-                new Room(20, "The Milky Way", Color.Green),
-                new Room(21, "The Window Room", Color.Navy),
-                new Room(22, "Copyroom", Color.Peru),
-                new Room(23, "Customer Care", Color.Purple),
-            };
+                        RoomType type;
+                        switch (r.TypeAsString)
+                        {
+                            case "Empty":
+                                type = RoomType.Empty;
+                                break;
+                            case "Workspace":
+                                type = RoomType.Workspace;
+                                break;
+                            case "Kitchen":
+                                type = RoomType.Kitchen;
+                                break;
+                            default:
+                                type = RoomType.Invalid;
+                                break;
+                        }
+
+                        Room room = new Room(r.Id, r.Name, color, type);
+                        _rooms.Add(room);
+                    }
+                }
+            }
+            catch (AggregateException e)
+            {
+                Debug.WriteLine(e.ToString());
+            }
+            return _rooms;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace UnleashedApp.Repositories.SquadRepositories
         public List<Squad> GetAllSquads()
         {
             string address = "squads/";
-
+            
             try
             {
                 HttpResponseMessage response = _client.GetAsync(address).Result;
@@ -31,7 +31,6 @@ namespace UnleashedApp.Repositories.SquadRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
-
             return _squads;
         }
 
@@ -53,7 +52,6 @@ namespace UnleashedApp.Repositories.SquadRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
-
             return _squad;
         }
 

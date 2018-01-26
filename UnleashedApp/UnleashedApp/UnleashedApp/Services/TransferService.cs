@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnleashedApp.Models;
 
 namespace UnleashedApp.Services
@@ -26,12 +22,12 @@ namespace UnleashedApp.Services
             }
         }
 
-        public static Room GetSelectedRoom()
+        internal static Room GetSelectedRoom()
         {
             return _selectedRoom;
         }
 
-        public static List<Space> GetSelectedSpaces()
+        internal static List<Space> GetSelectedSpaces()
         {
             return _spaces;
         }

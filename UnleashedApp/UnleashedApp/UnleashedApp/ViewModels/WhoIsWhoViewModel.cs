@@ -1,4 +1,5 @@
-﻿using System;
+using System.Collections.Generic;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -42,30 +43,33 @@ namespace UnleashedApp.ViewModels
         public void LoadHabitats()
         {
             var habitats = _habitatRepository.GetAllHabitats();
-            GroupedList = new ObservableCollection<Group>();
-
-            foreach (Habitat habitat in habitats)
+            
+            if (habitats != null)
             {
-                var group = new Group
+                GroupedList = new ObservableCollection<Group>();
+
+                foreach (Habitat habitat in habitats)
                 {
-                    Id = habitat.Id,
-                    Name = habitat.Name
-                };
+                    var group = new Group
+                    {
+                        Id = habitat.Id,
+                        Name = habitat.Name
+                    };
 
-                GroupedList.Add(group);
-            }
+                    GroupedList.Add(group);
+                }
 
-            foreach (Group group in GroupedList)
-            {
-                var employees = _habitatRepository.GetEmployees(group.Id);
-
-                foreach(Employee employee in employees)
+                foreach (Group group in GroupedList)
                 {
-                    employee.FullName = employee.First_Name + " " + employee.Last_Name;
-                    group.Add(employee);
+                    var employees = _habitatRepository.GetEmployees(group.Id);
+
+                    foreach (Employee employee in employees)
+                    {
+                        employee.FullName = employee.First_Name + " " + employee.Last_Name;
+                        group.Add(employee);
+                    }
                 }
             }
-            InitialiseFilteredList();
         }
 
         public void LoadSquads()
