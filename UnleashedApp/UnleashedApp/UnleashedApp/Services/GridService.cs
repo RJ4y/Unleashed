@@ -141,7 +141,7 @@ namespace UnleashedApp.Services
                     y = space.YCoord;
                 }
             }
-            //Because 0-10 = 11 values are increased by 1;
+            //Because 0 to 10 gives 11 values the dimensions are increased by 1;
             if (isInverted)
             {
                 return new Dimensions(y + 1, x + 1);

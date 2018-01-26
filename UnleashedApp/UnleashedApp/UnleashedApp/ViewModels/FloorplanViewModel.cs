@@ -13,7 +13,6 @@ namespace UnleashedApp.ViewModels
     {
         private readonly INavigationService _navigationService;
 
-        public ICommand FloorplanCommand { get; set; }
         public ICommand RoomCommand { get; set; }
 
         private ISpaceRepository _spaceRepository;
@@ -37,11 +36,7 @@ namespace UnleashedApp.ViewModels
         }
 
         private void InitialiseCommands()
-        {
-            FloorplanCommand = new Command(async () =>
-            {
-                await _navigationService.PushAsync(nameof(FloorplanView));
-            });
+        {            
             RoomCommand = new Command(async () =>
             {
                 await _navigationService.PushAsync(nameof(RoomView));

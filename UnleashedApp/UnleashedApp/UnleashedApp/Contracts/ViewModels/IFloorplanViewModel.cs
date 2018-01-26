@@ -4,6 +4,6 @@ namespace UnleashedApp.Contracts.ViewModels
 {
     public interface IFloorplanViewModel
     {
-        ICommand FloorplanCommand { get; set; }
+        ICommand RoomCommand { get; set; }
     }
 }

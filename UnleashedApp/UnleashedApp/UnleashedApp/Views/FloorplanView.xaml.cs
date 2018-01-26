@@ -20,12 +20,21 @@ namespace UnleashedApp.Views
         public FloorplanView()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
             viewModel = ViewModelLocator.Instance.FloorplanViewModel;
             Rooms = viewModel.Rooms;
             Spaces = viewModel.Spaces;
-            CreateLegendGrid();
-            CreateFloorplanGrid();
+            if (Rooms != null && Spaces != null)
+            {
+                CreateLegendGrid();
+                CreateFloorplanGrid();
+            }
+            else
+            {
+                Label label = new Label();
+                label.Text = "The data could not be found, there may be a problem with your connection.";
+                scrollView.Content = label;
+                mainGrid.IsVisible = false;
+            }
         }
 
         /// <summary>

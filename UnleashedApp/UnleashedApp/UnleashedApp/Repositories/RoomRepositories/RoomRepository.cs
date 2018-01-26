@@ -16,7 +16,6 @@ namespace UnleashedApp.Repositories.RoomRepositories
         public List<Room> GetAllRooms()
         {
             string address = "rooms/";
-
             try
             {
                 HttpResponseMessage response = _client.GetAsync(address).Result;
@@ -55,7 +54,6 @@ namespace UnleashedApp.Repositories.RoomRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
-
             return _rooms;
         }
     }

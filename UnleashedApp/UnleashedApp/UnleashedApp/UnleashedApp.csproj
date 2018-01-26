@@ -49,8 +49,8 @@
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Habitat.cs" />
     <Compile Include="Models\Room.cs" />
-    <Compile Include="Models\SerializableRoom.cs" />
-    <Compile Include="Models\SerializableSpace.cs" />
+    <Compile Include="Models\Serializers\SerializableRoom.cs" />
+    <Compile Include="Models\Serializers\SerializableSpace.cs" />
     <Compile Include="Models\Space.cs" />
     <Compile Include="Models\Squad.cs" />
     <Compile Include="Models\TempEmployee.cs" />

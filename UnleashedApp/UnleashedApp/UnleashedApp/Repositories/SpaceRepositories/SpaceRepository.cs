@@ -14,7 +14,6 @@ namespace UnleashedApp.Repositories.SpaceRepositories
         public List<Space> GetAllSpaces()
         {
             string address = "spaces/";
-
             try
             {
                 HttpResponseMessage response = _client.GetAsync(address).Result;
@@ -34,7 +33,6 @@ namespace UnleashedApp.Repositories.SpaceRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
-
             return _spaces;
         }
     }
