@@ -15,10 +15,13 @@
             </StackLayout>
         </StackLayout>
 
-        <ListView ItemsSource="{ Binding GroupedList }"
+        <SearchBar Text="{ Binding Filter, Mode=TwoWay }" Placeholder="search"/>
+
+        <ListView ItemsSource="{ Binding FilteredList }"
                   IsGroupingEnabled="True"
                   GroupDisplayBinding="{ Binding Name }"
                   GroupShortNameBinding="{Binding Name }"
+                  HasUnevenRows="True"
                   SelectedItem="{ Binding SelectedEmployee, Mode=TwoWay }">
             <ListView.ItemTemplate>
                 <DataTemplate>
