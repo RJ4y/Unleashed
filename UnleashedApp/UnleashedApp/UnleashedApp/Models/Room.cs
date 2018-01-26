@@ -17,14 +17,6 @@ namespace UnleashedApp.Models
             Type = type;
         }
 
-        public Room(int id, string name, Color color)
-        {
-            Id = id;
-            Name = name;
-            Color = color;
-            Type = RoomType.Workspace;
-        }
-
-        public enum RoomType { Empty, Workspace, Kitchen };
+        public enum RoomType { Empty, Workspace, Kitchen, Invalid };
     }
 }

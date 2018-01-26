@@ -2,19 +2,20 @@
 
 namespace UnleashedApp.Models
 {
-    public class Space
+    public class SerializableSpace
     {
         public int XCoord { get; set; }
         public int YCoord { get; set; }
+        [JsonProperty(PropertyName = "employee_id")]
         public int EmployeeId { get; set; }
-        public int RoomId { get; set; }
+        public SerializableRoom Room { get; set; }
 
-        public Space(int x, int y, int emp_id, int room_id)
+        public SerializableSpace(int x, int y, int emp_id, SerializableRoom room)
         {
             XCoord = x;
             YCoord = y;
             EmployeeId = emp_id;
-            RoomId = room_id;
+            Room = room;
         }
     }
 }

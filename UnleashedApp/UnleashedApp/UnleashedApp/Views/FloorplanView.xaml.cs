@@ -20,12 +20,22 @@ namespace UnleashedApp.Views
         public FloorplanView()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
             viewModel = ViewModelLocator.Instance.FloorplanViewModel;
             Rooms = viewModel.Rooms;
             Spaces = viewModel.Spaces;
-            CreateLegendGrid();
-            CreateFloorplanGrid();            
+            if (Rooms != null && Rooms.Count > 0 && Spaces != null && Spaces.Count > 0)
+            {
+                CreateLegendGrid();
+                CreateFloorplanGrid();
+            }
+            else
+            {
+                Label label = new Label();
+                label.HorizontalTextAlignment = TextAlignment.Center;
+                label.Text = "The data could not be found, there may be a problem with your connection.";
+                scrollView.Content = label;
+                mainGrid.IsVisible = false;
+            }
         }
 
         /// <summary>
@@ -82,7 +92,7 @@ namespace UnleashedApp.Views
         #region FloorplanGrid
         private void CreateFloorplanGrid()
         {
-            Dimensions dimensions = new Dimensions(13, 51);
+            Dimensions dimensions = GridService.GetFloorplanGridDimensions(Spaces);
             GridService.CreateGridColumnDefinitions(floorplanGrid, dimensions);
             GridService.CreateGridRowDefinitions(floorplanGrid, dimensions);
             FillFloorplanGrid();

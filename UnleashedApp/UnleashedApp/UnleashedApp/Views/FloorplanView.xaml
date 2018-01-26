@@ -4,8 +4,8 @@
              x:Class="UnleashedApp.Views.FloorplanView"
              xmlns:locator="clr-namespace:UnleashedApp"
              Padding="0">
-    <ScrollView>
-        <Grid x:Name="MainGrid" RowSpacing="0">
+    <ScrollView x:Name="scrollView">
+        <Grid x:Name="mainGrid" RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />

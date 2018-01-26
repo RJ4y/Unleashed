@@ -1,5 +1,7 @@
 ﻿using System.Windows.Input;
 using UnleashedApp.Contracts.ViewModels;
+using UnleashedApp.Models;
+using UnleashedApp.Repositories.EmployeeRepositories;
 using UnleashedApp.Views;
 using Xamarin.Forms;
 
@@ -8,25 +10,24 @@ namespace UnleashedApp.ViewModels
     public class RoomViewModel : ViewModelBase, IRoomViewModel
     {
         private readonly INavigationService _navigationService;
+        public ICommand EmployeeDetailCommand { get; set; }
+        public IEmployeeRepository EmployeeRepository { get; private set; }
+        public Employee SelectedEmployee { get; set; }
 
-        public ICommand RoomCommand { get; set; }
-        public ICommand WhoIsWhoCommand { get; set; }
-
-        public RoomViewModel(INavigationService navigationService)
+        public RoomViewModel(INavigationService navigationService, IEmployeeRepository employeeRepository)
         {
             _navigationService = navigationService;
+            EmployeeRepository = employeeRepository;
             InitialiseCommands();
         }
-        
+
         private void InitialiseCommands()
         {
-            RoomCommand = new Command(async () =>
+            EmployeeDetailCommand = new Command(async () =>
             {
-                await _navigationService.PushAsync(nameof(RoomView));
-            });
-            WhoIsWhoCommand = new Command(async () =>
-            {
-                await _navigationService.PushAsync(nameof(WhoIsWhoView));
+                EmployeeDetailView page = new EmployeeDetailView();
+                page.BindingContext = SelectedEmployee;
+                await _navigationService.PushAsync(page);
             });
         }
     }

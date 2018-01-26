@@ -18,7 +18,7 @@ namespace UnleashedApp
         private readonly IRoomRepository _roomRepository;
 
         public MenuViewModel MenuViewModel { get; }
-        public WhoIsWhoViewModel WhoIsViewViewModel { get; }
+        public WhoIsWhoViewModel WhoIsWhoViewModel { get; }
         public EmployeeDetailViewModel EmployeeDetailViewModel { get; }
         public FloorplanViewModel FloorplanViewModel { get; }
         public RoomViewModel RoomViewModel { get; }
@@ -36,10 +36,9 @@ namespace UnleashedApp
             _squadRepository = new SquadRepository();
 
             MenuViewModel = new MenuViewModel(_navigationService);
-            WhoIsViewViewModel = new WhoIsWhoViewModel(_navigationService, _habitatRepository, _squadRepository, _employeeRepository);
+            WhoIsWhoViewModel = new WhoIsWhoViewModel(_navigationService, _habitatRepository, _squadRepository, _employeeRepository);
             FloorplanViewModel = new FloorplanViewModel(_navigationService, _spaceRepository, _roomRepository);
-            RoomViewModel = new RoomViewModel(_navigationService);
-            WhoIsViewViewModel = new WhoIsWhoViewModel(_navigationService, _habitatRepository, _squadRepository, _employeeRepository);
+            RoomViewModel = new RoomViewModel(_navigationService, _employeeRepository);
             EmployeeDetailViewModel = new EmployeeDetailViewModel();
         }
     }
