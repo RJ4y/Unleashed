@@ -43,10 +43,10 @@ namespace UnleashedApp.ViewModels
             if (e.IsAuthenticated)
             {
                 var googleToken = e.Account.Properties["access_token"];
-                CustomTokenResponse accessTokenAPI = await _authenticationRepository.ExchangeGoogleTokenAsync(new TokenConvertRequest(googleToken));
-                if (accessTokenAPI != null)
+                CustomTokenResponse tokenResponse = await _authenticationRepository.RequestExchangeGoogleTokenAsync(new TokenConvertRequest(googleToken));
+                if (tokenResponse != null)
                 {
-                    _authenticationService.SaveCredentials(e.Account, accessTokenAPI.access_token);
+                    _authenticationService.SaveCredentials(e.Account, tokenResponse);
                     showHomePageAsync();
                 }
                 else

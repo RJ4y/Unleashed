@@ -16,6 +16,7 @@ namespace UnleashedApp.Repositories.HabitatRepositories
         public List<Habitat> GetAllHabitats()
         {
             var address = "habitats";
+            AddAuthenticationHeaderAsync();
 
             try
             {
@@ -38,6 +39,7 @@ namespace UnleashedApp.Repositories.HabitatRepositories
         public Habitat GetHabitatById(int id)
         {
             var address = "habitats/" + id;
+            AddAuthenticationHeaderAsync();
 
             try
             {
@@ -60,6 +62,7 @@ namespace UnleashedApp.Repositories.HabitatRepositories
         public List<Employee> GetEmployees(int id)
         {
             var address = "habitats/" + id + "/employees/";
+            AddAuthenticationHeaderAsync();
 
             try
             {

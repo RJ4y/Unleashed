@@ -15,7 +15,7 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
         public List<Employee> GetAllEmployees()
         {
             var address = "employees";
-
+            AddAuthenticationHeaderAsync();
             try
             {
                 HttpResponseMessage response = _client.GetAsync(address).Result;
@@ -36,6 +36,8 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
 
         public Employee GetEmployeeById(int id)
         {
+            AddAuthenticationHeaderAsync();
+
             var address = "employees/" + id;
 
             try

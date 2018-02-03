@@ -38,6 +38,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\TokenRefreshRequest.cs" />
+    <Compile Include="Models\TokenRequest.cs" />
+    <Compile Include="Models\TokenRevokeRequest.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Authentication\GoogleAuthenticator.cs" />
     <Compile Include="Models\CustomTokenResponse.cs" />

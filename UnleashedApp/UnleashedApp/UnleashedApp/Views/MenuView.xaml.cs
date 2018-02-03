@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using UnleashedApp.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace UnleashedApp.Views
@@ -10,6 +11,16 @@ namespace UnleashedApp.Views
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
+
+            MessagingCenter.Subscribe<MenuViewModel>(this, "logout_failed", (sender) =>
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await DisplayAlert("Logout failed!", "Something went wrong while logging out", "Try again");
+                });
+            });
         }
+
+
     }
 }

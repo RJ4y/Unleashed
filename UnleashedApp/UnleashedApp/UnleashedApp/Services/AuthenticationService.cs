@@ -1,49 +1,115 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using UnleashedApp.Repositories.AuthenticationRepositories;
 using Xamarin.Auth;
 
 namespace UnleashedApp.Authentication
 {
     public class AuthenticationService
     {
-        public void SaveCredentials(Account account, string API_token)
+        private static AuthenticationService instance;
+        private Account user;
+
+        public AuthenticationService()
         {
-            if (account != null && !string.IsNullOrWhiteSpace(API_token))
+            user = GetUser();
+        }
+
+        public static AuthenticationService Instance
+        {
+            get
             {
-                account.Properties.Add("API_token", API_token);
-                AccountStore.Create().Save(account, Constants.APP_NAME);
-            }
+                if (instance == null)
+                {
+                    instance = new AuthenticationService();
+                }
+                return instance; }
+        }
+
+        public void SaveCredentials(CustomTokenResponse tokenResponse)
+        {
+            Account account = GetUser();
+            SaveTokens(account, tokenResponse);
+        }
+
+        public void SaveCredentials(Account account, CustomTokenResponse tokenResponse)
+        {
+            SaveTokens(account, tokenResponse);
+
         }
 
         public string GetAPIAccessToken()
         {
-            if (UserIsLoggedIn())
-            {
-                Account account = GetUser();
-                return account.Properties["API_token"];
-            }
+            if(user.Properties.ContainsKey(Constants.ACCOUNT_PROPERTY_ACCESS_TOKEN))
+                return user.Properties[Constants.ACCOUNT_PROPERTY_ACCESS_TOKEN];
             return null;
         }
 
-        public void DeleteAccessToken()
+        public string GetAPIRefreshToken()
         {
-            var account = GetUser();
-            account.Properties.Remove("API_token");
-            AccountStore.Create().Save(account, Constants.APP_NAME);
+            if (user.Properties.ContainsKey(Constants.ACCOUNT_PROPERTY_REFRESH_TOKEN))
+                return user.Properties[Constants.ACCOUNT_PROPERTY_REFRESH_TOKEN];
+            return null;
         }
 
-        public bool UserIsLoggedIn()
+        public bool ShouldRefreshToken()
         {
-            Account account = GetUser();
-            if (account != null && account.Properties.ContainsKey("API_token"))
+            DateTime expiration = DateTime.Parse(user.Properties[Constants.ACCOUNT_PROPERTY_EXPIRATION]);
+            if (expiration < DateTime.Now)
             {
                 return true;
             }
             return false;
         }
 
+        private void SaveTokens(Account account, CustomTokenResponse tokenResponse)
+        {
+            if (account != null && !string.IsNullOrWhiteSpace(tokenResponse.access_token) && !string.IsNullOrWhiteSpace(tokenResponse.refresh_token))
+            {
+                if (account.Properties.ContainsKey(Constants.ACCOUNT_PROPERTY_ACCESS_TOKEN)) 
+                    account.Properties[Constants.ACCOUNT_PROPERTY_ACCESS_TOKEN] = tokenResponse.access_token;
+                account.Properties.Add(Constants.ACCOUNT_PROPERTY_ACCESS_TOKEN, tokenResponse.access_token);
+
+                if (account.Properties.ContainsKey(Constants.ACCOUNT_PROPERTY_REFRESH_TOKEN))
+                    account.Properties[Constants.ACCOUNT_PROPERTY_REFRESH_TOKEN] = tokenResponse.refresh_token;
+                account.Properties.Add(Constants.ACCOUNT_PROPERTY_REFRESH_TOKEN, tokenResponse.refresh_token);
+
+                DateTime expiration = CalculateTokenExpiration(tokenResponse);
+
+                if (account.Properties.ContainsKey(Constants.ACCOUNT_PROPERTY_EXPIRATION))
+                    account.Properties[Constants.ACCOUNT_PROPERTY_EXPIRATION] = expiration.ToString();
+                account.Properties.Add(Constants.ACCOUNT_PROPERTY_EXPIRATION, expiration.ToString());
+
+                AccountStore.Create().Save(account, Constants.APP_NAME);
+                user = account;
+            }
+        }
+
+        public void DeleteAccessTokens()
+        {
+            user.Properties.Remove(Constants.ACCOUNT_PROPERTY_ACCESS_TOKEN);
+            user.Properties.Remove(Constants.ACCOUNT_PROPERTY_REFRESH_TOKEN);
+            user.Properties.Remove(Constants.ACCOUNT_PROPERTY_EXPIRATION);
+            AccountStore.Create().Save(user, Constants.APP_NAME);
+        }
+
+        public bool UserIsLoggedIn()
+        {
+            if (user != null && user.Properties.ContainsKey(Constants.ACCOUNT_PROPERTY_REFRESH_TOKEN))
+                return true;
+            return false;
+        }
+
         private Account GetUser()
         {
             return AccountStore.Create().FindAccountsForService(Constants.APP_NAME).FirstOrDefault();
+        }
+
+        private DateTime CalculateTokenExpiration(CustomTokenResponse tokenResponse)
+        {
+            int expiresIn = int.Parse(tokenResponse.expires_in);
+            var test = DateTime.Now;
+            return DateTime.Now.AddSeconds(expiresIn);
         }
     }
 }

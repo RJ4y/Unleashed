@@ -7,12 +7,16 @@ namespace UnleashedApp
 {
     public static class Constants
     {
-
-        public const string CLIENT_ID_API = "K5pDHQ9l6ckHFiPptqUCqF4vLjZ1PZ80ftqpgebI";
-        public const string CLIENT_SECRET_API = "8DFXxudSDN5ntyu0s6ZRTK1tszqrIR6P0BuDowBUwSW6bxsGnlksJxpIApKd2knznPzC1p3p6vmDmTSxs6avyXMigdPIc0bw2Fz06gjZPLGhElacUzLN2YzTZF0QAUyM";
+        public const string CLIENT_ID_API = "PK5M2eVsuDADVZcojjzVTZiAl4yPCxPkl7nnAUte";
+        public const string CLIENT_SECRET_API = "OHavvxOG9JnQm6cMVtg5IjOeakyIjjDOLgrn6W1qdAKEpYIQhLIvWrJSIXwnQjPXQBZUzNxiNkKPBJlHCdn3n0PR1NxolJgZmrtrp9mEXrWx3zooTJCIl109TsSH0iva";
         public const string APP_NAME = "Unleashed";
         public const string CLIENT_ID = "213697302597-efe8ekru9nue7ihl2qocfbe0j8dgmqcp.apps.googleusercontent.com";
         public const string REDIRECT_SCHEME = "com.googleusercontent.apps.213697302597-efe8ekru9nue7ihl2qocfbe0j8dgmqcp";
-        public const string BASE_API_URL = "http://192.168.0.207:8000/";
+        public const string BASE_API_URL = "http://10.35.4.67:8000/";
+
+        public const string ACCOUNT_PROPERTY_ACCESS_TOKEN = "API_token";
+        public const string ACCOUNT_PROPERTY_REFRESH_TOKEN = "API_refresh_token";
+        public const string ACCOUNT_PROPERTY_EXPIRATION = "API_token_expiration";
+
     }
 }

@@ -28,7 +28,7 @@ namespace UnleashedApp
         {
             //services:
             _navigationService = new NavigationService();
-            _authenticationService = new AuthenticationService();
+            _authenticationService = AuthenticationService.Instance;
 
             //repositories:
             _employeeRepository = new EmployeeRepository();
@@ -38,7 +38,7 @@ namespace UnleashedApp
 
             //viewmodels:
             LoginViewModel = new LoginViewModel(_navigationService, _authenticationService, _authenticationRepository);
-            MenuViewModel = new MenuViewModel(_navigationService, _authenticationService);
+            MenuViewModel = new MenuViewModel(_navigationService, _authenticationService, _authenticationRepository);
             WhoIsViewViewModel = new WhoIsWhoViewModel(_navigationService, _habitatRepository, _squadRepository);
             //EmployeeDetailViewModel = new EmployeeDetailViewModel();
         }

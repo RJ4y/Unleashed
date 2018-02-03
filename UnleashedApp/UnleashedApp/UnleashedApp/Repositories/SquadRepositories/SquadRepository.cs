@@ -16,6 +16,7 @@ namespace UnleashedApp.Repositories.SquadRepositories
         public List<Squad> GetAllSquads()
         {
             var address = "employees";
+            AddAuthenticationHeaderAsync();
 
             try
             {
@@ -38,6 +39,7 @@ namespace UnleashedApp.Repositories.SquadRepositories
         public Squad GetSquadById(int id)
         {
             var address = "squads/" + id;
+            AddAuthenticationHeaderAsync();
 
             try
             {
@@ -60,6 +62,7 @@ namespace UnleashedApp.Repositories.SquadRepositories
         public List<Employee> GetEmployees(int id)
         {
             var address = "squads/" + id + "/employees";
+            AddAuthenticationHeaderAsync();
 
             try
             {
