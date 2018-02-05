@@ -164,19 +164,20 @@ namespace UnleashedApp.ViewModels
         {
             AddTrainingCommand = new Command(() =>
             {
-                _postTraining = new Training();
-
-                _postTraining.City = _city;
-                _postTraining.Company = _company;
-                _postTraining.Cost = Convert.ToInt32(_cost);
-                _postTraining.Date = _date;
-                _postTraining.Days = Convert.ToInt32(_days);
-                _postTraining.First_Name = "René";
-                _postTraining.Last_Name = "Jacobs";
-                _postTraining.Info = "info";
-                _postTraining.Invoice = _sendInvoice;
-                _postTraining.Team = "team";
-                _postTraining.TrainingName = Event;
+                _postTraining = new Training
+                {
+                    City = _city,
+                    Company = _company,
+                    Cost = Convert.ToInt32(_cost),
+                    Date = _date,
+                    Days = Convert.ToInt32(_days),
+                    First_Name = "René",
+                    Last_Name = "Jacobs",
+                    Info = "info",
+                    Invoice = _sendInvoice,
+                    Team = "team",
+                    TrainingName = Event
+                };
 
                 _trainingRepository.PostTrainingAsync(_postTraining);
             });
