@@ -3627,6 +3627,9 @@ namespace UnleashedApp.Droid
 			// aapt resource value: 0x7f030043
 			public const int Toolbar = 2130903107;
 			
+			// aapt resource value: 0x7f030044
+			public const int Toolbar_background = 2130903108;
+			
 			static Layout()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
