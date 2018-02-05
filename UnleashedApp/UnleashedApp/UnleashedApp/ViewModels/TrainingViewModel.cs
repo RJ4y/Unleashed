@@ -37,35 +37,16 @@ namespace UnleashedApp.ViewModels
 
             foreach(Training training in trainingList)
             {
-                var tr = new Training
-                {
-                    City = training.City,
-                    Company = training.Company,
-                    Cost = training.Cost,
-                    Date = training.Date,
-                    Days = training.Days,
-                    First_Name = training.First_Name,
-                    Last_Name = training.Last_Name,
-                    Info = training.Info,
-                    Invoice = training.Invoice,
-                    Team = training.Team,
-                    TrainingName = training.TrainingName
-                };
-
-                _trainings.Add(tr);
+                _trainings.Add(training);
             }
         }
 
         private void CalculateTotal()
         {
-            var total = 0;
-
             foreach(Training training in _trainings)
             {
-                total += training.Cost;
+                TrainingTotal += training.Cost;
             }
-
-            TrainingTotal = total;
         }
 
         public ObservableCollection<Training> TrainingList
