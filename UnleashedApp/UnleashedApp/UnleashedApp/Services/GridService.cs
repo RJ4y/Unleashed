@@ -85,7 +85,23 @@ namespace UnleashedApp.Services
             return new Dimensions(xMin, yMin);
         }
 
-        public static Dimensions GetMinifiedGridDimensions(List<Space> spaces)
+        public static Dimensions GetMinifiedSquareGridDimensions(List<Space> spaces)
+        {
+            Dimensions dimensions = GetDifferenceAsDimension(spaces);
+            int xDifference = dimensions.X;
+            int yDifference = dimensions.Y;
+
+            if (xDifference <= yDifference)
+            {
+                return new Dimensions(yDifference + 1, yDifference + 1);
+            }
+            else
+            {
+                return new Dimensions(xDifference + 1, xDifference + 1);
+            }
+        }
+
+        public static Dimensions GetDifferenceAsDimension(List<Space> spaces, bool isInverted = true)
         {
             int xMin = int.MaxValue;
             int yMin = int.MaxValue;
@@ -116,13 +132,13 @@ namespace UnleashedApp.Services
             int xDifference = xMax - xMin;
             int yDifference = yMax - yMin;
 
-            if (xDifference <= yDifference)
+            if (isInverted)
             {
-                return new Dimensions(yDifference + 1, yDifference + 1);
+                return new Dimensions(yDifference + 1, xDifference + 1);
             }
             else
             {
-                return new Dimensions(xDifference + 1, xDifference + 1);
+                return new Dimensions(xDifference + 1, yDifference + 1);
             }
         }
     }

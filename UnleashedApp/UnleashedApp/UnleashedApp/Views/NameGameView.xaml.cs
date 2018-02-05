@@ -84,40 +84,65 @@ namespace UnleashedApp.Views
         {
             foreach (Employee employee in employees)
             {
-                optionOne.Text = employees[0].FirstName;
-                optionTwo.Text = employees[1].FirstName;
-                optionThree.Text = employees[2].FirstName;
+                optionOneButton.Text = employees[0].FirstName + " " + employees[0].LastName;
+                optionTwoButton.Text = employees[1].FirstName + " " + employees[1].LastName;
+                optionThreeButton.Text = employees[2].FirstName + " " + employees[2].LastName;
             }
         }
 
         private void AddTapEvents()
         {
-            optionOne.Clicked += OptionTapped;
-            optionTwo.Clicked += OptionTapped;
-            optionThree.Clicked += OptionTapped;
+            optionOneButton.Clicked += OptionTapped;
+            optionTwoButton.Clicked += OptionTapped;
+            optionThreeButton.Clicked += OptionTapped;
+            guessAnotherButton.Clicked += GuessAnotherTapped;
         }
 
         private void OptionTapped(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            if (button.Text == CorrectEmployee.FirstName)
+            if (button.Text == CorrectEmployee.FirstName + " " + CorrectEmployee.LastName)
             {
                 ShowCorrectSelectionInformation();
             }
+            else
+            {
+                ShowWrongSelectionMessage(button.Text);
+            }
+        }
+
+        private void ShowWrongSelectionMessage(string text)
+        {
+            rowDefinitionWrongOption.Height = new GridLength(0, GridUnitType.Auto);
+            wrongOptionSelectedLabel.Text = text + " is not the name of this person. Please try again...";
+        }
+
+        private void GuessAnotherTapped(object sender, EventArgs e)
+        {
+            rowDefinitionWrongOption.Height = new GridLength(0, GridUnitType.Absolute);
+            StartNewGame();
+        }
+
+        private void StartNewGame()
+        {
+            correctAnswerScrollView.IsVisible = false;
+            InitializeFields();
+            questionScrollView.IsVisible = true;
+            wrongOptionSelectedLabel.Text = "";
         }
 
         private void ShowCorrectSelectionInformation()
         {
-            questionGrid.IsVisible = false;
+            questionScrollView.IsVisible = false;
             correctAnswerScrollView.IsVisible = true;
             image.Source = CorrectEmployee.PictureUrl;
             nameLabel.Text = CorrectEmployee.FirstName + " " + CorrectEmployee.LastName;
             functionLabel.Text = CorrectEmployee.Function;
-            expectationsLabel.Text = "Expectations: " + CorrectEmployee.Expectations;
-            motivationLabel.Text = "Motivation: " + CorrectEmployee.Motivation;
-            needToKnowLabel.Text = "Need to know: " + CorrectEmployee.NeedToKnow;
-            birthDateLabel.Text = "Birthdate: " + CorrectEmployee.DateOfBirth.ToString("d MMM yyyy");
-            /*"Good job! It seems like you know alot about " " already! Here are some other things you might not know:"*/
+
+            expectationsLabel.Text = CorrectEmployee.Expectations;
+            motivationLabel.Text = CorrectEmployee.Motivation;
+            needToKnowLabel.Text = CorrectEmployee.NeedToKnow;
+            birthDateLabel.Text = CorrectEmployee.DateOfBirth.ToString("d MMM yyyy");
         }
     }
 }

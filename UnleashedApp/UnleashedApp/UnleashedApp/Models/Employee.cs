@@ -14,6 +14,8 @@ namespace UnleashedApp.Models
         [JsonProperty(PropertyName = "last_name")]
         public string LastName { get; set; }
 
+        public string FullName { get { return FirstName + " " + LastName; } }
+
         [JsonProperty(PropertyName = "function")]
         public string Function { get; set; }
 

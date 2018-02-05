@@ -63,7 +63,7 @@ namespace UnleashedApp.Views
         #region RoomGrid
         private void CreateRoomGrid()
         {
-            Dimensions dimensions = GridService.GetMinifiedGridDimensions(Spaces);
+            Dimensions dimensions = GridService.GetMinifiedSquareGridDimensions(Spaces);
             GridService.CreateGridColumnDefinitions(roomGrid, dimensions);
             GridService.CreateGridRowDefinitions(roomGrid, dimensions);
             FillRoomGrid();
