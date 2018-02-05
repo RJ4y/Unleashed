@@ -27,7 +27,7 @@ namespace UnleashedApp.ViewModels
             CalculateTotal();
         }
 
-        public void Init()
+        private void Init()
         {
             _trainings = new ObservableCollection<Training>();
 
@@ -54,7 +54,7 @@ namespace UnleashedApp.ViewModels
             }
         }
 
-        public void CalculateTotal()
+        private void CalculateTotal()
         {
             var total = 0;
 
