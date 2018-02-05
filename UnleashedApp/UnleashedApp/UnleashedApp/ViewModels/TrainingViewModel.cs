@@ -22,6 +22,7 @@ namespace UnleashedApp.ViewModels
         public TrainingViewModel(ITrainingRepository trainingRepository)
         {
             _trainingRepository = trainingRepository;
+            _date = DateTime.Now;
             InitialiseCommands();
             Init();
             CalculateTotal();

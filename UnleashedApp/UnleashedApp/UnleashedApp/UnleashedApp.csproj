@@ -45,6 +45,7 @@
     <Compile Include="Contracts\ViewModels\IRoomViewModel.cs" />
     <Compile Include="Contracts\ViewModels\ITrainingViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IWhoIsWhoViewModel.cs" />
+    <Compile Include="Converters\CurrencyConverter.cs" />
     <Compile Include="Converters\DateConverter.cs" />
     <Compile Include="Models\Dimensions.cs" />
     <Compile Include="Models\Employee.cs" />

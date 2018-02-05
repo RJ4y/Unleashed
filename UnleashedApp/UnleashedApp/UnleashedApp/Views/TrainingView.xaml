@@ -1,25 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:system="clr-namespace:System;assembly=mscorlib"
             xmlns:converters="clr-namespace:UnleashedApp.Converters;assembly=UnleashedApp"
-             x:Class="UnleashedApp.Views.TrainingView">
+            x:Class="UnleashedApp.Views.TrainingView">
     <ContentPage Title="Overview">
         <ContentPage.Resources>
             <ResourceDictionary>
                 <converters:DateConverter x:Key="dateConverter"></converters:DateConverter>
+                <converters:CurrencyConverter x:Key="currencyConverter"></converters:CurrencyConverter>
             </ResourceDictionary>
         </ContentPage.Resources>
         
         <StackLayout Orientation="Vertical">
-            <Label Text="Training" TextColor="Red" FontSize="Large"/>
+            <Label Text="Finances" TextColor="Red" FontSize="Large" Margin="10,5,0,0"/>
+            
+            <StackLayout Orientation="Horizontal" Margin="30, 0, 30, 0">
+                <Label Text="Total cost:"/>
+                <Label Text="{ Binding TrainingTotal, Converter={StaticResource currencyConverter }"/>
+            </StackLayout>
 
-            <ListView ItemsSource="{ Binding TrainingList }" Margin="10, 0, 10, 0">
+            <StackLayout Orientation="Horizontal" Margin="30, 0, 30, 0">
+                <Label Text="Amount available:"/>
+                <Label Text="€100"/>
+            </StackLayout>
+
+            <Label Text="Training" TextColor="Red" FontSize="Large" Margin="10,0,0,0"/>
+
+            <ListView ItemsSource="{ Binding TrainingList }" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <Grid>
+                        <ViewCell IsEnabled="False">
+                            <Grid Padding="10, 7">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="60*"/>
@@ -27,56 +42,48 @@
                                     <ColumnDefinition Width="40*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Text="{ Binding Date, Converter={StaticResource dateConverter} }" Grid.Row="0" Grid.Column="0"/>
-                                <Label Text="{ Binding TrainingName }" Grid.Row="0" Grid.Column="1"/>
-                                <Label Text="{ Binding Cost }" Grid.Row="0" Grid.Column="2"/>
+                                <Label Text="{ Binding TrainingName }" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
+
+                                <Label Text="{ Binding Date, Converter={StaticResource dateConverter} }" Grid.Row="1" Grid.Column="0"/>
+
+                                <Label Text="{ Binding Cost, Converter={StaticResource currencyConverter }" Grid.Row="1" Grid.Column="2"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
-            <StackLayout Orientation="Horizontal" Margin="30, 0, 30, 0">
-                <Label Text="Total cost:"/>
-                <Label Text="{ Binding TrainingTotal }"/>
-            </StackLayout>
-
-            <StackLayout Orientation="Horizontal" Margin="30, 0, 30, 0">
-                <Label Text="Amount available:"/>
-                <Label Text="0000"/>
-            </StackLayout>
         </StackLayout>
     </ContentPage>
 
     <ContentPage Title="Add Training">
         <ScrollView>
-            <StackLayout Orientation="Vertical" Margin="20, 0, 20, 0">
-                <Label Text="Add Training" TextColor="Red" FontSize="Large"/>
+            <StackLayout Orientation="Vertical" Margin="15, 0, 15, 0">
+                <Label Text="Add Training" TextColor="Red" FontSize="Large" Margin="0,5,0,0"/>
                 <Label Text="Date:"/>
-                <DatePicker Date="{ Binding Date, Mode=TwoWay}"/>
+                <DatePicker Date="{ Binding Date, Mode=TwoWay }" Margin="0,-15,0,0"/>
                 
-                <Label Text="Days"/>
-                <Entry Text="{ Binding Days, Mode=TwoWay}"/>
-                
+                <Label Text="Days:"/>
+                <Entry Text="{ Binding Days, Mode=TwoWay}" Keyboard="Numeric" Margin="0,-15,0,0"/>
+
                 <Label Text="Training / Event / Hotel:"/>
-                <Entry Text="{ Binding Event, Mode=TwoWay}"/>
+                <Entry Text="{ Binding Event, Mode=TwoWay}" Margin="0,-15,0,0"/>
                 
                 <Label Text="Company:"/>
-                <Entry Text="{ Binding Company, Mode=TwoWay}"/>
+                <Entry Text="{ Binding Company, Mode=TwoWay}" Margin="0,-15,0,0"/>
                 
                 <Label Text="City:"/>
-                <Entry Text="{ Binding City, Mode=TwoWay}"/>
+                <Entry Text="{ Binding City, Mode=TwoWay}" Margin="0,-15,0,0"/>
                 
                 <Label Text="Cost (€):"/>
-                <Entry Text="{ Binding Cost, Mode=TwoWay}" Keyboard="Numeric"/>
+                <Entry Text="{ Binding Cost, Mode=TwoWay}" Keyboard="Numeric" Margin="0,-15,0,0"/>
 
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Invoice to finance?"/>
                     <Switch IsToggled="{ Binding IsOn, Mode=TwoWay}"/>
                 </StackLayout>
 
-                <Label Text="Extra info:"/>
-                <Entry Text="{ Binding Info, Mode=TwoWay}"/>
+                <Label Text="Additional information:"/>
+                <Entry Text="{ Binding Info, Mode=TwoWay}" Margin="0,-15,0,0"/>
 
                 <Button Text="Add Training" Command="{ Binding AddTrainingCommand }"/>
             </StackLayout>
