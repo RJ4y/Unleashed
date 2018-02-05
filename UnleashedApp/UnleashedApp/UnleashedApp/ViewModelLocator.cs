@@ -41,7 +41,7 @@ namespace UnleashedApp
             FloorplanViewModel = new FloorplanViewModel(_navigationService, _spaceRepository, _roomRepository);
             RoomViewModel = new RoomViewModel(_navigationService);
             EmployeeDetailViewModel = new EmployeeDetailViewModel();
-            NameGameViewModel = new NameGameViewModel(_navigationService, _employeeRepository);
+            NameGameViewModel = new NameGameViewModel(_employeeRepository);
         }
     }
 }

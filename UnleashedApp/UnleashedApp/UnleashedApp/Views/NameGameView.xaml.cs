@@ -16,6 +16,7 @@ namespace UnleashedApp.Views
         public static List<Employee> Males { get; private set; }
         public static List<Employee> Females { get; private set; }
         public static Employee CorrectEmployee { get; private set; }
+        public const int AMOUNT = 3;
 
         public NameGameView()
         {
@@ -27,6 +28,23 @@ namespace UnleashedApp.Views
             {
                 InitializeFields();
             }
+        }
+
+        private void InitializeFields()
+        {
+            if (RandomizeService.GetRandomGender() == 'M')
+            {
+                Males = GetMales();
+                List<Employee> answers = RandomizeService.GetSpecifiedAmountOfRandomObjectsFromList(Males, AMOUNT);
+                CreateAnswers(answers);
+            }
+            else
+            {
+                Females = GetFemales();
+                List<Employee> answers = RandomizeService.GetSpecifiedAmountOfRandomObjectsFromList(Females, AMOUNT);
+                CreateAnswers(answers);
+            }
+
         }
 
         private List<Employee> GetMales()
@@ -52,24 +70,7 @@ namespace UnleashedApp.Views
             return list;
         }
 
-        private void InitializeFields()
-        {
-            if (RandomizeService.GetRandomGender() == 'M')
-            {
-                Males = GetMales();
-                List<Employee> answers = RandomizeService.GetSpecifiedAmountOfRandomObjectsFromList(Males, 3);
-                CreateAnswers(answers, true);
-            }
-            else
-            {
-                Females = GetFemales();
-                List<Employee> answers = RandomizeService.GetSpecifiedAmountOfRandomObjectsFromList(Females, 3);
-                CreateAnswers(answers);
-            }
-
-        }
-
-        private void CreateAnswers(List<Employee> answers, bool isMale = false)
+        private void CreateAnswers(List<Employee> answers)
         {
             if (answers != null)
             {
@@ -82,12 +83,9 @@ namespace UnleashedApp.Views
 
         private void FillAnswerFields(List<Employee> employees)
         {
-            foreach (Employee employee in employees)
-            {
-                optionOneButton.Text = employees[0].FirstName + " " + employees[0].LastName;
-                optionTwoButton.Text = employees[1].FirstName + " " + employees[1].LastName;
-                optionThreeButton.Text = employees[2].FirstName + " " + employees[2].LastName;
-            }
+            optionOneButton.Text = employees[0].FirstName + " " + employees[0].LastName;
+            optionTwoButton.Text = employees[1].FirstName + " " + employees[1].LastName;
+            optionThreeButton.Text = employees[2].FirstName + " " + employees[2].LastName;
         }
 
         private void AddTapEvents()

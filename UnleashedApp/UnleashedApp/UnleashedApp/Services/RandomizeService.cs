@@ -22,38 +22,35 @@ namespace UnleashedApp.Services
         }
         #endregion
 
-        public static List<T> GetSpecifiedAmountOfRandomObjectsFromList<T>(List<T> employees, int amount)
+        public static List<T> GetSpecifiedAmountOfRandomObjectsFromList<T>(List<T> list, int amount)
         {
-            if (employees.Count >= amount)
+            if (list.Count >= amount)
             {
                 List<int> randomIndexes = new List<int>();
-                int first = random.Next(employees.Count);
+                List<T> randomEmployees = new List<T>();
+                int first = random.Next(list.Count);
                 randomIndexes.Add(first);
+                randomEmployees.Add(list[first]);
 
                 bool isDone = false;
                 while (!isDone)
                 {
-                    int index = random.Next(employees.Count);
+                    int index = random.Next(list.Count);
                     if (!randomIndexes.Contains(index))
                     {
                         randomIndexes.Add(index);
+                        randomEmployees.Add(list[index]);
+
                         if (randomIndexes.Count == amount)
                         {
                             isDone = true;
                         }
                     }
                 }
-                List<T> randomEmployees = new List<T>();
-                foreach (int i in randomIndexes)
-                {
-                    randomEmployees.Add(employees[i]);
-                }
+
                 return randomEmployees;
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         public static T GetRandomObjectFromList<T>(List<T> list)
