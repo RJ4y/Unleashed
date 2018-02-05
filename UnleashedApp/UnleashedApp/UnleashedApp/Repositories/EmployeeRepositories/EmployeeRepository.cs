@@ -14,7 +14,7 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
 
         public List<Employee> GetAllEmployees()
         {
-            string address = "employees";
+            string address = "employees/";
 
             try
             {

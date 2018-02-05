@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Windows.Input;
 using UnleashedApp.Contracts.ViewModels;
 using UnleashedApp.Models;
-using UnleashedApp.Repositories.EmployeeRepositories;
 using UnleashedApp.Repositories.HabitatRepositories;
 using UnleashedApp.Repositories.SquadRepositories;
 using UnleashedApp.Views;
@@ -24,7 +23,7 @@ namespace UnleashedApp.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public WhoIsWhoViewModel(INavigationService navigationService, IHabitatRepository habitatRepository, ISquadRepository squadRepository, IEmployeeRepository employeeRepository)
+        public WhoIsWhoViewModel(INavigationService navigationService, IHabitatRepository habitatRepository, ISquadRepository squadRepository)
         {
             _navigationService = navigationService;
             _habitatRepository = habitatRepository;
@@ -38,7 +37,7 @@ namespace UnleashedApp.ViewModels
             var habitats = _habitatRepository.GetAllHabitats();
             GroupedList = new ObservableCollection<Group>();
 
-            foreach(Habitat habitat in habitats)
+            foreach (Habitat habitat in habitats)
             {
                 var group = new Group
                 {
@@ -53,10 +52,12 @@ namespace UnleashedApp.ViewModels
             {
                 var employees = _habitatRepository.GetEmployees(group.Id);
 
-                foreach(Employee employee in employees)
+                if (employees != null && employees.Count > 0)
                 {
-                    employee.FullName = employee.First_Name + " " + employee.Last_Name;
-                    group.Add(employee);
+                    foreach (Employee employee in employees)
+                    {
+                        group.Add(employee);
+                    }
                 }
             }
         }
@@ -83,7 +84,6 @@ namespace UnleashedApp.ViewModels
 
                 foreach (Employee employee in employees)
                 {
-                    employee.FullName = employee.First_Name + " " + employee.Last_Name;
                     group.Add(employee);
                 }
             }
@@ -116,7 +116,7 @@ namespace UnleashedApp.ViewModels
             set
             {
                 _selectedEmployee = value;
-                RaisePropertyChanged(nameof(SelectedEmployee));        
+                RaisePropertyChanged(nameof(SelectedEmployee));
             }
         }
 

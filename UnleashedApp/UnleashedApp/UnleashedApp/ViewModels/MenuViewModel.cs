@@ -10,6 +10,7 @@ namespace UnleashedApp.ViewModels
         private readonly INavigationService _navigationService;
         public ICommand WhoIsWhoCommand { get; set; }
         public ICommand FloorplanCommand { get; set; }
+        public ICommand NameGameCommand { get; set; }
 
         public MenuViewModel(INavigationService navigationService)
         {
@@ -26,6 +27,10 @@ namespace UnleashedApp.ViewModels
             FloorplanCommand = new Command(async () =>
             {
                 await _navigationService.PushAsync(nameof(FloorplanView));
+            });
+            NameGameCommand = new Command(async () =>
+            {
+                await _navigationService.PushAsync(nameof(NameGameView));
             });
         }
     }

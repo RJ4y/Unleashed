@@ -22,6 +22,7 @@ namespace UnleashedApp
         public EmployeeDetailViewModel EmployeeDetailViewModel { get; }
         public FloorplanViewModel FloorplanViewModel { get; }
         public RoomViewModel RoomViewModel { get; }
+        public NameGameViewModel NameGameViewModel { get; }
 
         public static ViewModelLocator Instance => _instance ?? (_instance = new ViewModelLocator());
 
@@ -36,11 +37,11 @@ namespace UnleashedApp
             _squadRepository = new SquadRepository();
 
             MenuViewModel = new MenuViewModel(_navigationService);
-            WhoIsViewViewModel = new WhoIsWhoViewModel(_navigationService, _habitatRepository, _squadRepository, _employeeRepository);
+            WhoIsViewViewModel = new WhoIsWhoViewModel(_navigationService, _habitatRepository, _squadRepository);
             FloorplanViewModel = new FloorplanViewModel(_navigationService, _spaceRepository, _roomRepository);
             RoomViewModel = new RoomViewModel(_navigationService);
-            WhoIsViewViewModel = new WhoIsWhoViewModel(_navigationService, _habitatRepository, _squadRepository, _employeeRepository);
             EmployeeDetailViewModel = new EmployeeDetailViewModel();
+            NameGameViewModel = new NameGameViewModel(_navigationService, _employeeRepository);
         }
     }
 }
