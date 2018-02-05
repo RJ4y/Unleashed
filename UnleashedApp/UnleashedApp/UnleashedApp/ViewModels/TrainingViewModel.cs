@@ -23,6 +23,7 @@ namespace UnleashedApp.ViewModels
         {
             _trainingRepository = trainingRepository;
             _date = DateTime.Now;
+            _sendInvoice = "Nee";
             InitialiseCommands();
             Init();
             CalculateTotal();
@@ -154,12 +155,12 @@ namespace UnleashedApp.ViewModels
             }
         }
 
-        private string _isOn;
-        public bool IsOn
+        private string _sendInvoice;
+        public bool SendInvoice
         {
             get
             {
-                if(_isOn == "Ja")
+                if(_sendInvoice == "Ja")
                 {
                     return true;
                 } else
@@ -171,13 +172,13 @@ namespace UnleashedApp.ViewModels
             {
                 if (value)
                 {
-                    _isOn = "Ja";
+                    _sendInvoice = "Ja";
                 }
                 else
                 {
-                    _isOn = "Nee";
+                    _sendInvoice = "Nee";
                 }
-                RaisePropertyChanged(nameof(IsOn));
+                RaisePropertyChanged(nameof(SendInvoice));
             }
         }
         #endregion
@@ -193,15 +194,15 @@ namespace UnleashedApp.ViewModels
             {
                 _postTraining = new Training();
 
-                _postTraining.City = City;
-                _postTraining.Company = Company;
-                _postTraining.Cost = Convert.ToInt32(Cost);
-                _postTraining.Date = Date;
-                _postTraining.Days = Convert.ToInt32(Days);
+                _postTraining.City = _city;
+                _postTraining.Company = _company;
+                _postTraining.Cost = Convert.ToInt32(_cost);
+                _postTraining.Date = _date;
+                _postTraining.Days = Convert.ToInt32(_days);
                 _postTraining.First_Name = "René";
                 _postTraining.Last_Name = "Jacobs";
                 _postTraining.Info = "info";
-                _postTraining.Invoice = _isOn;
+                _postTraining.Invoice = _sendInvoice;
                 _postTraining.Team = "team";
                 _postTraining.TrainingName = Event;
 

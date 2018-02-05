@@ -79,7 +79,7 @@
 
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Invoice to finance?"/>
-                    <Switch IsToggled="{ Binding IsOn, Mode=TwoWay}"/>
+                    <Switch IsToggled="{ Binding SendInvoice, Mode=TwoWay}"/>
                 </StackLayout>
 
                 <Label Text="Additional information:"/>
