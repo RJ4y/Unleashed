@@ -20,10 +20,10 @@ namespace UnleashedApp.Models
         [JsonProperty(PropertyName = "start_date")]
         public DateTime StartDate { get; set; }
 
-        [JsonProperty(PropertyName = "end_date", NullValueHandling = NullValueHandling.Ignore)]
-        public DateTime EndDate { get; set; }
+        [JsonProperty(PropertyName = "end_date")]
+        public DateTime? EndDate { get; set; }
 
         [JsonProperty(PropertyName = "habitat")]
-        public Habitat Habitat { get; set; }       
+        public int Habitat { get; set; }       
     }
 }

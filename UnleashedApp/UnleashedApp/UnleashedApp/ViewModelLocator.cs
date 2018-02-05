@@ -34,7 +34,7 @@ namespace UnleashedApp
             _employeeRepository = new EmployeeRepository();
             _habitatRepository = new HabitatRepository();
             _squadRepository = new SquadRepository();
-            _authenticationRepository = new AuthenticationRepository();
+            _authenticationRepository = new AuthenticationRepository(new AuthenticationHttpClientAdapter());
 
             //viewmodels:
             LoginViewModel = new LoginViewModel(_navigationService, _authenticationService, _authenticationRepository);

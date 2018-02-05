@@ -31,9 +31,12 @@ namespace UnleashedApp.Repositories
             {
                 if (authService.ShouldRefreshToken())
                 {
-                    IAuthenticationRepository authRepo = new AuthenticationRepository();
-                    var response = await authRepo.RequestRefreshAccessTokenAsync(authService.GetAPIRefreshToken());
-                    authService.SaveCredentials(response);
+                    IAuthenticationRepository authRepo = new AuthenticationRepository(new AuthenticationHttpClientAdapter());
+                    CustomTokenResponse response = await authRepo.RequestRefreshAccessTokenAsync(authService.GetAPIRefreshToken());
+                    if (response.access_token != null)
+                    {
+                        authService.SaveCredentials(response);
+                    }
                 }
                 _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthenticationService.Instance.GetAPIAccessToken());
             }

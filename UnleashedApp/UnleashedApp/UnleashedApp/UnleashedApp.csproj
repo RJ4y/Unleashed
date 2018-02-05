@@ -41,6 +41,8 @@
     <Compile Include="Models\TokenRefreshRequest.cs" />
     <Compile Include="Models\TokenRequest.cs" />
     <Compile Include="Models\TokenRevokeRequest.cs" />
+    <Compile Include="Repositories\AuthenticationRepositories\AuthenticationHttpClientAdapter.cs" />
+    <Compile Include="Repositories\AuthenticationRepositories\IAuthenticationHttpClientAdapter.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Authentication\GoogleAuthenticator.cs" />
     <Compile Include="Models\CustomTokenResponse.cs" />

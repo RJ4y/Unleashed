@@ -14,13 +14,17 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
 {
     public class AuthenticationRepository : Repository, IAuthenticationRepository
     {
-        public const string CONVERT_URL = "auth/convert-token";
-        public const string REVOKE_URL = "auth/invalidate-sessions";
+        private readonly IAuthenticationHttpClientAdapter httpClientAdapter;
+
+        public AuthenticationRepository(IAuthenticationHttpClientAdapter httpClientAdapter)
+        {
+            this.httpClientAdapter = httpClientAdapter;
+        }
 
         public async Task<CustomTokenResponse> RequestExchangeGoogleTokenAsync(TokenConvertRequest tokenConvertRequest)
         {
             StringContent content = ConvertToJson(tokenConvertRequest);
-            HttpResponseMessage response = await _client.PostAsync(CONVERT_URL, content);
+            HttpResponseMessage response = await httpClientAdapter.ExchangeTokenAsync(content);
             if (response.IsSuccessStatusCode)
             {
                 return await ConvertToTokenObject(response);
@@ -32,7 +36,7 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
         {
             TokenRefreshRequest refreshRequest = new TokenRefreshRequest(refreshToken);
             StringContent content = ConvertToJson(refreshRequest);
-            HttpResponseMessage response = await _client.PostAsync(REFRESH_URL, content);
+            HttpResponseMessage response = await httpClientAdapter.GetRefreshedAccessTokenAsync(content);
             if (response.IsSuccessStatusCode)
             {
                 return await ConvertToTokenObject(response);
@@ -44,10 +48,7 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
         {
             TokenRevokeRequest revokeRequest = new TokenRevokeRequest();
             StringContent content = ConvertToJson(revokeRequest);
-            Debug.WriteLine("*****************************************************************" + content.ReadAsStringAsync().Result);
-            AddAuthenticationHeaderAsync();
-            Debug.WriteLine("*****************************************************************" + _client.DefaultRequestHeaders);
-            HttpResponseMessage response = await _client.PostAsync(REVOKE_URL, content);
+            HttpResponseMessage response = await httpClientAdapter.PostRevokeTokensAsync(content);
             if (response.IsSuccessStatusCode)
             {
                 return true;
