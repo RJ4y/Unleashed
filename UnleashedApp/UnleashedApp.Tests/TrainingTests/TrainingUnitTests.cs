@@ -102,6 +102,20 @@ namespace UnleashedApp.Tests.TrainingTests
 
             Assert.AreEqual(trainingBuilder.ReturnTotal(), trainingViewModel.TrainingTotal);
         }
+
+        [TestMethod]
+        public void SendInvoiceShouldConvertToYesOrNo()
+        {
+            trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(trainingBuilder.InitList(1));
+
+            var trainingViewModel = new TrainingViewModel(trainingRepoMock.Object);
+
+            trainingViewModel.SendInvoice = true;
+            Assert.AreEqual("Ja", trainingViewModel.getSendInvoice());
+
+            trainingViewModel.SendInvoice = false;
+            Assert.AreEqual("Nee", trainingViewModel.getSendInvoice());
+        }
     }
 
     public class TrainingBuilder

@@ -160,26 +160,17 @@ namespace UnleashedApp.ViewModels
         {
             get
             {
-                if(_sendInvoice == "Ja")
-                {
-                    return true;
-                } else
-                {
-                    return false;
-                }
+                return _sendInvoice == "Ja";
             }
             set
             {
-                if (value)
-                {
-                    _sendInvoice = "Ja";
-                }
-                else
-                {
-                    _sendInvoice = "Nee";
-                }
+                _sendInvoice = value ? "Ja" : "Nee";
                 RaisePropertyChanged(nameof(SendInvoice));
             }
+        }
+        public string getSendInvoice()
+        {
+            return _sendInvoice;
         }
         #endregion
 
