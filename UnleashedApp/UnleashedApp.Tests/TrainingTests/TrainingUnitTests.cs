@@ -104,6 +104,36 @@ namespace UnleashedApp.Tests.TrainingTests
         }
 
         [TestMethod]
+        public void RefreshShouldMaintainListIfNothingChanged()
+        {
+            trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(trainingBuilder.InitList(1));
+
+            var trainingViewModel = new TrainingViewModel(trainingRepoMock.Object);
+            var firstList = trainingViewModel.TrainingList;
+
+            trainingViewModel.Refresh();
+            var secondList = trainingViewModel.TrainingList;
+
+            Assert.AreEqual(firstList, secondList);
+        }
+
+        [TestMethod]
+        public void RefreshShouldReturnBiggerList()
+        {
+            trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(trainingBuilder.InitList(1));
+
+            var trainingViewModel = new TrainingViewModel(trainingRepoMock.Object);
+            var firstCount = trainingViewModel.TrainingList.Count;
+
+            trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(trainingBuilder.InitList(2));
+
+            trainingViewModel.Refresh();
+            var secondCount = trainingViewModel.TrainingList.Count;
+
+            Assert.AreNotEqual(firstCount, secondCount);
+        }
+
+        [TestMethod]
         public void SendInvoiceShouldConvertToYesOrNo()
         {
             trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(trainingBuilder.InitList(1));
