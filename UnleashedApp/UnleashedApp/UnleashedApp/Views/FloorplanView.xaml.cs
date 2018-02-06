@@ -92,7 +92,7 @@ namespace UnleashedApp.Views
         #region FloorplanGrid
         private void CreateFloorplanGrid()
         {
-            Dimensions dimensions = GridService.GetFloorplanGridDimensions(Spaces);
+            Dimensions dimensions = GridService.GetDifferenceAsDimension(Spaces);
             GridService.CreateGridColumnDefinitions(floorplanGrid, dimensions);
             GridService.CreateGridRowDefinitions(floorplanGrid, dimensions);
             FillFloorplanGrid();

@@ -34,7 +34,7 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
             return _employees;
         }
 
-        public Employee GetEmployeeById(int id)
+        public Employee GetEmployeeById(int? id)
         {
             string address = "employees/" + id + "/";
 

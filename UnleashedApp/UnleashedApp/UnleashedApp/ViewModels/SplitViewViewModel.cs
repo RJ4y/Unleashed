@@ -16,6 +16,7 @@ namespace UnleashedApp.ViewModels
         public ICommand GoHomeCommand { get; set; }
         public ICommand GoWhoIsWhoCommand { get; set; }
         public ICommand GoFloorplanCommand { get; set; }
+        public ICommand GoNameGameCommand { get; set; }
 
         public SplitViewViewModel(INavigationService navigationService)
         {
@@ -38,6 +39,11 @@ namespace UnleashedApp.ViewModels
             GoFloorplanCommand = new Command(() =>
             {
                 App.NavigationPage.Navigation.PushAsync(new FloorplanView());
+                App.MenuIsPresented = false;
+            });
+            GoNameGameCommand = new Command(() =>
+            {
+                App.NavigationPage.Navigation.PushAsync(new NameGameView());
                 App.MenuIsPresented = false;
             });
         }

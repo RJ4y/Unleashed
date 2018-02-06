@@ -11,7 +11,7 @@
         <Label Text="{ Binding Habitat.Name }" FontSize="Large" TextColor="#e6332a"/>
         <StackLayout Orientation="Horizontal">
             <Image Source="placeholder.jpg" HeightRequest="80"/>
-            <Label Text="{ Binding FullName }" TextColor="Black" VerticalTextAlignment="Center"/>
+            <Label Text="{ Binding LastName }" TextColor="Black" VerticalTextAlignment="Center"/>
         </StackLayout>
 
         <Label Text="{ Binding Function }" TextColor="Black"/>

@@ -6,7 +6,6 @@ using System.Linq;
 using System.Windows.Input;
 using UnleashedApp.Contracts.ViewModels;
 using UnleashedApp.Models;
-using UnleashedApp.Repositories.EmployeeRepositories;
 using UnleashedApp.Repositories.HabitatRepositories;
 using UnleashedApp.Repositories.SquadRepositories;
 using UnleashedApp.Views;
@@ -30,7 +29,7 @@ namespace UnleashedApp.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
-        public WhoIsWhoViewModel(INavigationService navigationService, IHabitatRepository habitatRepository, ISquadRepository squadRepository, IEmployeeRepository employeeRepository)
+        public WhoIsWhoViewModel(INavigationService navigationService, IHabitatRepository habitatRepository, ISquadRepository squadRepository)
         {
             _navigationService = navigationService;
             _habitatRepository = habitatRepository;
@@ -43,7 +42,7 @@ namespace UnleashedApp.ViewModels
         public void LoadHabitats()
         {
             var habitats = _habitatRepository.GetAllHabitats();
-            
+
             if (habitats != null)
             {
                 GroupedList = new ObservableCollection<Group>();
@@ -63,11 +62,14 @@ namespace UnleashedApp.ViewModels
                 {
                     var employees = _habitatRepository.GetEmployees(group.Id);
 
-                    foreach (Employee employee in employees)
-                    {
-                        employee.FullName = employee.First_Name + " " + employee.Last_Name;
-                        group.Add(employee);
-                    }
+                    if (employees != null && employees.Count > 0)
+
+                        foreach (Employee employee in employees)
+                        {
+                            {
+                                group.Add(employee);
+                            }
+                        }
                 }
             }
         }
@@ -94,7 +96,6 @@ namespace UnleashedApp.ViewModels
 
                 foreach (Employee employee in employees)
                 {
-                    employee.FullName = employee.First_Name + " " + employee.Last_Name;
                     group.Add(employee);
                 }
             }
@@ -141,7 +142,7 @@ namespace UnleashedApp.ViewModels
             set
             {
                 _selectedEmployee = value;
-                RaisePropertyChanged(nameof(SelectedEmployee));        
+                RaisePropertyChanged(nameof(SelectedEmployee));
             }
         }
 
@@ -184,17 +185,17 @@ namespace UnleashedApp.ViewModels
                     foreach (Group group in FilteredList)
                     {
                         ObservableCollection<Employee> temp = new ObservableCollection<Employee>();
-                        
-                        foreach(Employee emp in group)
+
+                        foreach (Employee emp in group)
                         {
-                            if(emp.FullName.ToLower().Contains(Filter.ToLower()))
+                            if (emp.FullName.ToLower().Contains(Filter.ToLower()))
                             {
                                 temp.Add(emp);
                             }
                         }
 
                         group.Clear();
-                        foreach(Employee emp in temp)
+                        foreach (Employee emp in temp)
                         {
                             group.Add(emp);
                         }
@@ -228,23 +229,22 @@ namespace UnleashedApp.ViewModels
         {
             FilteredList = new ObservableCollection<Group>();
 
-            foreach(Group group in GroupedList)
+            foreach (Group group in GroupedList)
             {
                 var gr = new Group();
                 gr.Id = group.Id;
                 gr.Name = group.Name;
 
-                foreach(Employee employee in group)
+                foreach (Employee employee in group)
                 {
                     var emp = new Employee();
                     emp.Id = employee.Id;
-                    emp.First_Name = employee.First_Name;
-                    emp.Last_Name = employee.Last_Name;
-                    emp.FullName = employee.FullName;
+                    emp.FirstName = employee.FirstName;
+                    emp.LastName = employee.LastName;
                     emp.StartDate = employee.StartDate;
                     emp.EndDate = employee.EndDate;
                     emp.Function = employee.Function;
-                    emp.Habitat = employee.Habitat;
+                    emp.Habitat_Id = employee.Habitat_Id;
 
                     gr.Add(emp);
                 }

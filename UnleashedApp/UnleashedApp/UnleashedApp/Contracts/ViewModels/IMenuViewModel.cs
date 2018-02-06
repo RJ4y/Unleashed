@@ -6,6 +6,7 @@ namespace UnleashedApp.Contracts.ViewModels
     {
         ICommand HomeCommand { get; set; }
         ICommand WhoIsWhoCommand { get; set; }
+        ICommand NameGameCommand { get; set; }
         ICommand FloorplanCommand { get; set; }
     }
 }
