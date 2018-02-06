@@ -24,7 +24,7 @@ namespace UnleashedApp.Repositories.SpaceRepositories
                     List<SerializableSpace> spaces = JsonConvert.DeserializeObject<List<SerializableSpace>>(resultString);
                     foreach (SerializableSpace s in spaces)
                     {
-                        Space space = new Space(s.XCoord, s.YCoord, s.EmployeeId, s.Room.Id);
+                        Space space = new Space(s.XCoord, s.YCoord, s.EmployeeId, s.Room);
                         _spaces.Add(space);
                     }
                 }
