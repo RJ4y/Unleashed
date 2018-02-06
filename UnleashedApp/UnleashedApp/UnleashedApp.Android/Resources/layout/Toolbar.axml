@@ -3,7 +3,14 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="?attr/actionBarSize"
-    android:background="?attr/Toolbar_background"
+    android:minHeight="?android:attr/actionBarSize"
+    android:background="?android:attr/colorPrimary"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    <ImageView
+        android:contentDescription="Unleashed logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:src="@drawable/unleashed"/>
 </android.support.v7.widget.Toolbar>
