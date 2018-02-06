@@ -23,7 +23,7 @@ namespace UnleashedApp.ViewModels
         {
             _trainingRepository = trainingRepository;
             _date = DateTime.Now;
-            _sendInvoice = "Nee";
+            _sendInvoice = "No";
             _isValid = false;
             InitialiseCommands();
             Init();
@@ -32,25 +32,12 @@ namespace UnleashedApp.ViewModels
 
         private void Init()
         {
-            _trainings = new ObservableCollection<Training>();
-
-            var trainingList = _trainingRepository.GetAll();
-
-            foreach(Training training in trainingList)
-            {
-                _trainings.Add(training);
-            }
+            _trainings = new ObservableCollection<Training>(_trainingRepository.GetAll());
         }
 
         public void Refresh()
         {
-            _trainings.Clear();
-            var trainingList = _trainingRepository.GetAll();
-
-            foreach (Training training in trainingList)
-            {
-                _trainings.Add(training);
-            }
+            _trainings = new ObservableCollection<Training>(_trainingRepository.GetAll());
         }
 
         private void CalculateTotal()
@@ -169,11 +156,11 @@ namespace UnleashedApp.ViewModels
         {
             get
             {
-                return _sendInvoice == "Ja";
+                return _sendInvoice == "Yes";
             }
             set
             {
-                _sendInvoice = value ? "Ja" : "Nee";
+                _sendInvoice = value ? "Yes" : "No";
                 RaisePropertyChanged(nameof(SendInvoice));
             }
         }
