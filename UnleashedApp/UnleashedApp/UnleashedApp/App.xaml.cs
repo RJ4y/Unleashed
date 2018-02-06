@@ -7,7 +7,7 @@ namespace UnleashedApp
 {
     public partial class App : Application
     {
-        public static NavigationPage NavigationPage { get; private set; }
+        public static NavigationPage NavigationPage { get; set; }
         private static RootPage RootPage;
 
         public static bool MenuIsPresented

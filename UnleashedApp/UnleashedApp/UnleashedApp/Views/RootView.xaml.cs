@@ -10,7 +10,7 @@ namespace UnleashedApp.Views
         public RootView()
         {
             InitializeComponent();
-            MasterBehavior = MasterBehavior.Popover;
+            MasterBehavior = MasterBehavior.Default;
         }
 
         private void InitializeComponent()

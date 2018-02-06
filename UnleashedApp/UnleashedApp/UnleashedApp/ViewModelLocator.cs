@@ -36,7 +36,7 @@ namespace UnleashedApp
             _habitatRepository = new HabitatRepository();
             _squadRepository = new SquadRepository();
 
-            SplitViewViewModel = new SplitViewViewModel();
+            SplitViewViewModel = new SplitViewViewModel(_navigationService);
             MenuViewModel = new MenuViewModel(_navigationService);
             WhoIsWhoViewModel = new WhoIsWhoViewModel(_navigationService, _habitatRepository, _squadRepository, _employeeRepository);
             FloorplanViewModel = new FloorplanViewModel(_navigationService, _spaceRepository, _roomRepository);

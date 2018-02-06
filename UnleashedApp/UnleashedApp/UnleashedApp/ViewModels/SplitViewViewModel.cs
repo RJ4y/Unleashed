@@ -11,33 +11,35 @@ namespace UnleashedApp.ViewModels
 {
     public class SplitViewViewModel
     {
-        public ICommand HomeCommand { get; set; }
-        public ICommand WhoIsWhoCommand { get; set; }
-        public ICommand FloorplanCommand { get; set; }
+        private readonly INavigationService _navigationService;
 
-        public SplitViewViewModel()
+        public ICommand GoHomeCommand { get; set; }
+        public ICommand GoWhoIsWhoCommand { get; set; }
+        public ICommand GoFloorplanCommand { get; set; }
+
+        public SplitViewViewModel(INavigationService navigationService)
         {
-            HomeCommand = new Command(GoHome);
-            WhoIsWhoCommand = new Command(GoWhoIsWho);
-            FloorplanCommand = new Command(GoFloorplan);
+            _navigationService = navigationService;
+            InitialiseCommands();
         }
 
-        void GoHome(object obj)
+        private void InitialiseCommands()
         {
-            App.NavigationPage.Navigation.PopToRootAsync();
-            App.MenuIsPresented = false;
-        }
-
-        void GoWhoIsWho(object obj)
-        {
-            App.NavigationPage.Navigation.PushAsync(new WhoIsWhoView());
-            App.MenuIsPresented = false;
-        }
-
-        void GoFloorplan(object obj)
-        {
-            App.NavigationPage.Navigation.PushAsync(new FloorplanView());
-            App.MenuIsPresented = false;
+            GoHomeCommand = new Command(() =>
+            {
+                App.NavigationPage.Navigation.PopToRootAsync();
+                App.MenuIsPresented = false;
+            });
+            GoWhoIsWhoCommand = new Command(() =>
+            {
+                App.NavigationPage.Navigation.PushAsync(new WhoIsWhoView());
+                App.MenuIsPresented = false;
+            });
+            GoFloorplanCommand = new Command(() =>
+            {
+                App.NavigationPage.Navigation.PushAsync(new FloorplanView());
+                App.MenuIsPresented = false;
+            });
         }
     }
 }
