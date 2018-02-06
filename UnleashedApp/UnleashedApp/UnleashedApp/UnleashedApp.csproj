@@ -45,6 +45,7 @@
     <Compile Include="Contracts\ViewModels\IRoomViewModel.cs" />
     <Compile Include="Contracts\ViewModels\ITrainingViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IWhoIsWhoViewModel.cs" />
+    <Compile Include="Converters\BooleanToImageConverter.cs" />
     <Compile Include="Converters\CurrencyConverter.cs" />
     <Compile Include="Converters\DateConverter.cs" />
     <Compile Include="Models\Dimensions.cs" />
@@ -69,6 +70,9 @@
     <Compile Include="Repositories\SquadRepositories\SquadRepository.cs" />
     <Compile Include="Repositories\TrainingRepository\ITrainingRepository.cs" />
     <Compile Include="Repositories\TrainingRepository\TrainingRepository.cs" />
+    <Compile Include="Services\CityValidatorBehavior.cs" />
+    <Compile Include="Services\CostValidatorBehavior.cs" />
+    <Compile Include="Services\DaysValidatorBehavior.cs" />
     <Compile Include="Services\GridService.cs" />
     <Compile Include="Services\LegendGridService.cs" />
     <Compile Include="Services\NavigationService.cs" />

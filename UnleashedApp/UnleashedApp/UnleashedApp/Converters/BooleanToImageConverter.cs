@@ -4,16 +4,16 @@ using Xamarin.Forms;
 
 namespace UnleashedApp.Converters
 {
-    public class CurrencyConverter : IValueConverter
+    public class BooleanToImageConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return "€" + value.ToString();
+            throw new NotImplementedException();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return value;
         }
     }
 }
