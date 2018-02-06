@@ -25,7 +25,7 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
         {
             StringContent content = ConvertToJson(tokenConvertRequest);
             HttpResponseMessage response = await httpClientAdapter.ExchangeTokenAsync(content);
-            if (response.IsSuccessStatusCode)
+            if (response != null && response.IsSuccessStatusCode)
             {
                 return await ConvertToTokenObject(response);
             }
@@ -37,7 +37,7 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
             TokenRefreshRequest refreshRequest = new TokenRefreshRequest(refreshToken);
             StringContent content = ConvertToJson(refreshRequest);
             HttpResponseMessage response = await httpClientAdapter.GetRefreshedAccessTokenAsync(content);
-            if (response.IsSuccessStatusCode)
+            if (response != null && response.IsSuccessStatusCode)
             {
                 return await ConvertToTokenObject(response);
             }
@@ -49,7 +49,7 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
             TokenRevokeRequest revokeRequest = new TokenRevokeRequest();
             StringContent content = ConvertToJson(revokeRequest);
             HttpResponseMessage response = await httpClientAdapter.PostRevokeTokensAsync(content);
-            if (response.IsSuccessStatusCode)
+            if (response != null && response.IsSuccessStatusCode)
             {
                 return true;
             }

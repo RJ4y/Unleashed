@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using UnleashedApp.Repositories.AuthenticationRepositories;
 using Xamarin.Auth;
 
 namespace UnleashedApp.Authentication
