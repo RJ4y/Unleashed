@@ -8,19 +8,21 @@
         <ToolbarItem Name="About" Order="Secondary" Text="About" Priority="0" />
         <ToolbarItem Name="LogOut" Order="Secondary" Text="Log out" Priority="1" />
     </ContentPage.ToolbarItems>
-    <Grid Padding="10"  RowSpacing="5" ColumnSpacing="0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <ContentPage.Content>
+        <Grid Padding="10"  RowSpacing="5" ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <Button Text="Who Is Who" Grid.Row="0" Grid.Column="0" Command="{Binding WhoIsWhoCommand}" BackgroundColor="#e6332a" TextColor="#fff" />
-        <Button Text="Floor Plan" Grid.Row="1" Grid.Column="0" Command="{Binding FloorplanCommand}" BackgroundColor="#e6332a" TextColor="#fff" />
-        <Button Text="Training" Grid.Row="2" Grid.Column="0" BackgroundColor="#e6332a" TextColor="#fff" />
-    </Grid>
+            <Button Text="Who Is Who" Grid.Row="0" Grid.Column="0" Command="{Binding GoWhoIsWhoCommand}" BackgroundColor="#e6332a" TextColor="#fff" />
+            <Button Text="Floor Plan" Grid.Row="1" Grid.Column="0" Command="{Binding GoFloorplanCommand}" BackgroundColor="#e6332a" TextColor="#fff" />
+            <Button Text="Training" Grid.Row="2" Grid.Column="0" BackgroundColor="#e6332a" TextColor="#fff" />
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>

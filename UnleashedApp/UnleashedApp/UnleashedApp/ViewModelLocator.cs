@@ -17,6 +17,7 @@ namespace UnleashedApp
         private readonly ISpaceRepository _spaceRepository;
         private readonly IRoomRepository _roomRepository;
 
+        public SplitViewViewModel SplitViewViewModel { get; }
         public MenuViewModel MenuViewModel { get; }
         public WhoIsWhoViewModel WhoIsWhoViewModel { get; }
         public EmployeeDetailViewModel EmployeeDetailViewModel { get; }
@@ -35,6 +36,7 @@ namespace UnleashedApp
             _habitatRepository = new HabitatRepository();
             _squadRepository = new SquadRepository();
 
+            SplitViewViewModel = new SplitViewViewModel();
             MenuViewModel = new MenuViewModel(_navigationService);
             WhoIsWhoViewModel = new WhoIsWhoViewModel(_navigationService, _habitatRepository, _squadRepository, _employeeRepository);
             FloorplanViewModel = new FloorplanViewModel(_navigationService, _spaceRepository, _roomRepository);

@@ -7,10 +7,32 @@ namespace UnleashedApp
 {
     public partial class App : Application
     {
+        public static NavigationPage NavigationPage { get; private set; }
+        private static RootPage RootPage;
+
+        public static bool MenuIsPresented
+        {
+            get
+            {
+                return RootPage.IsPresented;
+            }
+            set
+            {
+                RootPage.IsPresented = value;
+            }
+        }
+
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new MenuView());
+
+            var splitView = new SplitViewView();
+            NavigationPage = new NavigationPage(new MenuView());
+
+            RootPage = new RootPage();
+            RootPage.Master = splitView;
+            RootPage.Detail = NavigationPage;
+            MainPage = RootPage;
         }
 
         protected override void OnStart()

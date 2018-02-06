@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="UnleashedApp.Views.SplitViewView">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" iOS="0, 20, 0, 0" />
+    </ContentPage.Padding>
+    <StackLayout BackgroundColor="White" Padding="10">
+        <Grid Padding="10"  RowSpacing="5" ColumnSpacing="0" VerticalOptions="StartAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Text="Home" Grid.Row="0" Grid.Column="0" Command="{Binding GoHomeCommand}" BackgroundColor="#e6332a" TextColor="#fff" />
+            <Button Text="Who Is Who" Grid.Row="1" Grid.Column="0" Command="{Binding GoWhoIsWhoCommand}" BackgroundColor="#e6332a" TextColor="#fff" />
+            <Button Text="Floor Plan" Grid.Row="2" Grid.Column="0" Command="{Binding GoFloorplanCommand}" BackgroundColor="#e6332a" TextColor="#fff" />
+            <Button Text="Training" Grid.Row="3" Grid.Column="0" BackgroundColor="#e6332a" TextColor="#fff" />
+            <Grid Grid.Row="4"></Grid>
+            <Button Text="About" Grid.Row="5" Grid.Column="0" BackgroundColor="#e6332a" TextColor="#fff" />
+            <Button Text="Log out" Grid.Row="6" Grid.Column="0" BackgroundColor="#e6332a" TextColor="#fff" />
+        </Grid>
+    </StackLayout>
+</ContentPage>
