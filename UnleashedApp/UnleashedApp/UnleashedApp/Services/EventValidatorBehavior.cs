@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UnleashedApp.ViewModels;
 using Xamarin.Forms;
 
 namespace UnleashedApp.Services
 {
-    public class CostValidatorBehavior : Behavior<Entry>
+    public class EventValidatorBehavior : Behavior<Entry>
     {
         protected override void OnAttachedTo(Entry entry)
         {
@@ -14,12 +18,11 @@ namespace UnleashedApp.Services
 
         void HandleTextChanged(object sender, TextChangedEventArgs e)
         {
-            bool validPrice = decimal.TryParse(e.NewTextValue, out decimal priceDecimal) && priceDecimal >= 0 && priceDecimal * 100 == Math.Floor(priceDecimal*100);
-
-            ((Entry) sender).TextColor = validPrice ? Color.Green : Color.Red;
+            bool validEvent = e.NewTextValue.Length > 0;
+            ((Entry)sender).TextColor = validEvent ? Color.Green : Color.Red;
 
             var vm = ((Entry)sender).BindingContext;
-            ((TrainingViewModel)vm).IsCostValid = validPrice;
+            ((TrainingViewModel)vm).IsEventValid = validEvent;
         }
 
         protected override void OnDetachingFrom(Entry entry)

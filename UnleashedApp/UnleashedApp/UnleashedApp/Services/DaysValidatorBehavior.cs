@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnleashedApp.ViewModels;
 using Xamarin.Forms;
 
 namespace UnleashedApp.Services
@@ -20,6 +21,9 @@ namespace UnleashedApp.Services
             bool validDays = int.TryParse(e.NewTextValue, out int days) && days > 0 && days <= 100;
 
             ((Entry)sender).TextColor = validDays ? Color.Green : Color.Red;
+
+            var vm = ((Entry)sender).BindingContext;
+            ((TrainingViewModel)vm).IsDaysValid = validDays;
         }
 
         protected override void OnDetachingFrom(Entry entry)

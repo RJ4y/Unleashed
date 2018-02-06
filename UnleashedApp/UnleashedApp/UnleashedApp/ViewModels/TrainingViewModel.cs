@@ -24,6 +24,7 @@ namespace UnleashedApp.ViewModels
             _trainingRepository = trainingRepository;
             _date = DateTime.Now;
             _sendInvoice = "Nee";
+            _isValid = false;
             InitialiseCommands();
             Init();
             CalculateTotal();
@@ -46,6 +47,22 @@ namespace UnleashedApp.ViewModels
             foreach(Training training in _trainings)
             {
                 TrainingTotal += training.Cost;
+            }
+        }
+
+        public void VerifyForm()
+        {
+                IsValid = IsCityValid && IsCompanyValid && IsCostValid && IsDaysValid && IsEventValid;
+        }
+
+        private bool _isValid;
+        public bool IsValid
+        {
+            get => _isValid;
+            set
+            {
+                _isValid = value;
+                RaisePropertyChanged(nameof(IsValid));
             }
         }
 
@@ -152,6 +169,68 @@ namespace UnleashedApp.ViewModels
         public string getSendInvoice()
         {
             return _sendInvoice;
+        }
+        #endregion
+
+        #region ValidationProperties
+        private bool _isDaysValid;
+        public bool IsDaysValid
+        {
+            get => _isDaysValid;
+            set
+            {
+                _isDaysValid = value;
+                VerifyForm();
+                RaisePropertyChanged(nameof(IsDaysValid));
+            }
+        }
+
+        private bool _isEventValid;
+        public bool IsEventValid
+        {
+            get => _isEventValid;
+            set
+            {
+                _isEventValid = value;
+                VerifyForm();
+                RaisePropertyChanged(nameof(IsEventValid));
+            }
+        }
+
+        private bool _isCompanyValid;
+        public bool IsCompanyValid
+        {
+            get => _isCompanyValid;
+            set
+            {
+                _isCompanyValid = value;
+                VerifyForm();
+                RaisePropertyChanged(nameof(IsCompanyValid));
+            }
+        }
+
+        private bool _isCityValid;
+        public bool IsCityValid
+        {
+            get => _isCityValid;
+            set
+            {
+                _isCityValid = value;
+                VerifyForm();
+                RaisePropertyChanged(nameof(IsCityValid));
+            }
+        }
+
+        private bool _isCostValid;
+        public bool IsCostValid
+        {
+            get => _isCostValid;
+            set
+            {
+                _isCostValid = value;
+                VerifyForm();
+                RaisePropertyChanged(nameof(IsCostValid));
+            }
         }
         #endregion
 

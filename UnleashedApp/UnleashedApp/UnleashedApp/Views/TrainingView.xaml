@@ -64,27 +64,35 @@
                 <DatePicker Date="{ Binding Date, Mode=TwoWay }" Margin="0,-15,0,0"/>
                 
                 <Label Text="Days:"/>
-                <Entry Text="{ Binding Days, Mode=TwoWay}" Keyboard="Numeric" Margin="0,-15,0,0">
+                <Entry Text="{ Binding Days, Mode=TwoWay}" Placeholder="0" PlaceholderColor="Red" Keyboard="Numeric" Margin="0,-15,0,0">
                     <Entry.Behaviors>
-                        <local:DaysValidatorBehavior />
+                        <local:DaysValidatorBehavior/>
                     </Entry.Behaviors>
                 </Entry>
 
                 <Label Text="Training / Event / Hotel:"/>
-                <Entry Text="{ Binding Event, Mode=TwoWay}" Margin="0,-15,0,0"/>
-                
+                <Entry Text="{ Binding Event, Mode=TwoWay}" Placeholder="Training" PlaceholderColor="Red" Margin="0,-15,0,0">
+                    <Entry.Behaviors>
+                        <local:EventValidatorBehavior />
+                    </Entry.Behaviors>
+                </Entry>
+
                 <Label Text="Company:"/>
-                <Entry Text="{ Binding Company, Mode=TwoWay}" Margin="0,-15,0,0"/>
-                
+                <Entry Text="{ Binding Company, Mode=TwoWay}" Placeholder="Company" PlaceholderColor="Red" Margin="0,-15,0,0">
+                    <Entry.Behaviors>
+                        <local:CompanyValidatorBehavior />
+                    </Entry.Behaviors>
+                </Entry>
+
                 <Label Text="City:"/>
-                <Entry Text="{ Binding City, Mode=TwoWay}" Margin="0,-15,0,0">
+                <Entry Text="{ Binding City, Mode=TwoWay}" Placeholder="City" PlaceholderColor="Red" Margin="0,-15,0,0">
                     <Entry.Behaviors>
                         <local:CityValidatorBehavior />
                     </Entry.Behaviors>
                 </Entry>
 
                 <Label Text="Cost (€):"/>
-                <Entry Text="{ Binding Cost, Mode=TwoWay}" Keyboard="Numeric" Margin="0,-15,0,0">
+                <Entry Text="{ Binding Cost, Mode=TwoWay}" Placeholder="0" PlaceholderColor="Red" Keyboard="Numeric" Margin="0,-15,0,0">
                     <Entry.Behaviors>
                         <local:CostValidatorBehavior />
                     </Entry.Behaviors>
@@ -98,7 +106,7 @@
                 <Label Text="Additional information:"/>
                 <Entry Text="{ Binding Info, Mode=TwoWay}" Margin="0,-15,0,0"/>
 
-                <Button Text="Add Training" Command="{ Binding AddTrainingCommand }"/>
+                <Button x:Name="addTraining" Text="Add Training" Command="{ Binding AddTrainingCommand }" IsEnabled="{ Binding IsValid }"/>
             </StackLayout>
         </ScrollView>
     </ContentPage>

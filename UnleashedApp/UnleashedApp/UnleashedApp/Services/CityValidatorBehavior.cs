@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using UnleashedApp.ViewModels;
 using Xamarin.Forms;
 
 namespace UnleashedApp.Services
@@ -18,6 +19,9 @@ namespace UnleashedApp.Services
         {
             bool validCity = (Regex.IsMatch(e.NewTextValue, cityRegex, RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250)));
             ((Entry)sender).TextColor = validCity ? Color.Green : Color.Red;
+
+            var vm = ((Entry)sender).BindingContext;
+            ((TrainingViewModel)vm).IsCityValid = validCity;
         }
 
         protected override void OnDetachingFrom(Entry entry)
