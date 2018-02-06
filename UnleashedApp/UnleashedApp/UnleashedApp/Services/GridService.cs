@@ -85,7 +85,23 @@ namespace UnleashedApp.Services
             return new Dimensions(xMin, yMin);
         }
 
-        internal static Dimensions GetMinifiedGridDimensions(List<Space> spaces)
+        public static Dimensions GetMinifiedSquareGridDimensions(List<Space> spaces)
+        {
+            Dimensions dimensions = GetDifferenceAsDimension(spaces);
+            int xDifference = dimensions.X;
+            int yDifference = dimensions.Y;
+
+            if (xDifference <= yDifference)
+            {
+                return new Dimensions(yDifference + 1, yDifference + 1);
+            }
+            else
+            {
+                return new Dimensions(xDifference + 1, xDifference + 1);
+            }
+        }
+
+        public static Dimensions GetDifferenceAsDimension(List<Space> spaces, bool isInverted = true)
         {
             int xMin = int.MaxValue;
             int yMin = int.MaxValue;
@@ -116,39 +132,13 @@ namespace UnleashedApp.Services
             int xDifference = xMax - xMin;
             int yDifference = yMax - yMin;
 
-            if (xDifference <= yDifference)
-            {
-                return new Dimensions(yDifference + 1, yDifference + 1);
-            }
-            else
-            {
-                return new Dimensions(xDifference + 1, xDifference + 1);
-            }
-        }
-
-        internal static Dimensions GetFloorplanGridDimensions(List<Space> spaces, bool isInverted = true)
-        {
-            int x = 0;
-            int y = 0;
-            foreach (Space space in spaces)
-            {
-                if (space.XCoord > x)
-                {
-                    x = space.XCoord;
-                }
-                if (space.YCoord > y)
-                {
-                    y = space.YCoord;
-                }
-            }
-            //Because 0 to 10 gives 11 values the dimensions are increased by 1;
             if (isInverted)
             {
-                return new Dimensions(y + 1, x + 1);
+                return new Dimensions(yDifference + 1, xDifference + 1);
             }
             else
             {
-                return new Dimensions(x + 1, y + 1);
+                return new Dimensions(xDifference + 1, yDifference + 1);
             }
         }
     }

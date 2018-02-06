@@ -63,7 +63,7 @@ namespace UnleashedApp.Views
         #region RoomGrid
         private void CreateRoomGrid()
         {
-            Dimensions dimensions = GridService.GetMinifiedGridDimensions(Spaces);
+            Dimensions dimensions = GridService.GetMinifiedSquareGridDimensions(Spaces);
             GridService.CreateGridColumnDefinitions(roomGrid, dimensions);
             GridService.CreateGridRowDefinitions(roomGrid, dimensions);
             FillRoomGrid();
@@ -75,7 +75,7 @@ namespace UnleashedApp.Views
 
             foreach (Space space in Spaces)
             {
-                if (space.EmployeeId == 0)
+                if (space.EmployeeId == null)
                 {
                     AddEmptyCell(space.XCoord - translation.X, space.YCoord - translation.Y, Room.Color);
                 }
@@ -111,8 +111,8 @@ namespace UnleashedApp.Views
             BoxView box = ((BoxView)sender);
 
             Dimensions translation = GridService.GetGridTranslation(Spaces);
-            int x = Grid.GetColumn(box) + translation.X;
-            int y = Grid.GetRow(box) + translation.Y;
+            int x = Grid.GetRow(box) + translation.X;
+            int y = Grid.GetColumn(box) + translation.Y;
 
             foreach (Space space in Spaces)
             {
@@ -129,7 +129,7 @@ namespace UnleashedApp.Views
             Employee e = vm.EmployeeRepository.GetEmployeeById(space.EmployeeId);
             ViewModelLocator.Instance.RoomViewModel.SelectedEmployee = e;
 
-            bool action = await DisplayAlert(e.First_Name + " " + e.Last_Name, e.Function, "View details", "Close");
+            bool action = await DisplayAlert(e.FirstName + " " + e.LastName, e.Function, "View details", "Close");
             if (action == true)
             {
                 vm.EmployeeDetailCommand.Execute(null);

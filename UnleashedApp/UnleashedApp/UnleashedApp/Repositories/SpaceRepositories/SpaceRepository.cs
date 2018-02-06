@@ -21,12 +21,7 @@ namespace UnleashedApp.Repositories.SpaceRepositories
                 if (response.IsSuccessStatusCode)
                 {
                     string resultString = response.Content.ReadAsStringAsync().Result;
-                    List<SerializableSpace> spaces = JsonConvert.DeserializeObject<List<SerializableSpace>>(resultString);
-                    foreach (SerializableSpace s in spaces)
-                    {
-                        Space space = new Space(s.XCoord, s.YCoord, s.EmployeeId, s.Room.Id);
-                        _spaces.Add(space);
-                    }
+                    _spaces = JsonConvert.DeserializeObject<List<Space>>(resultString);
                 }
             }
             catch (AggregateException e)
