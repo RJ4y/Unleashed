@@ -40,14 +40,13 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="60*"/>
                                     <ColumnDefinition Width="50*"/>
-                                    <ColumnDefinition Width="40*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Text="{ Binding TrainingName }" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
+                                <Label Text="{ Binding TrainingName }" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
 
                                 <Label Text="{ Binding Date, Converter={StaticResource dateConverter} }" Grid.Row="1" Grid.Column="0"/>
 
-                                <Label Text="{ Binding Cost, Converter={StaticResource currencyConverter }" Grid.Row="1" Grid.Column="2"/>
+                                <Label Text="{ Binding Cost, Converter={StaticResource currencyConverter }" Grid.Row="1" Grid.Column="1"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

@@ -63,7 +63,7 @@ namespace UnleashedApp.ViewModels
 
         public void VerifyForm()
         {
-                IsValid = IsCityValid && IsCompanyValid && IsCostValid && IsDaysValid && IsEventValid;
+            IsValid = IsCityValid && IsCompanyValid && IsCostValid && IsDaysValid && IsEventValid;
         }
 
         private bool _isValid;
