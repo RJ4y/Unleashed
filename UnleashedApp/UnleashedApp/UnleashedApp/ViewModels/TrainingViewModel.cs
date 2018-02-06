@@ -42,6 +42,17 @@ namespace UnleashedApp.ViewModels
             }
         }
 
+        public void Refresh()
+        {
+            _trainings.Clear();
+            var trainingList = _trainingRepository.GetAll();
+
+            foreach (Training training in trainingList)
+            {
+                _trainings.Add(training);
+            }
+        }
+
         private void CalculateTotal()
         {
             foreach(Training training in _trainings)

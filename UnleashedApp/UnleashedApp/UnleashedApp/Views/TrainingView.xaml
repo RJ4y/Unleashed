@@ -28,7 +28,7 @@
 
             <Label Text="Training" TextColor="Red" FontSize="Large" Margin="10,0,0,0"/>
 
-            <ListView ItemsSource="{ Binding TrainingList }" HasUnevenRows="True">
+            <ListView ItemsSource="{ Binding TrainingList }" HasUnevenRows="True" IsPullToRefreshEnabled="True" Refreshing="ListView_Refreshing">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell IsEnabled="False">

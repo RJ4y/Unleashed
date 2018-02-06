@@ -17,5 +17,11 @@ namespace UnleashedApp.Views
             InitializeComponent();
             BindingContext = ViewModelLocator.Instance.TrainingViewModel;
         }
+
+        private void ListView_Refreshing(object sender, EventArgs e)
+        {
+            ViewModelLocator.Instance.TrainingViewModel.Refresh();
+            ((ListView)sender).EndRefresh();
+        }
     }
 }
