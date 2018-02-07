@@ -18,7 +18,7 @@
         <Button Text="Who Is Who" Grid.Row="0" Grid.Column="0" Command="{Binding WhoIsWhoCommand}" BackgroundColor="#e6332a"/>
         <Button Text="Floor Plan" Grid.Row="0" Grid.Column="1" Command="{Binding FloorplanCommand}" BackgroundColor="#e6332a"/>
 
-        <Button Text="Training" Grid.Row="1" Grid.Column="0" BackgroundColor="#e6332a"/>
+        <Button Text="Training" Grid.Row="1" Grid.Column="0" Command="{Binding TrainingCommand}" BackgroundColor="#e6332a"/>
         <Button Text="Log Out" Grid.Row="1" Grid.Column="1" BackgroundColor="#e6332a"/>
 
         <Button Text="Name game" Grid.Row="2" Grid.Column="0" Command="{Binding NameGameCommand}" BackgroundColor="#e6332a"/>

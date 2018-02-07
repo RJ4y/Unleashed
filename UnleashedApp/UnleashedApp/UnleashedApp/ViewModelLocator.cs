@@ -3,6 +3,7 @@ using UnleashedApp.Repositories.HabitatRepositories;
 using UnleashedApp.Repositories.RoomRepositories;
 using UnleashedApp.Repositories.SpaceRepositories;
 using UnleashedApp.Repositories.SquadRepositories;
+using UnleashedApp.Repositories.TrainingRepository;
 using UnleashedApp.ViewModels;
 
 namespace UnleashedApp
@@ -13,12 +14,14 @@ namespace UnleashedApp
         private readonly INavigationService _navigationService;
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IHabitatRepository _habitatRepository;
+        private readonly ITrainingRepository _trainingRepository;
         private readonly ISquadRepository _squadRepository;
         private readonly ISpaceRepository _spaceRepository;
         private readonly IRoomRepository _roomRepository;
 
         public MenuViewModel MenuViewModel { get; }
-        public WhoIsWhoViewModel WhoIsWhoViewModel { get; }
+        public WhoIsWhoViewModel WhoIsViewViewModel { get; }
+        public TrainingViewModel TrainingViewModel { get; }
         public EmployeeDetailViewModel EmployeeDetailViewModel { get; }
         public FloorplanViewModel FloorplanViewModel { get; }
         public RoomViewModel RoomViewModel { get; }
@@ -33,12 +36,14 @@ namespace UnleashedApp
             _spaceRepository = new SpaceRepository();
             _roomRepository = new RoomRepository();
             _employeeRepository = new EmployeeRepository();
+            _trainingRepository = new TrainingRepository();
             _habitatRepository = new HabitatRepository();
             _squadRepository = new SquadRepository();
 
             MenuViewModel = new MenuViewModel(_navigationService);
             WhoIsWhoViewModel = new WhoIsWhoViewModel(_navigationService, _habitatRepository, _squadRepository);
             FloorplanViewModel = new FloorplanViewModel(_navigationService, _spaceRepository, _roomRepository);
+            TrainingViewModel = new TrainingViewModel(_trainingRepository);
             RoomViewModel = new RoomViewModel(_navigationService, _employeeRepository);
             EmployeeDetailViewModel = new EmployeeDetailViewModel();
             NameGameViewModel = new NameGameViewModel(_employeeRepository);
