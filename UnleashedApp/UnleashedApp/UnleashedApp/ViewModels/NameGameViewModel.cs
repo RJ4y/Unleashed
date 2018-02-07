@@ -6,8 +6,9 @@ namespace UnleashedApp.ViewModels
 {
     public class NameGameViewModel
     {
-        private IEmployeeRepository _employeeRepository;
-        public List<Employee> Employees { get; set; }
+        private readonly IEmployeeRepository _employeeRepository;
+
+        public List<Employee> Employees { get; private set; }
 
         public NameGameViewModel(IEmployeeRepository employeeRepository)
         {

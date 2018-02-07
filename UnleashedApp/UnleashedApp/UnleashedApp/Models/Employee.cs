@@ -5,6 +5,17 @@ namespace UnleashedApp.Models
 {
     public class Employee
     {
+        public Employee(int id, string firstName, string lastName, DateTime startDate, DateTime? endDate, string function, int habitat_Id)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            StartDate = startDate;
+            EndDate = endDate;
+            Function = function;
+            Habitat_Id = habitat_Id;
+        }
+
         [JsonProperty(PropertyName = "id")]
         public int Id { get; set; }
 
@@ -51,5 +62,10 @@ namespace UnleashedApp.Models
 
         [JsonProperty(PropertyName = "email")]
         public string Email { get; set; }
+
+        public override string ToString()
+        {
+            return FullName;
+        }
     }
 }

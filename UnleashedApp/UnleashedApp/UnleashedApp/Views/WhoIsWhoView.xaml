@@ -5,14 +5,10 @@
              x:Name="WhoIsWho"
              xmlns:locator="clr-namespace:UnleashedApp">
 
-    <StackLayout Orientation="Vertical">
+    <StackLayout Orientation="Vertical">       
         <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
-            <StackLayout Orientation="Vertical" HorizontalOptions="Start">
-                <Button Text="Habitat" Command="{ Binding HabitatCommand }" BackgroundColor="White" TextColor="CornflowerBlue" FontAttributes="Bold"/>
-            </StackLayout>
-            <StackLayout Orientation="Vertical" HorizontalOptions="Fill">
-                <Button Text="Squad" Command="{ Binding SquadCommand }" BackgroundColor="White" TextColor="CornflowerBlue" FontAttributes="Bold"/>
-            </StackLayout>
+            <Button Text="Habitat" Command="{ Binding HabitatCommand }" BackgroundColor="White" TextColor="CornflowerBlue" FontAttributes="Bold" HorizontalOptions="Start"/>
+            <Button Text="Squad" Command="{ Binding SquadCommand }" BackgroundColor="White" TextColor="CornflowerBlue" FontAttributes="Bold" HorizontalOptions="End"/>
         </StackLayout>
 
         <SearchBar Text="{ Binding Filter, Mode=TwoWay }" Placeholder="search"/>

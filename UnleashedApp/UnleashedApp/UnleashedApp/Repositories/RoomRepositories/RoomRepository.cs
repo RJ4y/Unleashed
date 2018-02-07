@@ -27,7 +27,6 @@ namespace UnleashedApp.Repositories.RoomRepositories
                     foreach (SerializableRoom r in rooms)
                     {
                         Color color = Color.FromHex("#" + r.ColorAsString);
-
                         RoomType type;
                         switch (r.TypeAsString)
                         {
@@ -44,7 +43,6 @@ namespace UnleashedApp.Repositories.RoomRepositories
                                 type = RoomType.Invalid;
                                 break;
                         }
-
                         Room room = new Room(r.Id, r.Name, color, type);
                         _rooms.Add(room);
                     }

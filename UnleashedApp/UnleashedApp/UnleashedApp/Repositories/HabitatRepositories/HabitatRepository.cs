@@ -16,7 +16,6 @@ namespace UnleashedApp.Repositories.HabitatRepositories
         public List<Habitat> GetAllHabitats()
         {
             string address = "habitats/";
-
             try
             {
                 HttpResponseMessage response = _client.GetAsync(address).Result;
@@ -36,8 +35,7 @@ namespace UnleashedApp.Repositories.HabitatRepositories
 
         public Habitat GetHabitatById(int id)
         {
-            string address = "habitats/" + id + "/";
-            
+            string address = "habitats/" + id + "/";            
             try
             {
                 HttpResponseMessage response = _client.GetAsync(address).Result;
@@ -57,8 +55,7 @@ namespace UnleashedApp.Repositories.HabitatRepositories
 
         public List<Employee> GetEmployees(int id)
         {
-            string address = "habitats/" + id + "/employees/";
-            
+            string address = "habitats/" + id + "/employees/";            
             try
             {
                 HttpResponseMessage response = _client.GetAsync(address).Result;
@@ -73,7 +70,6 @@ namespace UnleashedApp.Repositories.HabitatRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
-
             return _employees;
         }
     }

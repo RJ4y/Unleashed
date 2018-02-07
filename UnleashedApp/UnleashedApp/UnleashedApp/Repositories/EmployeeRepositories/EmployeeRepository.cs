@@ -15,7 +15,6 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
         public List<Employee> GetAllEmployees()
         {
             string address = "employees/";
-
             try
             {
                 HttpResponseMessage response = _client.GetAsync(address).Result;
@@ -30,14 +29,12 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
-
             return _employees;
         }
 
         public Employee GetEmployeeById(int? id)
         {
             string address = "employees/" + id + "/";
-
             try
             {
                 HttpResponseMessage response = _client.GetAsync(address).Result;
@@ -52,7 +49,6 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
-
             return _employee;
         }
     }
