@@ -255,7 +255,7 @@ namespace UnleashedApp.ViewModels
                     Team = "team",
                     TrainingName = Event
                 };
-
+                TrainingList.Add(_postTraining);
                 _trainingRepository.PostTrainingAsync(_postTraining);
             });
         }
