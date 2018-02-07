@@ -21,6 +21,18 @@ namespace UnleashedApp.Tests.Converters
         }
 
         [Test]
+        public void ConvertShouldReturnValueIfFormattingFails()
+        {
+            //format of dd/MM/yyyy
+            var converter = new DateConverter();
+            var invalidDate = "ThisWontWork";
+
+            var result = converter.Convert(invalidDate, typeof(string), "", CultureInfo.CurrentCulture);
+
+            Assert.AreEqual(invalidDate, result);
+        }
+
+        [Test]
         public void ConvertBackShouldReturnSameValue()
         {
             //format of dd/MM/yyyy
