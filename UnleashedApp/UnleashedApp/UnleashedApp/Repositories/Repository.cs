@@ -3,7 +3,9 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 using UnleashedApp.Authentication;
+using UnleashedApp.Contracts;
 using UnleashedApp.Models;
 using UnleashedApp.Repositories.AuthenticationRepositories;
 
@@ -11,35 +13,70 @@ namespace UnleashedApp.Repositories
 {
     public abstract class Repository
     {
-        protected static readonly HttpClient _client = new HttpClient();
-        //NOTE: phones will turn to their own (device's) localhost. so set the ip to the ip of the device/server running the python backend!
-        //protected readonly Uri _baseAddress = new Uri("http://localhost:8000/");
+        public static readonly HttpClient _client = new HttpClient();
         protected readonly Uri _baseAddress = new Uri(Constants.BASE_API_URL);
-        public const string REFRESH_URL = "auth/token";
+        protected IAuthenticationService authenticationService;
+        protected IHttpClientAdapter httpClientAdapter;
 
-        public Repository()
+        public Repository(IAuthenticationService authenticationService, IHttpClientAdapter httpClientAdapter)
         {
             _client.BaseAddress = _baseAddress;
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            this.authenticationService = authenticationService;
+            this.httpClientAdapter = httpClientAdapter;
         }
 
-        public async void AddAuthenticationHeaderAsync()
+        public async Task<bool> AddAuthenticationHeaderAsync()
         {
-            AuthenticationService authService = AuthenticationService.Instance;
-            if (authService.UserIsLoggedIn())
+            if (authenticationService.UserIsLoggedIn())
             {
-                if (authService.ShouldRefreshToken())
+                if (authenticationService.ShouldRefreshToken())
                 {
-                    IAuthenticationRepository authRepo = new AuthenticationRepository(new AuthenticationHttpClientAdapter());
-                    CustomTokenResponse response = await authRepo.RequestRefreshAccessTokenAsync(authService.GetAPIRefreshToken());
-                    if (response.access_token != null)
+                    CustomTokenResponse response = await RequestRefreshAccessTokenAsync(authenticationService.GetAPIRefreshToken());
+                    if (response != null && response.access_token != null)
                     {
-                        authService.SaveCredentials(response);
+                       authenticationService.SaveCredentials(response);
+                    }
+                    else
+                    {
+                        return false;
                     }
                 }
-                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthenticationService.Instance.GetAPIAccessToken());
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authenticationService.GetAPIAccessToken());
+                return true;
             }
+            else
+            {
+                _client.DefaultRequestHeaders.Authorization = null;
+                return false;
+            }
+        }
+
+        public async Task<CustomTokenResponse> RequestRefreshAccessTokenAsync(string refreshToken)
+        {
+            TokenRefreshRequest refreshRequest = new TokenRefreshRequest(refreshToken);
+            StringContent content = ConvertToJson(refreshRequest);
+            HttpResponseMessage response = await httpClientAdapter.GetRefreshedAccessTokenAsync(content);
+            if (response != null && response.IsSuccessStatusCode)
+            {
+                return await ConvertToTokenObject(response);
+            }
+            return null;
+        }
+
+        public StringContent ConvertToJson(Object request)
+        {
+            string data = JsonConvert.SerializeObject(request);
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+            return content;
+        }
+
+        public async Task<CustomTokenResponse> ConvertToTokenObject(HttpResponseMessage response)
+        {
+            String tokenJson = await response.Content.ReadAsStringAsync();
+            CustomTokenResponse customToken = JsonConvert.DeserializeObject<CustomTokenResponse>(tokenJson);
+            return customToken;
         }
     }
 }

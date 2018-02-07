@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using UnleashedApp.Authentication;
+using UnleashedApp.Contracts;
 using UnleashedApp.Contracts.ViewModels;
 using UnleashedApp.Repositories.AuthenticationRepositories;
 using UnleashedApp.Views;
@@ -12,12 +13,12 @@ namespace UnleashedApp.ViewModels
     public class LoginViewModel : ILoginViewModel
     {
         private readonly INavigationService _navigationService;
-        private readonly AuthenticationService _authenticationService;
+        private readonly IAuthenticationService _authenticationService;
         private readonly IAuthenticationRepository _authenticationRepository;
 
         public ICommand PresentLoginScreenCommand { get; set; }
 
-        public LoginViewModel(INavigationService navigationService, AuthenticationService authenticationService, IAuthenticationRepository authenticationRepository)
+        public LoginViewModel(INavigationService navigationService, IAuthenticationService authenticationService, IAuthenticationRepository authenticationRepository)
         {
             _navigationService = navigationService;
             _authenticationService = authenticationService;

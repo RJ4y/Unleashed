@@ -3,12 +3,13 @@ using System.Net;
 using System.Text;
 using Moq;
 using UnleashedApp.Authentication;
-using UnleashedApp.Models;
 using UnleashedApp.Repositories.AuthenticationRepositories;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using UnleashedApp.Contracts;
+using UnleashedApp.Repositories;
 
 namespace UnleashedApp.Tests.Repositories
 {
@@ -16,13 +17,19 @@ namespace UnleashedApp.Tests.Repositories
     public class AuthenticationRepositoryTests
     {
         private IAuthenticationRepository repository;
+        private IAuthenticationService authService;
+
+        [SetUp]
+        public void Setup()
+        {
+            authService = new Mock<IAuthenticationService>().Object;
+        }
 
         [Test]
         public void TestExchangeValidGoogleToken_ShouldReturnCustomToken()
         {
             //Arrange
             TokenConvertRequest postRequest = new TokenConvertRequest("testGoogleToken");
-
             CustomTokenResponse responseContent = new CustomTokenResponse()
             {
                 access_token = "testAccessToken",
@@ -38,7 +45,7 @@ namespace UnleashedApp.Tests.Repositories
             var mockAPI = new Mock<IAuthenticationHttpClientAdapter>();
             mockAPI.Setup(api => api.ExchangeTokenAsync(It.IsAny<StringContent>())).Returns(Task.FromResult(response));
 
-            repository = new AuthenticationRepository(mockAPI.Object);
+            repository = new AuthenticationRepository(authService, new HttpClientAdapter(), mockAPI.Object);
 
             //Act
             var result = repository.RequestExchangeGoogleTokenAsync(postRequest).Result;
@@ -59,7 +66,7 @@ namespace UnleashedApp.Tests.Repositories
             var mockAPI = new Mock<IAuthenticationHttpClientAdapter>();
             mockAPI.Setup(api => api.ExchangeTokenAsync(It.IsAny<StringContent>())).Returns(Task.FromResult(response));
 
-            repository = new AuthenticationRepository(mockAPI.Object);
+            repository = new AuthenticationRepository(authService, new HttpClientAdapter(), mockAPI.Object);
 
             //Act
             var result = repository.RequestExchangeGoogleTokenAsync(postRequest).Result;
@@ -68,59 +75,7 @@ namespace UnleashedApp.Tests.Repositories
             mockAPI.Verify(api => api.ExchangeTokenAsync(It.IsAny<StringContent>()), Times.Once);
             Assert.IsNull(result);
         }
-
-        [Test]
-        public void TestRefreshToken_ShouldReturnNewCustomToken()
-        {
-            //Arrange
-            string refreshToken = "testRefreshToken";
-
-            CustomTokenResponse responseContent = new CustomTokenResponse()
-            {
-                access_token = "newAccessToken",
-                expires_in = "36000",
-                refresh_token = refreshToken,
-                scope = "",
-                token_type = "bearer"
-            };
-            string responseDataJson = JsonConvert.SerializeObject(responseContent);
-            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-            response.Content = new StringContent(responseDataJson, Encoding.UTF8, "application/json");
-
-            var mockApi = new Mock<IAuthenticationHttpClientAdapter>();
-            mockApi.Setup(api => api.GetRefreshedAccessTokenAsync(It.IsAny<StringContent>())).Returns(Task.FromResult(response));
-
-            repository = new AuthenticationRepository(mockApi.Object);
-
-            //Act
-            var result = repository.RequestRefreshAccessTokenAsync(refreshToken).Result as CustomTokenResponse;
-
-            //Assert
-            mockApi.Verify(api => api.GetRefreshedAccessTokenAsync(It.IsAny<StringContent>()), Times.Once);
-            Assert.IsNotNull(result);
-            Assert.That(result.access_token, Is.EqualTo("newAccessToken"));
-        }
-
-        [Test]
-        public void TestRefreshInvalidGoogleToken_ShouldReturnNull()
-        {
-            //Arrange
-            string refreshToken = "testRefreshToken";
-            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.BadRequest);
-
-            var mockAPI = new Mock<IAuthenticationHttpClientAdapter>();
-            mockAPI.Setup(api => api.GetRefreshedAccessTokenAsync(It.IsAny<StringContent>())).Returns(Task.FromResult(response));
-
-            repository = new AuthenticationRepository(mockAPI.Object);
-
-            //Act
-            var result = repository.RequestRefreshAccessTokenAsync(refreshToken).Result;
-
-            //Assert
-            mockAPI.Verify(api => api.GetRefreshedAccessTokenAsync(It.IsAny<StringContent>()), Times.Once);
-            Assert.IsNull(result);
-        }
-
+        
         [Test]
         public void TestRevokeTokens_ShouldReturnTrue()
         {
@@ -130,7 +85,7 @@ namespace UnleashedApp.Tests.Repositories
             var mockApi = new Mock<IAuthenticationHttpClientAdapter>();
             mockApi.Setup(api => api.PostRevokeTokensAsync(It.IsAny<StringContent>())).Returns(Task.FromResult(response));
 
-            repository = new AuthenticationRepository(mockApi.Object);
+            repository = new AuthenticationRepository(authService, new HttpClientAdapter(), mockApi.Object);
 
             //Act
             var result = repository.RequestRevokeTokens().Result;
@@ -150,7 +105,7 @@ namespace UnleashedApp.Tests.Repositories
             var mockApi = new Mock<IAuthenticationHttpClientAdapter>();
             mockApi.Setup(api => api.PostRevokeTokensAsync(It.IsAny<StringContent>())).Returns(Task.FromResult(response));
 
-            repository = new AuthenticationRepository(mockApi.Object);
+            repository = new AuthenticationRepository(authService, new HttpClientAdapter(), mockApi.Object);
 
             //Act
             var result = repository.RequestRevokeTokens().Result;

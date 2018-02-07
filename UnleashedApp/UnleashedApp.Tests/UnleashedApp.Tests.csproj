@@ -84,11 +84,14 @@
     <Reference Include="Validation, Version=2.2.0.0, Culture=neutral, PublicKeyToken=2fc06f0d701809a7, processorArchitecture=MSIL">
       <HintPath>..\packages\Validation.2.2.8\lib\dotnet\Validation.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Auth, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AuthenticationRepositoryTests.cs" />
-    <Compile Include="Services\AuthenticationServiceTests.cs" />
+    <Compile Include="Repositories\RepositoryTests.cs" />
+    <Compile Include="ViewModels\LoginViewModelTests.cs" />
+    <Compile Include="Views\LogOutTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

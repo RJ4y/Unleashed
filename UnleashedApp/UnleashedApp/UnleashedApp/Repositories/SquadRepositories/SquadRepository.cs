@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
+using UnleashedApp.Contracts;
 using UnleashedApp.Models;
 
 namespace UnleashedApp.Repositories.SquadRepositories
@@ -12,6 +13,10 @@ namespace UnleashedApp.Repositories.SquadRepositories
         private List<Squad> _squads;
         private Squad _squad;
         private List<Employee> _employees;
+
+        public SquadRepository(IAuthenticationService authenticationService, IHttpClientAdapter httpClientAdapter) : base(authenticationService, httpClientAdapter)
+        {
+        }
 
         public List<Squad> GetAllSquads()
         {

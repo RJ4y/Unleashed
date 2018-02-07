@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Linq;
+using UnleashedApp.Contracts;
 using Xamarin.Auth;
 
 namespace UnleashedApp.Authentication
 {
-    public class AuthenticationService
+    public class AuthenticationService: IAuthenticationService
     {
         private static AuthenticationService instance;
         private Account user;
 
-        public AuthenticationService()
+        private AuthenticationService()
         {
-            user = GetUser();
+            //user = GetUser();
         }
 
         public static AuthenticationService Instance
@@ -99,7 +100,7 @@ namespace UnleashedApp.Authentication
             return false;
         }
 
-        private Account GetUser()
+        public Account GetUser()
         {
             return AccountStore.Create().FindAccountsForService(Constants.APP_NAME).FirstOrDefault();
         }

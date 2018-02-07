@@ -38,11 +38,16 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Contracts\IAuthenticationService.cs" />
     <Compile Include="Models\TokenRefreshRequest.cs" />
     <Compile Include="Models\TokenRequest.cs" />
     <Compile Include="Models\TokenRevokeRequest.cs" />
     <Compile Include="Repositories\AuthenticationRepositories\AuthenticationHttpClientAdapter.cs" />
+    <Compile Include="Repositories\AuthenticationRepositories\AuthenticationRepository.cs" />
     <Compile Include="Repositories\AuthenticationRepositories\IAuthenticationHttpClientAdapter.cs" />
+    <Compile Include="Repositories\AuthenticationRepositories\IAuthenticationRepository.cs" />
+    <Compile Include="Repositories\HttpClientAdapter.cs" />
+    <Compile Include="Repositories\IHttpClientAdapter.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Authentication\GoogleAuthenticator.cs" />
     <Compile Include="Models\CustomTokenResponse.cs" />
@@ -60,8 +65,6 @@
     <Compile Include="Models\Space.cs" />
     <Compile Include="Models\Squad.cs" />
     <Compile Include="Models\Temp.cs" />
-    <Compile Include="Repositories\AuthenticationRepositories\AuthenticationRepository.cs" />
-    <Compile Include="Repositories\AuthenticationRepositories\IAuthenticationRepository.cs" />
     <Compile Include="Repositories\EmployeeRepositories\EmployeeRepository.cs" />
     <Compile Include="Repositories\EmployeeRepositories\IEmployeeRepository.cs" />
     <Compile Include="Repositories\HabitatRepositories\HabitatRepository.cs" />
