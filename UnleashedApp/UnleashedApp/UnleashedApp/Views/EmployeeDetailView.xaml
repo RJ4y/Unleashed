@@ -3,10 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UnleashedApp.Views.EmployeeDetailView"
              xmlns:locator="clr-namespace:UnleashedApp">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Name="About" Order="Secondary" Text="About" Priority="0" />
-        <ToolbarItem Name="LogOut" Order="Secondary" Text="Log out" Priority="1" />
-    </ContentPage.ToolbarItems>
     <StackLayout Orientation="Vertical" Padding="10">
         <Label Text="{ Binding Habitat.Name }" FontSize="Large" TextColor="#e6332a"/>
         <StackLayout Orientation="Horizontal">

@@ -4,10 +4,6 @@
              x:Class="UnleashedApp.Views.MenuView"
              xmlns:locator="clr-namespace:UnleashedApp"
              BindingContext="{Binding Source={x:Static locator:ViewModelLocator.Instance}, Path=MenuViewModel}">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Name="About" Order="Secondary" Text="About" Priority="0" />
-        <ToolbarItem Name="LogOut" Order="Secondary" Text="Log out" Priority="1" />
-    </ContentPage.ToolbarItems>
     <Grid Padding="10"  RowSpacing="5" ColumnSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
