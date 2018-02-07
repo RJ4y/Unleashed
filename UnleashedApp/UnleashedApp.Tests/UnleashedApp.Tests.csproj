@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\CurrencyConverterUnitTests.cs" />
+    <Compile Include="Converters\DateConverterUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TrainingTests\TrainingUnitTests.cs" />
     <Compile Include="WhoIsWhoTests\WhoIsWhoUnitTests.cs" />
