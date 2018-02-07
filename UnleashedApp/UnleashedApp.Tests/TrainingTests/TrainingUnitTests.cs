@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UnleashedApp.ViewModels;
 using UnleashedApp.Repositories.TrainingRepository;
 using Moq;
-using System.Collections.ObjectModel;
 using UnleashedApp.Models;
 
 namespace UnleashedApp.Tests.TrainingTests
@@ -16,34 +14,14 @@ namespace UnleashedApp.Tests.TrainingTests
     [TestClass]
     public class TrainingUnitTests
     {
-        private Mock<ITrainingRepository> trainingRepoMock;
-        private TrainingBuilder trainingBuilder;
-        private Random random;
-
-        public TrainingUnitTests()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
-        private TestContext testContextInstance;
+        private Mock<ITrainingRepository> _trainingRepoMock;
+        private TrainingBuilder _trainingBuilder;
 
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         //
@@ -70,25 +48,23 @@ namespace UnleashedApp.Tests.TrainingTests
         [TestInitialize]
         public void Setup()
         {
-            trainingRepoMock = new Mock<ITrainingRepository>();
-            trainingBuilder = new TrainingBuilder();
-            random = new Random();
+            _trainingRepoMock = new Mock<ITrainingRepository>();
+            _trainingBuilder = new TrainingBuilder();
         }
 
         [TestCleanup]
         public void TearDown()
         {
-            trainingRepoMock = null;
-            trainingBuilder = null;
-            random = null;
+            _trainingRepoMock = null;
+            _trainingBuilder = null;
         }
 
         [TestMethod]
         public void ConstructorShouldInitTrainingList()
         {
-            trainingRepoMock.Setup(x => x.GetAll()).Returns(trainingBuilder.InitList(0));
+            _trainingRepoMock.Setup(x => x.GetAll()).Returns(_trainingBuilder.InitList(0));
 
-            var trainingViewModel = new TrainingViewModel(trainingRepoMock.Object);
+            var trainingViewModel = new TrainingViewModel(_trainingRepoMock.Object);
 
             Assert.AreNotEqual(null, trainingViewModel.TrainingList);
         }
@@ -96,19 +72,19 @@ namespace UnleashedApp.Tests.TrainingTests
         [TestMethod]
         public void ConstructorShouldCalculateTotal()
         {
-            trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(trainingBuilder.InitList(100));
+            _trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(_trainingBuilder.InitList(100));
 
-            var trainingViewModel = new TrainingViewModel(trainingRepoMock.Object);
+            var trainingViewModel = new TrainingViewModel(_trainingRepoMock.Object);
 
-            Assert.AreEqual(trainingBuilder.ReturnTotal(), trainingViewModel.TrainingTotal);
+            Assert.AreEqual(_trainingBuilder.ReturnTotal(), trainingViewModel.TrainingTotal);
         }
 
         [TestMethod]
         public void RefreshShouldMaintainListLengthIfNothingChanged()
         {
-            trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(trainingBuilder.InitList(1));
+            _trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(_trainingBuilder.InitList(1));
 
-            var trainingViewModel = new TrainingViewModel(trainingRepoMock.Object);
+            var trainingViewModel = new TrainingViewModel(_trainingRepoMock.Object);
             var firstList = trainingViewModel.TrainingList;
 
             trainingViewModel.Refresh();
@@ -120,12 +96,12 @@ namespace UnleashedApp.Tests.TrainingTests
         [TestMethod]
         public void RefreshShouldReturnBiggerList()
         {
-            trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(trainingBuilder.InitList(1));
+            _trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(_trainingBuilder.InitList(1));
 
-            var trainingViewModel = new TrainingViewModel(trainingRepoMock.Object);
+            var trainingViewModel = new TrainingViewModel(_trainingRepoMock.Object);
             var firstCount = trainingViewModel.TrainingList.Count;
 
-            trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(trainingBuilder.InitList(2));
+            _trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(_trainingBuilder.InitList(2));
 
             trainingViewModel.Refresh();
             var secondCount = trainingViewModel.TrainingList.Count;
@@ -137,47 +113,48 @@ namespace UnleashedApp.Tests.TrainingTests
         [TestMethod]
         public void SendInvoiceShouldConvertToYesOrNo()
         {
-            trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(trainingBuilder.InitList(1));
+            _trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(_trainingBuilder.InitList(1));
 
-            var trainingViewModel = new TrainingViewModel(trainingRepoMock.Object);
-
-            trainingViewModel.SendInvoice = true;
-            Assert.AreEqual("Yes", trainingViewModel.getSendInvoice());
+            var trainingViewModel = new TrainingViewModel(_trainingRepoMock.Object)
+            {
+                SendInvoice = true
+            };
+            Assert.AreEqual("Yes", trainingViewModel.GetSendInvoice());
 
             trainingViewModel.SendInvoice = false;
-            Assert.AreEqual("No", trainingViewModel.getSendInvoice());
+            Assert.AreEqual("No", trainingViewModel.GetSendInvoice());
         }
     }
 
     public class TrainingBuilder
     {
-        private Random random;
-        private int total;
-
-        public TrainingBuilder() { }
+        private Random _random;
+        private int _total;
 
         public List<Training> InitList(int count)
         {
             var list = new List<Training>();
-            random = new Random();
-            total = 0;
+            _random = new Random();
+            _total = 0;
 
-            for(int i = 0; i < count; i++)
+            for(var i = 0; i < count; i++)
             {
-                var item = new Training();
-                item.First_Name = "FirstName";
-                item.Last_Name = "LastName";
-                item.City = "Neerpelt";
-                item.Company = "Company";
-                item.Date = new DateTime();
-                item.Days = 3;
-                item.Info = "info";
-                item.Invoice = "Nee";
-                item.Team = "Unleashed";
-                item.TrainingName = "Training";
+                var item = new Training
+                {
+                    First_Name = "FirstName",
+                    Last_Name = "LastName",
+                    City = "Neerpelt",
+                    Company = "Company",
+                    Date = new DateTime(),
+                    Days = 3,
+                    Info = "info",
+                    Invoice = "Nee",
+                    Team = "Unleashed",
+                    TrainingName = "Training",
 
-                item.Cost = random.Next(100000);
-                total += item.Cost;
+                    Cost = _random.Next(100000)
+                };
+                _total += item.Cost;
 
                 list.Add(item);
             }
@@ -187,7 +164,7 @@ namespace UnleashedApp.Tests.TrainingTests
 
         public int ReturnTotal()
         {
-            return total;
+            return _total;
         }
     }
 }
