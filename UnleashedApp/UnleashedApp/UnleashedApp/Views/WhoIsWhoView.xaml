@@ -1,47 +1,87 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:system="clr-namespace:System;assembly=mscorlib"
+            xmlns:converters="clr-namespace:UnleashedApp.Converters;assembly=UnleashedApp"
+            xmlns:local="clr-namespace:UnleashedApp.Services"
+            x:Class="UnleashedApp.Views.WhoIsWhoView"
+            x:Name="WhoIsWho">
+    <ContentPage Title="Habitats">
+        <ContentPage.Resources>
+            <ResourceDictionary>
+                <Style x:Key="Inactive" TargetType="Button">
+                    <Setter Property="BackgroundColor" Value="#fff" />
+                    <Setter Property="TextColor" Value="#e6332a" />
+                </Style>
+            </ResourceDictionary>
+        </ContentPage.Resources>
 
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="UnleashedApp.Views.WhoIsWhoView"
-             x:Name="WhoIsWho">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style x:Key="Inactive" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#fff" />
-                <Setter Property="TextColor" Value="#e6332a" />
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+        <StackLayout>
+            <Grid ColumnSpacing="10" RowSpacing="10" HorizontalOptions="FillAndExpand" Padding="10,10,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*" />
+                    <ColumnDefinition Width="50*" />
+                </Grid.ColumnDefinitions>
+                <SearchBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{ Binding HabitatFilter, Mode=TwoWay }"
+                       Placeholder="Search" />
+            </Grid>
+            <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{ Binding FilteredHabitatList }"
+                      IsGroupingEnabled="True"
+                      GroupDisplayBinding="{ Binding Name }"
+                      GroupShortNameBinding="{Binding Name }"
+                      HasUnevenRows="True"
+                      SelectedItem="{ Binding SelectedEmployee, Mode=TwoWay }">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell ImageSource="{Binding PictureUrl}" Text="{Binding FullName}"
+                                   Command="{ Binding Source={x:Reference WhoIsWho}, Path=BindingContext.EmployeeDetailCommand }" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage>
+    <ContentPage Title="Squads">
+        <ContentPage.Resources>
+            <ResourceDictionary>
+                <Style x:Key="Inactive" TargetType="Button">
+                    <Setter Property="BackgroundColor" Value="#fff" />
+                    <Setter Property="TextColor" Value="#e6332a" />
+                </Style>
+            </ResourceDictionary>
+        </ContentPage.Resources>
 
-    <StackLayout>
-        <Grid ColumnSpacing="10" RowSpacing="10" HorizontalOptions="FillAndExpand" Padding="10,10,10,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50*" />
-                <ColumnDefinition Width="50*" />
-            </Grid.ColumnDefinitions>
-            <Button x:Name="HabitatButton" Text="Habitat" Grid.Row="0" Grid.Column="0" Command="{ Binding HabitatCommand }"
-                Style="{StaticResource Inactive}" Clicked="HabitatButtonClicked" />
-            <Button x:Name="SquadButton" Text="Squad" Grid.Row="0" Grid.Column="1" Command="{ Binding SquadCommand }" Style="{StaticResource Inactive}" Clicked="SquadButtonClicked" />
-            <SearchBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{ Binding Filter, Mode=TwoWay }"
-                   Placeholder="Search" />
-        </Grid>
-        <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{ Binding FilteredList }"
-                  IsGroupingEnabled="True"
-                  GroupDisplayBinding="{ Binding Name }"
-                  GroupShortNameBinding="{Binding Name }"
-                  HasUnevenRows="True"
-                  SelectedItem="{ Binding SelectedEmployee, Mode=TwoWay }">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ImageCell ImageSource="{Binding PictureUrl}" Text="{Binding FullName}"
-                               Command="{ Binding Source={x:Reference WhoIsWho}, Path=BindingContext.EmployeeDetailCommand }" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
-</ContentPage>
+        <StackLayout>
+            <Grid ColumnSpacing="10" RowSpacing="10" HorizontalOptions="FillAndExpand" Padding="10,10,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*" />
+                    <ColumnDefinition Width="50*" />
+                </Grid.ColumnDefinitions>
+                <SearchBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{ Binding SquadFilter, Mode=TwoWay }"
+                       Placeholder="Search" />
+            </Grid>
+            <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{ Binding FilteredSquadList }"
+                      IsGroupingEnabled="True"
+                      GroupDisplayBinding="{ Binding Name }"
+                      GroupShortNameBinding="{Binding Name }"
+                      HasUnevenRows="True"
+                      SelectedItem="{ Binding SelectedEmployee, Mode=TwoWay }">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell ImageSource="{Binding PictureUrl}" Text="{Binding FullName}"
+                                   Command="{ Binding Source={x:Reference WhoIsWho}, Path=BindingContext.EmployeeDetailCommand }" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage>
+</TabbedPage>
