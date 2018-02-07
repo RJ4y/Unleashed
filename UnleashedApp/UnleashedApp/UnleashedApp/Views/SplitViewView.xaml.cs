@@ -42,7 +42,7 @@ namespace UnleashedApp.Views
             navigationDrawerList.ItemsSource = menuList;
         }
 
-        private void OnMenuItemSelected(object sender, ItemTappedEventArgs e)
+        private void OnMasterTapped(object sender, ItemTappedEventArgs e)
         {
             var item = (MasterItem) e.Item;
             Type page = item.TargetType;
