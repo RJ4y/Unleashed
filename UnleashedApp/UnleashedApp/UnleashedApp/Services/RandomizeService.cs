@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace UnleashedApp.Services
 {
-    internal static class RandomizeService
+    public static class RandomizeService
     {
         private static Random random = new Random();
 
