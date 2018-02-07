@@ -5,10 +5,13 @@
              xmlns:locator="clr-namespace:UnleashedApp"
              BindingContext="{Binding Source={x:Static locator:ViewModelLocator.Instance}, Path=SplitViewViewModel}">
     <ContentPage.Padding>
-        <OnPlatform x:TypeArguments="Thickness" iOS="0, 20, 0, 0" />
+        <OnPlatform x:TypeArguments="Thickness" iOS="0,20,0,0" />
     </ContentPage.Padding>
-    <StackLayout BackgroundColor="White" Padding="10">
-        <Grid Padding="10"  RowSpacing="5" ColumnSpacing="0" VerticalOptions="StartAndExpand">
+    <StackLayout BackgroundColor="White">
+        <StackLayout BackgroundColor="#e6332a" HeightRequest="56" Padding="15,0,15,0">
+            <Label Text="Unleashed" FontSize="20" VerticalOptions="CenterAndExpand" TextColor="White" />
+        </StackLayout>
+        <Grid Padding="10" RowSpacing="5" ColumnSpacing="0" VerticalOptions="StartAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
