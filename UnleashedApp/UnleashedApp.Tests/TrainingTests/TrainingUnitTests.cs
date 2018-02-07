@@ -142,10 +142,10 @@ namespace UnleashedApp.Tests.TrainingTests
             var trainingViewModel = new TrainingViewModel(trainingRepoMock.Object);
 
             trainingViewModel.SendInvoice = true;
-            Assert.AreEqual("Ja", trainingViewModel.getSendInvoice());
+            Assert.AreEqual("Yes", trainingViewModel.getSendInvoice());
 
             trainingViewModel.SendInvoice = false;
-            Assert.AreEqual("Nee", trainingViewModel.getSendInvoice());
+            Assert.AreEqual("No", trainingViewModel.getSendInvoice());
         }
     }
 

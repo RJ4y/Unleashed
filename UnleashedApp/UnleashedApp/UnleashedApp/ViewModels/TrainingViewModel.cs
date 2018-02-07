@@ -37,7 +37,13 @@ namespace UnleashedApp.ViewModels
 
         public void Refresh()
         {
-            _trainings = new ObservableCollection<Training>(_trainingRepository.GetAll());
+            _trainings.Clear();
+            var trainingList = _trainingRepository.GetAll();
+
+            foreach (Training training in trainingList)
+            {
+                _trainings.Add(training);
+            }
         }
 
         private void CalculateTotal()
