@@ -104,7 +104,7 @@ namespace UnleashedApp.Tests.TrainingTests
         }
 
         [TestMethod]
-        public void RefreshShouldMaintainListIfNothingChanged()
+        public void RefreshShouldMaintainListLengthIfNothingChanged()
         {
             trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(trainingBuilder.InitList(1));
 
@@ -114,7 +114,7 @@ namespace UnleashedApp.Tests.TrainingTests
             trainingViewModel.Refresh();
             var secondList = trainingViewModel.TrainingList;
 
-            Assert.AreEqual(firstList, secondList);
+            Assert.AreEqual(firstList.Count, secondList.Count);
         }
 
         [TestMethod]
