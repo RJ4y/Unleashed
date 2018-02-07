@@ -4,9 +4,5 @@ namespace UnleashedApp.ViewModels
 {
     public class EmployeeDetailViewModel : ViewModelBase, IEmployeeDetailViewModel
     {
-        public EmployeeDetailViewModel()
-        {
-
-        }
     }
 }

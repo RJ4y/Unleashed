@@ -11,7 +11,7 @@ namespace UnleashedApp.ViewModels
 {
     public class TrainingViewModel : ITrainingViewModel
     {
-        private ITrainingRepository _trainingRepository;
+        private readonly ITrainingRepository _trainingRepository;
         private ObservableCollection<Training> _trainings;
         private int _trainingTotal;
         private Training _postTraining;
@@ -154,17 +154,14 @@ namespace UnleashedApp.ViewModels
         private string _sendInvoice;
         public bool SendInvoice
         {
-            get
-            {
-                return _sendInvoice == "Yes";
-            }
+            get => _sendInvoice == "Yes";
             set
             {
                 _sendInvoice = value ? "Yes" : "No";
                 RaisePropertyChanged(nameof(SendInvoice));
             }
         }
-        public string getSendInvoice()
+        public string GetSendInvoice()
         {
             return _sendInvoice;
         }
