@@ -8,6 +8,6 @@ namespace UnleashedApp.Models
         [JsonProperty(PropertyName = "id")]
         public int Id { get; set; }
         [JsonProperty(PropertyName = "name")]
-        public String Name { get; set; }
+        public string Name { get; set; }
     }
 }

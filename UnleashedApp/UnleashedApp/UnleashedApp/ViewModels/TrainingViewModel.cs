@@ -161,10 +161,20 @@ namespace UnleashedApp.ViewModels
                 RaisePropertyChanged(nameof(SendInvoice));
             }
         }
+
+        #region SendInvoiceTesting
+        //Need for testing
         public string GetSendInvoice()
         {
             return _sendInvoice;
         }
+
+        public void SetSendInvoice(string yesOrNo)
+        {
+            _sendInvoice = yesOrNo;
+        }
+        #endregion
+
         #endregion
 
         #region ValidationProperties
