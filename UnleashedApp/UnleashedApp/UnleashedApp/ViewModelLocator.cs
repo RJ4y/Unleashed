@@ -20,7 +20,7 @@ namespace UnleashedApp
         private readonly IRoomRepository _roomRepository;
 
         public MenuViewModel MenuViewModel { get; }
-        public WhoIsWhoViewModel WhoIsViewViewModel { get; }
+        public WhoIsWhoViewModel WhoIsWhoViewModel { get; }
         public TrainingViewModel TrainingViewModel { get; }
         public EmployeeDetailViewModel EmployeeDetailViewModel { get; }
         public FloorplanViewModel FloorplanViewModel { get; }
