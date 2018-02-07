@@ -37,7 +37,6 @@ namespace UnleashedApp.ViewModels
 
         public void Refresh()
         {
-            TrainingList = null;
             Init();
         }
 
