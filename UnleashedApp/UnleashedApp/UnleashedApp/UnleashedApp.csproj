@@ -47,6 +47,7 @@
     <Compile Include="Models\Dimensions.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Habitat.cs" />
+    <Compile Include="Models\MasterItem.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\Serializers\SerializableRoom.cs" />
     <Compile Include="Models\Serializers\SerializableSpace.cs" />
