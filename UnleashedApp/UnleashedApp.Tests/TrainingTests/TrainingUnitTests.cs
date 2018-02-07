@@ -131,6 +131,7 @@ namespace UnleashedApp.Tests.TrainingTests
             var secondCount = trainingViewModel.TrainingList.Count;
 
             Assert.AreNotEqual(firstCount, secondCount);
+            Assert.IsTrue(firstCount < secondCount);
         }
 
         [TestMethod]
