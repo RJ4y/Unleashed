@@ -1,16 +1,76 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UnleashedApp.Views.EmployeeDetailView"
-             xmlns:locator="clr-namespace:UnleashedApp">
+             xmlns:forms="http://xamarin.com/schemas/2014/forms"
+             xmlns:converters="clr-namespace:UnleashedApp.Converters;assembly=UnleashedApp">
+    <forms:ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:DateConverter x:Key="DateConverter" />
+            <converters:HabitatConverter x:Key="HabitatConverter" />
+        </ResourceDictionary>
+    </forms:ContentPage.Resources>
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="25*" />
+                <ColumnDefinition Width="25*" />
+                <ColumnDefinition Width="25*" />
+                <ColumnDefinition Width="25*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
 
-    <StackLayout Orientation="Vertical">
-        <Label Text="{ Binding Habitat.Name }" FontSize="Large" TextColor="#e6332a"/>
-        <StackLayout Orientation="Horizontal">
-            <Image Source="placeholder.jpg" HeightRequest="80"/>
-            <Label Text="{ Binding LastName }" TextColor="Black" VerticalTextAlignment="Center"/>
-        </StackLayout>
+            <Image x:Name="Image" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Source="{ Binding PictureUrl }"
+                   HeightRequest="60" VerticalOptions="Center" />
+            <Label x:Name="NameLabel" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" FontAttributes="Bold"
+                   VerticalTextAlignment="End" Text="{ Binding FullName }" />
+            <Label x:Name="FunctionLabel" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" FontAttributes="Italic"
+                   VerticalTextAlignment="Start" FontSize="12" Text="{ Binding Function }" />
+            <Label x:Name="ExpectationsHeaderLabel" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4"
+                   Text="Expectations" FontAttributes="Bold" />
+            <Label x:Name="ExpectationsLabel" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4"
+                   Text="{ Binding Expectations }" />
+            <Label x:Name="MotivationHeaderLabel" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="4" Text="Motivation"
+                   FontAttributes="Bold" />
+            <Label x:Name="MotivationLabel" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="4"
+                   Text="{ Binding Motivation }" />
+            <Label x:Name="NeedToKnowHeaderLabel" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="4" Text="Need to know"
+                   FontAttributes="Bold" />
+            <Label x:Name="NeedToKnowLabel" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="4"
+                   Text="{ Binding NeedToKnow }" />
+            <Label x:Name="BirthDateHeaderLabel" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Text="Birth date"
+                   FontAttributes="Bold" />
+            <Label x:Name="BirthDateLabel" Grid.Row="9" Grid.Column="3" Grid.ColumnSpan="2"
+                   Text="{ Binding DateOfBirth, Converter={StaticResource DateConverter} }" />
 
-        <Label Text="{ Binding Function }" TextColor="Black"/>
-    </StackLayout>
+            <Label x:Name="HabitatHeaderLabel" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="2" Text="Habitat"
+                   FontAttributes="Bold" />
+            <Label x:Name="HabitatLabel" Grid.Row="10" Grid.Column="3" Grid.ColumnSpan="2"
+                   Text="{ Binding HabitatId, Converter={StaticResource HabitatConverter} }" />
+            <Label x:Name="StartDateHeaderLabel" Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="2" Text="Start date"
+                   FontAttributes="Bold" />
+            <Label x:Name="StartDateLabel" Grid.Row="11" Grid.Column="3" Grid.ColumnSpan="2"
+                   Text="{ Binding StartDate, Converter={StaticResource DateConverter} }" />
+            <Label x:Name="EmailLabel" Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="4" Text="{ Binding Email }"
+                   FontSize="12" Margin="0,0,0,10" />
+        </Grid>
+    </ScrollView>
 </ContentPage>

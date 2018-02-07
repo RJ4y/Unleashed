@@ -7,21 +7,6 @@ namespace UnleashedApp.Services
     {
         private static Random random = new Random();
 
-        #region Unused
-        public static void Shuffle<T>(this IList<T> list)
-        {
-            int n = list.Count;
-            while (n > 1)
-            {
-                n--;
-                int k = random.Next(n + 1);
-                T value = list[k];
-                list[k] = list[n];
-                list[n] = value;
-            }
-        }
-        #endregion
-
         public static List<T> GetSpecifiedAmountOfRandomObjectsFromList<T>(List<T> list, int amount)
         {
             if (list.Count >= amount)
@@ -50,6 +35,7 @@ namespace UnleashedApp.Services
 
                 return randomEmployees;
             }
+
             return null;
         }
 
@@ -65,10 +51,8 @@ namespace UnleashedApp.Services
             {
                 return 'M';
             }
-            else
-            {
-                return 'F';
-            }
+
+            return 'F';
         }
     }
 }

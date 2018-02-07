@@ -47,15 +47,16 @@
     <Compile Include="Contracts\ViewModels\IWhoIsWhoViewModel.cs" />
     <Compile Include="Converters\CurrencyConverter.cs" />
     <Compile Include="Converters\DateConverter.cs" />
+    <Compile Include="Converters\HabitatConverter.cs" />
     <Compile Include="Models\Dimensions.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Habitat.cs" />
     <Compile Include="Models\Room.cs" />
+    <Compile Include="Models\Serializers\SerializableEmployee.cs" />
     <Compile Include="Models\Serializers\SerializableRoom.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Space.cs" />
     <Compile Include="Models\Squad.cs" />
-    <Compile Include="Models\TempEmployee.cs" />
     <Compile Include="Models\Training.cs" />
     <Compile Include="Repositories\EmployeeRepositories\EmployeeRepository.cs" />
     <Compile Include="Repositories\EmployeeRepositories\IEmployeeRepository.cs" />

@@ -4,7 +4,7 @@ using Xamarin.Forms.Xaml;
 namespace UnleashedApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class EmployeeDetailView : ContentPage
+    public partial class EmployeeDetailView
     {
         public EmployeeDetailView()
         {

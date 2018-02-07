@@ -17,6 +17,12 @@ namespace UnleashedApp.Models
             Type = type;
         }
 
-        public enum RoomType { Empty, Workspace, Kitchen, Invalid };
+        public enum RoomType
+        {
+            Empty,
+            Workspace,
+            Kitchen,
+            Invalid
+        };
     }
 }

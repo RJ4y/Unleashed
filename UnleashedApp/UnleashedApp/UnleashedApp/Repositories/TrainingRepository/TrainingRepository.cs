@@ -14,7 +14,6 @@ namespace UnleashedApp.Repositories.TrainingRepository
     {
         private List<Training> _trainings;
         private Training _training;
-        private Employee _employee;
 
         public List<Training> GetAll()
         {
@@ -22,12 +21,13 @@ namespace UnleashedApp.Repositories.TrainingRepository
 
             try
             {
-                HttpResponseMessage response = _client.GetAsync(address).Result;
+                HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
                     string resultString = response.Content.ReadAsStringAsync().Result;
-                    _trainings = JsonConvert.DeserializeObject<List<Training>>(resultString, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                    _trainings = JsonConvert.DeserializeObject<List<Training>>(resultString,
+                        new IsoDateTimeConverter {DateTimeFormat = "dd/MM/yyyy"});
                 }
             }
             catch (AggregateException e)
@@ -44,7 +44,7 @@ namespace UnleashedApp.Repositories.TrainingRepository
 
             try
             {
-                HttpResponseMessage response = _client.GetAsync(address).Result;
+                HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -66,10 +66,11 @@ namespace UnleashedApp.Repositories.TrainingRepository
 
             try
             {
-                string postString = JsonConvert.SerializeObject(training, new IsoDateTimeConverter(){ DateTimeFormat = "dd/MM/yyyy" });
+                string postString = JsonConvert.SerializeObject(training,
+                    new IsoDateTimeConverter() {DateTimeFormat = "dd/MM/yyyy"});
                 StringContent content = new StringContent(postString, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage respone =  await _client.PostAsync(address, content);
+                HttpResponseMessage response = await Client.PostAsync(address, content);
             }
             catch (AggregateException e)
             {
@@ -83,7 +84,7 @@ namespace UnleashedApp.Repositories.TrainingRepository
 
             try
             {
-                HttpResponseMessage response = _client.GetAsync(address).Result;
+                HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -105,7 +106,7 @@ namespace UnleashedApp.Repositories.TrainingRepository
 
             try
             {
-                HttpResponseMessage response = _client.GetAsync(address).Result;
+                HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
                 {

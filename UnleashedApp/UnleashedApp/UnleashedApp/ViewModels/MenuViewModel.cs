@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using UnleashedApp.Contracts;
 using UnleashedApp.Contracts.ViewModels;
 using UnleashedApp.Views;
 using Xamarin.Forms;

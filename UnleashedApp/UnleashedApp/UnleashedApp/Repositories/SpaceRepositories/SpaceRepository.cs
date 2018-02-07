@@ -16,7 +16,7 @@ namespace UnleashedApp.Repositories.SpaceRepositories
             string address = "spaces/";
             try
             {
-                HttpResponseMessage response = _client.GetAsync(address).Result;
+                HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -28,6 +28,7 @@ namespace UnleashedApp.Repositories.SpaceRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
+
             return _spaces;
         }
     }

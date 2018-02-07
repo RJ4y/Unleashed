@@ -1,24 +1,23 @@
 ﻿using System;
 using System.Globalization;
+using UnleashedApp.Models;
+using UnleashedApp.Repositories.HabitatRepositories;
 using Xamarin.Forms;
 
 namespace UnleashedApp.Converters
 {
-    public class DateConverter : IValueConverter
+    public class HabitatConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (DateTime.TryParse(value.ToString(), out DateTime date))
-            {
-                return $"{date:dd/MM/yyyy}";
-            }
-
-            return value;
+            Habitat habitat = new HabitatRepository().GetHabitatById((int) value);
+            return habitat.Name;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value;
+            Habitat habitat = (Habitat) value;
+            return habitat.Id;
         }
     }
 }
