@@ -2,6 +2,7 @@
 <resources>
 
   <style name="MainTheme" parent="MainTheme.Base">
+    <item name="android:navigationBarColor">#c9251d</item>
   </style>
   
   <style name="MainTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
