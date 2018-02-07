@@ -4,22 +4,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UnleashedApp.Views.WhoIsWhoView"
              x:Name="WhoIsWho">
-    <Grid ColumnSpacing="8" HorizontalOptions="FillAndExpand">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50*" />
-            <ColumnDefinition Width="50*" />
-        </Grid.ColumnDefinitions>
-        <Button x:Name="HabitatButton" Text="Habitat" Grid.Row="0" Grid.Column="0" Command="{ Binding HabitatCommand }"
-                BackgroundColor="DodgerBlue" TextColor="White" FontAttributes="Bold" Clicked="HabitatButtonClicked" />
-        <Button x:Name="SquadButton" Text="Squad" Grid.Row="0" Grid.Column="1" Command="{ Binding SquadCommand }" BackgroundColor="White"
-                TextColor="DodgerBlue" FontAttributes="Bold" Clicked="SquadButtonClicked" />
-        <SearchBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{ Binding Filter, Mode=TwoWay }"
-                   Placeholder="search" />
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="Inactive" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#fff" />
+                <Setter Property="TextColor" Value="#e6332a" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <Grid ColumnSpacing="10" RowSpacing="10" HorizontalOptions="FillAndExpand" Padding="10,10,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="50*" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="HabitatButton" Text="Habitat" Grid.Row="0" Grid.Column="0" Command="{ Binding HabitatCommand }"
+                Style="{StaticResource Inactive}" Clicked="HabitatButtonClicked" />
+            <Button x:Name="SquadButton" Text="Squad" Grid.Row="0" Grid.Column="1" Command="{ Binding SquadCommand }" Style="{StaticResource Inactive}" Clicked="SquadButtonClicked" />
+            <SearchBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{ Binding Filter, Mode=TwoWay }"
+                   Placeholder="Search" />
+        </Grid>
         <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{ Binding FilteredList }"
                   IsGroupingEnabled="True"
                   GroupDisplayBinding="{ Binding Name }"
@@ -33,5 +43,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </Grid>
+    </StackLayout>
 </ContentPage>

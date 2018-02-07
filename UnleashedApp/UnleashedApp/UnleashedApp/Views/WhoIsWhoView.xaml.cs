@@ -15,20 +15,10 @@ namespace UnleashedApp.Views
 
         void HabitatButtonClicked(object sender, EventArgs args)
         {
-            Button button = (Button)sender;
-            button.BackgroundColor = Color.DodgerBlue;
-            button.TextColor = Color.White;
-            SquadButton.BackgroundColor = Color.White;
-            SquadButton.TextColor = Color.DodgerBlue;
         }
 
         private void SquadButtonClicked(object sender, EventArgs e)
         {
-            Button button = (Button)sender;
-            button.BackgroundColor = Color.DodgerBlue;
-            button.TextColor = Color.White;
-            HabitatButton.BackgroundColor = Color.White;
-            HabitatButton.TextColor = Color.DodgerBlue;
         }
     }
 }
