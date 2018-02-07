@@ -8,7 +8,7 @@ namespace UnleashedApp.Services
         private static Room _selectedRoom;
         private static List<Space> _spaces;
 
-        internal static void Store(Room selectedRoom, List<Space> spaces)
+        public static void Store(Room selectedRoom, List<Space> spaces)
         {
             _selectedRoom = selectedRoom;
 
@@ -22,12 +22,12 @@ namespace UnleashedApp.Services
             }
         }
 
-        internal static Room GetSelectedRoom()
+        public static Room GetSelectedRoom()
         {
             return _selectedRoom;
         }
 
-        internal static List<Space> GetSelectedSpaces()
+        public static List<Space> GetSelectedSpaces()
         {
             return _spaces;
         }

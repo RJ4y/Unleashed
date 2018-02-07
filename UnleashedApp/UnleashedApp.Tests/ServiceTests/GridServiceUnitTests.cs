@@ -85,7 +85,7 @@ namespace UnleashedApp.Tests.ServiceTests
             var minX = random.Next(amount);
             var minY = random.Next(amount);
             var spaceList = _spaceBuilder.Init(amount, minX, minY);
-            var result = GridService.GetDifferenceAsDimension(spaceList, true);
+            var result = GridService.GetDifferenceAsDimension(spaceList);
 
             Assert.AreEqual(amount - minY, result.X);
             Assert.AreEqual(amount - minX, result.Y);
@@ -94,15 +94,22 @@ namespace UnleashedApp.Tests.ServiceTests
 
     public class SpaceBuilder
     {
-        public List<Space> Init(int amount, int minX, int minY)
+        public List<Space> Init(int amount, int minX, int minY, int roomId = 0)
         {
+            var random = new Random();
             var list = new List<Space>();
+            var id = roomId;
 
             for (var i = minX; i < amount; i++)
             {
                 for (var j = minY; j < amount; j++)
                 {
-                    var space = new Space(i, j, 0, 0);
+                    if (roomId != 0)
+                    {
+                        id = random.Next(2);
+                    }
+
+                    var space = new Space(i, j, 0, id);
                     list.Add(space);
                 }
             }
