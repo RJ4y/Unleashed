@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
 
 namespace UnleashedApp.Models
 {
     public class Squad
     {
-        public int Id { get; set; }
-        public String Name { get; set; }
+        [JsonProperty(PropertyName = "id")] public int Id { get; set; }
+        [JsonProperty(PropertyName = "name")] public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return Id + ":" + Name;
+        }
     }
 }

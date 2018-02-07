@@ -25,7 +25,7 @@ namespace UnleashedApp.Views
             var whoIsWhoPage = new MasterItem() { Title = "Who is Who", TargetType = typeof(WhoIsWhoView) };
             var nameGamePage = new MasterItem() { Title = "Name Game", TargetType = typeof(NameGameView) };
             var floorPlanPage = new MasterItem() { Title = "Floor plan", TargetType = typeof(FloorplanView) };
-            var trainingPage = new MasterItem() { Title = "Training" };
+            var trainingPage = new MasterItem() { Title = "Training", TargetType = typeof(TrainingView) };
             var aboutPage = new MasterItem() { Title = "About" };
             var logoutAction = new MasterItem() { Title = "Log out" };
 
@@ -65,6 +65,11 @@ namespace UnleashedApp.Views
             else if (page == typeof(NameGameView))
             {
                 App.NavigationPage.Navigation.PushAsync(new NameGameView());
+                App.MenuIsPresented = false;
+            }
+            else if (page == typeof(TrainingView))
+            {
+                App.NavigationPage.Navigation.PushAsync(new TrainingView());
                 App.MenuIsPresented = false;
             }
 

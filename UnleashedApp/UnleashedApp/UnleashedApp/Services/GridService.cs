@@ -18,12 +18,13 @@ namespace UnleashedApp.Services
                 Grid.SetRow(item, row);
                 Grid.SetColumn(item, column);
             }
+
             grid.Children.Add(item);
         }
 
         internal static void AddColorLabel(Grid grid, int row, int column, Color color, bool isInverted = true)
         {
-            Label label = new Label { BackgroundColor = color };
+            Label label = new Label {BackgroundColor = color};
             if (isInverted)
             {
                 AddItemToGridAtLocation(label, grid, row, column);
@@ -37,7 +38,7 @@ namespace UnleashedApp.Services
 
         internal static void AddTextLabel(Grid grid, int row, int column, string text, bool isInverted = true)
         {
-            Label label = new Label { Text = text };
+            Label label = new Label {Text = text};
             if (isInverted)
             {
                 AddItemToGridAtLocation(label, grid, row, column);
@@ -52,7 +53,10 @@ namespace UnleashedApp.Services
         {
             for (int i = 0; i < dimensions.X; i++)
             {
-                grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(100 / dimensions.X, GridUnitType.Star) });
+                grid.ColumnDefinitions.Add(new ColumnDefinition
+                {
+                    Width = new GridLength(100 / dimensions.X, GridUnitType.Star)
+                });
             }
         }
 
@@ -60,7 +64,10 @@ namespace UnleashedApp.Services
         {
             for (int i = 0; i < dimensions.Y; i++)
             {
-                grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(100 / dimensions.Y, GridUnitType.Star) });
+                grid.RowDefinitions.Add(new RowDefinition
+                {
+                    Height = new GridLength(100 / dimensions.Y, GridUnitType.Star)
+                });
             }
         }
 
@@ -82,6 +89,7 @@ namespace UnleashedApp.Services
                     yMin = y;
                 }
             }
+
             return new Dimensions(xMin, yMin);
         }
 
@@ -95,10 +103,8 @@ namespace UnleashedApp.Services
             {
                 return new Dimensions(yDifference + 1, yDifference + 1);
             }
-            else
-            {
-                return new Dimensions(xDifference + 1, xDifference + 1);
-            }
+
+            return new Dimensions(xDifference + 1, xDifference + 1);
         }
 
         public static Dimensions GetDifferenceAsDimension(List<Space> spaces, bool isInverted = true)
@@ -114,6 +120,7 @@ namespace UnleashedApp.Services
                 {
                     xMin = x;
                 }
+
                 if (x > xMax)
                 {
                     xMax = x;
@@ -124,11 +131,13 @@ namespace UnleashedApp.Services
                 {
                     yMin = y;
                 }
+
                 if (y > yMax)
                 {
                     yMax = y;
                 }
             }
+
             int xDifference = xMax - xMin;
             int yDifference = yMax - yMin;
 
@@ -136,10 +145,8 @@ namespace UnleashedApp.Services
             {
                 return new Dimensions(yDifference + 1, xDifference + 1);
             }
-            else
-            {
-                return new Dimensions(xDifference + 1, yDifference + 1);
-            }
+
+            return new Dimensions(xDifference + 1, yDifference + 1);
         }
     }
 }

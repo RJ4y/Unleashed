@@ -43,18 +43,23 @@
     <Compile Include="Contracts\ViewModels\IFloorplanViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IMenuViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IRoomViewModel.cs" />
+    <Compile Include="Contracts\ViewModels\ITrainingViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IWhoIsWhoViewModel.cs" />
+    <Compile Include="Converters\CurrencyConverter.cs" />
+    <Compile Include="Converters\DateConverter.cs" />
+    <Compile Include="Converters\HabitatConverter.cs" />
     <Compile Include="Models\Dimensions.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Habitat.cs" />
     <Compile Include="Models\MasterItem.cs" />
     <Compile Include="Models\Room.cs" />
+    <Compile Include="Models\Serializers\SerializableEmployee.cs" />
     <Compile Include="Models\Serializers\SerializableRoom.cs" />
     <Compile Include="Models\Serializers\SerializableSpace.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Space.cs" />
     <Compile Include="Models\Squad.cs" />
-    <Compile Include="Models\TempEmployee.cs" />
+    <Compile Include="Models\Training.cs" />
     <Compile Include="Repositories\EmployeeRepositories\EmployeeRepository.cs" />
     <Compile Include="Repositories\EmployeeRepositories\IEmployeeRepository.cs" />
     <Compile Include="Repositories\HabitatRepositories\HabitatRepository.cs" />
@@ -66,6 +71,13 @@
     <Compile Include="Repositories\SpaceRepositories\SpaceRepository.cs" />
     <Compile Include="Repositories\SquadRepositories\ISquadRepository.cs" />
     <Compile Include="Repositories\SquadRepositories\SquadRepository.cs" />
+    <Compile Include="Repositories\TrainingRepository\ITrainingRepository.cs" />
+    <Compile Include="Repositories\TrainingRepository\TrainingRepository.cs" />
+    <Compile Include="Services\CityValidatorBehavior.cs" />
+    <Compile Include="Services\CompanyValidatorBehavior.cs" />
+    <Compile Include="Services\CostValidatorBehavior.cs" />
+    <Compile Include="Services\DaysValidatorBehavior.cs" />
+    <Compile Include="Services\EventValidatorBehavior.cs" />
     <Compile Include="Services\GridService.cs" />
     <Compile Include="Services\LegendGridService.cs" />
     <Compile Include="Services\NavigationService.cs" />
@@ -79,6 +91,7 @@
     <Compile Include="ViewModels\NameGameViewModel.cs" />
     <Compile Include="ViewModels\RoomViewModel.cs" />
     <Compile Include="ViewModels\SplitViewViewModel.cs" />
+    <Compile Include="ViewModels\TrainingViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\WhoIsWhoViewModel.cs" />
     <Compile Include="Views\EmployeeDetailView.xaml.cs">
@@ -101,6 +114,9 @@
     </Compile>
     <Compile Include="Views\SplitViewView.xaml.cs">
       <DependentUpon>SplitViewView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrainingView.xaml.cs">
+      <DependentUpon>TrainingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WhoIsWhoView.xaml.cs">
       <DependentUpon>WhoIsWhoView.xaml</DependentUpon>
@@ -185,6 +201,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\NameGameView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\TrainingView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

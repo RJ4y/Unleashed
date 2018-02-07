@@ -1,10 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UnleashedApp.Views.NameGameView">
     <ContentPage.Content>
         <StackLayout>
-            <ScrollView x:Name="questionScrollView">
+            <ScrollView x:Name="QuestionScrollView">
                 <Grid RowSpacing="5" HorizontalOptions="FillAndExpand" Padding="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -12,20 +13,20 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition x:Name="rowDefinitionWrongOption" Height="0" />
+                        <RowDefinition x:Name="RowDefinitionWrongOption" Height="0" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100*" />                       
+                        <ColumnDefinition Width="100*" />
                     </Grid.ColumnDefinitions>
-                    <Label x:Name="infoLabel" Grid.Row="0" HorizontalOptions="Center" Text="Who is this?" Margin="10" FontSize="Medium" TextColor="#e6332a"/>
-                    <Image x:Name="employeeImage" Grid.Row="1" Source="placeholder.jpg" Margin="0,0,0,10" />
-                    <Button x:Name="optionOneButton" Grid.Row="2" TextColor="#fff" BackgroundColor="#e6332a" />
-                    <Button x:Name="optionTwoButton" Grid.Row="3" TextColor="#fff" BackgroundColor="#e6332a" />
-                    <Button x:Name="optionThreeButton" Grid.Row="4" TextColor="#fff" BackgroundColor="#e6332a" />
-                    <Label x:Name="wrongOptionSelectedLabel" Grid.Row="5" Margin="10" />
+                    <Label x:Name="InfoLabel" Grid.Row="0" HorizontalOptions="Center" Text="Who is this?" Margin="10" FontSize="Medium" TextColor="#e6332a"/>
+                    <Image x:Name="EmployeeImage" Grid.Row="1" Source="placeholder.jpg" Margin="0,0,0,10" />
+                    <Button x:Name="OptionOneButton" Grid.Row="2" TextColor="#fff" BackgroundColor="#e6332a" />
+                    <Button x:Name="OptionTwoButton" Grid.Row="3" TextColor="#fff" BackgroundColor="#e6332a" />
+                    <Button x:Name="OptionThreeButton" Grid.Row="4" TextColor="#fff" BackgroundColor="#e6332a" />
+                    <Label x:Name="WrongOptionSelectedLabel" Grid.Row="5" Margin="10" />
                 </Grid>
             </ScrollView>
-            <ScrollView x:Name="correctAnswerScrollView" IsVisible="False">
+            <ScrollView x:Name="CorrectAnswerScrollView" IsVisible="False">
                 <Grid Padding="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -45,21 +46,20 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <Image x:Name="image" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Source="placeholder.jpg" HeightRequest="100" VerticalOptions="Center"/>
-                    <Label x:Name="nameLabel" Grid.Row="0" Grid.Column="1" VerticalTextAlignment="End" FontSize="Large" TextColor="#e6332a" Margin="0,-3,0,-7" />
-                    <Label x:Name="functionLabel"  Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Start" FontSize="Medium" TextColor="#999"  Margin="0" />
-                    <Label x:Name="expectationsHeaderLabel"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="Expectations" TextColor="#333" FontSize="Medium" />
-                    <Label x:Name="expectationsLabel"  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"  />
-                    <Label x:Name="motivationHeaderLabel"  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Text="Motivation" TextColor="#333" FontSize="Medium" />
-                    <Label x:Name="motivationLabel"  Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" />
-                    <Label x:Name="needToKnowHeaderLabel"  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Text="Need to know" TextColor="#333" FontSize="Medium" />
-                    <Label x:Name="needToKnowLabel"  Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" />
-                    <Label x:Name="birthDateHeaderLabel" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Text="Birth date" TextColor="#333" FontSize="Medium" />
-                    <Label x:Name="birthDateLabel" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" />
-                    <Button x:Name="guessAnotherButton" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Text="Guess another" TextColor="#fff" BackgroundColor="#e6332a" />
+                    <Image x:Name="Image" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Source="placeholder.jpg" HeightRequest="100" VerticalOptions="Center"/>
+                    <Label x:Name="NameLabel" Grid.Row="0" Grid.Column="1" VerticalTextAlignment="End" FontSize="Large" TextColor="#e6332a" Margin="0,-3,0,-7" />
+                    <Label x:Name="FunctionLabel"  Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Start" FontSize="Medium" TextColor="#999"  Margin="0" />
+                    <Label x:Name="ExpectationsHeaderLabel"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="Expectations" TextColor="#333" FontSize="Medium" />
+                    <Label x:Name="ExpectationsLabel"  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"  />
+                    <Label x:Name="MotivationHeaderLabel"  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Text="Motivation" TextColor="#333" FontSize="Medium" />
+                    <Label x:Name="MotivationLabel"  Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" />
+                    <Label x:Name="NeedToKnowHeaderLabel"  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Text="Need to know" TextColor="#333" FontSize="Medium" />
+                    <Label x:Name="NeedToKnowLabel"  Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" />
+                    <Label x:Name="BirthDateHeaderLabel" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Text="Birth date" TextColor="#333" FontSize="Medium" />
+                    <Label x:Name="BirthDateLabel" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" />
+                    <Button x:Name="GuessAnotherButton" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Text="Guess another" TextColor="#fff" BackgroundColor="#e6332a" />
                 </Grid>
             </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
-

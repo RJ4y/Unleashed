@@ -6,17 +6,18 @@ namespace UnleashedApp.Models
     {
         public int XCoord { get; set; }
         public int YCoord { get; set; }
+
         [JsonProperty(PropertyName = "employee")]
         public int? EmployeeId { get; set; }
-        [JsonProperty(PropertyName = "room")]
-        public int RoomId { get; set; }
 
-        public Space(int x, int y, int? emp_id, int room_id)
+        [JsonProperty(PropertyName = "room")] public int RoomId { get; set; }
+
+        public Space(int x, int y, int? empId, int roomId)
         {
             XCoord = x;
             YCoord = y;
-            EmployeeId = emp_id;
-            RoomId = room_id;
+            EmployeeId = empId;
+            RoomId = roomId;
         }
     }
 }

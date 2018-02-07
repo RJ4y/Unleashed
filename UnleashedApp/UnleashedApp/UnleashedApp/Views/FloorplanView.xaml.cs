@@ -10,9 +10,9 @@ using static UnleashedApp.Models.Room;
 namespace UnleashedApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FloorplanView : ContentPage
+    public partial class FloorplanView
     {
-        private static FloorplanViewModel viewModel;
+        private static FloorplanViewModel _viewModel;
         public static List<Room> Rooms { get; private set; }
         public static List<Space> Spaces { get; private set; }
         public static Room SelectedRoom { get; private set; }
@@ -20,9 +20,9 @@ namespace UnleashedApp.Views
         public FloorplanView()
         {
             InitializeComponent();
-            viewModel = ViewModelLocator.Instance.FloorplanViewModel;
-            Rooms = viewModel.Rooms;
-            Spaces = viewModel.Spaces;
+            _viewModel = ViewModelLocator.Instance.FloorplanViewModel;
+            Rooms = _viewModel.Rooms;
+            Spaces = _viewModel.Spaces;
             if (Rooms != null && Rooms.Count > 0 && Spaces != null && Spaces.Count > 0)
             {
                 CreateLegendGrid();
@@ -30,11 +30,13 @@ namespace UnleashedApp.Views
             }
             else
             {
-                Label label = new Label();
-                label.HorizontalTextAlignment = TextAlignment.Center;
-                label.Text = "The data could not be found, there may be a problem with your connection.";
-                scrollView.Content = label;
-                mainGrid.IsVisible = false;
+                Label label = new Label
+                {
+                    HorizontalTextAlignment = TextAlignment.Center,
+                    Text = "The data could not be found, there may be a problem with your connection."
+                };
+                ScrollView.Content = label;
+                MainGrid.IsVisible = false;
             }
         }
 
@@ -47,33 +49,33 @@ namespace UnleashedApp.Views
         {
             base.OnSizeAllocated(width, height);
 
-            double amountOfColumns = floorplanGrid.ColumnDefinitions.Count;
-            double amountOfRows = floorplanGrid.RowDefinitions.Count;
+            double amountOfColumns = FloorplanGrid.ColumnDefinitions.Count;
+            double amountOfRows = FloorplanGrid.RowDefinitions.Count;
             if (amountOfColumns > 0 && amountOfRows > 0)
             {
-                floorplanGrid.HeightRequest = width / amountOfColumns * amountOfRows;
+                FloorplanGrid.HeightRequest = width / amountOfColumns * amountOfRows;
             }
         }
 
         private void ChangeLegendVisibility(object sender, EventArgs e)
         {
-            if (legendGrid.IsVisible)
+            if (LegendGrid.IsVisible)
             {
-                legendGrid.IsVisible = false;
-                legendButton.Text = "Open legend";
+                LegendGrid.IsVisible = false;
+                LegendButton.Text = "Open legend";
             }
             else
             {
-                legendGrid.IsVisible = true;
-                legendButton.Text = "Close legend";
+                LegendGrid.IsVisible = true;
+                LegendButton.Text = "Close legend";
             }
         }
 
         #region LegendGrid
         private void CreateLegendGrid()
         {
-            LegendGridService.CreateLegendGridColumnDefinitions(legendGrid);
-            LegendGridService.CreateLegendGridRowDefinitions(legendGrid, Rooms.Count);
+            LegendGridService.CreateLegendGridColumnDefinitions(LegendGrid);
+            LegendGridService.CreateLegendGridRowDefinitions(LegendGrid, Rooms.Count);
             FillLegendGrid();
         }
 
@@ -82,8 +84,8 @@ namespace UnleashedApp.Views
             int i = 1;
             foreach (Room room in Rooms)
             {
-                GridService.AddColorLabel(legendGrid, i, 1, room.Color, false);
-                GridService.AddTextLabel(legendGrid, i, 2, room.Name, false);
+                GridService.AddColorLabel(LegendGrid, i, 1, room.Color, false);
+                GridService.AddTextLabel(LegendGrid, i, 2, room.Name, false);
                 i++;
             }
         }
@@ -93,8 +95,8 @@ namespace UnleashedApp.Views
         private void CreateFloorplanGrid()
         {
             Dimensions dimensions = GridService.GetDifferenceAsDimension(Spaces);
-            GridService.CreateGridColumnDefinitions(floorplanGrid, dimensions);
-            GridService.CreateGridRowDefinitions(floorplanGrid, dimensions);
+            GridService.CreateGridColumnDefinitions(FloorplanGrid, dimensions);
+            GridService.CreateGridRowDefinitions(FloorplanGrid, dimensions);
             FillFloorplanGrid();
         }
 
@@ -120,7 +122,7 @@ namespace UnleashedApp.Views
                     break;
             }
 
-            GridService.AddItemToGridAtLocation(box, floorplanGrid, row, column);
+            GridService.AddItemToGridAtLocation(box, FloorplanGrid, row, column);
         }
 
         private void AddRoomTapEventToBox(BoxView box)
@@ -135,14 +137,14 @@ namespace UnleashedApp.Views
 
         private void AddTapGestureRecognizer(BoxView box, EventHandler handler)
         {
-            TapGestureRecognizer box_tap = new TapGestureRecognizer();
-            box_tap.Tapped += handler;
-            box.GestureRecognizers.Add(box_tap);
+            TapGestureRecognizer boxTap = new TapGestureRecognizer();
+            boxTap.Tapped += handler;
+            box.GestureRecognizers.Add(boxTap);
         }
 
         private void RoomClicked(object sender, EventArgs e)
         {
-            BoxView box = ((BoxView)sender);
+            BoxView box = (BoxView)sender;
             foreach (Room r in Rooms)
             {
                 if (box.BackgroundColor.Equals(r.Color))
@@ -152,12 +154,11 @@ namespace UnleashedApp.Views
                     break;
                 }
             }
-            viewModel.RoomCommand.Execute(SelectedRoom);
+            _viewModel.RoomCommand.Execute(SelectedRoom);
         }
 
         private void KitchenClicked(object sender, EventArgs e)
         {
-            BoxView box = ((BoxView)sender);
             DisplayAlert("Kitchen", "Kitchen information", "OK");
         }
         #endregion       

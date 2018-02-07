@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace UnleashedApp
+namespace UnleashedApp.Contracts
 {
     public interface INavigationService
     {

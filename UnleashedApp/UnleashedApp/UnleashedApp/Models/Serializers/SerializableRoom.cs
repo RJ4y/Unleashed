@@ -1,4 +1,4 @@
-﻿namespace UnleashedApp.Models
+﻿namespace UnleashedApp.Models.Serializers
 {
     public class SerializableRoom
     {
