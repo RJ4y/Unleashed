@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using UnleashedApp.Contracts;
 using UnleashedApp.Contracts.ViewModels;
 using UnleashedApp.Views;
 using Xamarin.Forms;
@@ -21,18 +22,9 @@ namespace UnleashedApp.ViewModels
 
         private void InitialiseCommands()
         {
-            WhoIsWhoCommand = new Command(async () =>
-            {
-                await _navigationService.PushAsync(nameof(WhoIsWhoView));
-            });
-            FloorplanCommand = new Command(async () =>
-            {
-                await _navigationService.PushAsync(nameof(FloorplanView));
-            });
-            NameGameCommand = new Command(async () =>
-            {
-                await _navigationService.PushAsync(nameof(NameGameView));
-            });
+            WhoIsWhoCommand = new Command(async () => { await _navigationService.PushAsync(nameof(WhoIsWhoView)); });
+            FloorplanCommand = new Command(async () => { await _navigationService.PushAsync(nameof(FloorplanView)); });
+            NameGameCommand = new Command(async () => { await _navigationService.PushAsync(nameof(NameGameView)); });
         }
     }
 }

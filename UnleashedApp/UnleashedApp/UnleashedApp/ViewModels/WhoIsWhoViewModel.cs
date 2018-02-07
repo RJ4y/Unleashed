@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
+using UnleashedApp.Contracts;
 using UnleashedApp.Contracts.ViewModels;
 using UnleashedApp.Models;
 using UnleashedApp.Repositories.HabitatRepositories;
@@ -14,7 +15,6 @@ namespace UnleashedApp.ViewModels
 {
     public class WhoIsWhoViewModel : INotifyPropertyChanged, IWhoIsWhoViewModel
     {
-        #region Variables
         private readonly IHabitatRepository _habitatRepository;
         private readonly ISquadRepository _squadRepository;
         private readonly INavigationService _navigationService;
@@ -25,18 +25,18 @@ namespace UnleashedApp.ViewModels
         private static Employee _selectedEmployee;
         private static string _filter;
 
-        private static bool isSortingHabitats = true;
-        private static bool shouldLoadHabitatData = true;
-        private static bool shouldLoadSquadData = true;
+        private static bool _isSortingHabitats = true;
+        private static bool _shouldLoadHabitatData = true;
+        private static bool _shouldLoadSquadData = true;
 
         public ICommand EmployeeDetailCommand { get; set; }
         public ICommand HabitatCommand { get; set; }
         public ICommand SquadCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        #endregion
 
-        public WhoIsWhoViewModel(INavigationService navigationService, IHabitatRepository habitatRepository, ISquadRepository squadRepository)
+        public WhoIsWhoViewModel(INavigationService navigationService, IHabitatRepository habitatRepository,
+            ISquadRepository squadRepository)
         {
             _navigationService = navigationService;
             _habitatRepository = habitatRepository;
@@ -44,9 +44,11 @@ namespace UnleashedApp.ViewModels
             InitialiseCommands();
             LoadEmployeesPerHabitat();
             RefreshFilteredList();
+            LoadEmployeesPerSquad();
         }
 
         #region LoadData
+
         public void LoadEmployeesPerHabitat()
         {
             List<Habitat> habitats = _habitatRepository.GetAllHabitats();
@@ -64,11 +66,13 @@ namespace UnleashedApp.ViewModels
                         {
                             group.Add(employee);
                         }
+
                         _employeesPerHabitat.Add(group);
                     }
                 }
             }
-            shouldLoadHabitatData = false;
+
+            _shouldLoadHabitatData = false;
         }
 
         public void LoadEmployeesPerSquad()
@@ -88,15 +92,19 @@ namespace UnleashedApp.ViewModels
                         {
                             group.Add(employee);
                         }
+
                         _employeesPerSquad.Add(group);
                     }
                 }
             }
-            shouldLoadSquadData = false;
+
+            _shouldLoadSquadData = false;
         }
+
         #endregion
 
         #region Properties 
+
         public ObservableCollection<Group> FilteredList
         {
             get => _filteredList;
@@ -130,6 +138,7 @@ namespace UnleashedApp.ViewModels
                 }
             }
         }
+
         #endregion
 
         private void RaisePropertyChanged(string propertyName)
@@ -143,9 +152,8 @@ namespace UnleashedApp.ViewModels
 
             if (!String.IsNullOrEmpty(_filter))
             {
-                RefreshFilteredList();
-                List<Group> emptyGroups = new List<Group>();
                 List<Group> toBeRemovedGroups = new List<Group>();
+
                 foreach (Group group in _filteredList)
                 {
                     ObservableCollection<Employee> matchedEmployees = new ObservableCollection<Employee>();
@@ -157,6 +165,7 @@ namespace UnleashedApp.ViewModels
                             matchedEmployees.Add(employee);
                         }
                     }
+
                     group.Clear();
 
                     foreach (Employee employee in matchedEmployees)
@@ -181,45 +190,50 @@ namespace UnleashedApp.ViewModels
         }
 
         #region Initialisation
+
         private void InitialiseCommands()
         {
             EmployeeDetailCommand = new Command(async () =>
             {
-                EmployeeDetailView empDetailPage = new EmployeeDetailView();
-                empDetailPage.BindingContext = SelectedEmployee;
-
-                await _navigationService.PushAsync(empDetailPage);
+                EmployeeDetailView employeeDetailPage = new EmployeeDetailView
+                {
+                    BindingContext = SelectedEmployee
+                };
+                await _navigationService.PushAsync(employeeDetailPage);
                 SelectedEmployee = null;
             });
             HabitatCommand = new Command(() =>
             {
-                if (shouldLoadHabitatData)
+                if (_shouldLoadHabitatData)
                 {
                     LoadEmployeesPerHabitat();
                 }
                 else
                 {
-                    isSortingHabitats = true;
+                    _isSortingHabitats = true;
                 }
+
                 RefreshFilteredList();
                 RefreshFilter();
             });
             SquadCommand = new Command(() =>
             {
-                if (shouldLoadSquadData)
+                if (_shouldLoadSquadData)
                 {
                     LoadEmployeesPerSquad();
                 }
-                isSortingHabitats = false;
+
+                _isSortingHabitats = false;
                 RefreshFilteredList();
                 RefreshFilter();
             });
         }
+
         #endregion
 
         private void RefreshFilteredList()
         {
-            if (isSortingHabitats)
+            if (_isSortingHabitats)
             {
                 CopyObservableCollectionToFilteredList(_employeesPerHabitat);
             }
@@ -244,8 +258,11 @@ namespace UnleashedApp.ViewModels
                 Group g = new Group(group);
                 foreach (Employee e in group)
                 {
-                    g.Add(new Employee(e.Id, e.FirstName, e.LastName, e.StartDate, e.EndDate, e.Function, e.Habitat_Id));
+                    g.Add(new Employee(e.Id, e.FirstName, e.LastName, e.Function, e.HabitatId, e.StartDate, e.EndDate,
+                        e.VisibleSite, e.PictureUrl,
+                        e.Motivation, e.Expectations, e.NeedToKnow, e.DateOfBirth, e.Gender, e.Email));
                 }
+
                 FilteredList.Add(g);
             }
         }

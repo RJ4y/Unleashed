@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UnleashedApp.Contracts;
 using UnleashedApp.Views;
 using Xamarin.Forms;
 
-namespace UnleashedApp
+namespace UnleashedApp.Services
 {
     public class NavigationService : INavigationService
     {

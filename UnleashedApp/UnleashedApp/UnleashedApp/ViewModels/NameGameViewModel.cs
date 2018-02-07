@@ -6,15 +6,12 @@ namespace UnleashedApp.ViewModels
 {
     public class NameGameViewModel
     {
-        private readonly IEmployeeRepository _employeeRepository;
-
-        public List<Employee> Employees { get; private set; }
+        public List<Employee> Employees { get; }
 
         public NameGameViewModel(IEmployeeRepository employeeRepository)
         {
-            _employeeRepository = employeeRepository;
             InitialiseCommands();
-            Employees = _employeeRepository.GetAllEmployees();
+            Employees = employeeRepository.GetAllEmployees();
         }
 
         private void InitialiseCommands()

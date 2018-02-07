@@ -1,8 +1,10 @@
-﻿using UnleashedApp.Repositories.EmployeeRepositories;
+﻿using UnleashedApp.Contracts;
+using UnleashedApp.Repositories.EmployeeRepositories;
 using UnleashedApp.Repositories.HabitatRepositories;
 using UnleashedApp.Repositories.RoomRepositories;
 using UnleashedApp.Repositories.SpaceRepositories;
 using UnleashedApp.Repositories.SquadRepositories;
+using UnleashedApp.Services;
 using UnleashedApp.ViewModels;
 
 namespace UnleashedApp
@@ -10,12 +12,6 @@ namespace UnleashedApp
     public class ViewModelLocator
     {
         private static ViewModelLocator _instance;
-        private readonly INavigationService _navigationService;
-        private readonly IEmployeeRepository _employeeRepository;
-        private readonly IHabitatRepository _habitatRepository;
-        private readonly ISquadRepository _squadRepository;
-        private readonly ISpaceRepository _spaceRepository;
-        private readonly IRoomRepository _roomRepository;
 
         public MenuViewModel MenuViewModel { get; }
         public WhoIsWhoViewModel WhoIsWhoViewModel { get; }
@@ -28,20 +24,20 @@ namespace UnleashedApp
 
         private ViewModelLocator()
         {
-            _navigationService = new NavigationService();
+            INavigationService navigationService = new NavigationService();
 
-            _spaceRepository = new SpaceRepository();
-            _roomRepository = new RoomRepository();
-            _employeeRepository = new EmployeeRepository();
-            _habitatRepository = new HabitatRepository();
-            _squadRepository = new SquadRepository();
+            ISpaceRepository spaceRepository = new SpaceRepository();
+            IRoomRepository roomRepository = new RoomRepository();
+            IEmployeeRepository employeeRepository = new EmployeeRepository();
+            IHabitatRepository habitatRepository = new HabitatRepository();
+            ISquadRepository squadRepository = new SquadRepository();
 
-            MenuViewModel = new MenuViewModel(_navigationService);
-            WhoIsWhoViewModel = new WhoIsWhoViewModel(_navigationService, _habitatRepository, _squadRepository);
-            FloorplanViewModel = new FloorplanViewModel(_navigationService, _spaceRepository, _roomRepository);
-            RoomViewModel = new RoomViewModel(_navigationService, _employeeRepository);
+            MenuViewModel = new MenuViewModel(navigationService);
+            WhoIsWhoViewModel = new WhoIsWhoViewModel(navigationService, habitatRepository, squadRepository);
+            FloorplanViewModel = new FloorplanViewModel(navigationService, spaceRepository, roomRepository);
+            RoomViewModel = new RoomViewModel(navigationService, employeeRepository);
             EmployeeDetailViewModel = new EmployeeDetailViewModel();
-            NameGameViewModel = new NameGameViewModel(_employeeRepository);
+            NameGameViewModel = new NameGameViewModel(employeeRepository);
         }
     }
 }

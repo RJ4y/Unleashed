@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using UnleashedApp.Models;
+using UnleashedApp.Models.Serializers;
 using Xamarin.Forms;
 using static UnleashedApp.Models.Room;
 
@@ -18,7 +19,7 @@ namespace UnleashedApp.Repositories.RoomRepositories
             string address = "rooms/";
             try
             {
-                HttpResponseMessage response = _client.GetAsync(address).Result;
+                HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -43,6 +44,7 @@ namespace UnleashedApp.Repositories.RoomRepositories
                                 type = RoomType.Invalid;
                                 break;
                         }
+
                         Room room = new Room(r.Id, r.Name, color, type);
                         _rooms.Add(room);
                     }
@@ -52,6 +54,7 @@ namespace UnleashedApp.Repositories.RoomRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
+
             return _rooms;
         }
     }

@@ -6,16 +6,17 @@ namespace UnleashedApp.Repositories
 {
     public abstract class Repository
     {
-        protected static readonly HttpClient _client = new HttpClient();
-        //Set the base address to the ip of the device/server running the python backend!
-        protected readonly Uri _baseAddress = new Uri("http://10.84.134.30:8000/");
+        protected static readonly HttpClient Client = new HttpClient();
 
-        public Repository()
+        //Set the base address to the ip of the device/server running the python backend!
+        protected readonly Uri BaseAddress = new Uri("http://10.84.134.30:8000/");
+
+        protected Repository()
         {
-            _client.BaseAddress = _baseAddress;
-            _client.Timeout = TimeSpan.FromSeconds(20);
-            _client.DefaultRequestHeaders.Accept.Clear();
-            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            Client.BaseAddress = BaseAddress;
+            Client.Timeout = TimeSpan.FromSeconds(20);
+            Client.DefaultRequestHeaders.Accept.Clear();
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
     }
 }

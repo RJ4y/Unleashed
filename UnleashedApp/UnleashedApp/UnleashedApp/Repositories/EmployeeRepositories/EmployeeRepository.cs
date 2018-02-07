@@ -17,7 +17,7 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
             string address = "employees/";
             try
             {
-                HttpResponseMessage response = _client.GetAsync(address).Result;
+                HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -29,6 +29,7 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
+
             return _employees;
         }
 
@@ -37,7 +38,7 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
             string address = "employees/" + id + "/";
             try
             {
-                HttpResponseMessage response = _client.GetAsync(address).Result;
+                HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -49,6 +50,7 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
+
             return _employee;
         }
     }

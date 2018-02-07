@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using UnleashedApp.Models;
+using UnleashedApp.Models.Serializers;
 
 namespace UnleashedApp.Repositories.SquadRepositories
 {
@@ -15,10 +16,10 @@ namespace UnleashedApp.Repositories.SquadRepositories
 
         public List<Squad> GetAllSquads()
         {
-            string address = "squads/";            
+            string address = "squads/";
             try
             {
-                HttpResponseMessage response = _client.GetAsync(address).Result;
+                HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -30,6 +31,7 @@ namespace UnleashedApp.Repositories.SquadRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
+
             return _squads;
         }
 
@@ -38,7 +40,7 @@ namespace UnleashedApp.Repositories.SquadRepositories
             string address = "squads/" + id + "/";
             try
             {
-                HttpResponseMessage response = _client.GetAsync(address).Result;
+                HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -50,6 +52,7 @@ namespace UnleashedApp.Repositories.SquadRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
+
             return _squad;
         }
 
@@ -58,15 +61,16 @@ namespace UnleashedApp.Repositories.SquadRepositories
             string address = "squads/" + id + "/employees/";
             try
             {
-                HttpResponseMessage response = _client.GetAsync(address).Result;
+                HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
                     string resultString = response.Content.ReadAsStringAsync().Result;
-                    List<TempEmployee> rootObjects = JsonConvert.DeserializeObject<List<TempEmployee>>(resultString);
+                    List<SerializableEmployee> rootObjects =
+                        JsonConvert.DeserializeObject<List<SerializableEmployee>>(resultString);
                     _employees = new List<Employee>();
 
-                    foreach (TempEmployee root in rootObjects)
+                    foreach (SerializableEmployee root in rootObjects)
                     {
                         _employees.Add(root.Employee);
                     }
@@ -76,6 +80,7 @@ namespace UnleashedApp.Repositories.SquadRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
+
             return _employees;
         }
     }
