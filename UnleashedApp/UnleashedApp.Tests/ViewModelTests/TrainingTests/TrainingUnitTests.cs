@@ -6,7 +6,7 @@ using Moq;
 using NUnit.Framework;
 using UnleashedApp.Models;
 
-namespace UnleashedApp.Tests.TrainingTests
+namespace UnleashedApp.Tests.ViewModelTests.TrainingTests
 {
     /// <summary>
     /// Summary description for TrainingUnitTests

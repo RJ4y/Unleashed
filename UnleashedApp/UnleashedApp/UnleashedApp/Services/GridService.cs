@@ -64,7 +64,7 @@ namespace UnleashedApp.Services
             }
         }
 
-        internal static Dimensions GetGridTranslation(List<Space> spaces)
+        public static Dimensions GetGridTranslation(List<Space> spaces)
         {
             int xMin = int.MaxValue;
             int yMin = int.MaxValue;
