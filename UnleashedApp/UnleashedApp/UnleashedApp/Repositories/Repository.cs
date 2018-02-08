@@ -7,7 +7,7 @@ namespace UnleashedApp.Repositories
     public abstract class Repository
     {
         protected static readonly HttpClient Client = new HttpClient();
-        protected readonly Uri BaseAddress = new Uri("http://10.84.1.15:8000/");
+        protected readonly Uri BaseAddress = new Uri("http://10.84.1.18:8000/");
 
         protected Repository()
         {
