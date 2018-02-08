@@ -27,9 +27,6 @@ namespace UnleashedApp.ViewModels
         private static Employee _selectedEmployee;
         private static string _filterHabitat;
         private static string _filterSquad;
-        
-        private static bool _shouldLoadHabitatData = true;
-        private static bool _shouldLoadSquadData = true;
 
         public ICommand EmployeeDetailCommand { get; set; }
 
@@ -72,8 +69,6 @@ namespace UnleashedApp.ViewModels
                     }
                 }
             }
-
-            _shouldLoadHabitatData = false;
         }
 
         public void LoadEmployeesPerSquad()
@@ -98,8 +93,6 @@ namespace UnleashedApp.ViewModels
                     }
                 }
             }
-
-            _shouldLoadSquadData = false;
         }
 
         #endregion
