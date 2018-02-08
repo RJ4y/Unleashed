@@ -9,10 +9,11 @@ namespace UnleashedApp.Repositories.SpaceRepositories
 {
     public class SpaceRepository : Repository, ISpaceRepository
     {
-        private List<Space> _spaces = new List<Space>();
+        private List<Space> _spaces;
 
         public List<Space> GetAllSpaces()
         {
+            _spaces = new List<Space>();
             string address = "spaces/";
             try
             {
