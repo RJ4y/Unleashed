@@ -26,11 +26,11 @@
                       GroupDisplayBinding="{ Binding Name }"
                       GroupShortNameBinding="{Binding Name }"
                       HasUnevenRows="True"
-                      SelectedItem="{ Binding SelectedEmployee, Mode=TwoWay }">
+                      SelectedItem="{ Binding SelectedHabitatEmployee, Mode=TwoWay }">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ImageCell ImageSource="{Binding PictureUrl}" Text="{Binding FullName}"
-                                   Command="{ Binding Source={x:Reference WhoIsWho}, Path=BindingContext.EmployeeDetailCommand }" />
+                                   Command="{ Binding Source={x:Reference WhoIsWho}, Path=BindingContext.HabitatEmployeeDetailCommand }" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
@@ -56,11 +56,11 @@
                       GroupDisplayBinding="{ Binding Name }"
                       GroupShortNameBinding="{Binding Name }"
                       HasUnevenRows="True"
-                      SelectedItem="{ Binding SelectedEmployee, Mode=TwoWay }">
+                      SelectedItem="{ Binding SelectedSquadEmployee, Mode=TwoWay }">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ImageCell ImageSource="{Binding PictureUrl}" Text="{Binding FullName}"
-                                   Command="{ Binding Source={x:Reference WhoIsWho}, Path=BindingContext.EmployeeDetailCommand }" />
+                                   Command="{ Binding Source={x:Reference WhoIsWho}, Path=BindingContext.SquadEmployeeDetailCommand }" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
