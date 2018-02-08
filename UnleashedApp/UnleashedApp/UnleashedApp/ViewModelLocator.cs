@@ -40,7 +40,7 @@ namespace UnleashedApp
             FloorplanViewModel = new FloorplanViewModel(navigationService, spaceRepository, roomRepository);
             TrainingViewModel = new TrainingViewModel(trainingRepository);
             RoomViewModel = new RoomViewModel(navigationService, employeeRepository);
-            EmployeeDetailViewModel = new EmployeeDetailViewModel();
+            EmployeeDetailViewModel = new EmployeeDetailViewModel(spaceRepository, roomRepository);
             NameGameViewModel = new NameGameViewModel(employeeRepository);
         }
     }

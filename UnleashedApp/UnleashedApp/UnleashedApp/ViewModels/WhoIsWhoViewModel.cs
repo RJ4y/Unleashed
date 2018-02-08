@@ -8,6 +8,7 @@ using UnleashedApp.Contracts.ViewModels;
 using UnleashedApp.Models;
 using UnleashedApp.Repositories.HabitatRepositories;
 using UnleashedApp.Repositories.SquadRepositories;
+using UnleashedApp.Services;
 using UnleashedApp.Views;
 using Xamarin.Forms;
 
@@ -195,10 +196,9 @@ namespace UnleashedApp.ViewModels
         {
             EmployeeDetailCommand = new Command(async () =>
             {
-                EmployeeDetailView employeeDetailPage = new EmployeeDetailView
-                {
-                    BindingContext = SelectedEmployee
-                };
+                TransferService.Store(SelectedEmployee);
+                EmployeeDetailView employeeDetailPage = new EmployeeDetailView();
+                employeeDetailPage.BindingContext = SelectedEmployee;
                 await _navigationService.PushAsync(employeeDetailPage);
                 SelectedEmployee = null;
             });

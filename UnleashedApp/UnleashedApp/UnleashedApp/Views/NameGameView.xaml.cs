@@ -22,7 +22,6 @@ namespace UnleashedApp.Views
             InitializeComponent();
             NameGameViewModel viewModel = ViewModelLocator.Instance.NameGameViewModel;
             Employees = viewModel.Employees;
-
             if (Employees != null && Employees.Count > 0)
             {
                 InitializeFields();
@@ -97,7 +96,7 @@ namespace UnleashedApp.Views
 
         private void OptionTapped(object sender, EventArgs e)
         {
-            Button button = (Button) sender;
+            Button button = (Button)sender;
             if (button.Text == CorrectEmployee.FirstName + " " + CorrectEmployee.LastName)
             {
                 ShowCorrectSelectionInformation();
