@@ -13,7 +13,7 @@ namespace UnleashedApp.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value;
+            return ((string) value).Replace("€", "");
         }
     }
 }
