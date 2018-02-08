@@ -32,7 +32,7 @@ namespace UnleashedApp.ViewModels
 
         private void Init()
         {
-            TrainingList = new ObservableCollection<Training>(_trainingRepository.GetAll());
+            //TrainingList = new ObservableCollection<Training>(_trainingRepository.GetAll());
         }
 
         public void Refresh()
@@ -42,9 +42,12 @@ namespace UnleashedApp.ViewModels
 
         private void CalculateTotal()
         {
-            foreach(Training training in _trainings)
+            if (_trainings != null)
             {
-                TrainingTotal += training.Cost;
+                foreach (Training training in _trainings)
+                {
+                    TrainingTotal += training.Cost;
+                }
             }
         }
 
