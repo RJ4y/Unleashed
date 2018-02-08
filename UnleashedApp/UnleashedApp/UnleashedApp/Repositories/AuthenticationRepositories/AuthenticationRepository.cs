@@ -38,7 +38,8 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
             TokenRevokeRequest revokeRequest = new TokenRevokeRequest();
             StringContent content = ConvertToJson(revokeRequest);
             HttpResponseMessage response = await httpAuthClientAdapter.PostRevokeTokensAsync(content);
-            if (response != null && response.IsSuccessStatusCode)
+            Debug.WriteLine("in repository response post: " + response.Content.ReadAsStringAsync().Result);
+            if (response.IsSuccessStatusCode)
             {
                 return true;
             }

@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Net.Http;
+using System.Windows.Input;
 using UnleashedApp.Authentication;
 using UnleashedApp.Contracts;
 using UnleashedApp.Contracts.ViewModels;
@@ -34,7 +35,9 @@ namespace UnleashedApp.ViewModels
 
             LogOutCommand = new Command(async () =>
             {
-                bool revokeSucceeded = await _authenticationRepository.RequestRevokeTokens();
+                //Post revoke not working
+                //bool revokeSucceeded = await _authenticationRepository.RequestRevokeTokens();
+                bool revokeSucceeded = true;
                 if (revokeSucceeded)
                 {
                     _authenticationService.DeleteAccessTokens();
@@ -42,7 +45,7 @@ namespace UnleashedApp.ViewModels
                 }
                 else
                 {
-                    MessagingCenter.Send(this, "logout_failed");
+                    Xamarin.Forms.MessagingCenter.Send(this, "logout_failed", "Something went wrong");
                 }
             });
         }

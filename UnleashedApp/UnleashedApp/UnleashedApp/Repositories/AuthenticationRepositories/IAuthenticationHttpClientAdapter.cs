@@ -10,6 +10,6 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
     public interface IAuthenticationHttpClientAdapter
     {
         Task<HttpResponseMessage> ExchangeTokenAsync(StringContent convertToken);
-        Task<HttpResponseMessage> PostRevokeTokensAsync(StringContent revokeToken);
+        Task<HttpResponseMessage> PostRevokeTokensAsync(StringContent clientId);
     }
 }

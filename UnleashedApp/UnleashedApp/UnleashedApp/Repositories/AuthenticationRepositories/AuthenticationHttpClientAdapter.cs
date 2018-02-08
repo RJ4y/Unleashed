@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -22,10 +23,11 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
             return await _client.PostAsync(CONVERT_URL, convertToken);
         }
 
-        public async Task<HttpResponseMessage> PostRevokeTokensAsync(StringContent revokeToken)
+        public async Task<HttpResponseMessage> PostRevokeTokensAsync(StringContent clientId)
         {
-            AddAuthenticationHeaderAsync();
-            return await _client.PostAsync(REVOKE_URL, revokeToken);
+            await AddAuthenticationHeaderAsync();
+            Debug.WriteLine("in client adapter stringcontent " + clientId.ReadAsStringAsync().Result);
+            return await _client.PostAsync(REVOKE_URL, clientId);
         }
     }
 }

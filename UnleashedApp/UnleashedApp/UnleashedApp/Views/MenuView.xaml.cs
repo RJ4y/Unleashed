@@ -12,11 +12,11 @@ namespace UnleashedApp.Views
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
 
-            MessagingCenter.Subscribe<MenuViewModel>(this, "logout_failed", (sender) =>
+            MessagingCenter.Subscribe<MenuViewModel, string>(this, "logout_failed", (sender, arg) =>
             {
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    await DisplayAlert("Logout failed!", "Something went wrong while logging out", "Try again");
+                    await DisplayAlert("Logout failed!", arg, "Try again");
                 });
             });
         }

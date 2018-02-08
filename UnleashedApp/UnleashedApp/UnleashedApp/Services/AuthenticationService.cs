@@ -12,7 +12,7 @@ namespace UnleashedApp.Authentication
 
         private AuthenticationService()
         {
-            //user = GetUser();
+            user = GetUser();
         }
 
         public static AuthenticationService Instance
@@ -108,7 +108,6 @@ namespace UnleashedApp.Authentication
         private DateTime CalculateTokenExpiration(CustomTokenResponse tokenResponse)
         {
             int expiresIn = int.Parse(tokenResponse.expires_in);
-            var test = DateTime.Now;
             return DateTime.Now.AddSeconds(expiresIn);
         }
     }

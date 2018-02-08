@@ -44,6 +44,7 @@ namespace UnleashedApp.ViewModels
             if (e.IsAuthenticated)
             {
                 var googleToken = e.Account.Properties["access_token"];
+                _authenticationService.DeleteAccessTokens();
                 CustomTokenResponse tokenResponse = await _authenticationRepository.RequestExchangeGoogleTokenAsync(new TokenConvertRequest(googleToken));
                 if (tokenResponse != null)
                 {
