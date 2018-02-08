@@ -12,10 +12,11 @@ namespace UnleashedApp.Repositories.RoomRepositories
 {
     public class RoomRepository : Repository, IRoomRepository
     {
-        private List<Room> _rooms = new List<Room>();
+        private List<Room> _rooms;
 
         public List<Room> GetAllRooms()
         {
+            _rooms = new List<Room>();
             string address = "rooms/";
             try
             {
