@@ -21,22 +21,20 @@ namespace UnleashedApp.Views
 
             List<MasterItem> menuList = new List<MasterItem>();
 
-            var homePage = new MasterItem() { Title = "Home", TargetType = typeof(MenuView) };
+            var nameGamePage = new MasterItem() { Title = "Home", TargetType = typeof(NameGameView) };
             var whoIsWhoPage = new MasterItem() { Title = "Who is Who", TargetType = typeof(WhoIsWhoView) };
-            var nameGamePage = new MasterItem() { Title = "Name Game", TargetType = typeof(NameGameView) };
-            var floorPlanPage = new MasterItem() { Title = "Floor plan", TargetType = typeof(FloorplanView) };
+            var floorPlanPage = new MasterItem() { Title = "Floor Plan", TargetType = typeof(FloorplanView) };
             var trainingPage = new MasterItem() { Title = "Training", TargetType = typeof(TrainingView) };
             var aboutPage = new MasterItem() { Title = "About" };
             var logoutAction = new MasterItem() { Title = "Log out" };
 
             // Adding menu items to menuList
-            menuList.Add(homePage);
-            menuList.Add(whoIsWhoPage);
             menuList.Add(nameGamePage);
+            menuList.Add(whoIsWhoPage);
             menuList.Add(floorPlanPage);
             menuList.Add(trainingPage);
-            menuList.Add(aboutPage);
-            menuList.Add(logoutAction);
+            //menuList.Add(aboutPage);
+            //menuList.Add(logoutAction);
 
             // Setting our list to be ItemSource for ListView in MainPage.xaml
             navigationDrawerList.ItemsSource = menuList;
@@ -46,8 +44,8 @@ namespace UnleashedApp.Views
         {
             var item = (MasterItem) e.Item;
             Type page = item.TargetType;
-
-            if (page == typeof(MenuView))
+            
+            if (page == typeof(NameGameView))
             {
                 App.NavigationPage.Navigation.PopToRootAsync();
                 App.MenuIsPresented = false;
@@ -60,11 +58,6 @@ namespace UnleashedApp.Views
             else if (page == typeof(FloorplanView))
             {
                 App.NavigationPage.Navigation.PushAsync(new FloorplanView());
-                App.MenuIsPresented = false;
-            }
-            else if (page == typeof(NameGameView))
-            {
-                App.NavigationPage.Navigation.PushAsync(new NameGameView());
                 App.MenuIsPresented = false;
             }
             else if (page == typeof(TrainingView))
