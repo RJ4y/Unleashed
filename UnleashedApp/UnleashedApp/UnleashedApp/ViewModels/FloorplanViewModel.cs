@@ -33,7 +33,10 @@ namespace UnleashedApp.ViewModels
 
         private void InitialiseCommands()
         {
-            RoomCommand = new Command(async () => { await _navigationService.PushAsync(nameof(RoomView)); });
+            RoomCommand = new Command(() =>
+            {
+                App.NavigationPage.Navigation.PushAsync(new RoomView());
+            });
         }
     }
 }
