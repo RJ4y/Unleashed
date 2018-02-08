@@ -41,7 +41,6 @@
     <Compile Include="Contracts\INavigationService.cs" />
     <Compile Include="Contracts\ViewModels\IEmployeeDetailViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IFloorplanViewModel.cs" />
-    <Compile Include="Contracts\ViewModels\IMenuViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IRoomViewModel.cs" />
     <Compile Include="Contracts\ViewModels\ITrainingViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IWhoIsWhoViewModel.cs" />
@@ -87,7 +86,6 @@
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\EmployeeDetailViewModel.cs" />
     <Compile Include="ViewModels\FloorplanViewModel.cs" />
-    <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\NameGameViewModel.cs" />
     <Compile Include="ViewModels\RoomViewModel.cs" />
     <Compile Include="ViewModels\SplitViewViewModel.cs" />
@@ -99,9 +97,6 @@
     </Compile>
     <Compile Include="Views\FloorplanView.xaml.cs">
       <DependentUpon>FloorplanView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MenuView.xaml.cs">
-      <DependentUpon>MenuView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NameGameView.xaml.cs">
       <DependentUpon>NameGameView.xaml</DependentUpon>
@@ -156,12 +151,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\MenuView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\WhoIsWhoView.xaml">

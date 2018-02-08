@@ -74,7 +74,6 @@ namespace UnleashedApp.Services
         {
             switch (pageName)
             {
-                case nameof(MenuView): return new MenuView();
                 case nameof(FloorplanView): return new FloorplanView();
                 case nameof(RoomView): return new RoomView();
                 case nameof(EmployeeDetailView): return new EmployeeDetailView();

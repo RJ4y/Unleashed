@@ -15,7 +15,6 @@ namespace UnleashedApp
         private static ViewModelLocator _instance;
 
         public SplitViewViewModel SplitViewViewModel { get; }
-        public MenuViewModel MenuViewModel { get; }
         public WhoIsWhoViewModel WhoIsWhoViewModel { get; }
         public TrainingViewModel TrainingViewModel { get; }
         public EmployeeDetailViewModel EmployeeDetailViewModel { get; }
@@ -37,7 +36,6 @@ namespace UnleashedApp
             ITrainingRepository trainingRepository = new TrainingRepository();
 
             SplitViewViewModel = new SplitViewViewModel(navigationService);
-            MenuViewModel = new MenuViewModel(navigationService);
             WhoIsWhoViewModel = new WhoIsWhoViewModel(navigationService, habitatRepository, squadRepository);
             FloorplanViewModel = new FloorplanViewModel(navigationService, spaceRepository, roomRepository);
             TrainingViewModel = new TrainingViewModel(trainingRepository);
