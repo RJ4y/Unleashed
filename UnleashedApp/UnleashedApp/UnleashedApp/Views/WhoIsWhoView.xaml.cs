@@ -12,13 +12,5 @@ namespace UnleashedApp.Views
             InitializeComponent();
             BindingContext = ViewModelLocator.Instance.WhoIsWhoViewModel;
         }
-
-        void HabitatButtonClicked(object sender, EventArgs args)
-        {
-        }
-
-        private void SquadButtonClicked(object sender, EventArgs e)
-        {
-        }
     }
 }

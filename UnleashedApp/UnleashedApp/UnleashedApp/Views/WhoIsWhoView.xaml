@@ -7,15 +7,6 @@
             x:Class="UnleashedApp.Views.WhoIsWhoView"
             x:Name="WhoIsWho">
     <ContentPage Title="Habitats">
-        <ContentPage.Resources>
-            <ResourceDictionary>
-                <Style x:Key="Inactive" TargetType="Button">
-                    <Setter Property="BackgroundColor" Value="#fff" />
-                    <Setter Property="TextColor" Value="#e6332a" />
-                </Style>
-            </ResourceDictionary>
-        </ContentPage.Resources>
-
         <StackLayout>
             <Grid ColumnSpacing="10" RowSpacing="10" HorizontalOptions="FillAndExpand" Padding="10,10,10,0">
                 <Grid.RowDefinitions>
@@ -46,15 +37,6 @@
         </StackLayout>
     </ContentPage>
     <ContentPage Title="Squads">
-        <ContentPage.Resources>
-            <ResourceDictionary>
-                <Style x:Key="Inactive" TargetType="Button">
-                    <Setter Property="BackgroundColor" Value="#fff" />
-                    <Setter Property="TextColor" Value="#e6332a" />
-                </Style>
-            </ResourceDictionary>
-        </ContentPage.Resources>
-
         <StackLayout>
             <Grid ColumnSpacing="10" RowSpacing="10" HorizontalOptions="FillAndExpand" Padding="10,10,10,0">
                 <Grid.RowDefinitions>
