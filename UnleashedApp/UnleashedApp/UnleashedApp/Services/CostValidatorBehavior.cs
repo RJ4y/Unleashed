@@ -14,11 +14,13 @@ namespace UnleashedApp.Services
 
         void HandleTextChanged(object sender, TextChangedEventArgs e)
         {
-            bool validPrice = decimal.TryParse(e.NewTextValue, out decimal priceDecimal) && priceDecimal >= 0 && priceDecimal * 100 == Math.Floor(priceDecimal*100);
+            var vm = ((Entry)sender).BindingContext;
+
+            bool validPrice = decimal.TryParse(e.NewTextValue, out decimal priceDecimal) && priceDecimal >= 0 && priceDecimal <= ((TrainingViewModel) vm).BudgetRemaining && priceDecimal * 100 == Math.Floor(priceDecimal*100);
 
             ((Entry) sender).TextColor = validPrice ? Color.Green : Color.Red;
 
-            var vm = ((Entry)sender).BindingContext;
+            
             ((TrainingViewModel)vm).IsCostValid = validPrice;
         }
 
