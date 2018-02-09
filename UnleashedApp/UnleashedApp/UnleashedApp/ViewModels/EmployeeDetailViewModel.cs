@@ -10,11 +10,30 @@ namespace UnleashedApp.ViewModels
     {
         public List<Space> Spaces { get; set; }
         public List<Room> Rooms { get; set; }
+        private readonly ISpaceRepository _spaceRepository;
+        private readonly IRoomRepository _roomRepository;
 
         public EmployeeDetailViewModel(ISpaceRepository spaceRepository, IRoomRepository roomRepository)
         {
-            Spaces = spaceRepository.GetAllSpaces();
-            Rooms = roomRepository.GetAllRooms();
+            _spaceRepository = spaceRepository;
+            _roomRepository = roomRepository;
+        }
+
+        public void LoadSpaces()
+        {
+            if (Spaces == null)
+            {
+                Spaces = _spaceRepository.GetAllSpaces();
+            }
+        }
+
+        public void LoadRooms()
+        {
+            if (Rooms == null)
+            {
+                Rooms = _roomRepository.GetAllRooms();
+            }
+
         }
     }
 }

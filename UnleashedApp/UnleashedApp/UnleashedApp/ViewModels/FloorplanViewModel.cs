@@ -13,6 +13,8 @@ namespace UnleashedApp.ViewModels
     public class FloorplanViewModel : ViewModelBase, IFloorplanViewModel
     {
         private readonly INavigationService _navigationService;
+        private readonly ISpaceRepository _spaceRepository;
+        private readonly IRoomRepository _roomRepository;
 
         public ICommand RoomCommand { get; set; }
 
@@ -24,16 +26,32 @@ namespace UnleashedApp.ViewModels
             IRoomRepository roomRepository)
         {
             _navigationService = navigationService;
+            _spaceRepository = spaceRepository;
+            _roomRepository = roomRepository;
 
             InitialiseCommands();
-
-            Spaces = spaceRepository.GetAllSpaces();
-            Rooms = roomRepository.GetAllRooms();
         }
 
         private void InitialiseCommands()
         {
             RoomCommand = new Command(async () => { await _navigationService.PushAsync(nameof(RoomView)); });
+        }
+
+        public void LoadSpaces()
+        {
+            if (Spaces == null)
+            {
+                Spaces = _spaceRepository.GetAllSpaces();
+            }
+        }
+
+        public void LoadRooms()
+        {
+            if (Rooms == null)
+            {
+                Rooms = _roomRepository.GetAllRooms();
+            }
+
         }
     }
 }

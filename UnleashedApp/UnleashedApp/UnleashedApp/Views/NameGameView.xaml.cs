@@ -9,7 +9,7 @@ using Xamarin.Forms.Xaml;
 namespace UnleashedApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NameGameView
+    public partial class NameGameView: ContentPage
     {
         public static List<Employee> Employees { get; private set; }
         public static List<Employee> Males { get; private set; }
@@ -20,6 +20,18 @@ namespace UnleashedApp.Views
         public NameGameView()
         {
             InitializeComponent();
+            BindingContext = ViewModelLocator.Instance.NameGameViewModel;
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (BindingContext != null)
+            {
+                ((NameGameViewModel)BindingContext).LoadEmployees();
+            }
+
             NameGameViewModel viewModel = ViewModelLocator.Instance.NameGameViewModel;
             Employees = viewModel.Employees;
             if (Employees != null && Employees.Count > 0)

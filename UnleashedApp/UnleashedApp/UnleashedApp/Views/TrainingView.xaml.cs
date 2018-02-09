@@ -1,4 +1,5 @@
 ﻿using System;
+using UnleashedApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,9 +14,19 @@ namespace UnleashedApp.Views
             BindingContext = ViewModelLocator.Instance.TrainingViewModel;
         }
 
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (BindingContext != null)
+            {
+                ((TrainingViewModel)BindingContext).LoadTrainings();
+            }
+        }
+
         private void ListView_Refreshing(object sender, EventArgs e)
         {
-            ViewModelLocator.Instance.TrainingViewModel.Refresh();
+            ((TrainingViewModel)BindingContext).Refresh();
             ((ListView)sender).EndRefresh();
         }
     }

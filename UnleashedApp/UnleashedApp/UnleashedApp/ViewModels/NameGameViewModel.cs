@@ -6,16 +6,17 @@ namespace UnleashedApp.ViewModels
 {
     public class NameGameViewModel
     {
-        public List<Employee> Employees { get; }
+        public List<Employee> Employees { get; set; }
+        public IEmployeeRepository employeeRepository;
 
         public NameGameViewModel(IEmployeeRepository employeeRepository)
         {
-            InitialiseCommands();
-            Employees = employeeRepository.GetAllEmployees();
+            this.employeeRepository = employeeRepository;
         }
 
-        private void InitialiseCommands()
+        public void LoadEmployees()
         {
+            Employees = employeeRepository.GetAllEmployees();
         }
     }
 }

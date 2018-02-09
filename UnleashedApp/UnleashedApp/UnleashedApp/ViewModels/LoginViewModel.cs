@@ -43,7 +43,7 @@ namespace UnleashedApp.ViewModels
         {
             if (e.IsAuthenticated)
             {
-                //((Command)PresentLoginScreenCommand).ChangeCanExecute();
+                ((Command)PresentLoginScreenCommand).ChangeCanExecute();
                 var googleToken = e.Account.Properties["access_token"];
                 CustomTokenResponse tokenResponse = await _authenticationRepository.RequestExchangeGoogleTokenAsync(new TokenConvertRequest(googleToken));
                 if (tokenResponse != null)

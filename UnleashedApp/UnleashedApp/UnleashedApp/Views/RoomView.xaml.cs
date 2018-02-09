@@ -117,6 +117,7 @@ namespace UnleashedApp.Views
                 if (space.XCoord == x && space.YCoord == y)
                 {
                     ShowEmployeeInformation(space);
+                    break;
                 }
             }
         }

@@ -26,18 +26,17 @@ namespace UnleashedApp.ViewModels
             _sendInvoice = "No";
             _isValid = false;
             InitialiseCommands();
-            Init();
             CalculateTotal();
         }
 
-        private void Init()
+        public void LoadTrainings()
         {
             //TrainingList = new ObservableCollection<Training>(_trainingRepository.GetAll());
         }
 
         public void Refresh()
         {
-            Init();
+            LoadTrainings();
         }
 
         private void CalculateTotal()

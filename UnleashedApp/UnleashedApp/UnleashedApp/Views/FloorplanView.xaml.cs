@@ -10,33 +10,54 @@ using static UnleashedApp.Models.Room;
 namespace UnleashedApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FloorplanView
+    public partial class FloorplanView: ContentPage
     {
         private static FloorplanViewModel _viewModel;
         public static List<Room> Rooms { get; private set; }
         public static List<Space> Spaces { get; private set; }
         public static Room SelectedRoom { get; private set; }
+        private bool shouldLoad = true;
 
         public FloorplanView()
         {
             InitializeComponent();
-            _viewModel = ViewModelLocator.Instance.FloorplanViewModel;
-            Rooms = _viewModel.Rooms;
-            Spaces = _viewModel.Spaces;
-            if (Rooms != null && Rooms.Count > 0 && Spaces != null && Spaces.Count > 0)
+            
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (ViewModelLocator.Instance.FloorplanViewModel != null)
             {
-                CreateLegendGrid();
-                CreateFloorplanGrid();
-            }
-            else
-            {
-                Label label = new Label
+                ViewModelLocator.Instance.FloorplanViewModel.LoadSpaces();
+                ViewModelLocator.Instance.FloorplanViewModel.LoadRooms();
+               
+
+                if (shouldLoad)
                 {
-                    HorizontalTextAlignment = TextAlignment.Center,
-                    Text = "The data could not be found, there may be a problem with your connection."
-                };
-                ScrollView.Content = label;
-                MainGrid.IsVisible = false;
+                    _viewModel = ViewModelLocator.Instance.FloorplanViewModel;
+                    Rooms = _viewModel.Rooms;
+                    Spaces = _viewModel.Spaces;
+                    if (Rooms != null && Rooms.Count > 0 && Spaces != null && Spaces.Count > 0)
+                    {
+                        CreateLegendGrid();
+                        CreateFloorplanGrid();
+                    }
+                    else
+                    {
+                        Label label = new Label
+                        {
+                            HorizontalTextAlignment = TextAlignment.Center,
+                            Text = "The data could not be found, there may be a problem with your connection."
+                        };
+                        ScrollView.Content = label;
+                        MainGrid.IsVisible = false;
+                    }
+
+                    shouldLoad = false;
+                }
+               
             }
         }
 

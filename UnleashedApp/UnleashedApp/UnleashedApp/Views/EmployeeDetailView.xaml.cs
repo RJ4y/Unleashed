@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnleashedApp.Models;
 using UnleashedApp.Services;
+using UnleashedApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,6 +13,7 @@ namespace UnleashedApp.Views
         public static List<Space> Spaces { get; private set; }
         public static List<Room> Rooms { get; private set; }
         public static Employee Employee;
+        private bool shouldLoad = true;
 
         public EmployeeDetailView()
         {
@@ -21,8 +23,21 @@ namespace UnleashedApp.Views
 
             Rooms = ViewModelLocator.Instance.EmployeeDetailViewModel.Rooms;
             Spaces = ViewModelLocator.Instance.EmployeeDetailViewModel.Spaces;
-            if (Spaces != null && Spaces.Count > 0 && Employee != null && Rooms != null && Rooms.Count > 0)
+            
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (BindingContext != null)
+            {
+                ViewModelLocator.Instance.EmployeeDetailViewModel.LoadSpaces();
+                ViewModelLocator.Instance.EmployeeDetailViewModel.LoadRooms();
+            }
+            if (shouldLoad && Spaces != null && Spaces.Count > 0 && Employee != null && Rooms != null && Rooms.Count > 0)
                 CreateLocationGrid();
+            shouldLoad = false;
         }
 
         private void CreateLocationGrid()
