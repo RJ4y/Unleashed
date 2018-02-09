@@ -1,15 +1,9 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using UnleashedApp.Authentication;
-using UnleashedApp.Repositories;
 using UnleashedApp.ViewModels;
-using Xamarin.Auth;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,7 +12,6 @@ namespace UnleashedApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginView : ContentPage
     {
-
         public LoginView()
         {
             InitializeComponent();
@@ -33,6 +26,5 @@ namespace UnleashedApp.Views
                 });
             });
         }
-
     }
 }
