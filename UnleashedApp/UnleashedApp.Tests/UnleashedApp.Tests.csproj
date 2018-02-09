@@ -84,6 +84,7 @@
     <Compile Include="ServiceTests\RandomizeUnitTests.cs" />
     <Compile Include="ServiceTests\TransferServiceTests.cs" />
     <Compile Include="ViewModelTests\FloorPlanTests\FloorPlanUnitTests.cs" />
+    <Compile Include="ViewModelTests\RoomTests\RoomUnitTests.cs" />
     <Compile Include="ViewModelTests\TrainingTests\TrainingUnitTests.cs" />
     <Compile Include="ViewModelTests\WhoIsWhoTests\WhoIsWhoUnitTests.cs" />
   </ItemGroup>
