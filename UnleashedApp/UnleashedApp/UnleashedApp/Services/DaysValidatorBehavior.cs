@@ -15,7 +15,7 @@ namespace UnleashedApp.Services
         {
             bool validDays = int.TryParse(e.NewTextValue, out int days) && days > 0 && days <= 100;
 
-            ((Entry)sender).TextColor = validDays ? Color.Green : Color.Red;
+            ((Entry)sender).TextColor = validDays ? Color.DarkGray : Color.Red;
 
             var vm = ((Entry)sender).BindingContext;
             ((TrainingViewModel)vm).IsDaysValid = validDays;

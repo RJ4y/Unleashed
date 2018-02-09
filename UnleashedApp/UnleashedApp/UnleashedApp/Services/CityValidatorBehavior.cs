@@ -18,7 +18,7 @@ namespace UnleashedApp.Services
         void HandleTextChanged(object sender, TextChangedEventArgs e)
         {
             bool validCity = (Regex.IsMatch(e.NewTextValue, CityRegex, RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250)));
-            ((Entry)sender).TextColor = validCity ? Color.Green : Color.Red;
+            ((Entry)sender).TextColor = validCity ? Color.DarkGray : Color.Red;
 
             var vm = ((Entry)sender).BindingContext;
             ((TrainingViewModel)vm).IsCityValid = validCity;

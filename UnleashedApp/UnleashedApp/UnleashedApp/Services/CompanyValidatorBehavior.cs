@@ -14,7 +14,7 @@ namespace UnleashedApp.Services
         void HandleTextChanged(object sender, TextChangedEventArgs e)
         {
             bool validCompany = e.NewTextValue.Length > 0;
-            ((Entry)sender).TextColor = validCompany ? Color.Green : Color.Red;
+            ((Entry)sender).TextColor = validCompany ? Color.DarkGray : Color.Red;
 
             var vm = ((Entry)sender).BindingContext;
             ((TrainingViewModel)vm).IsCompanyValid = validCompany;
