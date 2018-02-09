@@ -88,6 +88,11 @@ namespace UnleashedApp.ViewModels
         }
 
         #region TrainingProperties
+
+        public DateTime MinimumDate => DateTime.Now.Subtract(TimeSpan.FromDays(365));
+
+        public DateTime MaximumDate => DateTime.Now.AddYears(1);
+
         private DateTime _date;
         public DateTime Date
         {

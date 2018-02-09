@@ -18,7 +18,7 @@
             
             <StackLayout Orientation="Horizontal" Margin="30, 0, 30, 0">
                 <Label Text="Total cost:"/>
-                <Label Text="{ Binding TrainingTotal, Converter={StaticResource currencyConverter }"/>
+                <Label Text="{ Binding TrainingTotal, Converter={StaticResource currencyConverter }}"/>
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" Margin="30, 0, 30, 0">
@@ -46,7 +46,7 @@
 
                                 <Label Text="{ Binding Date, Converter={StaticResource dateConverter} }" Grid.Row="1" Grid.Column="0"/>
 
-                                <Label Text="{ Binding Cost, Converter={StaticResource currencyConverter }" Grid.Row="1" Grid.Column="1"/>
+                                <Label Text="{ Binding Cost, Converter={StaticResource currencyConverter }}" Grid.Row="1" Grid.Column="1"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
@@ -60,7 +60,7 @@
             <StackLayout Orientation="Vertical" Margin="15, 0, 15, 0">
                 <Label Text="Add Training" TextColor="Red" FontSize="Large" Margin="0,5,0,0"/>
                 <Label Text="Date:"/>
-                <DatePicker Date="{ Binding Date, Mode=TwoWay }" Margin="0,-15,0,0"/>
+                <DatePicker Date="{ Binding Date, Mode=TwoWay }" Margin="0,-15,0,0" MinimumDate="{ Binding MinimumDate }" MaximumDate="{ Binding MaximumDate }"/>
                 
                 <Label Text="Days:"/>
                 <Entry Text="{ Binding Days, Mode=TwoWay}" Placeholder="0" PlaceholderColor="Red" Keyboard="Numeric" Margin="0,-15,0,0">
