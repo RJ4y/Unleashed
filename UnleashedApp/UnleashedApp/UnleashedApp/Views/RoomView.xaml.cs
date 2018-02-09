@@ -130,6 +130,7 @@ namespace UnleashedApp.Views
             bool action = await DisplayAlert(e.FirstName + " " + e.LastName, e.Function, "View details", "Close");
             if (action)
             {
+                TransferService.Store(e);
                 vm.EmployeeDetailCommand.Execute(null);
             }
         }
