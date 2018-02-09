@@ -8,19 +8,9 @@
             x:Name="WhoIsWho">
     <ContentPage Title="Habitats">
         <StackLayout>
-            <Grid ColumnSpacing="10" RowSpacing="10" HorizontalOptions="FillAndExpand" Padding="10,10,10,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50*" />
-                    <ColumnDefinition Width="50*" />
-                </Grid.ColumnDefinitions>
-                <SearchBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{ Binding HabitatFilter, Mode=TwoWay }"
-                       Placeholder="Search" />
-            </Grid>
+            <StackLayout Padding="10" Margin="0,0,0,-6" BackgroundColor="#c9251d">
+                <SearchBar Text="{ Binding HabitatFilter, Mode=TwoWay }" Placeholder="Search" PlaceholderColor="#fff" TextColor="#fff" CancelButtonColor="#fff" />
+            </StackLayout>
             <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{ Binding FilteredHabitatList }"
                       IsGroupingEnabled="True"
                       GroupDisplayBinding="{ Binding Name }"
@@ -38,19 +28,9 @@
     </ContentPage>
     <ContentPage Title="Squads">
         <StackLayout>
-            <Grid ColumnSpacing="10" RowSpacing="10" HorizontalOptions="FillAndExpand" Padding="10,10,10,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50*" />
-                    <ColumnDefinition Width="50*" />
-                </Grid.ColumnDefinitions>
-                <SearchBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{ Binding SquadFilter, Mode=TwoWay }"
-                       Placeholder="Search" />
-            </Grid>
+            <StackLayout Padding="10" Margin="0,0,0,-6" BackgroundColor="#c9251d">
+                <SearchBar Text="{ Binding HabitatFilter, Mode=TwoWay }" Placeholder="Search" PlaceholderColor="#fff" TextColor="#fff" CancelButtonColor="#fff" />
+            </StackLayout>
             <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{ Binding FilteredSquadList }"
                       IsGroupingEnabled="True"
                       GroupDisplayBinding="{ Binding Name }"

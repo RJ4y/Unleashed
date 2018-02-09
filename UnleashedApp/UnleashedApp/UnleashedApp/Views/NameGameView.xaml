@@ -18,7 +18,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100*" />
                     </Grid.ColumnDefinitions>
-                    <Label x:Name="InfoLabel" Grid.Row="0" HorizontalOptions="Center" Text="Who is this?" Margin="10" FontSize="Medium" TextColor="#e6332a"/>
+                    <Label x:Name="InfoLabel" Grid.Row="0" HorizontalOptions="Center" Text="Who is this?" Margin="10" FontSize="Large" TextColor="#e6332a"/>
                     <Image x:Name="EmployeeImage" Grid.Row="1" Source="placeholder.jpg" Margin="0,0,0,10" />
                     <Button x:Name="OptionOneButton" Grid.Row="2" TextColor="#fff" BackgroundColor="#e6332a" />
                     <Button x:Name="OptionTwoButton" Grid.Row="3" TextColor="#fff" BackgroundColor="#e6332a" />
