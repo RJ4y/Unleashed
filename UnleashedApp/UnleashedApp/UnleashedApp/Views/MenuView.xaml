@@ -23,9 +23,7 @@
 
         <Button Text="Training" Grid.Row="1" Grid.Column="0" Command="{Binding TrainingCommand}"
                 BackgroundColor="#e6332a" />
-        <Button Text="Log Out" Grid.Row="1" Grid.Column="1" BackgroundColor="#e6332a" />
 
-        <Button Text="Training" Grid.Row="1" Grid.Column="0" BackgroundColor="#e6332a"/>
         <Button Text="Log Out" Grid.Row="1" Grid.Column="1" BackgroundColor="#e6332a" Command="{Binding LogOutCommand}"/>
 
         <Button Text="Name game" Grid.Row="2" Grid.Column="0" Command="{Binding NameGameCommand}"
