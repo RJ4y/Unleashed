@@ -16,6 +16,7 @@ namespace UnleashedApp.ViewModels
         private int _trainingTotal;
         private Training _postTraining;
         public ICommand AddTrainingCommand { get; set; }
+        private const int TrainingBudget = 2000;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -25,6 +26,7 @@ namespace UnleashedApp.ViewModels
             _date = DateTime.Now;
             _sendInvoice = "No";
             _isValid = false;
+            BudgetRemaining = TrainingBudget;
             InitialiseCommands();
             Init();
             CalculateTotal();
@@ -32,6 +34,7 @@ namespace UnleashedApp.ViewModels
 
         private void Init()
         {
+            TrainingList = new ObservableCollection<Training>();
             //TrainingList = new ObservableCollection<Training>(_trainingRepository.GetAll());
         }
 
@@ -47,6 +50,7 @@ namespace UnleashedApp.ViewModels
                 foreach (Training training in _trainings)
                 {
                     TrainingTotal += training.Cost;
+                    BudgetRemaining -= training.Cost;
                 }
             }
         }
@@ -87,7 +91,23 @@ namespace UnleashedApp.ViewModels
             }
         }
 
+        private int _budgetRemaining;
+        public int BudgetRemaining
+        {
+            get => _budgetRemaining;
+            set
+            {
+                _budgetRemaining = value;
+                RaisePropertyChanged(nameof(BudgetRemaining));
+            }
+        }
+
         #region TrainingProperties
+
+        public DateTime MinimumDate => DateTime.Now.Subtract(TimeSpan.FromDays(365));
+
+        public DateTime MaximumDate => DateTime.Now.AddYears(1);
+
         private DateTime _date;
         public DateTime Date
         {
@@ -266,6 +286,7 @@ namespace UnleashedApp.ViewModels
                     TrainingName = Event
                 };
                 TrainingList.Add(_postTraining);
+                CalculateTotal();
                 _trainingRepository.PostTrainingAsync(_postTraining);
             });
         }

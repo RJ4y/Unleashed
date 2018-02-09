@@ -17,8 +17,8 @@ namespace UnleashedApp.Tests.ViewModelTests.EmployeeDetailTests
         private Mock<IRoomRepository> _roomRepositoryMock;
         private EmployeeDetailViewModel _employeeDetailViewModel;
         private SpaceBuilder _spaceBuilder;
-        private List<Space> expectedSpaces;
-        private List<Room> expectedRooms;
+        private List<Space> _expectedSpaces;
+        private List<Room> _expectedRooms;
 
         [SetUp]
         public void Setup()
@@ -27,8 +27,8 @@ namespace UnleashedApp.Tests.ViewModelTests.EmployeeDetailTests
             _spaceRepositoryMock = new Mock<ISpaceRepository>();
             _roomRepositoryMock = new Mock<IRoomRepository>();
 
-            expectedSpaces = _spaceBuilder.Init(5, 0, 0);
-            expectedRooms = new List<Room>
+            _expectedSpaces = _spaceBuilder.Init(5, 0, 0);
+            _expectedRooms = new List<Room>
             {
                 new Room(1, "naam", Color.Red, Room.RoomType.Workspace),
                 new Room(2, "naam", Color.Blue, Room.RoomType.Kitchen),
@@ -37,8 +37,8 @@ namespace UnleashedApp.Tests.ViewModelTests.EmployeeDetailTests
                 new Room(5, "naam", Color.Yellow, Room.RoomType.Workspace),
             };
 
-            _spaceRepositoryMock.Setup(x => x.GetAllSpaces()).Returns(expectedSpaces);
-            _roomRepositoryMock.Setup(x => x.GetAllRooms()).Returns(expectedRooms);
+            _spaceRepositoryMock.Setup(x => x.GetAllSpaces()).Returns(_expectedSpaces);
+            _roomRepositoryMock.Setup(x => x.GetAllRooms()).Returns(_expectedRooms);
 
             _employeeDetailViewModel = new EmployeeDetailViewModel(_spaceRepositoryMock.Object, _roomRepositoryMock.Object);
         }
@@ -55,14 +55,14 @@ namespace UnleashedApp.Tests.ViewModelTests.EmployeeDetailTests
         public void ConstructorShouldInitSpaces()
         {
             Assert.IsNotNull(_employeeDetailViewModel.Spaces);
-            Assert.AreEqual(expectedSpaces, _employeeDetailViewModel.Spaces);
+            Assert.AreEqual(_expectedSpaces, _employeeDetailViewModel.Spaces);
         }
 
         [Test]
         public void ConstructorShouldInitRooms()
         {
             Assert.IsNotNull(_employeeDetailViewModel.Rooms);
-            Assert.AreEqual(expectedRooms, _employeeDetailViewModel.Rooms);
+            Assert.AreEqual(_expectedRooms, _employeeDetailViewModel.Rooms);
         }
     }
 }
