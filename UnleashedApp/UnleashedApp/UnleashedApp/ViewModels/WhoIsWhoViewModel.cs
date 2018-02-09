@@ -269,16 +269,20 @@ namespace UnleashedApp.ViewModels
             HabitatEmployeeDetailCommand = new Command(async () =>
             {
                 TransferService.Store(SelectedHabitatEmployee);
-                EmployeeDetailView employeeDetailPage = new EmployeeDetailView();
-                employeeDetailPage.BindingContext = SelectedHabitatEmployee;
+                EmployeeDetailView employeeDetailPage = new EmployeeDetailView()
+                {
+                    BindingContext = SelectedHabitatEmployee
+                };
                 await App.NavigationPage.Navigation.PushAsync(employeeDetailPage);
                 SelectedHabitatEmployee = null;
             });
             SquadEmployeeDetailCommand = new Command(async () =>
             {
                 TransferService.Store(SelectedSquadEmployee);
-                EmployeeDetailView employeeDetailPage = new EmployeeDetailView();
-                employeeDetailPage.BindingContext = SelectedSquadEmployee;
+                EmployeeDetailView employeeDetailPage = new EmployeeDetailView()
+                {
+                    BindingContext = SelectedSquadEmployee
+                };
                 await App.NavigationPage.Navigation.PushAsync(employeeDetailPage);
                 SelectedSquadEmployee = null;
             });

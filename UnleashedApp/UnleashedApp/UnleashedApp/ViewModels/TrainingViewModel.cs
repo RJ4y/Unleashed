@@ -32,7 +32,7 @@ namespace UnleashedApp.ViewModels
 
         private void Init()
         {
-            //TrainingList = new ObservableCollection<Training>(_trainingRepository.GetAll());
+            TrainingList = new ObservableCollection<Training>(_trainingRepository.GetAll());
         }
 
         public void Refresh()

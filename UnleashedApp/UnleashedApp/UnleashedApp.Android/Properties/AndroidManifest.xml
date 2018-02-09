@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="Unleashed.Unleashed" android:installLocation="auto" android:versionName="0.4.1" android:versionCode="6">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="Unleashed.Unleashed" android:installLocation="internalOnly" android:versionName="0.4.1" android:versionCode="6">
 	<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="26" />
 	<application android:label="Unleashed" android:icon="@drawable/icon"></application>
 </manifest>

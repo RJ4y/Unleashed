@@ -30,9 +30,11 @@ namespace UnleashedApp
             var splitView = new SplitViewView();
             NavigationPage = new NavigationPage(new NameGameView());
 
-            RootPage = new RootPage();
-            RootPage.Master = splitView;
-            RootPage.Detail = NavigationPage;
+            RootPage = new RootPage()
+            {
+                Master = splitView,
+                Detail = NavigationPage
+            };
             MainPage = RootPage;
         }
 
