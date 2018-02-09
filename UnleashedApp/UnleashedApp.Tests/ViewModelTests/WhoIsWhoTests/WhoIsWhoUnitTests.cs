@@ -88,6 +88,37 @@ namespace UnleashedApp.Tests.ViewModelTests.WhoIsWhoTests
             Assert.IsInstanceOf(typeof(ObservableCollection<Group>), result);
         }
 
+        [Test]
+        public void CallingFilterShouldFilterList()
+        {
+            _whoIsWhoViewModel = new WhoIsWhoViewModel(_navigationServiceMock.Object, _habitatRepositoryMock.Object, _squadRepositoryMock.Object);
+
+            _whoIsWhoViewModel.Filter = "Jan";
+
+            var group = new Group()
+            {
+                Id = 1,
+                Name = "Care"
+            };
+
+            var employee = new Employee
+            {
+                Id = 3,
+                FirstName = "Jan",
+                LastName = "Janssen",
+                HabitatId = 2
+            };
+
+            group.Add(employee);
+
+            var expected = new ObservableCollection<Group>
+            {
+                group
+            };
+
+            Assert.AreEqual(expected.ToString(), _whoIsWhoViewModel.FilteredList.ToString());
+        }
+
         public class HabitatBuilder
         {
             public List<Habitat> InitHabitats()
@@ -140,8 +171,8 @@ namespace UnleashedApp.Tests.ViewModelTests.WhoIsWhoTests
                     new Employee
                     {
                         Id = 3,
-                        FirstName = "Fons",
-                        LastName = "Lambrechts",
+                        FirstName = "Jan",
+                        LastName = "Janssen",
                         HabitatId = 2
                     },
                     new Employee
