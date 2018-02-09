@@ -17,18 +17,21 @@ namespace UnleashedApp.Services
                 randomIndexes.Add(first);
                 randomEmployees.Add(list[first]);
 
-                bool isDone = false;
-                while (!isDone)
+                if (amount > 1)
                 {
-                    int index = random.Next(list.Count);
-                    if (!randomIndexes.Contains(index))
+                    bool isDone = false;
+                    while (!isDone)
                     {
-                        randomIndexes.Add(index);
-                        randomEmployees.Add(list[index]);
-
-                        if (randomIndexes.Count == amount)
+                        int index = random.Next(list.Count);
+                        if (!randomIndexes.Contains(index))
                         {
-                            isDone = true;
+                            randomIndexes.Add(index);
+                            randomEmployees.Add(list[index]);
+
+                            if (randomIndexes.Count == amount)
+                            {
+                                isDone = true;
+                            }
                         }
                     }
                 }

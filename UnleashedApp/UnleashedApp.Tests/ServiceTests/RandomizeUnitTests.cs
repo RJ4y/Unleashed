@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using NUnit.Framework;
 using UnleashedApp.Services;
 
@@ -30,11 +31,14 @@ namespace UnleashedApp.Tests.ServiceTests
             Assert.IsNull(result);
         }
 
+        //Something is wrong, test doesn't finish every now and again
         [Test]
+        [Repeat(10)]
         public void GetSpecifiedAmountOfRandomObjectsFromList_ShouldReturnAmountSpecified()
         {
             var random = new Random();
-            var amount = random.Next(10);
+            var amount = random.Next(9) + 1;
+
             var result = RandomizeService.GetSpecifiedAmountOfRandomObjectsFromList(_list, amount);
 
             Assert.AreEqual(amount, result.Count);

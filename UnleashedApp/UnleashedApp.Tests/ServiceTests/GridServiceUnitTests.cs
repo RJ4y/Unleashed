@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Moq;
 using NUnit.Framework;
 using UnleashedApp.Models;
 using UnleashedApp.Services;
+using Xamarin.Forms;
 
 namespace UnleashedApp.Tests.ServiceTests
 {
@@ -60,6 +62,26 @@ namespace UnleashedApp.Tests.ServiceTests
         }
 
         [Test]
+        public void GetMinifiedSquareGridDimensionsShouldFormSquareIfXIsBiggerThanY()
+        {
+            var random = new Random();
+            var amount = random.Next(50);
+            var minX = random.Next(amount);
+            var minY = random.Next(minX);
+
+            var spaceList = _spaceBuilder.Init(amount, minX, minY);
+
+            var result = GridService.GetMinifiedSquareGridDimensions(spaceList);
+
+            minX = amount - minX + 1;
+            minY = amount - minY + 1;
+            var biggest = minX > minY ? minX : minY;
+
+            Assert.AreEqual(biggest, result.X);
+            Assert.AreEqual(biggest, result.Y);
+        }
+
+        [Test]
         [Repeat(5)]
         public void GetDifferenceAsDimension_ShouldReturnCorrectDimensions()
         {
@@ -89,6 +111,90 @@ namespace UnleashedApp.Tests.ServiceTests
 
             Assert.AreEqual(amount - minY, result.X);
             Assert.AreEqual(amount - minX, result.Y);
+        }
+
+        [Test]
+        public void CreateGridRowDefinitions_ShouldAdd_DimensionYAmountOfRowDefs()
+        {
+            var grid = new Mock<Grid>();
+            var random = new Random();
+            var randomY = random.Next(40);
+
+            var dimension = new Dimensions(2, randomY);
+
+            GridService.CreateGridRowDefinitions(grid.Object, dimension);
+
+            Assert.AreEqual(randomY, grid.Object.RowDefinitions.Count);
+        }
+
+        [Test]
+        public void CreateGridColumnDefinitions_ShouldAdd_DimensionXAmountOfRowDefs()
+        {
+            var grid = new Mock<Grid>();
+            var random = new Random();
+            var randomX = random.Next(40);
+
+            var dimension = new Dimensions(randomX, 2);
+
+            GridService.CreateGridColumnDefinitions(grid.Object, dimension);
+
+            Assert.AreEqual(randomX, grid.Object.ColumnDefinitions.Count);
+        }
+
+        [Test]
+        public void AddColorLabelShouldAddLabelToGrid()
+        {
+            var grid = new Mock<Grid>();
+            var random = new Random();
+            var randomX = random.Next(40);
+            var randomY = random.Next(40);
+
+            var count = grid.Object.Children.Count;
+            GridService.AddColorLabel(grid.Object, randomX, randomY, Color.Red);
+
+            Assert.AreEqual(count + 1, grid.Object.Children.Count);
+        }
+
+        [Test]
+        public void AddColorLabelShouldAddLabelToGridIfFalse()
+        {
+            var grid = new Mock<Grid>();
+            var random = new Random();
+            var randomX = random.Next(40);
+            var randomY = random.Next(40);
+
+            var count = grid.Object.Children.Count;
+            GridService.AddColorLabel(grid.Object, randomX, randomY, Color.Red, false);
+
+            Assert.AreEqual(count + 1, grid.Object.Children.Count);
+        }
+
+        [Test]
+        public void AddTextLabelShouldAddLabelToGrid()
+        {
+            var grid = new Mock<Grid>();
+            var random = new Random();
+            var randomX = random.Next(40);
+            var randomY = random.Next(40);
+
+            var count = grid.Object.Children.Count;
+            GridService.AddTextLabel(grid.Object, randomX, randomY, "test");
+
+            Assert.AreEqual(count + 1, grid.Object.Children.Count);
+        }
+
+        [Test]
+        public void AddTextLabelShouldAddLabelToGridIfFalse()
+        {
+            var grid = new Mock<Grid>();
+            var random = new Random();
+            var randomX = random.Next(40);
+            var randomY = random.Next(40);
+
+            var count = grid.Object.Children.Count;
+            GridService.AddTextLabel(grid.Object, randomX, randomY, "test", false);
+
+            Assert.AreEqual(count + 1, grid.Object.Children.Count);
         }
     }
 

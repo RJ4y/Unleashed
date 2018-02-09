@@ -9,7 +9,7 @@ namespace UnleashedApp.Repositories
         protected static readonly HttpClient Client = new HttpClient();
 
         //Set the base address to the ip of the device/server running the python backend!
-        protected readonly Uri BaseAddress = new Uri("http://10.84.134.18:8000/");
+        protected readonly Uri BaseAddress = new Uri("http://10.84.1.77:8000/");
 
         protected Repository()
         {

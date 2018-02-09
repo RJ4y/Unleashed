@@ -33,12 +33,12 @@ namespace UnleashedApp.Services
             return _spaces;
         }
 
-        internal static void Store(Employee employee)
+        public static void Store(Employee employee)
         {
             _selectedEmployee = employee;
         }
 
-        internal static Employee GetSelectedEmployee()
+        public static Employee GetSelectedEmployee()
         {
             return _selectedEmployee;
         }

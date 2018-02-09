@@ -22,7 +22,7 @@ namespace UnleashedApp.Services
             grid.Children.Add(item);
         }
 
-        internal static void AddColorLabel(Grid grid, int row, int column, Color color, bool isInverted = true)
+        public static void AddColorLabel(Grid grid, int row, int column, Color color, bool isInverted = true)
         {
             Label label = new Label {BackgroundColor = color};
             if (isInverted)
@@ -36,7 +36,7 @@ namespace UnleashedApp.Services
         }
 
 
-        internal static void AddTextLabel(Grid grid, int row, int column, string text, bool isInverted = true)
+        public static void AddTextLabel(Grid grid, int row, int column, string text, bool isInverted = true)
         {
             Label label = new Label {Text = text};
             if (isInverted)
@@ -49,7 +49,7 @@ namespace UnleashedApp.Services
             }
         }
 
-        internal static void CreateGridColumnDefinitions(Grid grid, Dimensions dimensions)
+        public static void CreateGridColumnDefinitions(Grid grid, Dimensions dimensions)
         {
             for (int i = 0; i < dimensions.X; i++)
             {
@@ -60,7 +60,7 @@ namespace UnleashedApp.Services
             }
         }
 
-        internal static void CreateGridRowDefinitions(Grid grid, Dimensions dimensions)
+        public static void CreateGridRowDefinitions(Grid grid, Dimensions dimensions)
         {
             for (int i = 0; i < dimensions.Y; i++)
             {
