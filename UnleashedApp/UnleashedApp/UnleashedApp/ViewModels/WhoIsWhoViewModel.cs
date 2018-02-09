@@ -49,7 +49,7 @@ namespace UnleashedApp.ViewModels
 
         #region LoadData
 
-        public void LoadEmployeesPerHabitat()
+        private void LoadEmployeesPerHabitat()
         {
             List<Habitat> habitats = _habitatRepository.GetAllHabitats();
             if (habitats != null)
@@ -73,7 +73,7 @@ namespace UnleashedApp.ViewModels
             }
         }
 
-        public void LoadEmployeesPerSquad()
+        private void LoadEmployeesPerSquad()
         {
             List<Squad> squads = _squadRepository.GetAllSquads();
             if (squads != null)
@@ -95,6 +95,17 @@ namespace UnleashedApp.ViewModels
                     }
                 }
             }
+        }
+
+        //Exposing for tests
+        public ObservableCollection<Group> GetEmployeesPerHabitat()
+        {
+            return _employeesPerHabitat;
+        }
+
+        public ObservableCollection<Group> GetEmployeesPerSquad()
+        {
+            return _employeesPerSquad;
         }
 
         #endregion

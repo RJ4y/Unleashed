@@ -24,5 +24,7 @@ namespace UnleashedApp.Models
             Id = group.Id;
             Name = group.Name;
         }
+
+        public Group() { }
     }
 }

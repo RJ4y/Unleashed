@@ -27,6 +27,8 @@ namespace UnleashedApp.Models
             Email = email;
         }
 
+        public Employee() { }
+
         [JsonProperty(PropertyName = "id")] public int Id { get; set; }
 
         [JsonProperty(PropertyName = "first_name")]

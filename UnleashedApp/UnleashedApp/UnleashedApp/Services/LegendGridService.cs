@@ -4,7 +4,7 @@ namespace UnleashedApp.Services
 {
     public class LegendGridService
     {
-        internal static void CreateLegendGridRowDefinitions(Grid grid, int amountOfLabels)
+        public static void CreateLegendGridRowDefinitions(Grid grid, int amountOfLabels)
         {
             grid.RowDefinitions.Add(new RowDefinition {Height = new GridLength(4, GridUnitType.Star)});
 
@@ -16,7 +16,7 @@ namespace UnleashedApp.Services
             grid.RowDefinitions.Add(new RowDefinition {Height = new GridLength(4, GridUnitType.Star)});
         }
 
-        internal static void CreateLegendGridColumnDefinitions(Grid grid)
+        public static void CreateLegendGridColumnDefinitions(Grid grid)
         {
             grid.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(2, GridUnitType.Star)});
             grid.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(10, GridUnitType.Star)});

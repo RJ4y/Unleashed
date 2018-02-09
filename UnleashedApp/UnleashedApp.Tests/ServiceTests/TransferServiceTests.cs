@@ -56,5 +56,21 @@ namespace UnleashedApp.Tests.ServiceTests
             Assert.IsTrue(result.Count < spaceList.Count);
             Assert.IsTrue(onlyMatchingSpaces);
         }
+
+        [Test]
+        public void StoreShouldSaveEmployee()
+        {
+            var employee = new Employee
+            {
+                Id = 1,
+                FirstName = "Jan",
+                LastName = "Janssen"
+            };
+
+            TransferService.Store(employee);
+            var result = TransferService.GetSelectedEmployee();
+
+            Assert.AreEqual(employee, result);
+        }
     }
 }
