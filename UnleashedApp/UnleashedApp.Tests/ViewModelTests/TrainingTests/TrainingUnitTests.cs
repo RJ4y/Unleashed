@@ -56,11 +56,13 @@ namespace UnleashedApp.Tests.ViewModelTests.TrainingTests
         [Test]
         public void ConstructorShouldInitTrainingList()
         {
-            _trainingRepoMock.Setup(x => x.GetAll()).Returns(_trainingBuilder.InitList(0));
+            var list = _trainingBuilder.InitList(0);
+            _trainingRepoMock.Setup(x => x.GetAll()).Returns(list);
 
             var trainingViewModel = new TrainingViewModel(_trainingRepoMock.Object);
 
-            Assert.AreNotEqual(null, trainingViewModel.TrainingList);
+            Assert.IsNotNull(trainingViewModel.TrainingList);
+            Assert.AreEqual(list, trainingViewModel.TrainingList);
         }
 
         [Test]

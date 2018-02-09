@@ -19,8 +19,8 @@ namespace UnleashedApp.Tests.ViewModelTests.FloorPlanTests
         private Mock<IRoomRepository> _roomRepositoryMock;
         private FloorplanViewModel _floorplanViewModel;
         private SpaceBuilder _spaceBuilder;
-        private List<Space> expectedSpaces;
-        private List<Room> expectedRooms;
+        private List<Space> _expectedSpaces;
+        private List<Room> _expectedRooms;
 
         [SetUp]
         public void Setup()
@@ -30,8 +30,8 @@ namespace UnleashedApp.Tests.ViewModelTests.FloorPlanTests
             _spaceRepositoryMock = new Mock<ISpaceRepository>();
             _roomRepositoryMock = new Mock<IRoomRepository>();
 
-            expectedSpaces = _spaceBuilder.Init(5, 0, 0);
-            expectedRooms = new List<Room>
+            _expectedSpaces = _spaceBuilder.Init(5, 0, 0);
+            _expectedRooms = new List<Room>
             {
                 new Room(1, "naam", Color.Red, Room.RoomType.Workspace),
                 new Room(2, "naam", Color.Blue, Room.RoomType.Kitchen),
@@ -40,8 +40,8 @@ namespace UnleashedApp.Tests.ViewModelTests.FloorPlanTests
                 new Room(5, "naam", Color.Yellow, Room.RoomType.Workspace),
             };
 
-            _spaceRepositoryMock.Setup(x => x.GetAllSpaces()).Returns(expectedSpaces);
-            _roomRepositoryMock.Setup(x => x.GetAllRooms()).Returns(expectedRooms);
+            _spaceRepositoryMock.Setup(x => x.GetAllSpaces()).Returns(_expectedSpaces);
+            _roomRepositoryMock.Setup(x => x.GetAllRooms()).Returns(_expectedRooms);
         }
 
         [TearDown]
@@ -67,7 +67,7 @@ namespace UnleashedApp.Tests.ViewModelTests.FloorPlanTests
         {
             _floorplanViewModel = new FloorplanViewModel(_navigationServiceMock.Object, _spaceRepositoryMock.Object, _roomRepositoryMock.Object);
 
-            Assert.AreEqual(expectedSpaces, _floorplanViewModel.Spaces);
+            Assert.AreEqual(_expectedSpaces, _floorplanViewModel.Spaces);
         }
 
         [Test]
@@ -75,7 +75,7 @@ namespace UnleashedApp.Tests.ViewModelTests.FloorPlanTests
         {
             _floorplanViewModel = new FloorplanViewModel(_navigationServiceMock.Object, _spaceRepositoryMock.Object, _roomRepositoryMock.Object);
 
-            Assert.AreEqual(expectedRooms, _floorplanViewModel.Rooms);
+            Assert.AreEqual(_expectedRooms, _floorplanViewModel.Rooms);
         }
     }
 }
