@@ -29,7 +29,7 @@
     <ContentPage Title="Squads">
         <StackLayout>
             <StackLayout Padding="10" Margin="0,0,0,-6" BackgroundColor="#c9251d">
-                <SearchBar Text="{ Binding HabitatFilter, Mode=TwoWay }" Placeholder="Search" PlaceholderColor="#fff" TextColor="#fff" CancelButtonColor="#fff" />
+                <SearchBar Text="{ Binding SquadFilter, Mode=TwoWay }" Placeholder="Search" PlaceholderColor="#fff" TextColor="#fff" CancelButtonColor="#fff" />
             </StackLayout>
             <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{ Binding FilteredSquadList }"
                       IsGroupingEnabled="True"

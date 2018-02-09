@@ -162,6 +162,7 @@ namespace UnleashedApp.ViewModels
                     _habitatFilter = value;
                     RaisePropertyChanged("HabitatFilter");
                     FilterHabitatList();
+                    SquadFilter = value;
                 }
             }
         }
@@ -176,6 +177,7 @@ namespace UnleashedApp.ViewModels
                     _squadFilter = value;
                     RaisePropertyChanged("SquadFilter");
                     FilterSquadList();
+                    HabitatFilter = value;
                 }
             }
         }
