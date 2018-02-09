@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Globalization;
+using UnleashedApp.Authentication;
 using UnleashedApp.Models;
+using UnleashedApp.Repositories;
 using UnleashedApp.Repositories.HabitatRepositories;
 using Xamarin.Forms;
 
@@ -10,7 +12,7 @@ namespace UnleashedApp.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Habitat habitat = new HabitatRepository().GetHabitatById((int) value);
+            Habitat habitat = new HabitatRepository(AuthenticationService.Instance, new HttpClientAdapter()).GetHabitatById((int) value);
             return habitat.Name;
         }
 

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
+using UnleashedApp.Contracts;
 using UnleashedApp.Models;
 using UnleashedApp.Models.Serializers;
 using Xamarin.Forms;
@@ -14,12 +15,17 @@ namespace UnleashedApp.Repositories.RoomRepositories
     {
         private List<Room> _rooms;
 
+        public RoomRepository(IAuthenticationService authenticationService, IHttpClientAdapter httpClientAdapter): base(authenticationService, httpClientAdapter)
+        {
+        }
+
         public List<Room> GetAllRooms()
         {
             _rooms = new List<Room>();
             string address = "rooms/";
             try
             {
+                bool addToken = AddAuthenticationHeaderAsync().Result;
                 HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)

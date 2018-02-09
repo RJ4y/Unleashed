@@ -38,8 +38,24 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Contracts\IAuthenticationService.cs" />
+    <Compile Include="Models\TokenRefreshRequest.cs" />
+    <Compile Include="Models\TokenRequest.cs" />
+    <Compile Include="Models\TokenRevokeRequest.cs" />
+    <Compile Include="Repositories\AuthenticationRepositories\AuthenticationHttpClientAdapter.cs" />
+    <Compile Include="Repositories\AuthenticationRepositories\AuthenticationRepository.cs" />
+    <Compile Include="Repositories\AuthenticationRepositories\IAuthenticationHttpClientAdapter.cs" />
+    <Compile Include="Repositories\AuthenticationRepositories\IAuthenticationRepository.cs" />
+    <Compile Include="Repositories\HttpClientAdapter.cs" />
+    <Compile Include="Repositories\IHttpClientAdapter.cs" />
+    <Compile Include="Services\AuthenticationService.cs" />
+    <Compile Include="Authentication\GoogleAuthenticator.cs" />
+    <Compile Include="Models\CustomTokenResponse.cs" />
+    <Compile Include="Models\TokenConvertRequest.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Contracts\INavigationService.cs" />
     <Compile Include="Contracts\ViewModels\IEmployeeDetailViewModel.cs" />
+    <Compile Include="Contracts\ViewModels\ILoginViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IFloorplanViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IRoomViewModel.cs" />
     <Compile Include="Contracts\ViewModels\ITrainingViewModel.cs" />
@@ -85,6 +101,7 @@
     <Compile Include="Services\TransferService.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\EmployeeDetailViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\FloorplanViewModel.cs" />
     <Compile Include="ViewModels\NameGameViewModel.cs" />
     <Compile Include="ViewModels\RoomViewModel.cs" />
@@ -97,6 +114,9 @@
     </Compile>
     <Compile Include="Views\FloorplanView.xaml.cs">
       <DependentUpon>FloorplanView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NameGameView.xaml.cs">
       <DependentUpon>NameGameView.xaml</DependentUpon>
@@ -130,6 +150,9 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PCLCrypto, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d4421c8a4786956c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PCLCrypto.2.0.147\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\PCLCrypto.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.dll</HintPath>
     </Reference>
@@ -138,6 +161,12 @@
     </Reference>
     <Reference Include="System.Net.Http.Primitives, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Validation, Version=2.2.0.0, Culture=neutral, PublicKeyToken=2fc06f0d701809a7, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Validation.2.2.8\lib\portable-net40+sl50+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Validation.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Auth, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.Auth.1.5.0.3\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+XamarinIOS10\Xamarin.Auth.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.5.0.122203\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Core.dll</HintPath>
@@ -196,6 +225,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\TrainingView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\LoginView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
