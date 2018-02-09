@@ -2,7 +2,6 @@
 using UnleashedApp.Contracts;
 using UnleashedApp.Repositories;
 using UnleashedApp.Repositories.AuthenticationRepositories;
-﻿using UnleashedApp.Contracts;
 using UnleashedApp.Repositories.EmployeeRepositories;
 using UnleashedApp.Repositories.HabitatRepositories;
 using UnleashedApp.Repositories.RoomRepositories;
@@ -18,8 +17,8 @@ namespace UnleashedApp
     {
         private static ViewModelLocator _instance;
 
+        public SplitViewViewModel SplitViewViewModel { get; }
         public LoginViewModel LoginViewModel { get; }
-        public MenuViewModel MenuViewModel { get; }
         public WhoIsWhoViewModel WhoIsWhoViewModel { get; }
         public TrainingViewModel TrainingViewModel { get; }
         public EmployeeDetailViewModel EmployeeDetailViewModel { get; }
@@ -42,8 +41,8 @@ namespace UnleashedApp
             ITrainingRepository trainingRepository = new TrainingRepository(authenticationService, httpClientAdapter);
             IAuthenticationRepository authenticationRepository = new AuthenticationRepository(authenticationService, httpClientAdapter, new AuthenticationHttpClientAdapter(authenticationService, httpClientAdapter));
 
-            MenuViewModel = new MenuViewModel(navigationService, authenticationService, authenticationRepository);
-            WhoIsWhoViewModel = new WhoIsWhoViewModel(navigationService, habitatRepository, squadRepository);
+            SplitViewViewModel = new SplitViewViewModel(navigationService, authenticationService, authenticationRepository);
+            WhoIsWhoViewModel = new WhoIsWhoViewModel(habitatRepository, squadRepository);
             FloorplanViewModel = new FloorplanViewModel(navigationService, spaceRepository, roomRepository);
             TrainingViewModel = new TrainingViewModel(trainingRepository);
             RoomViewModel = new RoomViewModel(navigationService, employeeRepository);

@@ -7,7 +7,7 @@ using UnleashedApp.ViewModels;
 
 namespace UnleashedApp.Tests.ViewModelTests.RoomTests
 {
-    [TestFixture()]
+    [TestFixture]
     public class RoomUnitTests
     {
         private Mock<INavigationService> _navigationMock;

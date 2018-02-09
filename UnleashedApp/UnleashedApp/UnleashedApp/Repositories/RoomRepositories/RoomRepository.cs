@@ -13,7 +13,7 @@ namespace UnleashedApp.Repositories.RoomRepositories
 {
     public class RoomRepository : Repository, IRoomRepository
     {
-        private List<Room> _rooms = new List<Room>();
+        private List<Room> _rooms;
 
         public RoomRepository(IAuthenticationService authenticationService, IHttpClientAdapter httpClientAdapter): base(authenticationService, httpClientAdapter)
         {
@@ -21,6 +21,7 @@ namespace UnleashedApp.Repositories.RoomRepositories
 
         public List<Room> GetAllRooms()
         {
+            _rooms = new List<Room>();
             string address = "rooms/";
             try
             {

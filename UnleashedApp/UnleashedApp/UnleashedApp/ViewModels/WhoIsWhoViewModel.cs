@@ -18,28 +18,26 @@ namespace UnleashedApp.ViewModels
     {
         private readonly IHabitatRepository _habitatRepository;
         private readonly ISquadRepository _squadRepository;
-        private readonly INavigationService _navigationService;
 
-        private static ObservableCollection<Group> _filteredList;
+        private static ObservableCollection<Group> _filteredHabitatList;
+        private static ObservableCollection<Group> _filteredSquadList;
         private static ObservableCollection<Group> _employeesPerHabitat;
         private static ObservableCollection<Group> _employeesPerSquad;
-        private static Employee _selectedEmployee;
-        private static string _filter;
+        private static Employee _selectedHabitatEmployee;
+        private static Employee _selectedSquadEmployee;
+        private static string _habitatFilter;
+        private static string _squadFilter;
+        private bool _shouldLoadHabitatData = true;
+        private bool _shouldLoadSquadData = true;
 
-        private static bool _isSortingHabitats = true;
-        private static bool _shouldLoadHabitatData = true;
-        private static bool _shouldLoadSquadData = true;
-
-        public ICommand EmployeeDetailCommand { get; set; }
-        public ICommand HabitatCommand { get; set; }
-        public ICommand SquadCommand { get; set; }
+        public ICommand HabitatEmployeeDetailCommand { get; set; }
+        public ICommand SquadEmployeeDetailCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public WhoIsWhoViewModel(INavigationService navigationService, IHabitatRepository habitatRepository,
+        public WhoIsWhoViewModel(IHabitatRepository habitatRepository,
             ISquadRepository squadRepository)
         {
-            _navigationService = navigationService;
             _habitatRepository = habitatRepository;
             _squadRepository = squadRepository;
             InitialiseCommands();
@@ -121,36 +119,72 @@ namespace UnleashedApp.ViewModels
 
         #region Properties 
 
-        public ObservableCollection<Group> FilteredList
+        public ObservableCollection<Group> FilteredHabitatList
         {
-            get => _filteredList;
+            get => _filteredHabitatList;
             set
             {
-                _filteredList = value;
-                RaisePropertyChanged(nameof(FilteredList));
+                _filteredHabitatList = value;
+                RaisePropertyChanged(nameof(FilteredHabitatList));
             }
         }
 
-        public Employee SelectedEmployee
+        public ObservableCollection<Group> FilteredSquadList
         {
-            get => _selectedEmployee;
+            get => _filteredSquadList;
             set
             {
-                _selectedEmployee = value;
-                RaisePropertyChanged(nameof(SelectedEmployee));
+                _filteredSquadList = value;
+                RaisePropertyChanged(nameof(FilteredSquadList));
             }
         }
 
-        public string Filter
+        public Employee SelectedHabitatEmployee
         {
-            get => _filter;
+            get => _selectedHabitatEmployee;
             set
             {
-                if (_filter != value)
+                _selectedHabitatEmployee = value;
+                RaisePropertyChanged(nameof(SelectedHabitatEmployee));
+            }
+        }
+
+        public Employee SelectedSquadEmployee
+        {
+            get => _selectedSquadEmployee;
+            set
+            {
+                _selectedSquadEmployee = value;
+                RaisePropertyChanged(nameof(SelectedSquadEmployee));
+            }
+        }
+
+        public string HabitatFilter
+        {
+            get => _habitatFilter;
+            set
+            {
+                if (_habitatFilter != value)
                 {
-                    _filter = value;
-                    RaisePropertyChanged("Filter");
-                    FilterList();
+                    _habitatFilter = value;
+                    RaisePropertyChanged("HabitatFilter");
+                    FilterHabitatList();
+                    SquadFilter = value;
+                }
+            }
+        }
+
+        public string SquadFilter
+        {
+            get => _squadFilter;
+            set
+            {
+                if (_squadFilter != value)
+                {
+                    _squadFilter = value;
+                    RaisePropertyChanged("SquadFilter");
+                    FilterSquadList();
+                    HabitatFilter = value;
                 }
             }
         }
@@ -162,21 +196,21 @@ namespace UnleashedApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void FilterList()
+        private void FilterHabitatList()
         {
-            RefreshFilteredList();
+            RefreshFilteredHabitatList();
 
-            if (!String.IsNullOrEmpty(_filter))
+            if (!String.IsNullOrEmpty(_habitatFilter))
             {
                 List<Group> toBeRemovedGroups = new List<Group>();
 
-                foreach (Group group in _filteredList)
+                foreach (Group group in _filteredHabitatList)
                 {
                     ObservableCollection<Employee> matchedEmployees = new ObservableCollection<Employee>();
 
                     foreach (Employee employee in group)
                     {
-                        if (employee.FullName.ToLower().Contains(Filter.ToLower()))
+                        if (employee.FullName.ToLower().Contains(HabitatFilter.ToLower()))
                         {
                             matchedEmployees.Add(employee);
                         }
@@ -197,9 +231,52 @@ namespace UnleashedApp.ViewModels
 
                 foreach (Group group in toBeRemovedGroups)
                 {
-                    if (_filteredList.Contains(group))
+                    if (_filteredHabitatList.Contains(group))
                     {
-                        _filteredList.Remove(group);
+                        _filteredHabitatList.Remove(group);
+                    }
+                }
+            }
+        }
+
+        private void FilterSquadList()
+        {
+            RefreshFilteredSquadList();
+
+            if (!String.IsNullOrEmpty(_squadFilter))
+            {
+                List<Group> toBeRemovedGroups = new List<Group>();
+
+                foreach (Group group in _filteredSquadList)
+                {
+                    ObservableCollection<Employee> matchedEmployees = new ObservableCollection<Employee>();
+
+                    foreach (Employee employee in group)
+                    {
+                        if (employee.FullName.ToLower().Contains(SquadFilter.ToLower()))
+                        {
+                            matchedEmployees.Add(employee);
+                        }
+                    }
+
+                    group.Clear();
+
+                    foreach (Employee employee in matchedEmployees)
+                    {
+                        group.Add(employee);
+                    }
+
+                    if (group.Count == 0)
+                    {
+                        toBeRemovedGroups.Add(group);
+                    }
+                }
+
+                foreach (Group group in toBeRemovedGroups)
+                {
+                    if (_filteredSquadList.Contains(group))
+                    {
+                        _filteredSquadList.Remove(group);
                     }
                 }
             }
@@ -209,65 +286,74 @@ namespace UnleashedApp.ViewModels
 
         private void InitialiseCommands()
         {
-            EmployeeDetailCommand = new Command(async () =>
+            HabitatEmployeeDetailCommand = new Command(async () =>
             {
-                TransferService.Store(SelectedEmployee);
-                EmployeeDetailView employeeDetailPage = new EmployeeDetailView();
-                employeeDetailPage.BindingContext = SelectedEmployee;
-                await _navigationService.PushAsync(employeeDetailPage);
-                SelectedEmployee = null;
+                TransferService.Store(SelectedHabitatEmployee);
+                EmployeeDetailView employeeDetailPage = new EmployeeDetailView()
+                {
+                    BindingContext = SelectedHabitatEmployee
+                };
+                await App.NavigationPage.Navigation.PushAsync(employeeDetailPage);
+                SelectedHabitatEmployee = null;
             });
-            HabitatCommand = new Command(() =>
+            SquadEmployeeDetailCommand = new Command(async () =>
             {
-                if (_shouldLoadHabitatData)
+                TransferService.Store(SelectedSquadEmployee);
+                EmployeeDetailView employeeDetailPage = new EmployeeDetailView()
                 {
-                    LoadEmployeesPerHabitat();
-                }
-                else
-                {
-                    _isSortingHabitats = true;
-                }
-
-                RefreshFilteredList();
-                RefreshFilter();
-            });
-            SquadCommand = new Command(() =>
-            {
-                if (_shouldLoadSquadData)
-                {
-                    LoadEmployeesPerSquad();
-                }
-
-                _isSortingHabitats = false;
-                RefreshFilteredList();
-                RefreshFilter();
+                    BindingContext = SelectedSquadEmployee
+                };
+                await App.NavigationPage.Navigation.PushAsync(employeeDetailPage);
+                SelectedSquadEmployee = null;
             });
         }
 
         #endregion
 
-        public void RefreshFilteredList()
+        public void RefreshFilteredHabitatList()
         {
-            if (_isSortingHabitats)
+            CopyObservableCollectionToFilteredHabitatList(_employeesPerHabitat);
+        }
+
+        public void RefreshFilteredSquadList()
+        {
+            CopyObservableCollectionToFilteredSquadList(_employeesPerSquad);
+        }
+
+        private void RefreshFilterHabitat()
+        {
+            string memory = HabitatFilter;
+            HabitatFilter = "";
+            HabitatFilter = memory;
+        }
+
+        private void RefreshFilterSquad()
+        {
+            string memory = SquadFilter;
+            SquadFilter = "";
+            SquadFilter = memory;
+        }
+
+        private void CopyObservableCollectionToFilteredHabitatList(ObservableCollection<Group> employeesPerGroup)
+        {
+            FilteredHabitatList = new ObservableCollection<Group>();
+            foreach (Group group in employeesPerGroup)
             {
-                CopyObservableCollectionToFilteredList(_employeesPerHabitat);
-            }
-            else
-            {
-                CopyObservableCollectionToFilteredList(_employeesPerSquad);
+                Group g = new Group(group);
+                foreach (Employee e in group)
+                {
+                    g.Add(new Employee(e.Id, e.FirstName, e.LastName, e.Function, e.HabitatId, e.StartDate, e.EndDate,
+                        e.VisibleSite, e.PictureUrl,
+                        e.Motivation, e.Expectations, e.NeedToKnow, e.DateOfBirth, e.Gender, e.Email));
+                }
+
+                FilteredHabitatList.Add(g);
             }
         }
 
-        public void RefreshFilter()
+        private void CopyObservableCollectionToFilteredSquadList(ObservableCollection<Group> employeesPerGroup)
         {
-            string memory = Filter;
-            Filter = "";
-            Filter = memory;
-        }
-
-        private void CopyObservableCollectionToFilteredList(ObservableCollection<Group> employeesPerGroup)
-        {
-            FilteredList = new ObservableCollection<Group>();
+            FilteredSquadList = new ObservableCollection<Group>();
             if (employeesPerGroup != null)
             {
                 foreach (Group group in employeesPerGroup)
@@ -281,7 +367,7 @@ namespace UnleashedApp.ViewModels
                             e.Motivation, e.Expectations, e.NeedToKnow, e.DateOfBirth, e.Gender, e.Email));
                     }
 
-                    FilteredList.Add(g);
+                    FilteredSquadList.Add(g);
                 }
             }
         }

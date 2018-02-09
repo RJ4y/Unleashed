@@ -50,7 +50,7 @@ namespace UnleashedApp.Models
 
         [JsonProperty(PropertyName = "end_date")]
         public DateTime? EndDate { get; set; }
-
+        
         [JsonProperty(PropertyName = "visible_site")]
         public bool VisibleSite { get; set; }
 

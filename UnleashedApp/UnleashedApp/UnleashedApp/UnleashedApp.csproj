@@ -57,7 +57,6 @@
     <Compile Include="Contracts\ViewModels\IEmployeeDetailViewModel.cs" />
     <Compile Include="Contracts\ViewModels\ILoginViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IFloorplanViewModel.cs" />
-    <Compile Include="Contracts\ViewModels\IMenuViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IRoomViewModel.cs" />
     <Compile Include="Contracts\ViewModels\ITrainingViewModel.cs" />
     <Compile Include="Contracts\ViewModels\IWhoIsWhoViewModel.cs" />
@@ -67,9 +66,11 @@
     <Compile Include="Models\Dimensions.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Habitat.cs" />
+    <Compile Include="Models\MasterItem.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\Serializers\SerializableEmployee.cs" />
     <Compile Include="Models\Serializers\SerializableRoom.cs" />
+    <Compile Include="Models\Serializers\SerializableSpace.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Space.cs" />
     <Compile Include="Models\Squad.cs" />
@@ -102,9 +103,9 @@
     <Compile Include="ViewModels\EmployeeDetailViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\FloorplanViewModel.cs" />
-    <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\NameGameViewModel.cs" />
     <Compile Include="ViewModels\RoomViewModel.cs" />
+    <Compile Include="ViewModels\SplitViewViewModel.cs" />
     <Compile Include="ViewModels\TrainingViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\WhoIsWhoViewModel.cs" />
@@ -117,14 +118,17 @@
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MenuView.xaml.cs">
-      <DependentUpon>MenuView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\NameGameView.xaml.cs">
       <DependentUpon>NameGameView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RoomView.xaml.cs">
       <DependentUpon>RoomView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RootView.xaml.cs">
+      <DependentUpon>RootView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplitViewView.xaml.cs">
+      <DependentUpon>SplitViewView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TrainingView.xaml.cs">
       <DependentUpon>TrainingView.xaml</DependentUpon>
@@ -178,12 +182,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\MenuView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Views\WhoIsWhoView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
@@ -204,6 +202,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Views\EmployeeDetailView.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\SplitViewView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\RootView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

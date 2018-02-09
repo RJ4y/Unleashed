@@ -4,6 +4,7 @@ namespace UnleashedApp.Contracts.ViewModels
 {
     public interface IWhoIsWhoViewModel
     {
-        ICommand EmployeeDetailCommand { get; set; }
+        ICommand HabitatEmployeeDetailCommand { get; set; }
+        ICommand SquadEmployeeDetailCommand { get; set; }
     }
 }

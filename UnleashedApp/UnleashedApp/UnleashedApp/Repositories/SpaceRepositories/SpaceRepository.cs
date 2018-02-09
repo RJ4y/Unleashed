@@ -10,7 +10,7 @@ namespace UnleashedApp.Repositories.SpaceRepositories
 {
     public class SpaceRepository : Repository, ISpaceRepository
     {
-        private List<Space> _spaces = new List<Space>();
+        private List<Space> _spaces;
 
         public SpaceRepository(IAuthenticationService authenticationService, IHttpClientAdapter httpClientAdapter) : base(authenticationService, httpClientAdapter)
         {
@@ -18,6 +18,7 @@ namespace UnleashedApp.Repositories.SpaceRepositories
 
         public List<Space> GetAllSpaces()
         {
+            _spaces = new List<Space>();
             string address = "spaces/";
             try
             {
@@ -27,6 +28,14 @@ namespace UnleashedApp.Repositories.SpaceRepositories
                 if (response.IsSuccessStatusCode)
                 {
                     string resultString = response.Content.ReadAsStringAsync().Result;
+                    
+                    List<SerializableSpace> spaces = JsonConvert.DeserializeObject<List<SerializableSpace>>(resultString);
+                    foreach (SerializableSpace s in spaces)
+                    {
+                        Space space = new Space(s.XCoord, s.YCoord, s.EmployeeId, s.Room);
+                        _spaces.Add(space);
+                    }
+                    
                     _spaces = JsonConvert.DeserializeObject<List<Space>>(resultString);
                 }
             }

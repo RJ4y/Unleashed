@@ -6,7 +6,7 @@ using Xamarin.Forms.Xaml;
 namespace UnleashedApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class WhoIsWhoView: ContentPage
+    public partial class WhoIsWhoView: TabbedPage
     {
         public WhoIsWhoView()
         {
@@ -21,28 +21,10 @@ namespace UnleashedApp.Views
             if (BindingContext != null)
             {
                 ((WhoIsWhoViewModel)BindingContext).LoadEmployeesPerHabitat();
-                ((WhoIsWhoViewModel)BindingContext).RefreshFilteredList();
+                ((WhoIsWhoViewModel)BindingContext).RefreshFilteredHabitatList();
+                ((WhoIsWhoViewModel) BindingContext).RefreshFilteredSquadList();
                 ((WhoIsWhoViewModel)BindingContext).LoadEmployeesPerSquad();
-                ((WhoIsWhoViewModel)BindingContext).RefreshFilter();
             }
-        }
-
-        private void HabitatButtonClicked(object sender, EventArgs args)
-        {
-            Button button = (Button)sender;
-            button.BackgroundColor = Color.DodgerBlue;
-            button.TextColor = Color.White;
-            SquadButton.BackgroundColor = Color.White;
-            SquadButton.TextColor = Color.DodgerBlue;
-        }
-
-        private void SquadButtonClicked(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-            button.BackgroundColor = Color.DodgerBlue;
-            button.TextColor = Color.White;
-            HabitatButton.BackgroundColor = Color.White;
-            HabitatButton.TextColor = Color.DodgerBlue;
         }
     }
 }
