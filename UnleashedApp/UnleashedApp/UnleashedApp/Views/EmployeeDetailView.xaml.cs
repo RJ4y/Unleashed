@@ -9,6 +9,7 @@ namespace UnleashedApp.Views
         public EmployeeDetailView()
         {
             InitializeComponent();
+            BindingContext = ViewModelLocator.Instance.EmployeeDetailViewModel;
         }
     }
 }

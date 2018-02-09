@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace UnleashedApp.Models
 {
-    public class Group
+    public class Group : ObservableCollection<Employee>
     {
         public int Id { get; set; }
         public String Name { get; set; }

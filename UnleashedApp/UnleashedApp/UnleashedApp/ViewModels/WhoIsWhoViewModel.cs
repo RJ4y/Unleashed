@@ -1,75 +1,257 @@
-﻿using System;
 using System.Collections.Generic;
+using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows.Input;
 using UnleashedApp.Contracts.ViewModels;
 using UnleashedApp.Models;
 using UnleashedApp.Repositories.HabitatRepositories;
 using UnleashedApp.Repositories.SquadRepositories;
+using UnleashedApp.Views;
 using Xamarin.Forms;
 
 namespace UnleashedApp.ViewModels
 {
-    public class WhoIsWhoViewModel : ViewModelBase, IWhoIsWhoViewModel
+    public class WhoIsWhoViewModel : INotifyPropertyChanged, IWhoIsWhoViewModel
     {
+        #region Variables
         private IHabitatRepository _habitatRepository;
         private ISquadRepository _squadRepository;
-        public Habitat Habitat { get; set; }
-        public List<Habitat> Habitats { get; set; }
-        public List<Squad> Squads { get; set; }
-        public List<Group> Groups { get; set; }
-        public List<Employee> HabitatEmployeeList { get; set; }
-        //public List<Employee> Employees { get; set; }
-        public ObservableCollection<Employee> Employees { get; set; }
-        //public ICommand HabitatCommand { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        private readonly INavigationService _navigationService;
+        private ObservableCollection<Employee> _employees;
+        private ObservableCollection<Group> _groupedList;
+        private ObservableCollection<Group> _filteredList;
+        public ICommand EmployeeDetailCommand { get; set; }
+        public ICommand HabitatCommand { get; set; }
+        public ICommand SquadCommand { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
 
         public WhoIsWhoViewModel(INavigationService navigationService, IHabitatRepository habitatRepository, ISquadRepository squadRepository)
         {
-            //InitialiseComponents(messagingCenter, navigationService);
-            //InitialiseNavigation();
-            //InitialiseCommands();
+            _navigationService = navigationService;
             _habitatRepository = habitatRepository;
             _squadRepository = squadRepository;
-            LoadData();
+            InitialiseCommands();
+            LoadHabitats();
         }
 
-        public void LoadData()
+        #region LoadData
+        public void LoadHabitats()
         {
-            /*Habitats = _habitatRepository.GetAllHabitats();
-            Squads = _squadRepository.GetAllSquads();
+            var habitats = _habitatRepository.GetAllHabitats();
 
-            foreach (Habitat habitat in Habitats)
+            if (habitats != null)
             {
-                Groups.Add(habitat);
-            } */
-            if(_habitatRepository.GetEmployees(1) != null)
+                GroupedList = new ObservableCollection<Group>();
+
+                foreach (Habitat habitat in habitats)
+                {
+                    var group = new Group
+                    {
+                        Id = habitat.Id,
+                        Name = habitat.Name
+                    };
+
+                    GroupedList.Add(group);
+                }
+
+                foreach (Group group in GroupedList)
+                {
+                    var employees = _habitatRepository.GetEmployees(group.Id);
+
+                    if (employees != null && employees.Count > 0)
+
+                        foreach (Employee employee in employees)
+                        {
+                            {
+                                group.Add(employee);
+                            }
+                        }
+                }
+            }
+        }
+
+        public void LoadSquads()
+        {
+            var squads = _squadRepository.GetAllSquads();
+            GroupedList = new ObservableCollection<Group>();
+
+            foreach (Squad squad in squads)
             {
-                Employees = new ObservableCollection<Employee>(_habitatRepository.GetEmployees(1));
+                var group = new Group
+                {
+                    Id = squad.Id,
+                    Name = squad.Name
+                };
+
+                GroupedList.Add(group);
             }
 
-            //Employees = _squadRepository.GetEmployees(1);
+            foreach (Group group in GroupedList)
+            {
+                var employees = _squadRepository.GetEmployees(group.Id);
+
+                foreach (Employee employee in employees)
+                {
+                    group.Add(employee);
+                }
+            }
+
+            InitialiseFilteredList();
+        }
+        #endregion
+
+        #region Properties
+        public ObservableCollection<Group> GroupedList
+        {
+            get => _groupedList;
+            set
+            {
+                _groupedList = value;
+                RaisePropertyChanged(nameof(GroupedList));
+            }
         }
 
-        public void ProvideEmployeesPerHabitat(int id)
+        public ObservableCollection<Group> FilteredList
         {
-            HabitatEmployeeList = _habitatRepository.GetEmployees(id);
+            get => _filteredList;
+            set
+            {
+                _filteredList = value;
+                RaisePropertyChanged(nameof(FilteredList));
+            }
         }
-             
-        /* private void InitialiseNavigation()
-        {
-            MessagingCenter.Subscribe<MenuViewModel, CurrentUser>(this, Constants.Values.SHOW_QR_NAVIGATION_LINK, (sender, data) =>
-            {
-                User = data;
-                Contents = CreateImageSourceFromId();
-            });
-        } */
 
-        /* private void InitialiseCommands()
+        public ObservableCollection<Employee> Employees
         {
-            HabitatCommand = new Command(async () =>
+            get => _employees;
+            set
             {
-                await NavigationService.PushAsync(nameof(MenuView));
+                _employees = value;
+                RaisePropertyChanged(nameof(Employees));
+            }
+        }
+
+        private Employee _selectedEmployee;
+        public Employee SelectedEmployee
+        {
+            get => _selectedEmployee;
+            set
+            {
+                _selectedEmployee = value;
+                RaisePropertyChanged(nameof(SelectedEmployee));
+            }
+        }
+
+        private string _filter;
+        public string Filter
+        {
+            get
+            {
+                return _filter;
+            }
+            set
+            {
+                if (_filter != value)
+                {
+                    _filter = value;
+                    RaisePropertyChanged("Filter");
+                    FilterList();
+                }
+            }
+        }
+        #endregion
+
+        private void RaisePropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void FilterList()
+        {
+            if (_groupedList != null)
+            {
+                if (String.IsNullOrEmpty(_filter))
+                {
+                    InitialiseFilteredList();
+                }
+                else
+                {
+                    InitialiseFilteredList();
+
+                    foreach (Group group in FilteredList)
+                    {
+                        ObservableCollection<Employee> temp = new ObservableCollection<Employee>();
+
+                        foreach (Employee emp in group)
+                        {
+                            if (emp.FullName.ToLower().Contains(Filter.ToLower()))
+                            {
+                                temp.Add(emp);
+                            }
+                        }
+
+                        group.Clear();
+                        foreach (Employee emp in temp)
+                        {
+                            group.Add(emp);
+                        }
+                    }
+                }
+            }
+        }
+
+        #region Initialisation
+        private void InitialiseCommands()
+        {
+            EmployeeDetailCommand = new Command(async () =>
+            {
+                var empDetailPage = new EmployeeDetailView();
+                empDetailPage.BindingContext = SelectedEmployee;
+
+                await _navigationService.PushAsync(empDetailPage);
+                SelectedEmployee = null;
             });
-        } */
+            HabitatCommand = new Command(() =>
+            {
+                LoadHabitats();
+            });
+            SquadCommand = new Command(() =>
+            {
+                LoadSquads();
+            });
+        }
+
+        private void InitialiseFilteredList()
+        {
+            FilteredList = new ObservableCollection<Group>();
+
+            foreach (Group group in GroupedList)
+            {
+                var gr = new Group();
+                gr.Id = group.Id;
+                gr.Name = group.Name;
+
+                foreach (Employee employee in group)
+                {
+                    var emp = new Employee();
+                    emp.Id = employee.Id;
+                    emp.FirstName = employee.FirstName;
+                    emp.LastName = employee.LastName;
+                    emp.StartDate = employee.StartDate;
+                    emp.EndDate = employee.EndDate;
+                    emp.Function = employee.Function;
+                    emp.Habitat_Id = employee.Habitat_Id;
+
+                    gr.Add(emp);
+                }
+
+                FilteredList.Add(gr);
+            }
+        }
+        #endregion
     }
 }

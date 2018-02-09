@@ -20,11 +20,11 @@ namespace UnleashedApp.Repositories.HabitatRepositories
 
         public List<Habitat> GetAllHabitats()
         {
-            var address = "habitats";
-            AddAuthenticationHeaderAsync();
+            string address = "habitats/";
 
             try
             {
+                bool addToken = AddAuthenticationHeaderAsync().Result;
                 HttpResponseMessage response = _client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
@@ -37,17 +37,16 @@ namespace UnleashedApp.Repositories.HabitatRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
-
             return _habitats;
         }
 
         public Habitat GetHabitatById(int id)
         {
-            var address = "habitats/" + id;
-            AddAuthenticationHeaderAsync();
-
+            string address = "habitats/" + id + "/";
+            
             try
             {
+                bool addToken = AddAuthenticationHeaderAsync().Result;
                 HttpResponseMessage response = _client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
@@ -60,20 +59,19 @@ namespace UnleashedApp.Repositories.HabitatRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
-
             return _habitat;
         }
 
         public List<Employee> GetEmployees(int id)
         {
-            var address = "habitats/" + id + "/employees/";
-            AddAuthenticationHeaderAsync();
-
+            string address = "habitats/" + id + "/employees/";
+            
             try
             {
+                bool addToken = AddAuthenticationHeaderAsync().Result;
                 HttpResponseMessage response = _client.GetAsync(address).Result;
 
-                if(response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
                     string resultString = response.Content.ReadAsStringAsync().Result;
                     _employees = JsonConvert.DeserializeObject<List<Employee>>(resultString);

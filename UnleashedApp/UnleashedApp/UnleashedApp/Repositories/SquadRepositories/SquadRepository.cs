@@ -20,11 +20,11 @@ namespace UnleashedApp.Repositories.SquadRepositories
 
         public List<Squad> GetAllSquads()
         {
-            var address = "employees";
-            AddAuthenticationHeaderAsync();
-
+            string address = "squads/";
+            
             try
             {
+                bool addToken = AddAuthenticationHeaderAsync().Result;
                 HttpResponseMessage response = _client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
@@ -37,17 +37,16 @@ namespace UnleashedApp.Repositories.SquadRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
-
             return _squads;
         }
 
         public Squad GetSquadById(int id)
         {
-            var address = "squads/" + id;
-            AddAuthenticationHeaderAsync();
+            string address = "squads/" + id + "/";
 
             try
             {
+                bool addToken = AddAuthenticationHeaderAsync().Result;
                 HttpResponseMessage response = _client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
@@ -60,31 +59,28 @@ namespace UnleashedApp.Repositories.SquadRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
-
             return _squad;
         }
 
         public List<Employee> GetEmployees(int id)
         {
-            var address = "squads/" + id + "/employees";
-            AddAuthenticationHeaderAsync();
+            string address = "squads/" + id + "/employees/";
 
             try
             {
+                bool addToken = AddAuthenticationHeaderAsync().Result;
                 HttpResponseMessage response = _client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
                     string resultString = response.Content.ReadAsStringAsync().Result;
-                    List<Temp> rootObjects = JsonConvert.DeserializeObject<List<Temp>>(resultString);
+                    List<TempEmployee> rootObjects = JsonConvert.DeserializeObject<List<TempEmployee>>(resultString);
                     _employees = new List<Employee>();
 
-                    foreach(Temp root in rootObjects)
+                    foreach (TempEmployee root in rootObjects)
                     {
                         _employees.Add(root.Employee);
                     }
-
-                    //_employees = JsonConvert.DeserializeObject<List<Employee>>(resultString);
                 }
             }
             catch (AggregateException e)

@@ -12,7 +12,7 @@ namespace UnleashedApp
         public const string APP_NAME = "Unleashed";
         public const string CLIENT_ID = "213697302597-efe8ekru9nue7ihl2qocfbe0j8dgmqcp.apps.googleusercontent.com";
         public const string REDIRECT_SCHEME = "com.googleusercontent.apps.213697302597-efe8ekru9nue7ihl2qocfbe0j8dgmqcp";
-        public const string BASE_API_URL = "http://10.84.134.33:8000/";
+        public const string BASE_API_URL = "http://10.84.134.64:8000/";
         public const string REFRESH_URL = "auth/token";
 
         public const string ACCOUNT_PROPERTY_ACCESS_TOKEN = "API_token";

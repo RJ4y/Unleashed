@@ -2,7 +2,7 @@
 
 namespace UnleashedApp.Contracts.ViewModels
 {
-    public interface IWhoIsWhoViewModel
+    public interface IRoomViewModel
     {
         ICommand EmployeeDetailCommand { get; set; }
     }

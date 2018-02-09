@@ -8,14 +8,12 @@ namespace UnleashedApp
 {
     public class NavigationService : INavigationService
     {
-        //properties:
         private INavigation _navigation;
         public INavigation NavigationContext
         {
             set => _navigation = value;
         }
 
-        //methods:
         private void PreventNullReferenceMethod()
         {
             if (_navigation == null)
@@ -25,38 +23,36 @@ namespace UnleashedApp
         public Task<Page> PopAsync()
         {
             PreventNullReferenceMethod();
-
             return _navigation.PopAsync();
         }
 
         public Task<Page> PopModalAsync()
         {
             PreventNullReferenceMethod();
-
             return _navigation.PopModalAsync();
         }
 
         public Task PushAsync(string pageName)
         {
             PreventNullReferenceMethod();
-
             return _navigation.PushAsync(GetPage(pageName));
+        }
+
+        public Task PushAsync(Page page) {
+            return _navigation.PushAsync(page);
         }
 
         public Task PushModalAsync(string pageName, object objectToPass)
         {
             PreventNullReferenceMethod();
             ContentPage page = GetPage(pageName, objectToPass);
-
             return _navigation.PushModalAsync(page);
         }
 
         public Task PushModalAsync(string pageName)
         {
             PreventNullReferenceMethod();
-
             var contentPage = GetPage(pageName);
-
             //avoid showing the same modal twice
             var contentPageType = contentPage.GetType();
             if (_navigation.ModalStack.Any(p => p.GetType() == contentPageType))
@@ -74,8 +70,11 @@ namespace UnleashedApp
                 case nameof(MenuView): return new MenuView();
                 case nameof(WhoIsWhoView): return new WhoIsWhoView();
                 case nameof(LoginView): return new LoginView();
+                case nameof(FloorplanView): return new FloorplanView();
+                case nameof(RoomView): return new RoomView();
+                case nameof(EmployeeDetailView): return new EmployeeDetailView();
+                case nameof(NameGameView): return new NameGameView();
             }
-
             return null;
         }
 

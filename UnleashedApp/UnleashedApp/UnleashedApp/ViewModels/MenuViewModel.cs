@@ -16,13 +16,15 @@ namespace UnleashedApp.ViewModels
         private readonly IAuthenticationRepository _authenticationRepository;
 
         public ICommand WhoIsWhoCommand { get; set; }
+        public ICommand FloorplanCommand { get; set; }
+        public ICommand NameGameCommand { get; set; }
         public ICommand LogOutCommand { get; set; }
 
         public MenuViewModel(INavigationService navigationService, IAuthenticationService authenticationService, IAuthenticationRepository authenticationRepository)
         {
             _navigationService = navigationService;
-            _authenticationService = authenticationService;
             _authenticationRepository = authenticationRepository;
+            _authenticationService = authenticationService;
             InitialiseCommands();
         }
 
@@ -32,20 +34,26 @@ namespace UnleashedApp.ViewModels
             {
                 await _navigationService.PushAsync(nameof(WhoIsWhoView));
             });
-
+            FloorplanCommand = new Command(async () =>
+            {
+                await _navigationService.PushAsync(nameof(FloorplanView));
+            });
+            NameGameCommand = new Command(async () =>
+            {
+                await _navigationService.PushAsync(nameof(NameGameView));
+            });
             LogOutCommand = new Command(async () =>
             {
-                //Post revoke not working
                 //bool revokeSucceeded = await _authenticationRepository.RequestRevokeTokens();
-                bool revokeSucceeded = true;
-                if (revokeSucceeded)
+                //if (revokeSucceeded)
+                if(true)
                 {
                     _authenticationService.DeleteAccessTokens();
                     await _navigationService.PushAsync(nameof(LoginView));
                 }
                 else
                 {
-                    Xamarin.Forms.MessagingCenter.Send(this, "logout_failed", "Something went wrong");
+                    MessagingCenter.Send(this, "logout_failed");
                 }
             });
         }

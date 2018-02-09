@@ -19,10 +19,11 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
 
         public List<Employee> GetAllEmployees()
         {
-            var address = "employees";
-            AddAuthenticationHeaderAsync();
+            string address = "employees/";
+
             try
             {
+                bool addToken = AddAuthenticationHeaderAsync().Result;
                 HttpResponseMessage response = _client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
@@ -39,14 +40,13 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
             return _employees;
         }
 
-        public Employee GetEmployeeById(int id)
+        public Employee GetEmployeeById(int? id)
         {
-            AddAuthenticationHeaderAsync();
-
-            var address = "employees/" + id;
+            string address = "employees/" + id + "/";
 
             try
             {
+                bool addToken = AddAuthenticationHeaderAsync().Result;
                 HttpResponseMessage response = _client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
