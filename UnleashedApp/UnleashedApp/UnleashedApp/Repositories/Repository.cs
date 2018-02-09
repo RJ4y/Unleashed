@@ -13,17 +13,17 @@ namespace UnleashedApp.Repositories
 {
     public abstract class Repository
     {
-        public static readonly HttpClient _client = new HttpClient();
-        protected readonly Uri _baseAddress = new Uri(Constants.BASE_API_URL);
+        public static readonly HttpClient Client = new HttpClient();
+        protected readonly Uri BaseAddress = new Uri(Constants.BASE_API_URL);
         protected IAuthenticationService authenticationService;
         protected IHttpClientAdapter httpClientAdapter;
 
         public Repository(IAuthenticationService authenticationService, IHttpClientAdapter httpClientAdapter)
         {
-            _client.BaseAddress = _baseAddress;
-            _client.Timeout = TimeSpan.FromSeconds(20);
-            _client.DefaultRequestHeaders.Accept.Clear();
-            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            Client.BaseAddress = BaseAddress;
+            Client.Timeout = TimeSpan.FromSeconds(20);
+            Client.DefaultRequestHeaders.Accept.Clear();
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             this.authenticationService = authenticationService;
             this.httpClientAdapter = httpClientAdapter;
         }
@@ -44,12 +44,12 @@ namespace UnleashedApp.Repositories
                         return false;
                     }
                 }
-                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authenticationService.GetAPIAccessToken());
+                Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authenticationService.GetAPIAccessToken());
                 return true;
             }
             else
             {
-                _client.DefaultRequestHeaders.Authorization = null;
+                Client.DefaultRequestHeaders.Authorization = null;
                 return false;
             }
         }

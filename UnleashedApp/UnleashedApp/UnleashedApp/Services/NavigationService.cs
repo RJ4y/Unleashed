@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UnleashedApp.Contracts;
 using UnleashedApp.Views;
 using Xamarin.Forms;
 
-namespace UnleashedApp
+namespace UnleashedApp.Services
 {
     public class NavigationService : INavigationService
     {
@@ -35,7 +36,13 @@ namespace UnleashedApp
         public Task PushAsync(string pageName)
         {
             PreventNullReferenceMethod();
-            return _navigation.PushAsync(GetPage(pageName));
+            if(pageName == nameof(TrainingView))
+            {
+                return _navigation.PushAsync(GetTabbedPage(pageName));
+            } else
+            {
+                return _navigation.PushAsync(GetPage(pageName));
+            }
         }
 
         public Task PushAsync(Page page) {
@@ -75,6 +82,16 @@ namespace UnleashedApp
                 case nameof(EmployeeDetailView): return new EmployeeDetailView();
                 case nameof(NameGameView): return new NameGameView();
             }
+            return null;
+        }
+
+        public TabbedPage GetTabbedPage(string pageName, object objectToPass = null)
+        {
+            switch(pageName)
+            {
+                case nameof(TrainingView): return new TrainingView();
+            }
+
             return null;
         }
 

@@ -9,21 +9,19 @@ using Xamarin.Forms.Xaml;
 namespace UnleashedApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NameGameView : ContentPage
+    public partial class NameGameView
     {
-        private static NameGameViewModel viewModel;
         public static List<Employee> Employees { get; private set; }
         public static List<Employee> Males { get; private set; }
         public static List<Employee> Females { get; private set; }
         public static Employee CorrectEmployee { get; private set; }
-        public const int AMOUNT = 3;
+        public const int Amount = 3;
 
         public NameGameView()
         {
             InitializeComponent();
-            viewModel = ViewModelLocator.Instance.NameGameViewModel;
+            NameGameViewModel viewModel = ViewModelLocator.Instance.NameGameViewModel;
             Employees = viewModel.Employees;
-
             if (Employees != null && Employees.Count > 0)
             {
                 InitializeFields();
@@ -35,16 +33,15 @@ namespace UnleashedApp.Views
             if (RandomizeService.GetRandomGender() == 'M')
             {
                 Males = GetMales();
-                List<Employee> answers = RandomizeService.GetSpecifiedAmountOfRandomObjectsFromList(Males, AMOUNT);
+                List<Employee> answers = RandomizeService.GetSpecifiedAmountOfRandomObjectsFromList(Males, Amount);
                 CreateAnswers(answers);
             }
             else
             {
                 Females = GetFemales();
-                List<Employee> answers = RandomizeService.GetSpecifiedAmountOfRandomObjectsFromList(Females, AMOUNT);
+                List<Employee> answers = RandomizeService.GetSpecifiedAmountOfRandomObjectsFromList(Females, Amount);
                 CreateAnswers(answers);
             }
-
         }
 
         private List<Employee> GetMales()
@@ -67,6 +64,7 @@ namespace UnleashedApp.Views
                     list.Add(e);
                 }
             }
+
             return list;
         }
 
@@ -75,7 +73,7 @@ namespace UnleashedApp.Views
             if (answers != null)
             {
                 CorrectEmployee = RandomizeService.GetRandomObjectFromList(answers);
-                employeeImage.Source = CorrectEmployee.PictureUrl;
+                EmployeeImage.Source = CorrectEmployee.PictureUrl;
                 FillAnswerFields(answers);
                 AddTapEvents();
             }
@@ -83,17 +81,17 @@ namespace UnleashedApp.Views
 
         private void FillAnswerFields(List<Employee> employees)
         {
-            optionOneButton.Text = employees[0].FirstName + " " + employees[0].LastName;
-            optionTwoButton.Text = employees[1].FirstName + " " + employees[1].LastName;
-            optionThreeButton.Text = employees[2].FirstName + " " + employees[2].LastName;
+            OptionOneButton.Text = employees[0].FirstName + " " + employees[0].LastName;
+            OptionTwoButton.Text = employees[1].FirstName + " " + employees[1].LastName;
+            OptionThreeButton.Text = employees[2].FirstName + " " + employees[2].LastName;
         }
 
         private void AddTapEvents()
         {
-            optionOneButton.Clicked += OptionTapped;
-            optionTwoButton.Clicked += OptionTapped;
-            optionThreeButton.Clicked += OptionTapped;
-            guessAnotherButton.Clicked += GuessAnotherTapped;
+            OptionOneButton.Clicked += OptionTapped;
+            OptionTwoButton.Clicked += OptionTapped;
+            OptionThreeButton.Clicked += OptionTapped;
+            GuessAnotherButton.Clicked += GuessAnotherTapped;
         }
 
         private void OptionTapped(object sender, EventArgs e)
@@ -111,37 +109,36 @@ namespace UnleashedApp.Views
 
         private void ShowWrongSelectionMessage(string text)
         {
-            rowDefinitionWrongOption.Height = new GridLength(0, GridUnitType.Auto);
-            wrongOptionSelectedLabel.Text = text + " is not the name of this person. Please try again...";
+            RowDefinitionWrongOption.Height = new GridLength(0, GridUnitType.Auto);
+            WrongOptionSelectedLabel.Text = text + " is not the name of this person. Please try again...";
         }
 
         private void GuessAnotherTapped(object sender, EventArgs e)
         {
-            rowDefinitionWrongOption.Height = new GridLength(0, GridUnitType.Absolute);
+            RowDefinitionWrongOption.Height = new GridLength(0, GridUnitType.Absolute);
             StartNewGame();
         }
 
         private void StartNewGame()
         {
-            correctAnswerScrollView.IsVisible = false;
+            CorrectAnswerScrollView.IsVisible = false;
             InitializeFields();
-            questionScrollView.IsVisible = true;
-            wrongOptionSelectedLabel.Text = "";
+            QuestionScrollView.IsVisible = true;
+            WrongOptionSelectedLabel.Text = "";
         }
 
         private void ShowCorrectSelectionInformation()
         {
-            questionScrollView.IsVisible = false;
-            correctAnswerScrollView.IsVisible = true;
-            image.Source = CorrectEmployee.PictureUrl;
-            nameLabel.Text = CorrectEmployee.FirstName + " " + CorrectEmployee.LastName;
-            functionLabel.Text = CorrectEmployee.Function;
+            QuestionScrollView.IsVisible = false;
+            CorrectAnswerScrollView.IsVisible = true;
+            Image.Source = CorrectEmployee.PictureUrl;
+            NameLabel.Text = CorrectEmployee.FirstName + " " + CorrectEmployee.LastName;
+            FunctionLabel.Text = CorrectEmployee.Function;
 
-            expectationsLabel.Text = CorrectEmployee.Expectations;
-            motivationLabel.Text = CorrectEmployee.Motivation;
-            needToKnowLabel.Text = CorrectEmployee.NeedToKnow;
-            birthDateLabel.Text = CorrectEmployee.DateOfBirth.ToString("d MMM yyyy");
+            ExpectationsLabel.Text = CorrectEmployee.Expectations;
+            MotivationLabel.Text = CorrectEmployee.Motivation;
+            NeedToKnowLabel.Text = CorrectEmployee.NeedToKnow;
+            BirthDateLabel.Text = CorrectEmployee.DateOfBirth.ToString("d MMM yyyy");
         }
     }
 }
-

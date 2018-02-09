@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using UnleashedApp.Authentication;
 using UnleashedApp.Contracts;
 using UnleashedApp.Repositories;
 using UnleashedApp.Repositories.AuthenticationRepositories;
 using UnleashedApp.Repositories.EmployeeRepositories;
-using Validation;
 using Xamarin.Auth;
 
 namespace UnleashedApp.Tests.Repositories
@@ -45,9 +43,9 @@ namespace UnleashedApp.Tests.Repositories
             new EmployeeRepository(authServiceMock.Object, httpClientMock.Object);
 
             //Assert
-            Assert.IsNotNull(Repository._client.DefaultRequestHeaders.Accept);
-            Assert.AreEqual(Repository._client.DefaultRequestHeaders.Accept.Count, 1);
-            Assert.IsTrue(Repository._client.DefaultRequestHeaders.Accept.Contains(new MediaTypeWithQualityHeaderValue("application/json")));
+            Assert.IsNotNull(Repository.Client.DefaultRequestHeaders.Accept);
+            Assert.AreEqual(Repository.Client.DefaultRequestHeaders.Accept.Count, 1);
+            Assert.IsTrue(Repository.Client.DefaultRequestHeaders.Accept.Contains(new MediaTypeWithQualityHeaderValue("application/json")));
         }
 
         [Test]
@@ -66,8 +64,8 @@ namespace UnleashedApp.Tests.Repositories
 
             //Assert
             Assert.IsTrue(result);
-            Assert.IsNotNull(Repository._client.DefaultRequestHeaders.Authorization);
-            Assert.AreEqual(Repository._client.DefaultRequestHeaders.Authorization, authHeader);
+            Assert.IsNotNull(Repository.Client.DefaultRequestHeaders.Authorization);
+            Assert.AreEqual(Repository.Client.DefaultRequestHeaders.Authorization, authHeader);
         }
 
         [Test]
@@ -82,7 +80,7 @@ namespace UnleashedApp.Tests.Repositories
             bool result = repository.AddAuthenticationHeaderAsync().Result;
 
             //Assert
-            Assert.IsNull(Repository._client.DefaultRequestHeaders.Authorization);
+            Assert.IsNull(Repository.Client.DefaultRequestHeaders.Authorization);
             Assert.IsFalse(result);
         }
 
@@ -126,8 +124,8 @@ namespace UnleashedApp.Tests.Repositories
             //Assert
             httpClientMock.Verify(client => client.GetRefreshedAccessTokenAsync(It.IsAny<StringContent>()), Times.Once);
             Assert.IsTrue(result);
-            Assert.IsNotNull(Repository._client.DefaultRequestHeaders.Authorization);
-            Assert.AreEqual(Repository._client.DefaultRequestHeaders.Authorization, authHeader);
+            Assert.IsNotNull(Repository.Client.DefaultRequestHeaders.Authorization);
+            Assert.AreEqual(Repository.Client.DefaultRequestHeaders.Authorization, authHeader);
         }
 
         [Test]
@@ -144,7 +142,7 @@ namespace UnleashedApp.Tests.Repositories
 
             //Assert
             httpClientMock.Verify(api => api.GetRefreshedAccessTokenAsync(It.IsAny<StringContent>()), Times.Never);
-            Assert.IsNull(Repository._client.DefaultRequestHeaders.Authorization);
+            Assert.IsNull(Repository.Client.DefaultRequestHeaders.Authorization);
             Assert.IsFalse(result);
         }
 
@@ -167,7 +165,7 @@ namespace UnleashedApp.Tests.Repositories
 
             //Assert
             httpClientMock.Verify(api => api.GetRefreshedAccessTokenAsync(It.IsAny<StringContent>()), Times.Once);
-            Assert.IsNull(Repository._client.DefaultRequestHeaders.Authorization);
+            Assert.IsNull(Repository.Client.DefaultRequestHeaders.Authorization);
             Assert.IsFalse(result);
         }
 

@@ -5,8 +5,31 @@ namespace UnleashedApp.Models
 {
     public class Employee
     {
-        [JsonProperty(PropertyName = "id")]
-        public int Id { get; set; }
+        public Employee(int id, string firstName, string lastName, string function, int habitatId, DateTime startDate,
+            DateTime? endDate, bool visibleSite,
+            string pictureUrl, string motivation, string expectations, string needToKnow, DateTime dateOfBirth,
+            char gender, string email)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            Function = function;
+            HabitatId = habitatId;
+            StartDate = startDate;
+            EndDate = endDate;
+            VisibleSite = visibleSite;
+            PictureUrl = pictureUrl;
+            Motivation = motivation;
+            Expectations = expectations;
+            NeedToKnow = needToKnow;
+            DateOfBirth = dateOfBirth;
+            Gender = gender;
+            Email = email;
+        }
+
+        public Employee() { }
+
+        [JsonProperty(PropertyName = "id")] public int Id { get; set; }
 
         [JsonProperty(PropertyName = "first_name")]
         public string FirstName { get; set; }
@@ -14,13 +37,13 @@ namespace UnleashedApp.Models
         [JsonProperty(PropertyName = "last_name")]
         public string LastName { get; set; }
 
-        public string FullName { get { return FirstName + " " + LastName; } }
+        public string FullName => FirstName + " " + LastName;
 
         [JsonProperty(PropertyName = "function")]
         public string Function { get; set; }
 
         [JsonProperty(PropertyName = "habitat")]
-        public int Habitat_Id { get; set; }
+        public int HabitatId { get; set; }
 
         [JsonProperty(PropertyName = "start_date")]
         public DateTime StartDate { get; set; }
@@ -49,7 +72,11 @@ namespace UnleashedApp.Models
         [JsonProperty(PropertyName = "gender")]
         public char Gender { get; set; }
 
-        [JsonProperty(PropertyName = "email")]
-        public string Email { get; set; }
+        [JsonProperty(PropertyName = "email")] public string Email { get; set; }
+
+        public override string ToString()
+        {
+            return FullName;
+        }
     }
 }

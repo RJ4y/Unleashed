@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using UnleashedApp.Contracts;
 using UnleashedApp.Contracts.ViewModels;
 using UnleashedApp.Models;
 using UnleashedApp.Repositories.EmployeeRepositories;
@@ -11,7 +12,7 @@ namespace UnleashedApp.ViewModels
     {
         private readonly INavigationService _navigationService;
         public ICommand EmployeeDetailCommand { get; set; }
-        public IEmployeeRepository EmployeeRepository { get; private set; }
+        public IEmployeeRepository EmployeeRepository { get; }
         public Employee SelectedEmployee { get; set; }
 
         public RoomViewModel(INavigationService navigationService, IEmployeeRepository employeeRepository)
@@ -25,8 +26,10 @@ namespace UnleashedApp.ViewModels
         {
             EmployeeDetailCommand = new Command(async () =>
             {
-                EmployeeDetailView page = new EmployeeDetailView();
-                page.BindingContext = SelectedEmployee;
+                EmployeeDetailView page = new EmployeeDetailView
+                {
+                    BindingContext = SelectedEmployee
+                };
                 await _navigationService.PushAsync(page);
             });
         }

@@ -12,7 +12,7 @@ namespace UnleashedApp.Repositories
     {
         public Task<HttpResponseMessage> GetRefreshedAccessTokenAsync(StringContent refreshToken)
         {
-            return Repository._client.PostAsync(Constants.REFRESH_URL, refreshToken);
+            return Repository.Client.PostAsync(Constants.REFRESH_URL, refreshToken);
         }
 
     }

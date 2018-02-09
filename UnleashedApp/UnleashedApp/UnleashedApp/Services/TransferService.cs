@@ -6,9 +6,10 @@ namespace UnleashedApp.Services
     public static class TransferService
     {
         private static Room _selectedRoom;
+        private static Employee _selectedEmployee;
         private static List<Space> _spaces;
 
-        internal static void Store(Room selectedRoom, List<Space> spaces)
+        public static void Store(Room selectedRoom, List<Space> spaces)
         {
             _selectedRoom = selectedRoom;
 
@@ -22,14 +23,24 @@ namespace UnleashedApp.Services
             }
         }
 
-        internal static Room GetSelectedRoom()
+        public static Room GetSelectedRoom()
         {
             return _selectedRoom;
         }
 
-        internal static List<Space> GetSelectedSpaces()
+        public static List<Space> GetSelectedSpaces()
         {
             return _spaces;
+        }
+
+        public static void Store(Employee employee)
+        {
+            _selectedEmployee = employee;
+        }
+
+        public static Employee GetSelectedEmployee()
+        {
+            return _selectedEmployee;
         }
     }
 }

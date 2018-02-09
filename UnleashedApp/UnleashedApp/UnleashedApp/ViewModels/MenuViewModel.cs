@@ -1,6 +1,4 @@
-﻿using System.Net.Http;
 using System.Windows.Input;
-using UnleashedApp.Authentication;
 using UnleashedApp.Contracts;
 using UnleashedApp.Contracts.ViewModels;
 using UnleashedApp.Repositories.AuthenticationRepositories;
@@ -19,6 +17,7 @@ namespace UnleashedApp.ViewModels
         public ICommand FloorplanCommand { get; set; }
         public ICommand NameGameCommand { get; set; }
         public ICommand LogOutCommand { get; set; }
+        public ICommand TrainingCommand { get; set; }
 
         public MenuViewModel(INavigationService navigationService, IAuthenticationService authenticationService, IAuthenticationRepository authenticationRepository)
         {
@@ -46,7 +45,7 @@ namespace UnleashedApp.ViewModels
             {
                 //bool revokeSucceeded = await _authenticationRepository.RequestRevokeTokens();
                 //if (revokeSucceeded)
-                if(true)
+                if (true)
                 {
                     _authenticationService.DeleteAccessTokens();
                     await _navigationService.PushAsync(nameof(LoginView));
@@ -55,6 +54,10 @@ namespace UnleashedApp.ViewModels
                 {
                     MessagingCenter.Send(this, "logout_failed");
                 }
+            });
+            TrainingCommand = new Command(async () =>
+            {
+                await _navigationService.PushAsync(nameof(TrainingView));
             });
         }
     }

@@ -20,14 +20,14 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
 
         public async Task<HttpResponseMessage> ExchangeTokenAsync(StringContent convertToken)
         {
-            return await _client.PostAsync(CONVERT_URL, convertToken);
+            return await Client.PostAsync(CONVERT_URL, convertToken);
         }
 
         public async Task<HttpResponseMessage> PostRevokeTokensAsync(StringContent clientId)
         {
             await AddAuthenticationHeaderAsync();
             Debug.WriteLine("in client adapter stringcontent " + clientId.ReadAsStringAsync().Result);
-            return await _client.PostAsync(REVOKE_URL, clientId);
+            return await Client.PostAsync(REVOKE_URL, clientId);
         }
     }
 }

@@ -9,19 +9,17 @@ using Xamarin.Forms.Xaml;
 namespace UnleashedApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RoomView : ContentPage
+    public partial class RoomView 
     {
-        private static RoomViewModel viewModel;
         public static Room Room { get; private set; }
         public static List<Space> Spaces { get; private set; }
 
         public RoomView()
         {
             InitializeComponent();
-            viewModel = ViewModelLocator.Instance.RoomViewModel;
             Room = TransferService.GetSelectedRoom();
             Spaces = TransferService.GetSelectedSpaces();
-            roomNameLabel.Text = Room.Name;
+            RoomNameLabel.Text = Room.Name;
             CreateLegendGrid();
             CreateRoomGrid();
         }
@@ -35,28 +33,28 @@ namespace UnleashedApp.Views
         {
             base.OnSizeAllocated(width, height);
 
-            double amountOfColumns = roomGrid.ColumnDefinitions.Count;
-            double amountOfRows = roomGrid.RowDefinitions.Count;
+            double amountOfColumns = RoomGrid.ColumnDefinitions.Count;
+            double amountOfRows = RoomGrid.RowDefinitions.Count;
             if (amountOfColumns > 0 && amountOfRows > 0)
             {
-                roomGrid.HeightRequest = width / amountOfColumns * amountOfRows;
+                RoomGrid.HeightRequest = width / amountOfColumns * amountOfRows;
             }
         }
 
         #region LegendGrid
         private void CreateLegendGrid()
         {
-            LegendGridService.CreateLegendGridColumnDefinitions(legendGrid);
-            LegendGridService.CreateLegendGridRowDefinitions(legendGrid, 2);
+            LegendGridService.CreateLegendGridColumnDefinitions(LegendGrid);
+            LegendGridService.CreateLegendGridRowDefinitions(LegendGrid, 2);
             FillLegendGrid();
         }
 
         private void FillLegendGrid()
         {
-            GridService.AddColorLabel(legendGrid, 1, 1, Color.Black, false);
-            GridService.AddTextLabel(legendGrid, 1, 2, "Workspot", false);
-            GridService.AddColorLabel(legendGrid, 2, 1, Room.Color, false);
-            GridService.AddTextLabel(legendGrid, 2, 2, "Empty", false);
+            GridService.AddColorLabel(LegendGrid, 1, 1, Color.Black, false);
+            GridService.AddTextLabel(LegendGrid, 1, 2, "Workspot", false);
+            GridService.AddColorLabel(LegendGrid, 2, 1, Room.Color, false);
+            GridService.AddTextLabel(LegendGrid, 2, 2, "Empty", false);
         }
         #endregion
 
@@ -64,8 +62,8 @@ namespace UnleashedApp.Views
         private void CreateRoomGrid()
         {
             Dimensions dimensions = GridService.GetMinifiedSquareGridDimensions(Spaces);
-            GridService.CreateGridColumnDefinitions(roomGrid, dimensions);
-            GridService.CreateGridRowDefinitions(roomGrid, dimensions);
+            GridService.CreateGridColumnDefinitions(RoomGrid, dimensions);
+            GridService.CreateGridRowDefinitions(RoomGrid, dimensions);
             FillRoomGrid();
         }
 
@@ -81,7 +79,7 @@ namespace UnleashedApp.Views
                 }
                 else
                 {
-                    AddEmployeeWorkspotCell(space.XCoord - translation.X, space.YCoord - translation.Y, Room);
+                    AddEmployeeWorkspotCell(space.XCoord - translation.X, space.YCoord - translation.Y);
                 }
             }
         }
@@ -89,21 +87,21 @@ namespace UnleashedApp.Views
         private void AddEmptyCell(int column, int row, Color color)
         {
             BoxView box = new BoxView { BackgroundColor = color };
-            GridService.AddItemToGridAtLocation(box, roomGrid, row, column);
+            GridService.AddItemToGridAtLocation(box, RoomGrid, row, column);
         }
 
-        private void AddEmployeeWorkspotCell(int column, int row, Room room)
+        private void AddEmployeeWorkspotCell(int column, int row)
         {
             BoxView box = new BoxView { BackgroundColor = Color.Black };
             AddWorkspaceTapEventToBox(box);
-            GridService.AddItemToGridAtLocation(box, roomGrid, row, column);
+            GridService.AddItemToGridAtLocation(box, RoomGrid, row, column);
         }
 
         private void AddWorkspaceTapEventToBox(BoxView box)
         {
-            TapGestureRecognizer box_tap = new TapGestureRecognizer();
-            box_tap.Tapped += WorkspaceClicked;
-            box.GestureRecognizers.Add(box_tap);
+            TapGestureRecognizer boxTap = new TapGestureRecognizer();
+            boxTap.Tapped += WorkspaceClicked;
+            box.GestureRecognizers.Add(boxTap);
         }
 
         private void WorkspaceClicked(object sender, EventArgs e)
@@ -130,8 +128,9 @@ namespace UnleashedApp.Views
             ViewModelLocator.Instance.RoomViewModel.SelectedEmployee = e;
 
             bool action = await DisplayAlert(e.FirstName + " " + e.LastName, e.Function, "View details", "Close");
-            if (action == true)
+            if (action)
             {
+                TransferService.Store(e);
                 vm.EmployeeDetailCommand.Execute(null);
             }
         }

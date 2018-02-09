@@ -21,11 +21,10 @@ namespace UnleashedApp.Repositories.HabitatRepositories
         public List<Habitat> GetAllHabitats()
         {
             string address = "habitats/";
-
             try
             {
                 bool addToken = AddAuthenticationHeaderAsync().Result;
-                HttpResponseMessage response = _client.GetAsync(address).Result;
+                HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -37,17 +36,17 @@ namespace UnleashedApp.Repositories.HabitatRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
+
             return _habitats;
         }
 
         public Habitat GetHabitatById(int id)
         {
             string address = "habitats/" + id + "/";
-            
             try
             {
                 bool addToken = AddAuthenticationHeaderAsync().Result;
-                HttpResponseMessage response = _client.GetAsync(address).Result;
+                HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -59,17 +58,17 @@ namespace UnleashedApp.Repositories.HabitatRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
+
             return _habitat;
         }
 
         public List<Employee> GetEmployees(int id)
         {
             string address = "habitats/" + id + "/employees/";
-            
             try
             {
                 bool addToken = AddAuthenticationHeaderAsync().Result;
-                HttpResponseMessage response = _client.GetAsync(address).Result;
+                HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
                 {

@@ -1,12 +1,15 @@
-﻿using UnleashedApp.Authentication;
+﻿﻿using UnleashedApp.Authentication;
 using UnleashedApp.Contracts;
 using UnleashedApp.Repositories;
 using UnleashedApp.Repositories.AuthenticationRepositories;
+﻿using UnleashedApp.Contracts;
 using UnleashedApp.Repositories.EmployeeRepositories;
 using UnleashedApp.Repositories.HabitatRepositories;
 using UnleashedApp.Repositories.RoomRepositories;
 using UnleashedApp.Repositories.SpaceRepositories;
 using UnleashedApp.Repositories.SquadRepositories;
+using UnleashedApp.Repositories.TrainingRepository;
+using UnleashedApp.Services;
 using UnleashedApp.ViewModels;
 
 namespace UnleashedApp
@@ -14,19 +17,11 @@ namespace UnleashedApp
     public class ViewModelLocator
     {
         private static ViewModelLocator _instance;
-        private readonly INavigationService _navigationService;
-        private readonly IAuthenticationService _authenticationService;
-        private readonly IEmployeeRepository _employeeRepository;
-        private readonly IHabitatRepository _habitatRepository;
-        private readonly ISquadRepository _squadRepository;
-        private readonly IAuthenticationRepository _authenticationRepository;
-        private readonly IHttpClientAdapter _httpClientAdapter;
-        private readonly ISpaceRepository _spaceRepository;
-        private readonly IRoomRepository _roomRepository;
 
         public LoginViewModel LoginViewModel { get; }
         public MenuViewModel MenuViewModel { get; }
         public WhoIsWhoViewModel WhoIsWhoViewModel { get; }
+        public TrainingViewModel TrainingViewModel { get; }
         public EmployeeDetailViewModel EmployeeDetailViewModel { get; }
         public FloorplanViewModel FloorplanViewModel { get; }
         public RoomViewModel RoomViewModel { get; }
@@ -36,26 +31,25 @@ namespace UnleashedApp
 
         private ViewModelLocator()
         {
-            _navigationService = new NavigationService();
-            _authenticationService = AuthenticationService.Instance;
+            INavigationService navigationService = new NavigationService();
+            IAuthenticationService authenticationService = AuthenticationService.Instance;
+            IHttpClientAdapter httpClientAdapter = new HttpClientAdapter();
+            ISpaceRepository spaceRepository = new SpaceRepository(authenticationService, httpClientAdapter);
+            IRoomRepository roomRepository = new RoomRepository(authenticationService, httpClientAdapter);
+            IEmployeeRepository employeeRepository = new EmployeeRepository(authenticationService, httpClientAdapter);
+            IHabitatRepository habitatRepository = new HabitatRepository(authenticationService, httpClientAdapter);
+            ISquadRepository squadRepository = new SquadRepository(authenticationService, httpClientAdapter);
+            ITrainingRepository trainingRepository = new TrainingRepository(authenticationService, httpClientAdapter);
+            IAuthenticationRepository authenticationRepository = new AuthenticationRepository(authenticationService, httpClientAdapter, new AuthenticationHttpClientAdapter(authenticationService, httpClientAdapter));
 
-            //repositories:
-            _httpClientAdapter = new HttpClientAdapter();
-            _employeeRepository = new EmployeeRepository(AuthenticationService.Instance, _httpClientAdapter);
-            _habitatRepository = new HabitatRepository(AuthenticationService.Instance, _httpClientAdapter);
-            _squadRepository = new SquadRepository(AuthenticationService.Instance, _httpClientAdapter);
-            _spaceRepository = new SpaceRepository(AuthenticationService.Instance, _httpClientAdapter);
-            _roomRepository = new RoomRepository(AuthenticationService.Instance, _httpClientAdapter);
-            _authenticationRepository = new AuthenticationRepository(AuthenticationService.Instance, _httpClientAdapter, new AuthenticationHttpClientAdapter(AuthenticationService.Instance, _httpClientAdapter));
-
-            //viewmodels:
-            LoginViewModel = new LoginViewModel(_navigationService, _authenticationService, _authenticationRepository);
-            MenuViewModel = new MenuViewModel(_navigationService, _authenticationService, _authenticationRepository);
-            WhoIsWhoViewModel = new WhoIsWhoViewModel(_navigationService, _habitatRepository, _squadRepository);
-            FloorplanViewModel = new FloorplanViewModel(_navigationService, _spaceRepository, _roomRepository);
-            RoomViewModel = new RoomViewModel(_navigationService, _employeeRepository);
-            EmployeeDetailViewModel = new EmployeeDetailViewModel();
-            NameGameViewModel = new NameGameViewModel(_employeeRepository);
+            MenuViewModel = new MenuViewModel(navigationService, authenticationService, authenticationRepository);
+            WhoIsWhoViewModel = new WhoIsWhoViewModel(navigationService, habitatRepository, squadRepository);
+            FloorplanViewModel = new FloorplanViewModel(navigationService, spaceRepository, roomRepository);
+            TrainingViewModel = new TrainingViewModel(trainingRepository);
+            RoomViewModel = new RoomViewModel(navigationService, employeeRepository);
+            EmployeeDetailViewModel = new EmployeeDetailViewModel(spaceRepository, roomRepository);
+            NameGameViewModel = new NameGameViewModel(employeeRepository);
+            LoginViewModel = new LoginViewModel(navigationService, authenticationService, authenticationRepository);
         }
     }
 }

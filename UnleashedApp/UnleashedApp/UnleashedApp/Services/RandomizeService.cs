@@ -3,24 +3,9 @@ using System.Collections.Generic;
 
 namespace UnleashedApp.Services
 {
-    internal static class RandomizeService
+    public static class RandomizeService
     {
         private static Random random = new Random();
-
-        #region Unused
-        public static void Shuffle<T>(this IList<T> list)
-        {
-            int n = list.Count;
-            while (n > 1)
-            {
-                n--;
-                int k = random.Next(n + 1);
-                T value = list[k];
-                list[k] = list[n];
-                list[n] = value;
-            }
-        }
-        #endregion
 
         public static List<T> GetSpecifiedAmountOfRandomObjectsFromList<T>(List<T> list, int amount)
         {
@@ -32,24 +17,28 @@ namespace UnleashedApp.Services
                 randomIndexes.Add(first);
                 randomEmployees.Add(list[first]);
 
-                bool isDone = false;
-                while (!isDone)
+                if (amount > 1)
                 {
-                    int index = random.Next(list.Count);
-                    if (!randomIndexes.Contains(index))
+                    bool isDone = false;
+                    while (!isDone)
                     {
-                        randomIndexes.Add(index);
-                        randomEmployees.Add(list[index]);
-
-                        if (randomIndexes.Count == amount)
+                        int index = random.Next(list.Count);
+                        if (!randomIndexes.Contains(index))
                         {
-                            isDone = true;
+                            randomIndexes.Add(index);
+                            randomEmployees.Add(list[index]);
+
+                            if (randomIndexes.Count == amount)
+                            {
+                                isDone = true;
+                            }
                         }
                     }
                 }
 
                 return randomEmployees;
             }
+
             return null;
         }
 
@@ -65,10 +54,8 @@ namespace UnleashedApp.Services
             {
                 return 'M';
             }
-            else
-            {
-                return 'F';
-            }
+
+            return 'F';
         }
     }
 }

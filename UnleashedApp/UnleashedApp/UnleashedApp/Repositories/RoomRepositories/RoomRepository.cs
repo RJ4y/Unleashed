@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using UnleashedApp.Contracts;
 using UnleashedApp.Models;
+using UnleashedApp.Models.Serializers;
 using Xamarin.Forms;
 using static UnleashedApp.Models.Room;
 
@@ -24,7 +25,7 @@ namespace UnleashedApp.Repositories.RoomRepositories
             try
             {
                 bool addToken = AddAuthenticationHeaderAsync().Result;
-                HttpResponseMessage response = _client.GetAsync(address).Result;
+                HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -33,7 +34,6 @@ namespace UnleashedApp.Repositories.RoomRepositories
                     foreach (SerializableRoom r in rooms)
                     {
                         Color color = Color.FromHex("#" + r.ColorAsString);
-
                         RoomType type;
                         switch (r.TypeAsString)
                         {
@@ -60,6 +60,7 @@ namespace UnleashedApp.Repositories.RoomRepositories
             {
                 Debug.WriteLine(e.ToString());
             }
+
             return _rooms;
         }
     }
