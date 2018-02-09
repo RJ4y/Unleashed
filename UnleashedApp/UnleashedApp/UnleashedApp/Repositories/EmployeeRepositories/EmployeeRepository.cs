@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
+using UnleashedApp.Contracts;
 using UnleashedApp.Models;
 
 namespace UnleashedApp.Repositories.EmployeeRepositories
@@ -12,11 +13,16 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
         private List<Employee> _employees;
         private Employee _employee;
 
+        public EmployeeRepository(IAuthenticationService authenticationService, IHttpClientAdapter httpClientAdapter ) : base(authenticationService, httpClientAdapter)
+        {
+        }
+
         public List<Employee> GetAllEmployees()
         {
             string address = "employees/";
             try
             {
+                bool addToken = AddAuthenticationHeaderAsync().Result;
                 HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
@@ -38,6 +44,7 @@ namespace UnleashedApp.Repositories.EmployeeRepositories
             string address = "employees/" + id + "/";
             try
             {
+                bool addToken = AddAuthenticationHeaderAsync().Result;
                 HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)

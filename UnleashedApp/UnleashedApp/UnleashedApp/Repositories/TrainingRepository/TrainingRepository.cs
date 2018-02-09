@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using UnleashedApp.Contracts;
 using UnleashedApp.Models;
 
 namespace UnleashedApp.Repositories.TrainingRepository
@@ -14,6 +15,10 @@ namespace UnleashedApp.Repositories.TrainingRepository
     {
         private List<Training> _trainings;
         private Training _training;
+
+        public TrainingRepository(IAuthenticationService authenticationService, IHttpClientAdapter httpClientAdapter) : base(authenticationService, httpClientAdapter)
+        {
+        }
 
         public List<Training> GetAll()
         {

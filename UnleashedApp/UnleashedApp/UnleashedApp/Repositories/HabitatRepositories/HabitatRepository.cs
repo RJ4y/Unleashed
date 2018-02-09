@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
+using UnleashedApp.Contracts;
 using UnleashedApp.Models;
 
 namespace UnleashedApp.Repositories.HabitatRepositories
@@ -13,11 +14,16 @@ namespace UnleashedApp.Repositories.HabitatRepositories
         private List<Employee> _employees;
         private Habitat _habitat;
 
+        public HabitatRepository(IAuthenticationService authenticationService, IHttpClientAdapter httpClientAdapter) : base(authenticationService, httpClientAdapter)
+        {
+        }
+
         public List<Habitat> GetAllHabitats()
         {
             string address = "habitats/";
             try
             {
+                bool addToken = AddAuthenticationHeaderAsync().Result;
                 HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
@@ -39,6 +45,7 @@ namespace UnleashedApp.Repositories.HabitatRepositories
             string address = "habitats/" + id + "/";
             try
             {
+                bool addToken = AddAuthenticationHeaderAsync().Result;
                 HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
@@ -60,6 +67,7 @@ namespace UnleashedApp.Repositories.HabitatRepositories
             string address = "habitats/" + id + "/employees/";
             try
             {
+                bool addToken = AddAuthenticationHeaderAsync().Result;
                 HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)

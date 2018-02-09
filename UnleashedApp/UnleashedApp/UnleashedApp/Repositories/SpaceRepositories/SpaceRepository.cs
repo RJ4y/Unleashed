@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
+using UnleashedApp.Contracts;
 using UnleashedApp.Models;
 
 namespace UnleashedApp.Repositories.SpaceRepositories
@@ -11,11 +12,16 @@ namespace UnleashedApp.Repositories.SpaceRepositories
     {
         private List<Space> _spaces = new List<Space>();
 
+        public SpaceRepository(IAuthenticationService authenticationService, IHttpClientAdapter httpClientAdapter) : base(authenticationService, httpClientAdapter)
+        {
+        }
+
         public List<Space> GetAllSpaces()
         {
             string address = "spaces/";
             try
             {
+                bool addToken = AddAuthenticationHeaderAsync().Result;
                 HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)

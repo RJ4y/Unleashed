@@ -1,4 +1,6 @@
-﻿using UnleashedApp.Views;
+﻿using UnleashedApp.Authentication;
+using UnleashedApp.Repositories.AuthenticationRepositories;
+using UnleashedApp.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +13,15 @@ namespace UnleashedApp
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new MenuView());
+
+            if (AuthenticationService.Instance.UserIsLoggedIn())
+            {
+                MainPage = new NavigationPage(new MenuView());
+            }
+            else
+            {
+                MainPage = new NavigationPage(new LoginView());
+            }
         }
 
         protected override void OnStart()

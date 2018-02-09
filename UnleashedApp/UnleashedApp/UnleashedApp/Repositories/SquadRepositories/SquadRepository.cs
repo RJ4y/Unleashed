@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
+using UnleashedApp.Contracts;
 using UnleashedApp.Models;
 using UnleashedApp.Models.Serializers;
 
@@ -14,11 +15,16 @@ namespace UnleashedApp.Repositories.SquadRepositories
         private Squad _squad;
         private List<Employee> _employees;
 
+        public SquadRepository(IAuthenticationService authenticationService, IHttpClientAdapter httpClientAdapter) : base(authenticationService, httpClientAdapter)
+        {
+        }
+
         public List<Squad> GetAllSquads()
         {
             string address = "squads/";
             try
             {
+                bool addToken = AddAuthenticationHeaderAsync().Result;
                 HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
@@ -40,6 +46,7 @@ namespace UnleashedApp.Repositories.SquadRepositories
             string address = "squads/" + id + "/";
             try
             {
+                bool addToken = AddAuthenticationHeaderAsync().Result;
                 HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
@@ -61,6 +68,7 @@ namespace UnleashedApp.Repositories.SquadRepositories
             string address = "squads/" + id + "/employees/";
             try
             {
+                bool addToken = AddAuthenticationHeaderAsync().Result;
                 HttpResponseMessage response = Client.GetAsync(address).Result;
 
                 if (response.IsSuccessStatusCode)
