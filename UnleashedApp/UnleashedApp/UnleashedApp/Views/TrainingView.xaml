@@ -23,7 +23,7 @@
 
             <StackLayout Orientation="Horizontal" Margin="30, 0, 30, 0">
                 <Label Text="Amount available:"/>
-                <Label Text="€100"/>
+                <Label Text="{ Binding BudgetRemaining, Converter={StaticResource currencyConverter} }"/>
             </StackLayout>
 
             <Label Text="Training" TextColor="Red" FontSize="Large" Margin="10,0,0,0"/>
