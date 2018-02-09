@@ -72,13 +72,11 @@ namespace UnleashedApp.ViewModels
             MessagingCenter.Send(this, "authentication_failed", message);
         }
 
-        private async void showHomePageAsync()
+        private void showHomePageAsync()
         {
-             await _navigationService.PushAsync(nameof(MenuView));
-            //Disables the pressing back (to login) after logging in
-            _navigationService.ClearPageStack();
+            App.NavigationPage.Navigation.PushAsync(new NameGameView());
+            App.NavigationPage.Navigation.RemovePage(App.NavigationPage.Navigation.NavigationStack[0]);
+            App.NavigationPage.Navigation.PopToRootAsync();
         }
-
-        
     }
 }

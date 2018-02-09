@@ -21,9 +21,10 @@ namespace UnleashedApp.Repositories
         public Repository(IAuthenticationService authenticationService, IHttpClientAdapter httpClientAdapter)
         {
             Client.BaseAddress = BaseAddress;
-            Client.Timeout = TimeSpan.FromSeconds(20);
             Client.DefaultRequestHeaders.Accept.Clear();
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            Client.Timeout = TimeSpan.FromSeconds(10);
+            
             this.authenticationService = authenticationService;
             this.httpClientAdapter = httpClientAdapter;
         }

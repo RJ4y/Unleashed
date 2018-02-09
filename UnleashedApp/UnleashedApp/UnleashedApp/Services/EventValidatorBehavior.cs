@@ -14,7 +14,7 @@ namespace UnleashedApp.Services
         void HandleTextChanged(object sender, TextChangedEventArgs e)
         {
             bool validEvent = e.NewTextValue.Length > 0;
-            ((Entry)sender).TextColor = validEvent ? Color.Green : Color.Red;
+            ((Entry)sender).TextColor = validEvent ? Color.DarkGray : Color.Red;
 
             var vm = ((Entry)sender).BindingContext;
             ((TrainingViewModel)vm).IsEventValid = validEvent;

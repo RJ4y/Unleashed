@@ -18,7 +18,7 @@ namespace UnleashedApp.Services
 
             bool validPrice = decimal.TryParse(e.NewTextValue, out decimal priceDecimal) && priceDecimal >= 0 && priceDecimal <= ((TrainingViewModel) vm).BudgetRemaining && priceDecimal * 100 == Math.Floor(priceDecimal*100);
 
-            ((Entry) sender).TextColor = validPrice ? Color.Green : Color.Red;
+            ((Entry) sender).TextColor = validPrice ? Color.DarkGray : Color.Red;
 
             
             ((TrainingViewModel)vm).IsCostValid = validPrice;

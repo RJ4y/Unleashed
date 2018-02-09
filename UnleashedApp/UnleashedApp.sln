@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2003
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnleashedApp.Android", "UnleashedApp\UnleashedApp.Android\UnleashedApp.Android.csproj", "{992D7072-D713-4A87-ADB3-2964A7EDEB31}"
 EndProject
@@ -228,7 +228,6 @@ Global
 		{87D8DCA4-7712-4590-8896-7572E3697145}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{87D8DCA4-7712-4590-8896-7572E3697145}.Debug|x86.Build.0 = Debug|Any CPU
 		{87D8DCA4-7712-4590-8896-7572E3697145}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{87D8DCA4-7712-4590-8896-7572E3697145}.Release|Any CPU.Build.0 = Release|Any CPU
 		{87D8DCA4-7712-4590-8896-7572E3697145}.Release|ARM.ActiveCfg = Release|Any CPU
 		{87D8DCA4-7712-4590-8896-7572E3697145}.Release|ARM.Build.0 = Release|Any CPU
 		{87D8DCA4-7712-4590-8896-7572E3697145}.Release|iPhone.ActiveCfg = Release|Any CPU
@@ -244,6 +243,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {61A90C48-3450-4FF3-A99E-F34D14BD7694}
+		SolutionGuid = {BE55FFF6-5BAB-4CDB-937C-D47536090F95}
 	EndGlobalSection
 EndGlobal

@@ -1,37 +1,49 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="UnleashedApp.Views.WhoIsWhoView"
-             x:Name="WhoIsWho">
-    <Grid ColumnSpacing="8" HorizontalOptions="FillAndExpand">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50*" />
-            <ColumnDefinition Width="50*" />
-        </Grid.ColumnDefinitions>
-        <Button x:Name="HabitatButton" Text="Habitat" Grid.Row="0" Grid.Column="0" Command="{ Binding HabitatCommand }"
-                BackgroundColor="DodgerBlue" TextColor="White" FontAttributes="Bold" Clicked="HabitatButtonClicked" />
-        <Button x:Name="SquadButton" Text="Squad" Grid.Row="0" Grid.Column="1" Command="{ Binding SquadCommand }" BackgroundColor="White"
-                TextColor="DodgerBlue" FontAttributes="Bold" Clicked="SquadButtonClicked" />
-        <SearchBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{ Binding Filter, Mode=TwoWay }"
-                   Placeholder="search" />
-        <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{ Binding FilteredList }"
-                  IsGroupingEnabled="True"
-                  GroupDisplayBinding="{ Binding Name }"
-                  GroupShortNameBinding="{Binding Name }"
-                  HasUnevenRows="True"
-                  SelectedItem="{ Binding SelectedEmployee, Mode=TwoWay }">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ImageCell ImageSource="{Binding PictureUrl}" Text="{Binding FullName}"
-                               Command="{ Binding Source={x:Reference WhoIsWho}, Path=BindingContext.EmployeeDetailCommand }" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </Grid>
-</ContentPage>
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:system="clr-namespace:System;assembly=mscorlib"
+            xmlns:converters="clr-namespace:UnleashedApp.Converters;assembly=UnleashedApp"
+            xmlns:local="clr-namespace:UnleashedApp.Services"
+            x:Class="UnleashedApp.Views.WhoIsWhoView"
+            x:Name="WhoIsWho">
+    <ContentPage Title="Habitats">
+        <StackLayout>
+            <StackLayout Padding="10" Margin="0,0,0,-6" BackgroundColor="#c9251d">
+                <SearchBar Text="{ Binding HabitatFilter, Mode=TwoWay }" Placeholder="Search" PlaceholderColor="#fff" TextColor="#fff" CancelButtonColor="#fff" />
+            </StackLayout>
+            <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{ Binding FilteredHabitatList }"
+                      IsGroupingEnabled="True"
+                      GroupDisplayBinding="{ Binding Name }"
+                      GroupShortNameBinding="{Binding Name }"
+                      HasUnevenRows="True"
+                      SelectedItem="{ Binding SelectedHabitatEmployee, Mode=TwoWay }">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell ImageSource="{Binding PictureUrl}" Text="{Binding FullName}"
+                                   Command="{ Binding Source={x:Reference WhoIsWho}, Path=BindingContext.HabitatEmployeeDetailCommand }" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage>
+    <ContentPage Title="Squads">
+        <StackLayout>
+            <StackLayout Padding="10" Margin="0,0,0,-6" BackgroundColor="#c9251d">
+                <SearchBar Text="{ Binding SquadFilter, Mode=TwoWay }" Placeholder="Search" PlaceholderColor="#fff" TextColor="#fff" CancelButtonColor="#fff" />
+            </StackLayout>
+            <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{ Binding FilteredSquadList }"
+                      IsGroupingEnabled="True"
+                      GroupDisplayBinding="{ Binding Name }"
+                      GroupShortNameBinding="{Binding Name }"
+                      HasUnevenRows="True"
+                      SelectedItem="{ Binding SelectedSquadEmployee, Mode=TwoWay }">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell ImageSource="{Binding PictureUrl}" Text="{Binding FullName}"
+                                   Command="{ Binding Source={x:Reference WhoIsWho}, Path=BindingContext.SquadEmployeeDetailCommand }" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage>
+</TabbedPage>
