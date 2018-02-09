@@ -28,7 +28,7 @@ namespace UnleashedApp
             InitializeComponent();
 
             var splitView = new SplitViewView();
-            NavigationPage = new NavigationPage(new TrainingView());
+            NavigationPage = new NavigationPage(new NameGameView());
 
             RootPage = new RootPage()
             {
