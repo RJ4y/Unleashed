@@ -19,5 +19,7 @@ namespace UnleashedApp
         public const string ACCOUNT_PROPERTY_REFRESH_TOKEN = "API_refresh_token";
         public const string ACCOUNT_PROPERTY_EXPIRATION = "API_token_expiration";
 
+        public const string apiTimout = "API_timeout";
+
     }
 }
