@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnleashedApp.Contracts;
 using Xamarin.Auth;
@@ -49,6 +50,27 @@ namespace UnleashedApp.Authentication
         {
             if (user.Properties.ContainsKey(Constants.ACCOUNT_PROPERTY_REFRESH_TOKEN))
                 return user.Properties[Constants.ACCOUNT_PROPERTY_REFRESH_TOKEN];
+            return null;
+        }
+
+        public string GetGoogleAccessToken()
+        {
+            if (user.Properties.ContainsKey("access_token"))
+                return user.Properties["access_token"];
+            return null;
+        }
+
+        public string GetUserFirstName()
+        {
+            if (user.Properties.ContainsKey(Constants.ACCOUNT_PROPERTY_FIRST_NAME))
+                return user.Properties[Constants.ACCOUNT_PROPERTY_FIRST_NAME];
+            return null;
+        }
+
+        public string GetUserLastName()
+        {
+            if (user.Properties.ContainsKey(Constants.ACCOUNT_PROPERTY_LAST_NAME))
+                return user.Properties[Constants.ACCOUNT_PROPERTY_LAST_NAME];
             return null;
         }
 
@@ -103,6 +125,17 @@ namespace UnleashedApp.Authentication
         public Account GetUser()
         {
             return AccountStore.Create().FindAccountsForService(Constants.APP_NAME).FirstOrDefault();
+        }
+
+        public void SaveUserName(Dictionary<string, string> fullName)
+        {
+            if (user.Properties.ContainsKey(Constants.ACCOUNT_PROPERTY_FIRST_NAME) && user.Properties.ContainsKey(Constants.ACCOUNT_PROPERTY_LAST_NAME))
+            {
+                user.Properties[Constants.ACCOUNT_PROPERTY_FIRST_NAME] = fullName["given_name"];
+                user.Properties[Constants.ACCOUNT_PROPERTY_LAST_NAME] = fullName["family_name"];
+            }
+            user.Properties.Add(Constants.ACCOUNT_PROPERTY_FIRST_NAME, fullName["given_name"]);
+            user.Properties.Add(Constants.ACCOUNT_PROPERTY_LAST_NAME, fullName["family_name"]);
         }
 
         private DateTime CalculateTokenExpiration(CustomTokenResponse tokenResponse)

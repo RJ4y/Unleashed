@@ -11,5 +11,6 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
     {
         Task<HttpResponseMessage> ExchangeTokenAsync(StringContent convertToken);
         Task<HttpResponseMessage> PostRevokeTokensAsync(StringContent clientId);
+        Task<HttpResponseMessage> GetUserNameAsync();
     }
 }

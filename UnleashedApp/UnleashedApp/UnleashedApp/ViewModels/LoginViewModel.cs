@@ -49,6 +49,8 @@ namespace UnleashedApp.ViewModels
                 if (tokenResponse != null)
                 {
                     _authenticationService.SaveCredentials(e.Account, tokenResponse);
+                    var fullNameDictionary = await _authenticationRepository.GetUserName();
+                    _authenticationService.SaveUserName(fullNameDictionary);
                     showHomePageAsync();
                 }
                 else

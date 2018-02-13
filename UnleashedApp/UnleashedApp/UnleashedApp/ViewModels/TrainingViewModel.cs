@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
+using UnleashedApp.Authentication;
 using UnleashedApp.Contracts.ViewModels;
 using UnleashedApp.Models;
 using UnleashedApp.Repositories.TrainingRepository;
@@ -277,8 +278,8 @@ namespace UnleashedApp.ViewModels
                     Cost = Convert.ToInt32(_cost),
                     Date = _date,
                     Days = Convert.ToInt32(_days),
-                    First_Name = "René",
-                    Last_Name = "Jacobs",
+                    First_Name = AuthenticationService.Instance.GetUserFirstName(),
+                    Last_Name = AuthenticationService.Instance.GetUserLastName(),
                     Info = "info",
                     Invoice = _sendInvoice,
                     Team = "team",

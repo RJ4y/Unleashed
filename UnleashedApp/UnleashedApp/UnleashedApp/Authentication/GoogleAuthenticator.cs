@@ -12,7 +12,7 @@ namespace UnleashedApp.Authentication
 
         private const string CLIENT_ID = Constants.CLIENT_ID;
 
-        private const string SCOPE = "email";
+        public const string SCOPE = "https://www.googleapis.com/auth/userinfo.profile";
         private const string AUTHORIZE_URI = "https://accounts.google.com/o/oauth2/v2/auth";
         private const string ACCESSTOKEN_URI = "https://www.googleapis.com/oauth2/v4/token";
 

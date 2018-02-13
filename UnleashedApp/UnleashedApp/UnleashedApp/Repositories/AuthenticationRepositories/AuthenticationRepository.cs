@@ -38,12 +38,23 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
             TokenRevokeRequest revokeRequest = new TokenRevokeRequest();
             StringContent content = ConvertToJson(revokeRequest);
             HttpResponseMessage response = await httpAuthClientAdapter.PostRevokeTokensAsync(content);
-            Debug.WriteLine("in repository response post: " + response.Content.ReadAsStringAsync().Result);
             if (response.IsSuccessStatusCode)
             {
                 return true;
             }
             return false;
+        }
+
+        public async Task<Dictionary<string, string>> GetUserName()
+        {
+            HttpResponseMessage response = await httpAuthClientAdapter.GetUserNameAsync();
+            if (response != null && response.IsSuccessStatusCode)
+            {
+                string nameJson = await response.Content.ReadAsStringAsync();
+                var nameObject = JsonConvert.DeserializeObject<Dictionary<string, string>>(nameJson);
+                return nameObject;
+            }
+            return null;
         }
     }
 }

@@ -14,9 +14,13 @@ namespace UnleashedApp.Contracts
         void SaveCredentials(Account account, CustomTokenResponse tokenResponse);
         string GetAPIAccessToken();
         string GetAPIRefreshToken();
+        string GetGoogleAccessToken();
+        string GetUserFirstName();
+        string GetUserLastName();
         bool ShouldRefreshToken();
         void DeleteAccessTokens();
         bool UserIsLoggedIn();
         Account GetUser();
+        void SaveUserName(Dictionary<string, string> userName);
     }
 }

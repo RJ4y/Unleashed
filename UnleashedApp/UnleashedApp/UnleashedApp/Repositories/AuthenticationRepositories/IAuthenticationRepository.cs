@@ -13,5 +13,6 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
         Task<CustomTokenResponse> RequestExchangeGoogleTokenAsync(TokenConvertRequest tokenConvertRequest);
         Task<CustomTokenResponse> RequestRefreshAccessTokenAsync(string refreshToken);
         Task<bool> RequestRevokeTokens();
+        Task<Dictionary<string, string>> GetUserName();
     }
 }
