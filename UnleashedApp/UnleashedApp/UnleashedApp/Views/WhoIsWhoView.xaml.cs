@@ -22,7 +22,7 @@ namespace UnleashedApp.Views
             {
                 ((WhoIsWhoViewModel)BindingContext).LoadEmployeesPerHabitat();
                 ((WhoIsWhoViewModel)BindingContext).RefreshFilteredHabitatList();
-                ((WhoIsWhoViewModel) BindingContext).RefreshFilteredSquadList();
+                ((WhoIsWhoViewModel)BindingContext).RefreshFilteredSquadList();
                 ((WhoIsWhoViewModel)BindingContext).LoadEmployeesPerSquad();
             }
         }
