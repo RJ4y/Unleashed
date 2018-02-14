@@ -11,12 +11,13 @@
         <StackLayout BackgroundColor="#e6332a" HeightRequest="56" Padding="15,0,15,0" Margin="0,0,0,-6">
             <Label Text="Unleashed" FontSize="20" VerticalOptions="CenterAndExpand" TextColor="White" />
         </StackLayout>
-        <ListView x:Name="navigationDrawerList" RowHeight="47" Margin="0" ItemTapped="OnMasterTapped">
+        <ListView x:Name="navigationDrawerList" RowHeight="57" Margin="0" ItemTapped="OnMasterTapped" SeparatorVisibility="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal" Padding="15,10,15,10">
-                            <Label Text="{Binding Title}" FontSize="Default" VerticalOptions="Center" TextColor="#444" />
+                        <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal" Padding="15" Spacing="20">
+                            <Image Source="{Binding Icon}" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />
+                            <Label Text="{Binding Title}" FontSize="Medium" VerticalOptions="Center" TextColor="#444" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
