@@ -16,7 +16,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal" Padding="15" Spacing="20">
-                            <Image Source="{Binding Icon}" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />
+                            <Image Source="{Binding Icon}" WidthRequest="32" HeightRequest="32" VerticalOptions="Center" />
                             <Label Text="{Binding Title}" FontSize="Medium" VerticalOptions="Center" TextColor="#444" />
                         </StackLayout>
                     </ViewCell>
