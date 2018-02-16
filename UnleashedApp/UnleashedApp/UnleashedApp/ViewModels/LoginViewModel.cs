@@ -3,6 +3,7 @@ using System.Windows.Input;
 using UnleashedApp.Authentication;
 using UnleashedApp.Contracts;
 using UnleashedApp.Contracts.ViewModels;
+using UnleashedApp.Models;
 using UnleashedApp.Repositories.AuthenticationRepositories;
 using UnleashedApp.Views;
 using Xamarin.Auth;
@@ -44,19 +45,29 @@ namespace UnleashedApp.ViewModels
             if (e.IsAuthenticated)
             {
                 ((Command)PresentLoginScreenCommand).ChangeCanExecute();
-                var googleToken = e.Account.Properties["access_token"];
-                CustomTokenResponse tokenResponse = await _authenticationRepository.RequestExchangeGoogleTokenAsync(new TokenConvertRequest(googleToken));
-                if (tokenResponse != null)
-                {
-                    _authenticationService.SaveCredentials(e.Account, tokenResponse);
-                    var fullNameDictionary = await _authenticationRepository.GetUserName();
-                    _authenticationService.SaveUserName(fullNameDictionary);
-                    showHomePageAsync();
-                }
-                else
-                {
-                    ShowErrorMessage("Oops something went wrong");
-                }
+                User user = await _authenticationRepository.GetUserName(e.Account);
+
+                //Only @unleashed.be may log in -> disabled for demo purposes
+
+                //if (!user.Email.Contains("@unleashed.be"))
+                //{
+                //    ShowErrorMessage("Oops you are not authorized to use this app, make sure you use your @unleashed.be mail address");
+                //}
+                //else
+                //{
+                    var googleToken = e.Account.Properties["access_token"];
+                    CustomTokenResponse tokenResponse = await _authenticationRepository.RequestExchangeGoogleTokenAsync(new TokenConvertRequest(googleToken));
+                    if (tokenResponse != null)
+                    {
+                        _authenticationService.SaveCredentials(e.Account, tokenResponse);
+                        _authenticationService.SaveUserName(user);
+                        showHomePageAsync();
+                    }
+                    else
+                    {
+                        ShowErrorMessage("Oops something went wrong");
+                    }
+                //}
             }
             else
             {

@@ -7,8 +7,10 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using UnleashedApp.Authentication;
 using UnleashedApp.Contracts;
+using Xamarin.Auth;
 
 namespace UnleashedApp.Repositories.AuthenticationRepositories
 {
@@ -46,15 +48,13 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
             }
         }
 
-        public async Task<HttpResponseMessage> GetUserNameAsync()
+        public async Task<Response> GetUserInfoAsync(Account account)
         {
             try
             {
-                string googleAccesToken = authenticationService.GetGoogleAccessToken();
-                UriBuilder builder = new UriBuilder("https://www.googleapis.com/oauth2/v2/userinfo");
-                builder.Query = "fields=family_name%2Cgiven_name&key=" + googleAccesToken;
-                Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", googleAccesToken);
-                return await Client.GetAsync(builder.Uri);
+                var request = new OAuth2Request("GET", new Uri("https://www.googleapis.com/oauth2/v2/userinfo"), null, account);
+                return await request.GetResponseAsync();
+                
             }
             catch (TaskCanceledException ex)
             {

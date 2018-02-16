@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using UnleashedApp.Authentication;
 using UnleashedApp.Contracts;
 using UnleashedApp.Models;
+using Xamarin.Auth;
 
 namespace UnleashedApp.Repositories.AuthenticationRepositories
 {
@@ -45,14 +46,14 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
             return false;
         }
 
-        public async Task<Dictionary<string, string>> GetUserName()
+        public async Task<User> GetUserName(Account account)
         {
-            HttpResponseMessage response = await httpAuthClientAdapter.GetUserNameAsync();
-            if (response != null && response.IsSuccessStatusCode)
+            Response response = await httpAuthClientAdapter.GetUserInfoAsync(account);
+            if (response != null)
             {
-                string nameJson = await response.Content.ReadAsStringAsync();
-                var nameObject = JsonConvert.DeserializeObject<Dictionary<string, string>>(nameJson);
-                return nameObject;
+                string userJson = response.GetResponseText();
+                var user = JsonConvert.DeserializeObject<User>(userJson);
+                return user;
             }
             return null;
         }

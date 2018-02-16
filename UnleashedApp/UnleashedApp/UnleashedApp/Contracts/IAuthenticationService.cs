@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnleashedApp.Authentication;
+using UnleashedApp.Models;
 using Xamarin.Auth;
 
 namespace UnleashedApp.Contracts
@@ -21,6 +22,6 @@ namespace UnleashedApp.Contracts
         void DeleteAccessTokens();
         bool UserIsLoggedIn();
         Account GetUser();
-        void SaveUserName(Dictionary<string, string> userName);
+        void SaveUserName(User user);
     }
 }

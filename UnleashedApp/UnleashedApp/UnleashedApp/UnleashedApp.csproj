@@ -42,6 +42,7 @@
     <Compile Include="Models\TokenRefreshRequest.cs" />
     <Compile Include="Models\TokenRequest.cs" />
     <Compile Include="Models\TokenRevokeRequest.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Repositories\AuthenticationRepositories\AuthenticationHttpClientAdapter.cs" />
     <Compile Include="Repositories\AuthenticationRepositories\AuthenticationRepository.cs" />
     <Compile Include="Repositories\AuthenticationRepositories\IAuthenticationHttpClientAdapter.cs" />

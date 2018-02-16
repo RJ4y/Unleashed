@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnleashedApp.Contracts;
+using UnleashedApp.Models;
 using Xamarin.Auth;
 
 namespace UnleashedApp.Authentication
@@ -127,15 +128,18 @@ namespace UnleashedApp.Authentication
             return AccountStore.Create().FindAccountsForService(Constants.APP_NAME).FirstOrDefault();
         }
 
-        public void SaveUserName(Dictionary<string, string> fullName)
+        public void SaveUserName(User loggedInUser)
         {
             if (user.Properties.ContainsKey(Constants.ACCOUNT_PROPERTY_FIRST_NAME) && user.Properties.ContainsKey(Constants.ACCOUNT_PROPERTY_LAST_NAME))
             {
-                user.Properties[Constants.ACCOUNT_PROPERTY_FIRST_NAME] = fullName["given_name"];
-                user.Properties[Constants.ACCOUNT_PROPERTY_LAST_NAME] = fullName["family_name"];
+                user.Properties[Constants.ACCOUNT_PROPERTY_FIRST_NAME] = loggedInUser.FirstName;
+                user.Properties[Constants.ACCOUNT_PROPERTY_LAST_NAME] = loggedInUser.LastName;
             }
-            user.Properties.Add(Constants.ACCOUNT_PROPERTY_FIRST_NAME, fullName["given_name"]);
-            user.Properties.Add(Constants.ACCOUNT_PROPERTY_LAST_NAME, fullName["family_name"]);
+            else
+            {
+                user.Properties.Add(Constants.ACCOUNT_PROPERTY_FIRST_NAME, loggedInUser.FirstName);
+                user.Properties.Add(Constants.ACCOUNT_PROPERTY_LAST_NAME, loggedInUser.LastName);
+            }
         }
 
         private DateTime CalculateTokenExpiration(CustomTokenResponse tokenResponse)
