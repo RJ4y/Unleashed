@@ -13,15 +13,15 @@ namespace UnleashedApp.ViewModels
 {
     public class LoginViewModel : ILoginViewModel
     {
-        private readonly INavigationService _navigationService;
         private readonly IAuthenticationService _authenticationService;
         private readonly IAuthenticationRepository _authenticationRepository;
 
         public ICommand PresentLoginScreenCommand { get; set; }
 
-        public LoginViewModel(INavigationService navigationService, IAuthenticationService authenticationService, IAuthenticationRepository authenticationRepository)
+        bool canLogin = true;
+
+        public LoginViewModel(IAuthenticationService authenticationService, IAuthenticationRepository authenticationRepository)
         {
-            _navigationService = navigationService;
             _authenticationService = authenticationService;
             _authenticationRepository = authenticationRepository;
             GoogleAuthenticator.Authenticator.Completed += OnAuthCompletedAsync;
@@ -32,30 +32,32 @@ namespace UnleashedApp.ViewModels
 
         private void InitialiseCommands()
         {
-            PresentLoginScreenCommand = new Command(() =>
-            {
-                var presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
-                presenter.Login(GoogleAuthenticator.Authenticator);
-            }
-            );
+            PresentLoginScreenCommand = new Command(async () => presentGoogleLoginScreen(), () => canLogin);
+        }
+
+        private void presentGoogleLoginScreen()
+        {
+            var presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
+            presenter.Login(GoogleAuthenticator.Authenticator);
         }
 
         private async void OnAuthCompletedAsync(object sender, AuthenticatorCompletedEventArgs e)
         {
             if (e.IsAuthenticated)
             {
-                ((Command)PresentLoginScreenCommand).ChangeCanExecute();
+                ChangeEnableButton(false);
                 User user = await _authenticationRepository.GetUserName(e.Account);
 
                 //Only @unleashed.be may log in -> disabled for demo purposes
 
                 //if (!user.Email.Contains("@unleashed.be"))
                 //{
+                    //ChangeEnableButton(true);
                 //    ShowErrorMessage("Oops you are not authorized to use this app, make sure you use your @unleashed.be mail address");
                 //}
                 //else
                 //{
-                    var googleToken = e.Account.Properties["access_token"];
+                var googleToken = e.Account.Properties["access_token"];
                     CustomTokenResponse tokenResponse = await _authenticationRepository.RequestExchangeGoogleTokenAsync(new TokenConvertRequest(googleToken));
                     if (tokenResponse != null)
                     {
@@ -65,14 +67,22 @@ namespace UnleashedApp.ViewModels
                     }
                     else
                     {
+                        ChangeEnableButton(true);
                         ShowErrorMessage("Oops something went wrong");
                     }
                 //}
             }
             else
             {
+                ChangeEnableButton(true);
                 ShowErrorMessage("Oops you are not authorized to use this app");
             }
+        }
+
+        private void ChangeEnableButton(bool isEnabled)
+        {
+            canLogin = isEnabled;
+            ((Command)PresentLoginScreenCommand).ChangeCanExecute();
         }
 
         private void OnAuthError(object sender, AuthenticatorErrorEventArgs e)
