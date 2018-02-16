@@ -88,6 +88,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\GoogleAuthenticatorTests.cs" />
     <Compile Include="Converters\CurrencyConverterUnitTests.cs" />
     <Compile Include="Converters\DateConverterUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

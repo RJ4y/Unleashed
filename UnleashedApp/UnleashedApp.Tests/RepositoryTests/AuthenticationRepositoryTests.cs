@@ -9,7 +9,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using UnleashedApp.Contracts;
+using UnleashedApp.Models;
 using UnleashedApp.Repositories;
+using Xamarin.Auth;
 
 namespace UnleashedApp.Tests.Repositories
 {
@@ -114,6 +116,53 @@ namespace UnleashedApp.Tests.Repositories
             mockApi.Verify(api => api.PostRevokeTokensAsync(It.IsAny<StringContent>()), Times.Once);
             Assert.IsNotNull(result);
             Assert.False(result);
+        }
+
+        [Test]
+        public void TestGetUserInfo_ShouldReturnUserInfo()
+        {
+            //Arrange
+            User testUser = new User()
+            {
+                Email = "test@unleashed.be",
+                FirstName = "Hanne",
+                FullName = "Hanne Colaers",
+                LastName = "Colaers"
+            };
+            string responseDataJson = JsonConvert.SerializeObject(testUser);
+            HttpResponseMessage httpResponse = new HttpResponseMessage(HttpStatusCode.OK);
+            httpResponse.Content = new StringContent(responseDataJson, Encoding.UTF8, "application/json");
+            httpResponse.RequestMessage = new HttpRequestMessage();
+            Response response = new Response(httpResponse);
+
+            var mockApi = new Mock<IAuthenticationHttpClientAdapter>();
+            mockApi.Setup(api => api.GetUserInfoAsync(It.IsAny<Account>())).Returns(Task.FromResult(response));
+            repository = new AuthenticationRepository(authService, new HttpClientAdapter(), mockApi.Object);
+
+            //Act
+            User result = repository.GetUserInfoAsync(new Account()).Result;
+
+            //Assert
+            Assert.AreEqual(result.FullName, "Hanne Colaers");
+        }
+
+        [Test]
+        public void TestGetUserInfo_BadRequestShouldReturnNull()
+        {
+            //Arrange
+            HttpResponseMessage httpResponse = new HttpResponseMessage(HttpStatusCode.BadRequest);
+            httpResponse.RequestMessage = new HttpRequestMessage();
+            Response response = new Response(httpResponse);
+
+            var mockApi = new Mock<IAuthenticationHttpClientAdapter>();
+            mockApi.Setup(api => api.GetUserInfoAsync(It.IsAny<Account>())).Returns(Task.FromResult(response));
+            repository = new AuthenticationRepository(authService, new HttpClientAdapter(), mockApi.Object);
+
+            //Act
+            User result = repository.GetUserInfoAsync(new Account()).Result;
+
+            //Assert
+            Assert.IsNull(result);
         }
     }
 }

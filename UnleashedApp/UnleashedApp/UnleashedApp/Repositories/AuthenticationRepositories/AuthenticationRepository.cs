@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -46,10 +47,10 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
             return false;
         }
 
-        public async Task<User> GetUserName(Account account)
+        public async Task<User> GetUserInfoAsync(Account account)
         {
             Response response = await httpAuthClientAdapter.GetUserInfoAsync(account);
-            if (response != null)
+            if (response != null && response.StatusCode == HttpStatusCode.OK)
             {
                 string userJson = response.GetResponseText();
                 var user = JsonConvert.DeserializeObject<User>(userJson);

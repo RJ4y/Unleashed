@@ -32,10 +32,10 @@ namespace UnleashedApp.ViewModels
 
         private void InitialiseCommands()
         {
-            PresentLoginScreenCommand = new Command(async () => presentGoogleLoginScreen(), () => canLogin);
+            PresentLoginScreenCommand = new Command(async () => PresentGoogleLoginScreen(), () => canLogin);
         }
 
-        private void presentGoogleLoginScreen()
+        private void PresentGoogleLoginScreen()
         {
             var presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
             presenter.Login(GoogleAuthenticator.Authenticator);
@@ -46,7 +46,7 @@ namespace UnleashedApp.ViewModels
             if (e.IsAuthenticated)
             {
                 ChangeEnableButton(false);
-                User user = await _authenticationRepository.GetUserName(e.Account);
+                User user = await _authenticationRepository.GetUserInfoAsync(e.Account);
 
                 //Only @unleashed.be may log in -> disabled for demo purposes
 

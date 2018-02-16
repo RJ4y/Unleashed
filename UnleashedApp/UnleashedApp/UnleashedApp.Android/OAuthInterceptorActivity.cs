@@ -18,8 +18,8 @@ namespace UnleashedApp.Droid
     [IntentFilter(
     actions: new[] { Intent.ActionView },
     Categories = new[] { Intent.CategoryBrowsable, Intent.CategoryDefault },
-    DataScheme = GoogleAuthenticator.REDIRECT_SCHEME,
-    DataPath = GoogleAuthenticator.REDIRECT_PATH
+    DataScheme = "com.googleusercontent.apps.213697302597-efe8ekru9nue7ihl2qocfbe0j8dgmqcp",
+    DataPath = GoogleAuthenticator.RedirectPath
 )]
     public class OAuthInterceptorActivity : AppCompatActivity
     {

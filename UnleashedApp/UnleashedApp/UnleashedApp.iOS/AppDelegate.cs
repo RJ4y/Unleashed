@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using UnleashedApp.Authentication;
 
 namespace UnleashedApp.iOS
 {
@@ -32,6 +33,17 @@ namespace UnleashedApp.iOS
             UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes() { TextColor = UIColor.White });
 
             return base.FinishedLaunching(app, options);
+        }
+
+        public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+        {
+            // Convert NSUrl to Uri
+            var uri = new Uri(url.AbsoluteString);
+
+            // Load redirectUrl page
+            GoogleAuthenticator.Authenticator.OnPageLoading(uri);
+
+            return true;
         }
     }
 }

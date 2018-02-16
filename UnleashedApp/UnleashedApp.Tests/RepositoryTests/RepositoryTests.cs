@@ -132,8 +132,6 @@ namespace UnleashedApp.Tests.Repositories
         public void TestAddAddAuthenticationHeader_UserNotloggedIn_RefreshToken_ShouldNotAddHeader()
         {
             //Arrange
-            string refreshToken = "testRefreshToken";
-
             authServiceMock.Setup(s => s.UserIsLoggedIn()).Returns(false);
             Repository repository = new EmployeeRepository(authServiceMock.Object, httpClientMock.Object);
 

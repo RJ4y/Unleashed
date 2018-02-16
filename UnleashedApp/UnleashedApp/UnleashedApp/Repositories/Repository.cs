@@ -14,7 +14,7 @@ namespace UnleashedApp.Repositories
     public abstract class Repository
     {
         public static readonly HttpClient Client = new HttpClient();
-        protected readonly Uri BaseAddress = new Uri(Constants.BASE_API_URL);
+        protected readonly Uri BaseAddress = new Uri(Constants.BaseApiUrl);
         protected IAuthenticationService authenticationService;
         protected IHttpClientAdapter httpClientAdapter;
 
