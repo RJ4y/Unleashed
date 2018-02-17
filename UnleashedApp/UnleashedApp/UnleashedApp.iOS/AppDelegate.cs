@@ -25,12 +25,15 @@ namespace UnleashedApp.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             global::Xamarin.Auth.Presenters.XamarinIOS.AuthenticationConfiguration.Init();
+            App.ScreenWidth = UIScreen.MainScreen.Bounds.Width;
+            App.ScreenHeight = UIScreen.MainScreen.Bounds.Height;
             LoadApplication(new App());
-            UINavigationBar.Appearance.BarTintColor = UIColor.FromPatternImage(UIImage.FromFile("header.png"));
-            // To change Text Colors to white here
-            UINavigationBar.Appearance.TintColor = UIColor.White;
-            // To change Title Text colors to white here
-            UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes() { TextColor = UIColor.White });
+
+            //UINavigationBar.Appearance.BarTintColor = UIColor.FromPatternImage(UIImage.FromFile("header.png"));
+            //// To change Text Colors to white here
+            //UINavigationBar.Appearance.TintColor = UIColor.White;
+            //// To change Title Text colors to white here
+            //UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes() { TextColor = UIColor.White });
 
             return base.FinishedLaunching(app, options);
         }

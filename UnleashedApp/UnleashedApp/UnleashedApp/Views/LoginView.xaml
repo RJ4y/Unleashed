@@ -1,14 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="UnleashedApp.Views.LoginView" BackgroundImage="splash.png"
+             x:Class="UnleashedApp.Views.LoginView" 
              xmlns:locator="clr-namespace:UnleashedApp"
              BindingContext="{Binding Source={x:Static locator:ViewModelLocator.Instance}, Path=LoginViewModel}">
     <ContentPage.Content>
-        <StackLayout Padding="50,80" Orientation="Vertical">
-            <ListView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="true" />
-            <Button Text="Login with Unleashed account" Command="{Binding PresentLoginScreenCommand}" 
-                    FontSize="Medium" FontAttributes="Bold" TextColor="#e6332a" HorizontalOptions="FillAndExpand" BackgroundColor="White"/>
-        </StackLayout>
+        <RelativeLayout>
+            <Image Source="splash.png"
+                   RelativeLayout.WidthConstraint=
+                   "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                   RelativeLayout.HeightConstraint=
+                   "{ConstraintExpression Type=RelativeToParent, Property=Height}"/>
+            <Grid RelativeLayout.WidthConstraint=
+                  "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                  RelativeLayout.HeightConstraint=
+                  "{ConstraintExpression Type=RelativeToParent, Property=Height}" Margin="40,0,40,120">
+                <Button Text="Login with Unleashed account" Command="{Binding PresentLoginScreenCommand}" 
+                    FontSize="Medium" FontAttributes="Bold" TextColor="#e6332a" HorizontalOptions="FillAndExpand" VerticalOptions="End" BackgroundColor="White"/>
+            </Grid>
+        </RelativeLayout>
     </ContentPage.Content>
 </ContentPage>
