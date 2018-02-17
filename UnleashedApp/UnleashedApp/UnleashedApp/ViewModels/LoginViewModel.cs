@@ -18,7 +18,7 @@ namespace UnleashedApp.ViewModels
 
         public ICommand PresentLoginScreenCommand { get; set; }
 
-        bool canLogin = true;
+        private bool canLogin = true;
 
         public LoginViewModel(IAuthenticationService authenticationService, IAuthenticationRepository authenticationRepository)
         {
@@ -79,7 +79,7 @@ namespace UnleashedApp.ViewModels
             }
         }
 
-        private void ChangeEnableButton(bool isEnabled)
+        public void ChangeEnableButton(bool isEnabled)
         {
             canLogin = isEnabled;
             ((Command)PresentLoginScreenCommand).ChangeCanExecute();

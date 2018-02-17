@@ -19,13 +19,19 @@ namespace UnleashedApp.Views
 
             NavigationPage.SetHasNavigationBar(this, false);
 
-            MessagingCenter.Subscribe<LoginViewModel, string>(this, "authentication_failed", (sender, arg) =>
-            {
-                Device.BeginInvokeOnMainThread(async () =>
+            MessagingCenter.Subscribe<LoginViewModel, string>(this, "authentication_failed",
+                (sender, arg) =>
                 {
-                    await DisplayAlert("Authentication failed!", arg, "Try again");
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await DisplayAlert("Authentication failed!", arg, "Try again");
+                    });
                 });
-            });
+        }
+
+        protected override void OnAppearing()
+        {
+            ViewModelLocator.Instance.LoginViewModel.ChangeEnableButton(true);
         }
     }
 }

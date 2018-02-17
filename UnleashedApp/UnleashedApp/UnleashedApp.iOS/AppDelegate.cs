@@ -25,8 +25,6 @@ namespace UnleashedApp.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             global::Xamarin.Auth.Presenters.XamarinIOS.AuthenticationConfiguration.Init();
-            App.ScreenWidth = UIScreen.MainScreen.Bounds.Width;
-            App.ScreenHeight = UIScreen.MainScreen.Bounds.Height;
             LoadApplication(new App());
 
             //UINavigationBar.Appearance.BarTintColor = UIColor.FromPatternImage(UIImage.FromFile("header.png"));

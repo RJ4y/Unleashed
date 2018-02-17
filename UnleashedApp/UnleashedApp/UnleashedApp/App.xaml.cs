@@ -16,9 +16,6 @@ namespace UnleashedApp
         public static NavigationPage NavigationPage { get; set; }
         public static RootPage RootPage;
 
-        public static double ScreenWidth { get; set; }
-        public static double ScreenHeight { get; set; }
-
         public static bool MenuIsPresented
         {
             get
