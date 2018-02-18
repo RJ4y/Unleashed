@@ -77,11 +77,7 @@ namespace UnleashedApp.Authentication
         public bool ShouldRefreshToken()
         {
             DateTime expiration = DateTime.Parse(user.Properties[Constants.AccountPropertyExpiration]);
-            if (expiration < DateTime.Now)
-            {
-                return true;
-            }
-            return false;
+            return expiration < DateTime.Now;
         }
 
         private void SaveTokens(Account account, CustomTokenResponse tokenResponse)
@@ -117,9 +113,7 @@ namespace UnleashedApp.Authentication
 
         public bool UserIsLoggedIn()
         {
-            if (user != null && user.Properties.ContainsKey(Constants.AccountPropertyRefreshToken))
-                return true;
-            return false;
+            return user != null && user.Properties.ContainsKey(Constants.AccountPropertyRefreshToken);
         }
 
         public Account GetUser()
