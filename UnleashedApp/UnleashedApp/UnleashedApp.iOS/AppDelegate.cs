@@ -27,11 +27,14 @@ namespace UnleashedApp.iOS
             global::Xamarin.Auth.Presenters.XamarinIOS.AuthenticationConfiguration.Init();
             LoadApplication(new App());
 
-            //UINavigationBar.Appearance.BarTintColor = UIColor.FromPatternImage(UIImage.FromFile("header.png"));
-            //// To change Text Colors to white here
-            //UINavigationBar.Appearance.TintColor = UIColor.White;
-            //// To change Title Text colors to white here
-            //UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes() { TextColor = UIColor.White });
+            // To change Text Colors to white here
+            UINavigationBar.Appearance.BarTintColor = UIColor.FromRGB(230,51,42);
+            UINavigationBar.Appearance.TintColor = UIColor.White;
+
+
+            //Selected tab color
+            UITabBar.Appearance.SelectedImageTintColor = UIColor.FromRGB(230, 51, 42);
+
 
             return base.FinishedLaunching(app, options);
         }

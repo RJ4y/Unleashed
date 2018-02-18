@@ -14,7 +14,7 @@
     <ScrollView>
         <Grid Padding="10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -40,34 +40,34 @@
                    HeightRequest="100" />
             <Label x:Name="NameLabel" Grid.Row="0" Grid.Column="1" FontSize="Large" TextColor="#e6332a" Grid.ColumnSpan="2" Margin="0,-7,0,-10"
                    VerticalTextAlignment="End" Text="{ Binding FullName }" />
-            <Label x:Name="FunctionLabel" Grid.Row="1" Grid.Column="1" FontSize="Medium" Grid.ColumnSpan="2"
-                   VerticalTextAlignment="Start" Text="{ Binding Function }" />
+            <Label x:Name="FunctionLabel" Grid.Row="1" Grid.Column="1" FontSize="Medium" Grid.ColumnSpan="2" 
+                   VerticalTextAlignment="Start" Text="{ Binding Function }" TextColor="#999" />
             <Label x:Name="ExpectationsHeaderLabel" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
                    Text="Expectations" FontSize="Medium" TextColor="#333" />
             <Label x:Name="ExpectationsLabel" Grid.Row="3" Grid.Column="0" FontSize="Default" Grid.ColumnSpan="3"
-                   Text="{ Binding Expectations }" />
+                   Text="{ Binding Expectations }" TextColor="#999"/>
             <Label x:Name="MotivationHeaderLabel" Grid.Row="4" Grid.Column="0" Text="Motivation" Grid.ColumnSpan="3"
                    FontSize="Medium" TextColor="#333" />
             <Label x:Name="MotivationLabel" Grid.Row="5" Grid.Column="0" FontSize="Default" Grid.ColumnSpan="3"
-                   Text="{ Binding Motivation }" />
+                   Text="{ Binding Motivation }" TextColor="#999"/>
             <Label x:Name="NeedToKnowHeaderLabel" Grid.Row="6" Grid.Column="0" Text="Need to know" Grid.ColumnSpan="3"
                    FontSize="Medium" TextColor="#333" />
             <Label x:Name="NeedToKnowLabel" Grid.Row="7" Grid.Column="0" FontSize="Default" Grid.ColumnSpan="3"
-                   Text="{ Binding NeedToKnow }" />
+                   Text="{ Binding NeedToKnow }" TextColor="#999"/>
             <Label x:Name="BirthDateHeaderLabel" Grid.Row="8" Grid.Column="0" Text="Birth date"
                    FontSize="Medium" TextColor="#333" />
             <Label x:Name="BirthDateLabel" Grid.Row="9"
-                   Text="{ Binding DateOfBirth, Converter={StaticResource DateConverter} }" />
+                   Text="{ Binding DateOfBirth, Converter={StaticResource DateConverter} }" TextColor="#999"/>
             <Label x:Name="HabitatHeaderLabel" Grid.Row="10" Grid.Column="0" Text="Habitat"
                    FontSize="Medium" TextColor="#333" />
             <Label x:Name="HabitatLabel" Grid.Row="11" Grid.Column="0" 
-                   Text="{ Binding HabitatId, Converter={StaticResource HabitatConverter} }" />
+                   Text="{ Binding HabitatId, Converter={StaticResource HabitatConverter} }" TextColor="#999"/>
             <Label x:Name="StartDateHeaderLabel" Grid.Row="12" Grid.Column="0" Text="Start date"
                    FontSize="Medium" TextColor="#333" />
             <Label x:Name="StartDateLabel" Grid.Row="13" Grid.Column="0" 
-                   Text="{ Binding StartDate, Converter={StaticResource DateConverter} }" />
+                   Text="{ Binding StartDate, Converter={StaticResource DateConverter} }" TextColor="#999"/>
             <Label x:Name="EmailLabel" Grid.Row="14" Grid.Column="0" Text="{ Binding Email }" Grid.ColumnSpan="2"
-                   Margin="0,0,0,10" />
+                   Margin="0,0,0,10" TextColor="#999"/>
             <Grid Grid.Row="15" Grid.Column="0" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />

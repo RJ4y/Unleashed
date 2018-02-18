@@ -9,17 +9,18 @@
     <ContentPage Title="Habitats">
         <StackLayout>
             <StackLayout Padding="10" Margin="0,0,0,-6" BackgroundColor="#c9251d">
-                <SearchBar Text="{ Binding HabitatFilter, Mode=TwoWay }" Placeholder="Search" PlaceholderColor="#fff" TextColor="#fff" CancelButtonColor="#fff" />
+                <SearchBar Text="{ Binding HabitatFilter, Mode=TwoWay }" Placeholder="Search" PlaceholderColor="#fff" TextColor="#fff" CancelButtonColor="#fff" BackgroundColor="Transparent"/>
             </StackLayout>
             <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{ Binding FilteredHabitatList }"
                       IsGroupingEnabled="True"
                       GroupDisplayBinding="{ Binding Name }"
                       GroupShortNameBinding="{Binding Name }"
                       HasUnevenRows="True"
-                      SelectedItem="{ Binding SelectedHabitatEmployee, Mode=TwoWay }">
+                      SelectedItem="{ Binding SelectedHabitatEmployee, Mode=TwoWay }"
+                      SeparatorVisibility="None" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ImageCell ImageSource="{Binding PictureUrl}" Text="{Binding FullName}"
+                        <ImageCell ImageSource="{Binding PictureUrl}" Text="{Binding FullName}" Height="80"
                                    Command="{ Binding Source={x:Reference WhoIsWho}, Path=BindingContext.HabitatEmployeeDetailCommand }" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -29,14 +30,16 @@
     <ContentPage Title="Squads">
         <StackLayout>
             <StackLayout Padding="10" Margin="0,0,0,-6" BackgroundColor="#c9251d">
-                <SearchBar Text="{ Binding SquadFilter, Mode=TwoWay }" Placeholder="Search" PlaceholderColor="#fff" TextColor="#fff" CancelButtonColor="#fff" />
+                <SearchBar Text="{ Binding SquadFilter, Mode=TwoWay }" Placeholder="Search" PlaceholderColor="#fff" TextColor="#fff" CancelButtonColor="#fff" BackgroundColor="Transparent"/>
             </StackLayout>
             <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{ Binding FilteredSquadList }"
                       IsGroupingEnabled="True"
                       GroupDisplayBinding="{ Binding Name }"
                       GroupShortNameBinding="{Binding Name }"
                       HasUnevenRows="True"
-                      SelectedItem="{ Binding SelectedSquadEmployee, Mode=TwoWay }">
+                      SelectedItem="{ Binding SelectedSquadEmployee, Mode=TwoWay }"
+                      SeparatorVisibility="None"
+                      >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ImageCell ImageSource="{Binding PictureUrl}" Text="{Binding FullName}"
