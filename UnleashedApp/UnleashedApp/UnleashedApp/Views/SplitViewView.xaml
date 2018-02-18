@@ -8,7 +8,7 @@
         <OnPlatform x:TypeArguments="Thickness" iOS="0,20,0,0" />
     </ContentPage.Padding>
     <StackLayout BackgroundColor="White">
-        <StackLayout BackgroundColor="#e6332a" HeightRequest="56" Padding="15,0,15,0" Margin="0,0,0,-6">
+        <StackLayout BackgroundColor="#e6332a" HeightRequest="56" Padding="15,0,15,0">
             <Label Text="Unleashed" FontSize="20" VerticalOptions="CenterAndExpand" TextColor="White" />
         </StackLayout>
         <ListView x:Name="navigationDrawerList" RowHeight="57" Margin="0" ItemTapped="OnMasterTapped" SeparatorVisibility="None">
