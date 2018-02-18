@@ -1,5 +1,4 @@
-﻿using System;
-using UnleashedApp.ViewModels;
+﻿using UnleashedApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,7 +21,7 @@ namespace UnleashedApp.Views
             {
                 ((WhoIsWhoViewModel)BindingContext).LoadEmployeesPerHabitat();
                 ((WhoIsWhoViewModel)BindingContext).RefreshFilteredHabitatList();
-                ((WhoIsWhoViewModel) BindingContext).RefreshFilteredSquadList();
+                ((WhoIsWhoViewModel)BindingContext).RefreshFilteredSquadList();
                 ((WhoIsWhoViewModel)BindingContext).LoadEmployeesPerSquad();
             }
         }

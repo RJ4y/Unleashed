@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using UnleashedApp.Authentication;
 using UnleashedApp.Contracts;
 using UnleashedApp.Models;
-using UnleashedApp.Repositories.AuthenticationRepositories;
 
 namespace UnleashedApp.Repositories
 {

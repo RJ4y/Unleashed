@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace UnleashedApp
+﻿namespace UnleashedApp
 {
     public static class Constants
     {
@@ -12,7 +7,7 @@ namespace UnleashedApp
         public const string AppName = "Unleashed";
         public const string BaseApiUrl = "http://192.168.0.206:8000/";
         public const string RefreshUrl = "auth/token";
-
+        
         public const string AccountPropertyAccessToken = "API_token";
         public const string AccountPropertyRefreshToken = "API_refresh_token";
         public const string AccountPropertyExpiration = "API_token_expiration";

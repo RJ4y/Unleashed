@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using UnleashedApp.Authentication;
 using UnleashedApp.Contracts;
 using UnleashedApp.Contracts.ViewModels;

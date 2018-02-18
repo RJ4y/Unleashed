@@ -9,7 +9,7 @@
     <ContentPage Title="Habitats">
         <StackLayout>
             <StackLayout Padding="10" Margin="0,0,0,-6" BackgroundColor="#c9251d">
-                <SearchBar Text="{ Binding HabitatFilter, Mode=TwoWay }" Placeholder="Search" PlaceholderColor="#fff" TextColor="#fff" CancelButtonColor="#fff" BackgroundColor="Transparent"/>
+                    <SearchBar Text="{ Binding Filter, Mode=TwoWay }" Placeholder="Search" PlaceholderColor="#fff" TextColor="#fff" CancelButtonColor="#fff" BackgroundColor="Transparent"/>
             </StackLayout>
             <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{ Binding FilteredHabitatList }"
                       IsGroupingEnabled="True"
@@ -30,7 +30,7 @@
     <ContentPage Title="Squads">
         <StackLayout>
             <StackLayout Padding="10" Margin="0,0,0,-6" BackgroundColor="#c9251d">
-                <SearchBar Text="{ Binding SquadFilter, Mode=TwoWay }" Placeholder="Search" PlaceholderColor="#fff" TextColor="#fff" CancelButtonColor="#fff" BackgroundColor="Transparent"/>
+                    <SearchBar Text="{ Binding Filter, Mode=TwoWay }" Placeholder="Search" PlaceholderColor="#fff" TextColor="#fff" CancelButtonColor="#fff" BackgroundColor="Transparent"/>
             </StackLayout>
             <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{ Binding FilteredSquadList }"
                       IsGroupingEnabled="True"

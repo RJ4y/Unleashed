@@ -1,5 +1,4 @@
-﻿using System;
-using UnleashedApp.Authentication;
+﻿using UnleashedApp.Authentication;
 using UnleashedApp.Contracts;
 using UnleashedApp.Repositories;
 using UnleashedApp.Repositories.AuthenticationRepositories;
