@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnleashedApp.Models;
 using UnleashedApp.Services;
-using UnleashedApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
