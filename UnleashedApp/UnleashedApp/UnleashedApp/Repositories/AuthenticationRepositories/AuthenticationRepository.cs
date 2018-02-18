@@ -1,12 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using UnleashedApp.Authentication;
 using UnleashedApp.Contracts;
@@ -40,11 +34,7 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
             TokenRevokeRequest revokeRequest = new TokenRevokeRequest();
             StringContent content = ConvertToJson(revokeRequest);
             HttpResponseMessage response = await httpAuthClientAdapter.PostRevokeTokensAsync(content);
-            if (response.IsSuccessStatusCode)
-            {
-                return true;
-            }
-            return false;
+            return response.IsSuccessStatusCode;
         }
 
         public async Task<User> GetUserInfoAsync(Account account)
