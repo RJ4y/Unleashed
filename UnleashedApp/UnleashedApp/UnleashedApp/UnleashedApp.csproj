@@ -22,9 +22,9 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;DEBUG:__MOBILE;__ANDROID__;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>3</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,6 +42,7 @@
     <Compile Include="Models\TokenRefreshRequest.cs" />
     <Compile Include="Models\TokenRequest.cs" />
     <Compile Include="Models\TokenRevokeRequest.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Repositories\AuthenticationRepositories\AuthenticationHttpClientAdapter.cs" />
     <Compile Include="Repositories\AuthenticationRepositories\AuthenticationRepository.cs" />
     <Compile Include="Repositories\AuthenticationRepositories\IAuthenticationHttpClientAdapter.cs" />

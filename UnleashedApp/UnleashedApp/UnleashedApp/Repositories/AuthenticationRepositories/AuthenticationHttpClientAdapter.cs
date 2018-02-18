@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using UnleashedApp.Authentication;
 using UnleashedApp.Contracts;
+using Xamarin.Auth;
 
 namespace UnleashedApp.Repositories.AuthenticationRepositories
 {
@@ -33,10 +38,23 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
         public async Task<HttpResponseMessage> PostRevokeTokensAsync(StringContent clientId)
         {
             await AddAuthenticationHeaderAsync();
-            Debug.WriteLine("in client adapter stringcontent " + clientId.ReadAsStringAsync().Result);
             try
             {
                 return await Client.PostAsync(REVOKE_URL, clientId);
+            }
+            catch (TaskCanceledException ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<Response> GetUserInfoAsync(Account account)
+        {
+            try
+            {
+                var request = new OAuth2Request("GET", new Uri("https://www.googleapis.com/oauth2/v2/userinfo"), null, account);
+                return await request.GetResponseAsync();
+                
             }
             catch (TaskCanceledException ex)
             {

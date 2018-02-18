@@ -15,7 +15,7 @@ namespace UnleashedApp.Repositories
         {
             try
             {
-                return Repository.Client.PostAsync(Constants.REFRESH_URL, refreshToken);
+                return Repository.Client.PostAsync(Constants.RefreshUrl, refreshToken);
             }
             catch (TaskCanceledException ex)
             {

@@ -27,7 +27,7 @@ namespace UnleashedApp.Authentication
             GrantType = "convert_token";
             Backend = "google-oauth2";
             Token = googleToken;
-            ClientSecret = Constants.CLIENT_SECRET_API;
+            ClientSecret = Constants.ClientSecretApi;
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnleashedApp.Authentication;
 using UnleashedApp.Models;
+using Xamarin.Auth;
 
 namespace UnleashedApp.Repositories.AuthenticationRepositories
 {
@@ -13,5 +14,6 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
         Task<CustomTokenResponse> RequestExchangeGoogleTokenAsync(TokenConvertRequest tokenConvertRequest);
         Task<CustomTokenResponse> RequestRefreshAccessTokenAsync(string refreshToken);
         Task<bool> RequestRevokeTokens();
+        Task<User> GetUserInfoAsync(Account account);
     }
 }

@@ -14,7 +14,7 @@ namespace UnleashedApp.Models
 
         protected TokenRequest()
         {
-            ClientId = Constants.CLIENT_ID_API;
+            ClientId = Constants.ClientIdApi;
         }
     }
 }

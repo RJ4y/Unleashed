@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 using UnleashedApp.Authentication;
 using UnleashedApp.Contracts;
 using UnleashedApp.Models;
+using Xamarin.Auth;
 
 namespace UnleashedApp.Repositories.AuthenticationRepositories
 {
@@ -38,12 +40,23 @@ namespace UnleashedApp.Repositories.AuthenticationRepositories
             TokenRevokeRequest revokeRequest = new TokenRevokeRequest();
             StringContent content = ConvertToJson(revokeRequest);
             HttpResponseMessage response = await httpAuthClientAdapter.PostRevokeTokensAsync(content);
-            Debug.WriteLine("in repository response post: " + response.Content.ReadAsStringAsync().Result);
             if (response.IsSuccessStatusCode)
             {
                 return true;
             }
             return false;
+        }
+
+        public async Task<User> GetUserInfoAsync(Account account)
+        {
+            Response response = await httpAuthClientAdapter.GetUserInfoAsync(account);
+            if (response != null && response.StatusCode == HttpStatusCode.OK)
+            {
+                string userJson = response.GetResponseText();
+                var user = JsonConvert.DeserializeObject<User>(userJson);
+                return user;
+            }
+            return null;
         }
     }
 }

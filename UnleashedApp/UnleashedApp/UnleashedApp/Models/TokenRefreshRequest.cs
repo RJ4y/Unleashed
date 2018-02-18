@@ -22,7 +22,7 @@ namespace UnleashedApp.Models
         {
             GrantType = "refresh_token";
             RefreshToken = refreshToken;
-            ClientSecret = Constants.CLIENT_SECRET_API;
+            ClientSecret = Constants.ClientSecretApi;
         }
     }
 }

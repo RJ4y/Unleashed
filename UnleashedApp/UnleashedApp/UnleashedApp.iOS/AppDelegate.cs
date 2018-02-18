@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using UnleashedApp.Authentication;
 
 namespace UnleashedApp.iOS
 {
@@ -25,13 +26,25 @@ namespace UnleashedApp.iOS
             global::Xamarin.Forms.Forms.Init();
             global::Xamarin.Auth.Presenters.XamarinIOS.AuthenticationConfiguration.Init();
             LoadApplication(new App());
-            UINavigationBar.Appearance.BarTintColor = UIColor.FromPatternImage(UIImage.FromFile("header.png"));
-            // To change Text Colors to white here
-            UINavigationBar.Appearance.TintColor = UIColor.White;
-            // To change Title Text colors to white here
-            UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes() { TextColor = UIColor.White });
+
+            //UINavigationBar.Appearance.BarTintColor = UIColor.FromPatternImage(UIImage.FromFile("header.png"));
+            //// To change Text Colors to white here
+            //UINavigationBar.Appearance.TintColor = UIColor.White;
+            //// To change Title Text colors to white here
+            //UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes() { TextColor = UIColor.White });
 
             return base.FinishedLaunching(app, options);
+        }
+
+        public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+        {
+            // Convert NSUrl to Uri
+            var uri = new Uri(url.AbsoluteString);
+
+            // Load redirectUrl page
+            GoogleAuthenticator.Authenticator.OnPageLoading(uri);
+
+            return true;
         }
     }
 }
