@@ -19,7 +19,7 @@
                         <ColumnDefinition Width="100*" />
                     </Grid.ColumnDefinitions>
                     <Label x:Name="InfoLabel" Grid.Row="0" HorizontalOptions="Center" Text="Who is this?" Margin="10" FontSize="Large" TextColor="#e6332a"/>
-                    <Image x:Name="EmployeeImage" Grid.Row="1" Source="placeholder.jpg" Margin="0,0,0,10" />
+                    <Image x:Name="EmployeeImage" Grid.Row="1" Source="placeholder.png" Margin="0,0,0,10" />
                     <Label x:Name="WrongOptionSelectedLabel" Grid.Row="2" Margin="10" />
                     <Button x:Name="OptionOneButton" Grid.Row="3" TextColor="#fff" BackgroundColor="#e6332a" />
                     <Button x:Name="OptionTwoButton" Grid.Row="4" TextColor="#fff" BackgroundColor="#e6332a" />
@@ -39,7 +39,7 @@
                             <ColumnDefinition Width="100" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <Image x:Name="Image" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Source="placeholder.jpg" HeightRequest="100" VerticalOptions="Center"/>
+                        <Image x:Name="Image" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Source="placeholder.png" HeightRequest="100" VerticalOptions="Center"/>
                         <Label x:Name="NameLabel" Grid.Row="0" Grid.Column="1" VerticalTextAlignment="End" FontSize="Large" TextColor="#fff" Margin="0,-3,0,-7" />
                         <Label x:Name="FunctionLabel"  Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Start" FontSize="Medium" TextColor="#ffcac7"  Margin="0" />
                         <Button x:Name="GuessAnotherButton" Grid.Row="2" Grid.Column="1" Text="Guess another" TextColor="#e6332a" BackgroundColor="#fff" />
