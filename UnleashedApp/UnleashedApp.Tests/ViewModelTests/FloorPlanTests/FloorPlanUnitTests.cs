@@ -42,6 +42,8 @@ namespace UnleashedApp.Tests.ViewModelTests.FloorPlanTests
 
             _spaceRepositoryMock.Setup(x => x.GetAllSpaces()).Returns(_expectedSpaces);
             _roomRepositoryMock.Setup(x => x.GetAllRooms()).Returns(_expectedRooms);
+
+            _floorplanViewModel = new FloorplanViewModel(_navigationServiceMock.Object, _spaceRepositoryMock.Object, _roomRepositoryMock.Object);
         }
 
         [TearDown]
@@ -51,29 +53,28 @@ namespace UnleashedApp.Tests.ViewModelTests.FloorPlanTests
             _navigationServiceMock = null;
             _spaceRepositoryMock = null;
             _roomRepositoryMock = null;
+            _floorplanViewModel = null;
         }
 
 
         [Test]
         public void ConstructorShouldInitCommand()
         {
-            _floorplanViewModel = new FloorplanViewModel(_navigationServiceMock.Object, _spaceRepositoryMock.Object, _roomRepositoryMock.Object);
-
             Assert.IsNotNull(_floorplanViewModel.RoomCommand);
         }
 
         [Test]
-        public void ContstuctorShouldInitSpaces()
+        public void LoadSpacesShouldInitSpaces()
         {
-            _floorplanViewModel = new FloorplanViewModel(_navigationServiceMock.Object, _spaceRepositoryMock.Object, _roomRepositoryMock.Object);
+            _floorplanViewModel.LoadSpaces();
 
             Assert.AreEqual(_expectedSpaces, _floorplanViewModel.Spaces);
         }
 
         [Test]
-        public void ContstuctorShouldInitRooms()
+        public void LoadRoomsShouldInitRooms()
         {
-            _floorplanViewModel = new FloorplanViewModel(_navigationServiceMock.Object, _spaceRepositoryMock.Object, _roomRepositoryMock.Object);
+            _floorplanViewModel.LoadRooms();
 
             Assert.AreEqual(_expectedRooms, _floorplanViewModel.Rooms);
         }

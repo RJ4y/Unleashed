@@ -29,13 +29,14 @@ namespace UnleashedApp.ViewModels
             _isValid = false;
             BudgetRemaining = TrainingBudget;
             InitialiseCommands();
-            CalculateTotal();
         }
 
         public void LoadTrainings()
         {
-            TrainingList = new ObservableCollection<Training>();
-            //TrainingList = new ObservableCollection<Training>(_trainingRepository.GetAll());
+            //Switch commented line if (not) testing
+            //TrainingList = new ObservableCollection<Training>();
+            TrainingList = new ObservableCollection<Training>(_trainingRepository.GetAll());
+            CalculateTotal();
         }
 
         public void Refresh()

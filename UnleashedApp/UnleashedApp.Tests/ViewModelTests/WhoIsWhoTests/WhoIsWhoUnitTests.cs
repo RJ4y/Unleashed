@@ -33,6 +33,8 @@ namespace UnleashedApp.Tests.ViewModelTests.WhoIsWhoTests
             _habitatRepositoryMock.Setup(y => y.GetEmployees(1)).Returns(_habitatBuilder.InitEmployees);
             _squadRepositoryMock.Setup(z => z.GetAllSquads()).Returns(_squadBuilder.InitSquads);
             _squadRepositoryMock.Setup(a => a.GetEmployees(1)).Returns(_habitatBuilder.InitEmployees);
+
+            _whoIsWhoViewModel = new WhoIsWhoViewModel(_habitatRepositoryMock.Object, _squadRepositoryMock.Object);
         }
 
         [TearDown]
@@ -43,19 +45,20 @@ namespace UnleashedApp.Tests.ViewModelTests.WhoIsWhoTests
             _squadRepositoryMock = null;
             _habitatBuilder = null;
             _squadBuilder = null;
+            _whoIsWhoViewModel = null;
         }
 
-        //[Test]
-        //public void ConstructorShouldInitialiseCommands()
-        //{
-        //    _whoIsWhoViewModel = new WhoIsWhoViewModel(_habitatRepositoryMock.Object, _squadRepositoryMock.Object);
-
-        //}
+        [Test]
+        public void ConstructorShouldInitialiseCommands()
+        {
+            Assert.IsNotNull(_whoIsWhoViewModel.HabitatEmployeeDetailCommand);
+            Assert.IsNotNull(_whoIsWhoViewModel.SquadEmployeeDetailCommand);
+        }
 
         [Test]
-        public void ConstructorShouldLoadEmployeesPerHabitat()
+        public void LoadEmployeesPerHabitatShouldInitCollection()
         {
-            _whoIsWhoViewModel = new WhoIsWhoViewModel(_habitatRepositoryMock.Object, _squadRepositoryMock.Object);
+            _whoIsWhoViewModel.LoadEmployeesPerHabitat();
 
             var result = _whoIsWhoViewModel.GetEmployeesPerHabitat();
 
@@ -64,9 +67,9 @@ namespace UnleashedApp.Tests.ViewModelTests.WhoIsWhoTests
         }
 
         [Test]
-        public void ConstructorShouldLoadEmployeesPerSquad()
+        public void LoadEmployeesPerSquadShouldInitCollection()
         {
-            _whoIsWhoViewModel = new WhoIsWhoViewModel(_habitatRepositoryMock.Object, _squadRepositoryMock.Object);
+            _whoIsWhoViewModel.LoadEmployeesPerSquad();
 
             var result = _whoIsWhoViewModel.GetEmployeesPerSquad();
 
@@ -75,22 +78,32 @@ namespace UnleashedApp.Tests.ViewModelTests.WhoIsWhoTests
         }
 
         [Test]
-        public void ConstructorShouldInitFilteredList()
+        public void AddingFilterShouldInitFilteredSquadList()
         {
-            _whoIsWhoViewModel = new WhoIsWhoViewModel(_habitatRepositoryMock.Object, _squadRepositoryMock.Object);
+            _whoIsWhoViewModel.LoadEmployeesPerSquad();
 
-            //var result = _whoIsWhoViewModel.FilteredList;
+            _whoIsWhoViewModel.Filter = "";
 
-            //Assert.IsNotNull(result);
-            //Assert.IsInstanceOf(typeof(ObservableCollection<Group>), result);
+            Assert.IsNotNull(_whoIsWhoViewModel.FilteredSquadList);
+        }
+
+        [Test]
+        public void AddingFilterShouldInitFilteredHabitatList()
+        {
+            _whoIsWhoViewModel.LoadEmployeesPerHabitat();
+
+            _whoIsWhoViewModel.Filter = "";
+
+            Assert.IsNotNull(_whoIsWhoViewModel.FilteredHabitatList);
         }
 
         [Test]
         public void CallingFilterShouldFilterList()
         {
-            _whoIsWhoViewModel = new WhoIsWhoViewModel(_habitatRepositoryMock.Object, _squadRepositoryMock.Object);
+            _whoIsWhoViewModel.LoadEmployeesPerSquad();
+            _whoIsWhoViewModel.LoadEmployeesPerHabitat();
 
-            //_whoIsWhoViewModel.Filter = "Jan";
+            _whoIsWhoViewModel.Filter = "Jan";
 
             //var group = new Group()
             //{
@@ -113,7 +126,8 @@ namespace UnleashedApp.Tests.ViewModelTests.WhoIsWhoTests
             //    group
             //};
 
-            //Assert.AreEqual(expected.ToString(), _whoIsWhoViewModel.FilteredList.ToString());
+            Assert.AreEqual(1, _whoIsWhoViewModel.FilteredHabitatList.Count);
+            Assert.AreEqual(1, _whoIsWhoViewModel.FilteredSquadList.Count);
         }
 
         public class HabitatBuilder
