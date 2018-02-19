@@ -24,8 +24,8 @@ namespace UnleashedApp.Views
 
             List<MasterItem> menuList = new List<MasterItem>();
 
-            var nameGamePage = new MasterItem() { Title = "Home", Icon = "home.png", TargetType = typeof(NameGameView) };
-            var whoIsWhoPage = new MasterItem() { Title = "Who is Who", Icon = "users.png", TargetType = typeof(WhoIsWhoView) };
+            var nameGamePage = new MasterItem() { Title = "Who is Who", Icon = "home.png", TargetType = typeof(NameGameView) };
+            var whoIsWhoPage = new MasterItem() { Title = "Employees", Icon = "users.png", TargetType = typeof(WhoIsWhoView) };
             var floorPlanPage = new MasterItem() { Title = "Floor Plan", Icon = "map.png", TargetType = typeof(FloorplanView) };
             var trainingPage = new MasterItem() { Title = "Training", Icon = "training.png", TargetType = typeof(TrainingView) };
             var aboutPage = new MasterItem() { Title = "About" };
@@ -51,32 +51,28 @@ namespace UnleashedApp.Views
             
             if (page == typeof(NameGameView))
             {
-                App.NavigationPage.Navigation.PopToRootAsync();
-                App.MenuIsPresented = false;
+                App.NavigationPage.Navigation.PushAsync(new NameGameView());
             }
             else if (page == typeof(WhoIsWhoView))
             {
                 App.NavigationPage.Navigation.PushAsync(new WhoIsWhoView());
-                App.MenuIsPresented = false;
             }
             else if (page == typeof(FloorplanView))
             {
                 App.NavigationPage.Navigation.PushAsync(new FloorplanView());
-                App.MenuIsPresented = false;
             }
             else if (page == typeof(TrainingView))
             {
                 App.NavigationPage.Navigation.PushAsync(new TrainingView());
-                App.MenuIsPresented = false;
             }
             else if (page == typeof(LoginView))
             {
                 _authenticationService.DeleteAccessTokens();
                 App.NavigationPage.Navigation.PushAsync(new LoginView());
-                App.MenuIsPresented = false;
             }
 
-            ((ListView)sender).SelectedItem = null;
+            App.MenuIsPresented = false;
+            App.NavigationPage.Navigation.RemovePage(App.NavigationPage.Navigation.NavigationStack[0]);
         }
     }
 }

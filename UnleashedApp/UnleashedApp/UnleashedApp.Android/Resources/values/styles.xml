@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
-
   <style name="MainTheme" parent="MainTheme.Base">
   </style>
   
@@ -12,6 +11,11 @@
     <item name="colorAccent">#e6332a</item>
     <item name="windowActionModeOverlay">true</item>
     <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+
+    <item name="android:colorPressedHighlight">#eee</item>
+    <item name="android:colorLongPressedHighlight">#eee</item>
+    <item name="android:colorFocusedHighlight">#eee</item>
+    <item name="android:colorActivatedHighlight">#eee</item>
   </style>
 
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
