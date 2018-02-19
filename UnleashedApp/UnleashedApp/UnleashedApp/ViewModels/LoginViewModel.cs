@@ -97,7 +97,7 @@ namespace UnleashedApp.ViewModels
 
         private void showHomePageAsync()
         {
-            App.NavigationPage.Navigation.PushAsync(new NameGameView());
+            App.NavigationPage.Navigation.PushAsync(new WhoIsWhoView());
             App.NavigationPage.Navigation.RemovePage(App.NavigationPage.Navigation.NavigationStack[0]);
             App.NavigationPage.Navigation.PopToRootAsync();
         }

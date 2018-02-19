@@ -5,7 +5,7 @@
         public const string ClientIdApi = "PisqVHmz7R28aCN9cc552eqhiHgO4tddU6Ed8a9F";
         public const string ClientSecretApi = "gabqf7ooJTbhZPpaD0yeDN1Dl8RDIu8aKNBVsTe4UpbPk9hr5IU4oniJ5C926OECfWYij349ECbBhEaqiU6mBuQJ8MLk1OtsxWg5fjYjQqscdmPXcJ6q1GovkFNCWPHL";
         public const string AppName = "Unleashed";
-        public const string BaseApiUrl = "http://10.84.1.129:8000/";
+        public const string BaseApiUrl = "http://192.168.138.1:8000/";
         public const string RefreshUrl = "auth/token";
         
         public const string AccountPropertyAccessToken = "API_token";
