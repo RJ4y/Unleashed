@@ -13,10 +13,10 @@
     <item name="windowActionModeOverlay">true</item>
     <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
 
-    <item name="android:colorPressedHighlight">#fff</item>
-    <item name="android:colorLongPressedHighlight">#fff</item>
-    <item name="android:colorFocusedHighlight">#fff</item>
-    <item name="android:colorActivatedHighlight">#fff</item>
+    <item name="android:colorPressedHighlight">#eee</item>
+    <item name="android:colorLongPressedHighlight">#eee</item>
+    <item name="android:colorFocusedHighlight">#eee</item>
+    <item name="android:colorActivatedHighlight">#eee</item>
   </style>
 
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">

@@ -50,32 +50,28 @@ namespace UnleashedApp.Views
             
             if (page == typeof(NameGameView))
             {
-                App.NavigationPage.Navigation.PopToRootAsync();
-                App.MenuIsPresented = false;
+                App.NavigationPage.Navigation.PushAsync(new NameGameView());
             }
             else if (page == typeof(WhoIsWhoView))
             {
                 App.NavigationPage.Navigation.PushAsync(new WhoIsWhoView());
-                App.MenuIsPresented = false;
             }
             else if (page == typeof(FloorplanView))
             {
                 App.NavigationPage.Navigation.PushAsync(new FloorplanView());
-                App.MenuIsPresented = false;
             }
             else if (page == typeof(TrainingView))
             {
                 App.NavigationPage.Navigation.PushAsync(new TrainingView());
-                App.MenuIsPresented = false;
             }
             else if (page == typeof(LoginView))
             {
                 _authenticationService.DeleteAccessTokens();
                 App.NavigationPage.Navigation.PushAsync(new LoginView());
-                App.MenuIsPresented = false;
             }
 
-            ((ListView)sender).SelectedItem = null;
+            App.MenuIsPresented = false;
+            App.NavigationPage.Navigation.RemovePage(App.NavigationPage.Navigation.NavigationStack[0]);
         }
     }
 }
