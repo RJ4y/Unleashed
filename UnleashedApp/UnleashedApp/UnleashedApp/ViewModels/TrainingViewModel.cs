@@ -27,7 +27,6 @@ namespace UnleashedApp.ViewModels
             _date = DateTime.Now;
             _sendInvoice = "No";
             _isValid = false;
-            BudgetRemaining = TrainingBudget;
             InitialiseCommands();
         }
 
@@ -35,6 +34,7 @@ namespace UnleashedApp.ViewModels
         {
             //Switch commented line if (not) testing
             //TrainingList = new ObservableCollection<Training>();
+            BudgetRemaining = TrainingBudget;
             TrainingList = new ObservableCollection<Training>(_trainingRepository.GetAll());
             CalculateTotal();
         }
@@ -46,6 +46,8 @@ namespace UnleashedApp.ViewModels
 
         private void CalculateTotal()
         {
+            TrainingTotal = 0;
+
             if (_trainings != null)
             {
                 foreach (Training training in _trainings)
