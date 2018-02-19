@@ -25,9 +25,9 @@ namespace UnleashedApp.Views
             List<MasterItem> menuList = new List<MasterItem>();
             List<MasterItem> logoutList = new List<MasterItem>();
             
-            var whoIsWhoPage = new MasterItem() { Title = "Who is Who", Icon = "users.png", TargetType = typeof(WhoIsWhoView) };
+            var whoIsWhoPage = new MasterItem() { Title = "Who is who", Icon = "users.png", TargetType = typeof(WhoIsWhoView) };
             var nameGamePage = new MasterItem() { Title = "Guess who", Icon = "home.png", TargetType = typeof(NameGameView) };
-            var floorPlanPage = new MasterItem() { Title = "Floor Plan", Icon = "map.png", TargetType = typeof(FloorplanView) };
+            var floorPlanPage = new MasterItem() { Title = "Floor plan", Icon = "map.png", TargetType = typeof(FloorplanView) };
             var trainingPage = new MasterItem() { Title = "Training", Icon = "training.png", TargetType = typeof(TrainingView) };
             var logoutAction = new MasterItem() { Title = "Log out", Icon = "signout.png", TargetType = typeof(LoginView) };
 
