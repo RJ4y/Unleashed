@@ -1,9 +1,6 @@
-﻿using System;
-using Moq;
+﻿using Moq;
 using NUnit.Framework;
-using UnleashedApp.Authentication;
 using UnleashedApp.Contracts;
-using UnleashedApp.Repositories;
 using UnleashedApp.Repositories.AuthenticationRepositories;
 using UnleashedApp.ViewModels;
 

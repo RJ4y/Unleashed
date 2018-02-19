@@ -13,8 +13,32 @@ namespace UnleashedApp.Tests.ViewModelTests.NameGameTests
         private NameGameViewModel _nameGameViewModel;
         private Mock<IEmployeeRepository> _employeeRepoMock;
 
+        [SetUp]
+        public void Setup()
+        {
+            _employeeRepoMock = new Mock<IEmployeeRepository>();
+
+            _nameGameViewModel = new NameGameViewModel(_employeeRepoMock.Object);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _employeeRepoMock = null;
+
+            _nameGameViewModel = null;
+        }
+
+
         [Test]
-        public void ConstructorShouldInitListOfEmployees()
+        public void ConstructorShouldInitRepository()
+        {
+            Assert.IsNotNull(_nameGameViewModel.employeeRepository);
+        }
+
+
+        [Test]
+        public void LoadEmployeesShouldInitListOfEmployees()
         {
             var list = new List<Employee>
             {
@@ -35,10 +59,9 @@ namespace UnleashedApp.Tests.ViewModelTests.NameGameTests
                 }
             };
 
-            _employeeRepoMock = new Mock<IEmployeeRepository>();
             _employeeRepoMock.Setup(x => x.GetAllEmployees()).Returns(list);
 
-            _nameGameViewModel = new NameGameViewModel(_employeeRepoMock.Object);
+            _nameGameViewModel.LoadEmployees();
 
             Assert.IsNotNull(_nameGameViewModel.Employees);
             Assert.AreEqual(list, _nameGameViewModel.Employees);

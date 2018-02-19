@@ -41,6 +41,7 @@ namespace UnleashedApp.Views
 
             // Setting our list to be ItemSource for ListView in MainPage.xaml
             navigationDrawerList.ItemsSource = menuList;
+            navigationDrawerList.SeparatorVisibility = SeparatorVisibility.None;
         }
 
         private void OnMasterTapped(object sender, ItemTappedEventArgs e)

@@ -22,10 +22,5 @@ namespace UnleashedApp.Views
                     });
                 });
         }
-
-        protected override void OnAppearing()
-        {
-            ViewModelLocator.Instance.LoginViewModel.ChangeEnableButton(true);
-        }
     }
 }

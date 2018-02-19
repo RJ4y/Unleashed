@@ -52,15 +52,19 @@ namespace UnleashedApp.Tests.ViewModelTests.EmployeeDetailTests
         }
 
         [Test]
-        public void ConstructorShouldInitSpaces()
+        public void LoadSpacesShouldInitSpaces()
         {
+            _employeeDetailViewModel.LoadSpaces();
+
             Assert.IsNotNull(_employeeDetailViewModel.Spaces);
             Assert.AreEqual(_expectedSpaces, _employeeDetailViewModel.Spaces);
         }
 
         [Test]
-        public void ConstructorShouldInitRooms()
+        public void LoadRoomsShouldInitRooms()
         {
+            _employeeDetailViewModel.LoadRooms();
+
             Assert.IsNotNull(_employeeDetailViewModel.Rooms);
             Assert.AreEqual(_expectedRooms, _employeeDetailViewModel.Rooms);
         }

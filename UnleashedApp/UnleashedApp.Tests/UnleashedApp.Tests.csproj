@@ -100,6 +100,7 @@
     <Compile Include="ViewModelTests\FloorPlanTests\FloorPlanUnitTests.cs" />
     <Compile Include="ViewModelTests\NameGameTests\NameGameUnitTests.cs" />
     <Compile Include="ViewModelTests\RoomTests\RoomUnitTests.cs" />
+    <Compile Include="ViewModelTests\SplitViewTests\SplitViewModelTests.cs" />
     <Compile Include="ViewModelTests\TrainingTests\TrainingUnitTests.cs" />
     <Compile Include="ViewModelTests\WhoIsWhoTests\WhoIsWhoUnitTests.cs" />
     <Compile Include="ViewModelTests\LoginTests\LoginViewModelTests.cs" />
