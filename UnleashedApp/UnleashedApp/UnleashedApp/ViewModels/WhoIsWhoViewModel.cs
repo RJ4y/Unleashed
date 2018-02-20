@@ -276,26 +276,28 @@ namespace UnleashedApp.ViewModels
 
         private void CopyObservableCollectionToFilteredHabitatList(ObservableCollection<Group> employeesPerGroup)
         {
-            FilteredHabitatList = new ObservableCollection<Group>();
-            foreach (Group group in employeesPerGroup)
+            if (employeesPerGroup != null)
             {
-                Group g = new Group(group);
-                foreach (Employee e in group)
+                FilteredHabitatList = new ObservableCollection<Group>();
+                foreach (Group group in employeesPerGroup)
                 {
-                    g.Add(new Employee(e.Id, e.FirstName, e.LastName, e.Function, e.HabitatId, e.StartDate, e.EndDate,
-                        e.VisibleSite, e.PictureUrl,
-                        e.Motivation, e.Expectations, e.NeedToKnow, e.DateOfBirth, e.Gender, e.Email));
+                    Group g = new Group(group);
+                    foreach (Employee e in group)
+                    {
+                        g.Add(new Employee(e.Id, e.FirstName, e.LastName, e.Function, e.HabitatId, e.StartDate, e.EndDate,
+                            e.VisibleSite, e.PictureUrl,
+                            e.Motivation, e.Expectations, e.NeedToKnow, e.DateOfBirth, e.Gender, e.Email));
+                    }
+                    FilteredHabitatList.Add(g);
                 }
-
-                FilteredHabitatList.Add(g);
             }
         }
 
         private void CopyObservableCollectionToFilteredSquadList(ObservableCollection<Group> employeesPerGroup)
         {
-            FilteredSquadList = new ObservableCollection<Group>();
             if (employeesPerGroup != null)
             {
+                FilteredSquadList = new ObservableCollection<Group>();
                 foreach (Group group in employeesPerGroup)
                 {
                     Group g = new Group(group);
@@ -306,7 +308,6 @@ namespace UnleashedApp.ViewModels
                             e.VisibleSite, e.PictureUrl,
                             e.Motivation, e.Expectations, e.NeedToKnow, e.DateOfBirth, e.Gender, e.Email));
                     }
-
                     FilteredSquadList.Add(g);
                 }
             }
