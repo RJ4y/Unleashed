@@ -106,7 +106,6 @@
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork@2x" />
     <None Include="packages.config" />
-    <Compile Include="Renderers\CustomNavigationBarRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
