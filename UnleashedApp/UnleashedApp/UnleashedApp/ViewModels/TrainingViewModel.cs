@@ -183,6 +183,17 @@ namespace UnleashedApp.ViewModels
             }
         }
 
+        private string _info;
+        public string Info
+        {
+            get => _info;
+            set
+            {
+                _info = value;
+                RaisePropertyChanged(nameof(Info));
+            }
+        }
+
         private string _sendInvoice;
         public bool SendInvoice
         {
@@ -289,7 +300,7 @@ namespace UnleashedApp.ViewModels
                     Days = Convert.ToInt32(_days),
                     First_Name = AuthenticationService.Instance.GetUserFirstName(),
                     Last_Name = AuthenticationService.Instance.GetUserLastName(),
-                    Info = "info",
+                    Info = _info,
                     Invoice = _sendInvoice,
                     Team = "team",
                     TrainingName = Event
