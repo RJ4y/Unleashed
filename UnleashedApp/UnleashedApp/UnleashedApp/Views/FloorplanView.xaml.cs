@@ -10,7 +10,7 @@ using static UnleashedApp.Models.Room;
 namespace UnleashedApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FloorplanView: ContentPage
+    public partial class FloorplanView: TabbedPage
     {
         private static FloorplanViewModel _viewModel;
         public static List<Room> Rooms { get; private set; }
@@ -51,8 +51,10 @@ namespace UnleashedApp.Views
                             HorizontalTextAlignment = TextAlignment.Center,
                             Text = "The data could not be found, there may be a problem with your connection."
                         };
-                        ScrollView.Content = label;
-                        MainGrid.IsVisible = false;
+                        FloorplanScrollView.Content = label;
+                        LegendScrollView.Content = label;
+                        FloorplanGrid.IsVisible = false;
+                        LegendGrid.IsVisible = false;
                     }
 
                     shouldLoad = false;
@@ -75,20 +77,6 @@ namespace UnleashedApp.Views
             if (amountOfColumns > 0 && amountOfRows > 0)
             {
                 FloorplanGrid.HeightRequest = width / amountOfColumns * amountOfRows;
-            }
-        }
-
-        private void ChangeLegendVisibility(object sender, EventArgs e)
-        {
-            if (LegendGrid.IsVisible)
-            {
-                LegendGrid.IsVisible = false;
-                LegendButton.Text = "Open legend";
-            }
-            else
-            {
-                LegendGrid.IsVisible = true;
-                LegendButton.Text = "Close legend";
             }
         }
 

@@ -23,9 +23,17 @@
                     <ColumnDefinition Width="50*"/>
                 </Grid.ColumnDefinitions>
                 <Label Text="TOTAL COST" Grid.Column="0" Grid.Row="0" TextColor="#fff" FontAttributes="Bold" HorizontalTextAlignment="Center" />
-                <Label Text="{ Binding TrainingTotal, Converter={StaticResource currencyConverter} }" Grid.Column="0" Grid.Row="1" Margin="0,-16,0,0" TextColor="#fff" FontSize="30" HorizontalTextAlignment="Center" />
+                <Label Text="{ Binding TrainingTotal, Converter={StaticResource currencyConverter} }" Grid.Column="0" Grid.Row="1" TextColor="#fff" FontSize="30" HorizontalTextAlignment="Center">
+                    <Label.Margin>
+                        <OnPlatform x:TypeArguments="Thickness" iOS="0" Android="0,-16,0,0" />
+                    </Label.Margin>
+                </Label>
                 <Label Text="BUDGET REMAINING" Grid.Column="1" Grid.Row="0" TextColor="#fff" FontAttributes="Bold" HorizontalTextAlignment="Center" />
-                <Label Text="{ Binding BudgetRemaining, Converter={StaticResource currencyConverter} }" Grid.Column="1" Grid.Row="1" Margin="0,-16,0,0" TextColor="#fff" FontSize="30" HorizontalTextAlignment="Center" />
+                <Label Text="{ Binding BudgetRemaining, Converter={StaticResource currencyConverter} }" Grid.Column="1" Grid.Row="1" Margin="0,-16,0,0" TextColor="#fff" FontSize="30" HorizontalTextAlignment="Center">
+                    <Label.Margin>
+                        <OnPlatform x:TypeArguments="Thickness" iOS="0" Android="0,-16,0,0" />
+                    </Label.Margin>
+                </Label>
             </Grid>
             <ListView ItemsSource="{ Binding TrainingList }" HasUnevenRows="True" IsPullToRefreshEnabled="True" Refreshing="ListView_Refreshing">
                 <ListView.ItemTemplate>
@@ -62,35 +70,50 @@
                 <DatePicker Date="{ Binding Date, Mode=TwoWay }" Margin="0,-10,0,0" MinimumDate="{ Binding MinimumDate }" MaximumDate="{ Binding MaximumDate }"/>
                 
                 <Label Text="Days"/>
-                <Entry Text="{ Binding Days, Mode=TwoWay}" Keyboard="Numeric" Margin="0,-10,0,0">
+                <Entry Text="{ Binding Days, Mode=TwoWay}" Keyboard="Numeric">
+                    <Entry.Margin>
+                        <OnPlatform x:TypeArguments="Thickness" iOS="0" Android="0,-10,0,0" />
+                    </Entry.Margin>
                     <Entry.Behaviors>
                         <local:DaysValidatorBehavior/>
                     </Entry.Behaviors>
                 </Entry>
 
                 <Label Text="Training / Event / Hotel"/>
-                <Entry Text="{ Binding Event, Mode=TwoWay}" Margin="0,-10,0,0">
+                <Entry Text="{ Binding Event, Mode=TwoWay}">
+                    <Entry.Margin>
+                        <OnPlatform x:TypeArguments="Thickness" iOS="0" Android="0,-10,0,0" />
+                    </Entry.Margin>
                     <Entry.Behaviors>
                         <local:EventValidatorBehavior />
                     </Entry.Behaviors>
                 </Entry>
 
                 <Label Text="Company"/>
-                <Entry Text="{ Binding Company, Mode=TwoWay}" Margin="0,-10,0,0">
+                <Entry Text="{ Binding Company, Mode=TwoWay}">
+                    <Entry.Margin>
+                        <OnPlatform x:TypeArguments="Thickness" iOS="0" Android="0,-10,0,0" />
+                    </Entry.Margin>
                     <Entry.Behaviors>
                         <local:CompanyValidatorBehavior />
                     </Entry.Behaviors>
                 </Entry>
 
                 <Label Text="City"/>
-                <Entry Text="{ Binding City, Mode=TwoWay}" Margin="0,-10,0,0">
+                <Entry Text="{ Binding City, Mode=TwoWay}">
+                    <Entry.Margin>
+                        <OnPlatform x:TypeArguments="Thickness" iOS="0" Android="0,-10,0,0" />
+                    </Entry.Margin>
                     <Entry.Behaviors>
                         <local:CityValidatorBehavior />
                     </Entry.Behaviors>
                 </Entry>
 
                 <Label Text="Cost (€)"/>
-                <Entry Text="{ Binding Cost, Mode=TwoWay}" Keyboard="Numeric" Margin="0,-10,0,0">
+                <Entry Text="{ Binding Cost, Mode=TwoWay}" Keyboard="Numeric">
+                    <Entry.Margin>
+                        <OnPlatform x:TypeArguments="Thickness" iOS="0" Android="0,-10,0,0" />
+                    </Entry.Margin>
                     <Entry.Behaviors>
                         <local:CostValidatorBehavior />
                     </Entry.Behaviors>
@@ -102,7 +125,11 @@
                 </StackLayout>
 
                 <Label Text="Additional information"/>
-                <Entry Text="{ Binding Info, Mode=TwoWay}" Margin="0,-10,0,0"/>
+                <Entry Text="{ Binding Info, Mode=TwoWay}">
+                    <Entry.Margin>
+                        <OnPlatform x:TypeArguments="Thickness" iOS="0" Android="0,-10,0,0" />
+                    </Entry.Margin>
+                </Entry>
 
                 <Button x:Name="addTraining" Text="Add Training" BackgroundColor="#e6332a" TextColor="#fff" Command="{ Binding AddTrainingCommand }" IsEnabled="{ Binding IsValid }"/>
             </StackLayout>
