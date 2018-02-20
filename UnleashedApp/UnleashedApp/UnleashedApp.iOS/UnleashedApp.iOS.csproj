@@ -161,6 +161,9 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\header.png" />
+    <BundleResource Include="Resources\menu.png" />
+    <BundleResource Include="Resources\menu%402x.png" />
+    <BundleResource Include="Resources\menu%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UnleashedApp\UnleashedApp.csproj">
@@ -220,9 +223,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\unleashed.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\placeholder.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

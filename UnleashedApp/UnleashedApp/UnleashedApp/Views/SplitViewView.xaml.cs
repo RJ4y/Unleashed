@@ -17,6 +17,7 @@ namespace UnleashedApp.Views
         public SplitViewView(IAuthenticationService authenticationService, IAuthenticationRepository authenticationRepository)
         {
             Title = "Unleashed";
+            Icon = "menu.png";
             InitializeComponent();
 
             _authenticationRepository = authenticationRepository;

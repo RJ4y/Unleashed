@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:system="clr-namespace:System;assembly=mscorlib"
@@ -20,10 +20,14 @@
                       SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ImageCell ImageSource="{Binding PictureUrl}" Text="{Binding FullName}" Height="80"
+                        <ImageCell ImageSource="{Binding PictureUrl}" Text="{Binding FullName}" 
                                    Command="{ Binding Source={x:Reference WhoIsWho}, Path=BindingContext.HabitatEmployeeDetailCommand }" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
+
+                <ListView.RowHeight>
+                    <OnPlatform x:TypeArguments="x:Int32" iOS="80" Android="60" />
+                </ListView.RowHeight>
             </ListView>
         </StackLayout>
     </ContentPage>
@@ -45,6 +49,10 @@
                                    Command="{ Binding Source={x:Reference WhoIsWho}, Path=BindingContext.SquadEmployeeDetailCommand }" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
+
+                <ListView.RowHeight>
+                    <OnPlatform x:TypeArguments="x:Int32" iOS="80" Android="60" />
+                </ListView.RowHeight>
             </ListView>
         </StackLayout>
     </ContentPage>
