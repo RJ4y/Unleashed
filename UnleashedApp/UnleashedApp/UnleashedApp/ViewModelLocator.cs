@@ -41,7 +41,7 @@ namespace UnleashedApp
             ITrainingRepository trainingRepository = new TrainingRepository(authenticationService, httpClientAdapter);
             IAuthenticationRepository authenticationRepository = new AuthenticationRepository(authenticationService, httpClientAdapter, new AuthenticationHttpClientAdapter(authenticationService, httpClientAdapter));
 
-            SplitViewViewModel = new SplitViewViewModel(navigationService, authenticationService, authenticationRepository);
+            SplitViewViewModel = new SplitViewViewModel();
             WhoIsWhoViewModel = new WhoIsWhoViewModel(habitatRepository, squadRepository);
             FloorplanViewModel = new FloorplanViewModel(navigationService, spaceRepository, roomRepository);
             TrainingViewModel = new TrainingViewModel(trainingRepository);
