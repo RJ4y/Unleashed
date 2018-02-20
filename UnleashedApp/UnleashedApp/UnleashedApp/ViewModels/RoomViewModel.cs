@@ -24,13 +24,12 @@ namespace UnleashedApp.ViewModels
 
         private void InitialiseCommands()
         {
-            EmployeeDetailCommand = new Command(async () =>
+            EmployeeDetailCommand = new Command(() =>
             {
-                EmployeeDetailView page = new EmployeeDetailView
+                App.NavigationPage.Navigation.PushAsync(new EmployeeDetailView
                 {
                     BindingContext = SelectedEmployee
-                };
-                await _navigationService.PushAsync(page);
+                });
             });
         }
     }

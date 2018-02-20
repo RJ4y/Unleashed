@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnleashedApp.Models;
 using UnleashedApp.Services;
+using UnleashedApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,12 +18,9 @@ namespace UnleashedApp.Views
         public EmployeeDetailView()
         {
             InitializeComponent();
-            BindingContext = ViewModelLocator.Instance.EmployeeDetailViewModel;
             Employee = TransferService.GetSelectedEmployee();
-
             Rooms = ViewModelLocator.Instance.EmployeeDetailViewModel.Rooms;
             Spaces = ViewModelLocator.Instance.EmployeeDetailViewModel.Spaces;
-            
         }
 
         protected override void OnAppearing()
@@ -36,9 +34,13 @@ namespace UnleashedApp.Views
                 Rooms = ViewModelLocator.Instance.EmployeeDetailViewModel.Rooms;
                 Spaces = ViewModelLocator.Instance.EmployeeDetailViewModel.Spaces;
             }
-            if (shouldLoad && Spaces != null && Spaces.Count > 0 && Employee != null && Rooms != null && Rooms.Count > 0)
+
+            if (shouldLoad && Spaces != null && Spaces.Count > 0 && Employee != null && Rooms != null &&
+                Rooms.Count > 0)
+            {
                 CreateLocationGrid();
-            shouldLoad = false;
+                shouldLoad = false;
+            }
         }
 
         private void CreateLocationGrid()
@@ -66,7 +68,7 @@ namespace UnleashedApp.Views
         }
 
         /// <summary>
-        /// Makes the FloorplanGrid cells a square by making the width and height the correct ratio.
+        /// Makes the LocationGrid cells a square by making the width and height the correct ratio.
         /// </summary>
         /// <param name="width"></param>
         /// <param name="height"></param>
