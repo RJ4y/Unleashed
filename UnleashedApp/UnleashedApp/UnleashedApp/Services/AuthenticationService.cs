@@ -133,6 +133,7 @@ namespace UnleashedApp.Authentication
                 user.Properties.Add(Constants.AccountPropertyFirstName, loggedInUser.FirstName);
                 user.Properties.Add(Constants.AccountPropertyLastName, loggedInUser.LastName);
             }
+            AccountStore.Create().Save(user, Constants.AppName);
         }
 
         private DateTime CalculateTokenExpiration(CustomTokenResponse tokenResponse)

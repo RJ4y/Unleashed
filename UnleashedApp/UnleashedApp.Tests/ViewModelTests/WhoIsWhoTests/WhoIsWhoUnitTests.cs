@@ -82,6 +82,7 @@ namespace UnleashedApp.Tests.ViewModelTests.WhoIsWhoTests
         {
             _whoIsWhoViewModel.LoadEmployeesPerSquad();
 
+            _whoIsWhoViewModel.Filter = "R";
             _whoIsWhoViewModel.Filter = "";
 
             Assert.IsNotNull(_whoIsWhoViewModel.FilteredSquadList);
