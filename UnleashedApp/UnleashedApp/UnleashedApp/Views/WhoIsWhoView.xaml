@@ -26,9 +26,7 @@
                 </ListView.ItemTemplate>
 
                 <ListView.RowHeight>
-                    <OnPlatform x:TypeArguments="x:Int32">
-                        <On Platform="iOS">80</On>
-                    </OnPlatform>
+                    <OnPlatform x:TypeArguments="x:Int32" iOS="80" Android="60" />
                 </ListView.RowHeight>
             </ListView>
         </StackLayout>
@@ -51,6 +49,10 @@
                                    Command="{ Binding Source={x:Reference WhoIsWho}, Path=BindingContext.SquadEmployeeDetailCommand }" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
+
+                <ListView.RowHeight>
+                    <OnPlatform x:TypeArguments="x:Int32" iOS="80" Android="60" />
+                </ListView.RowHeight>
             </ListView>
         </StackLayout>
     </ContentPage>
