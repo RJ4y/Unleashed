@@ -52,6 +52,7 @@ namespace UnleashedApp.ViewModels
         private void CalculateTotal()
         {
             TrainingTotal = 0;
+            BudgetRemaining = TrainingBudget;
 
             if (_trainings != null)
             {
