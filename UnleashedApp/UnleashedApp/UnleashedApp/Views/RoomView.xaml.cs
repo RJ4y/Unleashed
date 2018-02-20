@@ -20,7 +20,6 @@ namespace UnleashedApp.Views
             Room = TransferService.GetSelectedRoom();
             Spaces = TransferService.GetSelectedSpaces();
             RoomNameLabel.Text = Room.Name;
-            CreateLegendGrid();
             CreateRoomGrid();
         }
 
@@ -40,23 +39,6 @@ namespace UnleashedApp.Views
                 RoomGrid.HeightRequest = width / amountOfColumns * amountOfRows;
             }
         }
-
-        #region LegendGrid
-        private void CreateLegendGrid()
-        {
-            LegendGridService.CreateLegendGridColumnDefinitions(LegendGrid);
-            LegendGridService.CreateLegendGridRowDefinitions(LegendGrid, 2);
-            FillLegendGrid();
-        }
-
-        private void FillLegendGrid()
-        {
-            GridService.AddColorLabel(LegendGrid, 1, 1, Color.Black, false);
-            GridService.AddTextLabel(LegendGrid, 1, 2, "Workspot", false);
-            GridService.AddColorLabel(LegendGrid, 2, 1, Room.Color, false);
-            GridService.AddTextLabel(LegendGrid, 2, 2, "Empty", false);
-        }
-        #endregion
 
         #region RoomGrid
         private void CreateRoomGrid()
