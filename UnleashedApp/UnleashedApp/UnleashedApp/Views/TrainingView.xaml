@@ -23,9 +23,23 @@
                     <ColumnDefinition Width="50*"/>
                 </Grid.ColumnDefinitions>
                 <Label Text="TOTAL COST" Grid.Column="0" Grid.Row="0" TextColor="#fff" FontAttributes="Bold" HorizontalTextAlignment="Center" />
-                <Label Text="{ Binding TrainingTotal, Converter={StaticResource currencyConverter} }" Grid.Column="0" Grid.Row="1" Margin="0,-16,0,0" TextColor="#fff" FontSize="30" HorizontalTextAlignment="Center" />
+                <Label Text="{ Binding TrainingTotal, Converter={StaticResource currencyConverter} }" Grid.Column="0" Grid.Row="1" TextColor="#fff" FontSize="30" HorizontalTextAlignment="Center">
+                    <Label.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="iOS" Value="0" />
+                            <On Platform="Android" Value="0,-16,0,0" />
+                        </OnPlatform>
+                    </Label.Margin>
+                </Label>
                 <Label Text="BUDGET REMAINING" Grid.Column="1" Grid.Row="0" TextColor="#fff" FontAttributes="Bold" HorizontalTextAlignment="Center" />
-                <Label Text="{ Binding BudgetRemaining, Converter={StaticResource currencyConverter} }" Grid.Column="1" Grid.Row="1" Margin="0,-16,0,0" TextColor="#fff" FontSize="30" HorizontalTextAlignment="Center" />
+                <Label Text="{ Binding BudgetRemaining, Converter={StaticResource currencyConverter} }" Grid.Column="1" Grid.Row="1" Margin="0,-16,0,0" TextColor="#fff" FontSize="30" HorizontalTextAlignment="Center">
+                    <Label.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="iOS" Value="0" />
+                            <On Platform="Android" Value="0,-16,0,0" />
+                        </OnPlatform>
+                    </Label.Margin>
+                </Label>
             </Grid>
             <ListView ItemsSource="{ Binding TrainingList }" HasUnevenRows="True" IsPullToRefreshEnabled="True" Refreshing="ListView_Refreshing">
                 <ListView.ItemTemplate>

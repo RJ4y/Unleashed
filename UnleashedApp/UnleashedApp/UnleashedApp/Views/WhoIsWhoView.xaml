@@ -17,7 +17,7 @@
                       GroupShortNameBinding="{Binding Name }"
                       HasUnevenRows="True"
                       SelectedItem="{ Binding SelectedHabitatEmployee, Mode=TwoWay }"
-                      SeparatorVisibility="None" >
+                      SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ImageCell ImageSource="{Binding PictureUrl}" Text="{Binding FullName}" Height="80"
@@ -38,8 +38,7 @@
                       GroupShortNameBinding="{Binding Name }"
                       HasUnevenRows="True"
                       SelectedItem="{ Binding SelectedSquadEmployee, Mode=TwoWay }"
-                      SeparatorVisibility="None"
-                      >
+                      SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ImageCell ImageSource="{Binding PictureUrl}" Text="{Binding FullName}"
