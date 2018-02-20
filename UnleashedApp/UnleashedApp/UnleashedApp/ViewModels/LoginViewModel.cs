@@ -17,7 +17,7 @@ namespace UnleashedApp.ViewModels
 
         public ICommand PresentLoginScreenCommand { get; set; }
 
-        private bool canLogin = true;
+        private bool canLogin;
 
         public LoginViewModel(IAuthenticationService authenticationService, IAuthenticationRepository authenticationRepository)
         {
@@ -25,7 +25,7 @@ namespace UnleashedApp.ViewModels
             _authenticationRepository = authenticationRepository;
             GoogleAuthenticator.Authenticator.Completed += OnAuthCompletedAsync;
             GoogleAuthenticator.Authenticator.Error += OnAuthError;
-
+            canLogin = true;
             InitialiseCommands();
         }
 
@@ -38,13 +38,13 @@ namespace UnleashedApp.ViewModels
         {
             var presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
             presenter.Login(GoogleAuthenticator.Authenticator);
+            ChangeEnableButton(false);
         }
 
         private async void OnAuthCompletedAsync(object sender, AuthenticatorCompletedEventArgs e)
         {
             if (e.IsAuthenticated)
             {
-                ChangeEnableButton(false);
                 User user = await _authenticationRepository.GetUserInfoAsync(e.Account);
 
                 //Only @unleashed.be may log in -> disabled for demo purposes
@@ -63,7 +63,8 @@ namespace UnleashedApp.ViewModels
                         _authenticationService.SaveCredentials(e.Account, tokenResponse);
                         _authenticationService.SaveUserName(user);
                         showHomePageAsync();
-                    }
+                        ChangeEnableButton(true);
+                }
                     else
                     {
                         ChangeEnableButton(true);

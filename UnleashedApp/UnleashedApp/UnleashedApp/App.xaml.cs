@@ -37,14 +37,14 @@ namespace UnleashedApp
 
             var splitView = new SplitViewView(authenticationService, authenticationRepository);
             
-            if (AuthenticationService.Instance.UserIsLoggedIn())
-            {
-                NavigationPage = new NavigationPage(new NameGameView());
-            }
-            else
-            {
+            //if (AuthenticationService.Instance.UserIsLoggedIn())
+            //{
+            //    NavigationPage = new NavigationPage(new NameGameView());
+            //}
+            //else
+            //{
                 NavigationPage = new NavigationPage(new LoginView());
-            }
+            //}
 
             RootPage = new RootPage()
             {

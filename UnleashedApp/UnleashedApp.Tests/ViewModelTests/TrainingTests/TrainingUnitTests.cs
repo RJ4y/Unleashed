@@ -16,6 +16,7 @@ namespace UnleashedApp.Tests.ViewModelTests.TrainingTests
     {
         private Mock<ITrainingRepository> _trainingRepoMock;
         private TrainingBuilder _trainingBuilder;
+        private TrainingViewModel _trainingViewModel;
 
         #region Additional test attributes
         //
@@ -44,6 +45,7 @@ namespace UnleashedApp.Tests.ViewModelTests.TrainingTests
         {
             _trainingRepoMock = new Mock<ITrainingRepository>();
             _trainingBuilder = new TrainingBuilder();
+            _trainingViewModel = new TrainingViewModel(_trainingRepoMock.Object);
         }
 
         [TearDown]
@@ -51,28 +53,29 @@ namespace UnleashedApp.Tests.ViewModelTests.TrainingTests
         {
             _trainingRepoMock = null;
             _trainingBuilder = null;
+            _trainingViewModel = null;
         }
 
         [Test]
-        public void ConstructorShouldInitTrainingList()
+        public void LoadTrainingsShouldInitTrainingList()
         {
             var list = _trainingBuilder.InitList(0);
             _trainingRepoMock.Setup(x => x.GetAll()).Returns(list);
 
-            var trainingViewModel = new TrainingViewModel(_trainingRepoMock.Object);
+            _trainingViewModel.LoadTrainings();
 
-            Assert.IsNotNull(trainingViewModel.TrainingList);
-            Assert.AreEqual(list, trainingViewModel.TrainingList);
+            Assert.IsNotNull(_trainingViewModel.TrainingList);
+            Assert.AreEqual(list, _trainingViewModel.TrainingList);
         }
 
         [Test]
-        public void ConstructorShouldCalculateTotal()
+        public void LoadTrainingsShouldCalculateTotal()
         {
             _trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(_trainingBuilder.InitList(100));
 
-            var trainingViewModel = new TrainingViewModel(_trainingRepoMock.Object);
+            _trainingViewModel.LoadTrainings();
 
-            Assert.AreEqual(_trainingBuilder.ReturnTotal(), trainingViewModel.TrainingTotal);
+            Assert.AreEqual(_trainingBuilder.ReturnTotal(), _trainingViewModel.TrainingTotal);
         }
 
         [Test]
@@ -80,9 +83,7 @@ namespace UnleashedApp.Tests.ViewModelTests.TrainingTests
         {
             _trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(_trainingBuilder.InitList(1));
 
-            var trainingViewModel = new TrainingViewModel(_trainingRepoMock.Object);
-
-            Assert.IsNotNull(trainingViewModel.AddTrainingCommand);
+            Assert.IsNotNull(_trainingViewModel.AddTrainingCommand);
         }
 
         [Test]
@@ -90,11 +91,11 @@ namespace UnleashedApp.Tests.ViewModelTests.TrainingTests
         {
             _trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(_trainingBuilder.InitList(1));
 
-            var trainingViewModel = new TrainingViewModel(_trainingRepoMock.Object);
-            var firstList = trainingViewModel.TrainingList;
+            _trainingViewModel.LoadTrainings();
+            var firstList = _trainingViewModel.TrainingList;
 
-            trainingViewModel.Refresh();
-            var secondList = trainingViewModel.TrainingList;
+            _trainingViewModel.Refresh();
+            var secondList = _trainingViewModel.TrainingList;
 
             Assert.AreEqual(firstList.Count, secondList.Count);
         }
@@ -104,13 +105,13 @@ namespace UnleashedApp.Tests.ViewModelTests.TrainingTests
         {
             _trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(_trainingBuilder.InitList(1));
 
-            var trainingViewModel = new TrainingViewModel(_trainingRepoMock.Object);
-            var firstCount = trainingViewModel.TrainingList.Count;
+            _trainingViewModel.LoadTrainings();
+            var firstCount = _trainingViewModel.TrainingList.Count;
 
             _trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(_trainingBuilder.InitList(2));
 
-            trainingViewModel.Refresh();
-            var secondCount = trainingViewModel.TrainingList.Count;
+            _trainingViewModel.Refresh();
+            var secondCount = _trainingViewModel.TrainingList.Count;
 
             Assert.AreNotEqual(firstCount, secondCount);
             Assert.IsTrue(firstCount < secondCount);
@@ -121,14 +122,12 @@ namespace UnleashedApp.Tests.ViewModelTests.TrainingTests
         {
             _trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(_trainingBuilder.InitList(1));
 
-            var trainingViewModel = new TrainingViewModel(_trainingRepoMock.Object)
-            {
-                SendInvoice = true
-            };
-            Assert.AreEqual("Yes", trainingViewModel.GetSendInvoice());
+            _trainingViewModel.SendInvoice = true;
 
-            trainingViewModel.SendInvoice = false;
-            Assert.AreEqual("No", trainingViewModel.GetSendInvoice());
+            Assert.AreEqual("Yes", _trainingViewModel.GetSendInvoice());
+
+            _trainingViewModel.SendInvoice = false;
+            Assert.AreEqual("No", _trainingViewModel.GetSendInvoice());
         }
 
         [Test]
@@ -136,13 +135,11 @@ namespace UnleashedApp.Tests.ViewModelTests.TrainingTests
         {
             _trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(_trainingBuilder.InitList(1));
 
-            var trainingViewModel = new TrainingViewModel(_trainingRepoMock.Object);
+            _trainingViewModel.SetSendInvoice("Yes");
+            Assert.IsTrue(_trainingViewModel.SendInvoice);
 
-            trainingViewModel.SetSendInvoice("Yes");
-            Assert.IsTrue(trainingViewModel.SendInvoice);
-
-            trainingViewModel.SetSendInvoice("No");
-            Assert.IsFalse(trainingViewModel.SendInvoice);
+            _trainingViewModel.SetSendInvoice("No");
+            Assert.IsFalse(_trainingViewModel.SendInvoice);
         }
 
         [Test]
@@ -150,18 +147,15 @@ namespace UnleashedApp.Tests.ViewModelTests.TrainingTests
         {
             _trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(_trainingBuilder.InitList(1));
 
-            var trainingViewModel = new TrainingViewModel(_trainingRepoMock.Object)
-            {
-                IsCityValid = true,
-                IsCompanyValid = true,
-                IsCostValid = true,
-                IsDaysValid = true,
-                IsEventValid = true,
-            };
+            _trainingViewModel.IsCostValid = true;
+            _trainingViewModel.IsCityValid = true;
+            _trainingViewModel.IsCompanyValid = true;
+            _trainingViewModel.IsDaysValid = true;
+            _trainingViewModel.IsEventValid = true;
 
-            trainingViewModel.VerifyForm();
+            _trainingViewModel.VerifyForm();
 
-            Assert.IsTrue(trainingViewModel.IsValid);
+            Assert.IsTrue(_trainingViewModel.IsValid);
         }
 
         [Test]
@@ -169,18 +163,15 @@ namespace UnleashedApp.Tests.ViewModelTests.TrainingTests
         {
             _trainingRepoMock.Setup(trainingList => trainingList.GetAll()).Returns(_trainingBuilder.InitList(1));
 
-            var trainingViewModel = new TrainingViewModel(_trainingRepoMock.Object)
-            {
-                IsCityValid = true,
-                IsCompanyValid = false,
-                IsCostValid = true,
-                IsDaysValid = true,
-                IsEventValid = true,
-            };
+            _trainingViewModel.IsCostValid = true;
+            _trainingViewModel.IsCityValid = true;
+            _trainingViewModel.IsCompanyValid = false;
+            _trainingViewModel.IsDaysValid = true;
+            _trainingViewModel.IsEventValid = true;
 
-            trainingViewModel.VerifyForm();
+            _trainingViewModel.VerifyForm();
 
-            Assert.IsFalse(trainingViewModel.IsValid);
+            Assert.IsFalse(_trainingViewModel.IsValid);
         }
     }
 
