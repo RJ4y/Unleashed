@@ -33,6 +33,8 @@ namespace UnleashedApp.Views
             {
                 ViewModelLocator.Instance.EmployeeDetailViewModel.LoadSpaces();
                 ViewModelLocator.Instance.EmployeeDetailViewModel.LoadRooms();
+                Rooms = ViewModelLocator.Instance.EmployeeDetailViewModel.Rooms;
+                Spaces = ViewModelLocator.Instance.EmployeeDetailViewModel.Spaces;
             }
             if (shouldLoad && Spaces != null && Spaces.Count > 0 && Employee != null && Rooms != null && Rooms.Count > 0)
                 CreateLocationGrid();
