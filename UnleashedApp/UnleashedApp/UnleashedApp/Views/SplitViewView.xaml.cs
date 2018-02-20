@@ -23,12 +23,12 @@ namespace UnleashedApp.Views
             _authenticationService = authenticationService;
 
             List<MasterItem> menuList = new List<MasterItem>();
-
-            var nameGamePage = new MasterItem() { Title = "Who is Who", Icon = "home.png", TargetType = typeof(NameGameView) };
-            var whoIsWhoPage = new MasterItem() { Title = "Employees", Icon = "users.png", TargetType = typeof(WhoIsWhoView) };
-            var floorPlanPage = new MasterItem() { Title = "Floor Plan", Icon = "map.png", TargetType = typeof(FloorplanView) };
+            List<MasterItem> logoutList = new List<MasterItem>();
+            
+            var whoIsWhoPage = new MasterItem() { Title = "Who is who", Icon = "users.png", TargetType = typeof(WhoIsWhoView) };
+            var nameGamePage = new MasterItem() { Title = "Guess who", Icon = "home.png", TargetType = typeof(NameGameView) };
+            var floorPlanPage = new MasterItem() { Title = "Floor plan", Icon = "map.png", TargetType = typeof(FloorplanView) };
             var trainingPage = new MasterItem() { Title = "Training", Icon = "training.png", TargetType = typeof(TrainingView) };
-            var aboutPage = new MasterItem() { Title = "About" };
             var logoutAction = new MasterItem() { Title = "Log out", Icon = "signout.png", TargetType = typeof(LoginView) };
 
             // Adding menu items to menuList
@@ -36,12 +36,10 @@ namespace UnleashedApp.Views
             menuList.Add(whoIsWhoPage);
             menuList.Add(floorPlanPage);
             menuList.Add(trainingPage);
-            //menuList.Add(aboutPage);
             menuList.Add(logoutAction);
 
             // Setting our list to be ItemSource for ListView in MainPage.xaml
             navigationDrawerList.ItemsSource = menuList;
-            navigationDrawerList.SeparatorVisibility = SeparatorVisibility.None;
         }
 
         private void OnMasterTapped(object sender, ItemTappedEventArgs e)
