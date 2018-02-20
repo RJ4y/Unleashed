@@ -308,7 +308,20 @@ namespace UnleashedApp.ViewModels
                 TrainingList.Add(_postTraining);
                 CalculateTotal();
                 _trainingRepository.PostTrainingAsync(_postTraining);
+                ResetForm();
             });
+        }
+
+        private void ResetForm()
+        {
+            City = "";
+            Company = "";
+            Cost = null;
+            Date = DateTime.Now;
+            Days = "";
+            Info = "";
+            SendInvoice = false;
+            Event = "";
         }
     }
 }
