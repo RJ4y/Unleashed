@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using UnleashedApp.Authentication;
 using UnleashedApp.Contracts.ViewModels;
@@ -35,7 +36,11 @@ namespace UnleashedApp.ViewModels
             //Switch commented line if (not) testing
             //TrainingList = new ObservableCollection<Training>();
             BudgetRemaining = TrainingBudget;
-            TrainingList = new ObservableCollection<Training>(_trainingRepository.GetAll());
+            var trainings = new ObservableCollection<Training>(_trainingRepository.GetAll());
+
+            var tempList = trainings.Where(fn => fn.First_Name.Equals(AuthenticationService.Instance.GetUserFirstName())).Where(ln => ln.Last_Name.Equals(AuthenticationService.Instance.GetUserLastName()));
+            TrainingList = new ObservableCollection<Training>(tempList);
+
             CalculateTotal();
         }
 
